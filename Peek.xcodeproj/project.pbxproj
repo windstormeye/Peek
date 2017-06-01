@@ -15,6 +15,11 @@
 		74559D901EE009BF0081A0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */; };
 		74559D9B1EE009BF0081A0A5 /* PeekTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D9A1EE009BF0081A0A5 /* PeekTests.m */; };
 		74559DA61EE009BF0081A0A5 /* PeekUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DA51EE009BF0081A0A5 /* PeekUITests.m */; };
+		74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74559DB41EE00CCF0081A0A5 /* constant.mm */; };
+		74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */; };
+		74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBB1EE010230081A0A5 /* PJHUD.m */; };
+		74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */; };
+		88433AA5A4C7DDDB6B224BFA /* libPods-Peek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		45C9A47EC43E78E017A9676B /* Pods-Peek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.release.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.release.xcconfig"; sourceTree = "<group>"; };
 		74559D7D1EE009BE0081A0A5 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74559D811EE009BE0081A0A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74559D831EE009BE0081A0A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +57,17 @@
 		74559DA11EE009BF0081A0A5 /* PeekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74559DA51EE009BF0081A0A5 /* PeekUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeekUITests.m; sourceTree = "<group>"; };
 		74559DA71EE009BF0081A0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74559DB31EE00CCF0081A0A5 /* constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constant.h; sourceTree = "<group>"; };
+		74559DB41EE00CCF0081A0A5 /* constant.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = constant.mm; sourceTree = "<group>"; };
+		74559DB61EE00CF10081A0A5 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		74559DB71EE00FB70081A0A5 /* UIViewController+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
+		74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extension.m"; sourceTree = "<group>"; };
+		74559DBA1EE010230081A0A5 /* PJHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJHUD.h; sourceTree = "<group>"; };
+		74559DBB1EE010230081A0A5 /* PJHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJHUD.m; sourceTree = "<group>"; };
+		74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PJUIImage+Extension.h"; sourceTree = "<group>"; };
+		74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PJUIImage+Extension.m"; sourceTree = "<group>"; };
+		9C08E1DA4A63E424E541F8AF /* Pods-Peek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.debug.xcconfig"; sourceTree = "<group>"; };
+		AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Peek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88433AA5A4C7DDDB6B224BFA /* libPods-Peek.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A687D942E1AC5100AC54C53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		74559D741EE009BE0081A0A5 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +111,8 @@
 				74559D991EE009BF0081A0A5 /* PeekTests */,
 				74559DA41EE009BF0081A0A5 /* PeekUITests */,
 				74559D7E1EE009BE0081A0A5 /* Products */,
+				82E88649A5E06163174BC06B /* Pods */,
+				6A687D942E1AC5100AC54C53 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,18 +136,11 @@
 				74559D891EE009BF0081A0A5 /* Main.storyboard */,
 				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
 				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
-				74559D911EE009BF0081A0A5 /* Info.plist */,
-				74559D801EE009BE0081A0A5 /* Supporting Files */,
+				74559DC11EE03AC00081A0A5 /* Extension */,
+				74559DC01EE03AB20081A0A5 /* Global */,
+				74559DC21EE03AD10081A0A5 /* other */,
 			);
 			path = Peek;
-			sourceTree = "<group>";
-		};
-		74559D801EE009BE0081A0A5 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				74559D811EE009BE0081A0A5 /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		74559D991EE009BF0081A0A5 /* PeekTests */ = {
@@ -140,6 +161,47 @@
 			path = PeekUITests;
 			sourceTree = "<group>";
 		};
+		74559DC01EE03AB20081A0A5 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				74559DB31EE00CCF0081A0A5 /* constant.h */,
+				74559DB41EE00CCF0081A0A5 /* constant.mm */,
+				74559DBA1EE010230081A0A5 /* PJHUD.h */,
+				74559DBB1EE010230081A0A5 /* PJHUD.m */,
+			);
+			name = Global;
+			sourceTree = "<group>";
+		};
+		74559DC11EE03AC00081A0A5 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				74559DB71EE00FB70081A0A5 /* UIViewController+Extension.h */,
+				74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */,
+				74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */,
+				74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		74559DC21EE03AD10081A0A5 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				74559D811EE009BE0081A0A5 /* main.m */,
+				74559DB61EE00CF10081A0A5 /* PrefixHeader.pch */,
+				74559D911EE009BF0081A0A5 /* Info.plist */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
+		82E88649A5E06163174BC06B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9C08E1DA4A63E424E541F8AF /* Pods-Peek.debug.xcconfig */,
+				45C9A47EC43E78E017A9676B /* Pods-Peek.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +209,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74559DAA1EE009BF0081A0A5 /* Build configuration list for PBXNativeTarget "Peek" */;
 			buildPhases = (
+				8A97DFBB59C0811AA5694DD4 /* [CP] Check Pods Manifest.lock */,
 				74559D791EE009BE0081A0A5 /* Sources */,
 				74559D7A1EE009BE0081A0A5 /* Frameworks */,
 				74559D7B1EE009BE0081A0A5 /* Resources */,
+				FA2BD91CC9B3F7C495F58D38 /* [CP] Embed Pods Frameworks */,
+				D26890AC09E5B447A4BED1B2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -271,13 +336,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8A97DFBB59C0811AA5694DD4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D26890AC09E5B447A4BED1B2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Peek/Pods-Peek-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA2BD91CC9B3F7C495F58D38 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Peek/Pods-Peek-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		74559D791EE009BE0081A0A5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
 				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
+				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
+				74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */,
+				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +481,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Peek/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -410,6 +529,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Peek/PrefixHeader.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -425,6 +546,7 @@
 		};
 		74559DAB1EE009BF0081A0A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C08E1DA4A63E424E541F8AF /* Pods-Peek.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U6J5965DZK;
@@ -437,6 +559,7 @@
 		};
 		74559DAC1EE009BF0081A0A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45C9A47EC43E78E017A9676B /* Pods-Peek.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U6J5965DZK;
@@ -516,6 +639,7 @@
 				74559DAC1EE009BF0081A0A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		74559DAD1EE009BF0081A0A5 /* Build configuration list for PBXNativeTarget "PeekTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +648,7 @@
 				74559DAF1EE009BF0081A0A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		74559DB01EE009BF0081A0A5 /* Build configuration list for PBXNativeTarget "PeekUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +657,7 @@
 				74559DB21EE009BF0081A0A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
