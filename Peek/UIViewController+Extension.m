@@ -53,7 +53,7 @@ static const void *LeftBarButton = &LeftBarButton;
     self.navigationBar.backgroundColor = mainDeepSkyBlue;
     [self.view addSubview:self.navigationBar];
     
-    self.leftBarButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 25, 28, 28)];
+    self.leftBarButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 35, 28, 28)];
     [self.leftBarButton setImage:[[UIImage imageNamed:@"back"] imageWithColor:[UIColor whiteColor]] forState:0];
     [self.leftBarButton addTarget:self action:@selector(extentionBack) forControlEvents:1<<6];
     [self.view addSubview:self.leftBarButton];
@@ -65,7 +65,7 @@ static const void *LeftBarButton = &LeftBarButton;
     
     [self.view addSubview:self.titleLabel];
     
-    self.rightBarButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-55, 25, 28, 28)];
+    self.rightBarButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-55, 35, 28, 28)];
     self.rightBarButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.rightBarButton setTitleColor:[UIColor whiteColor] forState:0];
     [self.view addSubview:self.rightBarButton];

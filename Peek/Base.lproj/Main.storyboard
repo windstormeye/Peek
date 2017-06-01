@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvx-c3-RkU">
-                                <rect key="frame" x="157" y="607" width="60" height="60"/>
+                                <rect key="frame" x="157" y="602" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="70v-Sh-yUL"/>
                                     <constraint firstAttribute="height" constant="60" id="Sbh-Qa-P19"/>
@@ -32,7 +32,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Uvx-c3-RkU" secondAttribute="bottom" id="VWL-3W-GzE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Uvx-c3-RkU" secondAttribute="bottom" constant="5" id="VWL-3W-GzE"/>
                             <constraint firstItem="Uvx-c3-RkU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xm1-87-cb2"/>
                         </constraints>
                     </view>
