@@ -131,11 +131,10 @@
 			children = (
 				74559D831EE009BE0081A0A5 /* AppDelegate.h */,
 				74559D841EE009BE0081A0A5 /* AppDelegate.m */,
-				74559D861EE009BE0081A0A5 /* ViewController.h */,
-				74559D871EE009BE0081A0A5 /* ViewController.m */,
-				74559D891EE009BF0081A0A5 /* Main.storyboard */,
-				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
 				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
+				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
+				747E22E31EE27AD60078552D /* 侧滑菜单栏 */,
+				747E22E21EE27AC00078552D /* 首页 */,
 				74559DC11EE03AC00081A0A5 /* Extension */,
 				74559DC01EE03AB20081A0A5 /* Global */,
 				74559DC21EE03AD10081A0A5 /* other */,
@@ -191,6 +190,23 @@
 				74559D911EE009BF0081A0A5 /* Info.plist */,
 			);
 			name = other;
+			sourceTree = "<group>";
+		};
+		747E22E21EE27AC00078552D /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				74559D891EE009BF0081A0A5 /* Main.storyboard */,
+				74559D861EE009BE0081A0A5 /* ViewController.h */,
+				74559D871EE009BE0081A0A5 /* ViewController.m */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		747E22E31EE27AD60078552D /* 侧滑菜单栏 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "侧滑菜单栏";
 			sourceTree = "<group>";
 		};
 		82E88649A5E06163174BC06B /* Pods */ = {

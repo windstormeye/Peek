@@ -28,6 +28,9 @@
                                     <constraint firstAttribute="height" constant="60" id="Sbh-Qa-P19"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="相机"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zyi-Cn-HSn"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
