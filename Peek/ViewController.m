@@ -7,17 +7,21 @@
 //
 
 #import "ViewController.h"
+#import "LeftSliderView.h"
 
 @interface ViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property(nonatomic,strong)UIView *leftView;
-@property(nonatomic,strong)UIView *leftBGView;
+
 @property(nonatomic,strong)UIView *rightView;
 @property(nonatomic,strong)UIView *rightBGView;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 
 @property (nonatomic,strong) UIImagePickerController *imagePicker;
 @end
 
 @implementation ViewController
+{
+    LeftSliderView *_leftView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,9 +56,18 @@
     [self.leftBarButton addTarget:self action:@selector(moreAction) forControlEvents:1<<6];
     [self.rightBarButton setImage:[UIImage imageNamed:@"朋友"] forState:0];
     [self.rightBarButton addTarget:self action:@selector(friendAction) forControlEvents:1<<6];
+
     
-    [self setupLeftView];
-    [self setupRightView];
+    _leftView = [[LeftSliderView alloc] init];
+    [self.view addSubview:_leftView];
+    
+    UIScreenEdgePanGestureRecognizer *edgePan = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(showLeftAd:)];
+    edgePan.edges = UIRectEdgeLeft;
+    [self.view addGestureRecognizer:edgePan];
+    
+    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    _panGesture.enabled = NO;
+    [self.view addGestureRecognizer:_panGesture];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -101,13 +114,48 @@
         return _imagePicker;
 }
 
+- (void)panGesture:(UIPanGestureRecognizer *)ges {
+    CGPoint p = [ges translationInView:self.view];
+    NSLog(@"%@", NSStringFromCGPoint(p));
+    CGRect frame = _leftView.frame;
+    
+    // 判断左右拖动问题
+    CGPoint velocity = [ges velocityInView:self.view];
+    if(velocity.x>0) {
+        NSLog(@"zzz");
+        return;
+    } else {
+        NSLog(@"rrr");
+    }
+    
+    frame.origin.x = p.x;
+
+    _leftView.frame = frame;
+    
+    
+    if (ges.state == UIGestureRecognizerStateEnded || ges.state == UIGestureRecognizerStateCancelled) {
+        // 判断当前广告视图在屏幕上显示是否超过一半
+        if (CGRectContainsPoint(self.view.frame, _leftView.center)) {
+            // 如果超过,那么完全展示出来
+            frame.origin.x = 0;
+        }else{
+            // 如果没有,隐藏
+            frame.origin.x = -SCREEN_WIDTH * 0.6;
+            _panGesture.enabled = NO;
+        }
+        [UIView animateWithDuration:0.25 animations:^{
+            _leftView.frame = frame;
+        }];
+    }
+}
+
 // 开启左侧滑功能
 - (void)showLeftAd:(UIScreenEdgePanGestureRecognizer *)ges {
     
     CGPoint p = [ges locationInView:self.view];
     NSLog(@"%@", NSStringFromCGPoint(p));
-    CGRect frame = self.leftView.frame;
-    
+    CGRect frame = _leftView.frame;
+    frame.origin.x = p.x - SCREEN_WIDTH * 0.6;
     // 如果已经划出view
     if (frame.origin.x == 0) {
         return;
@@ -116,23 +164,22 @@
     // 更改adView的x值.当滑动距离超过view宽度时，则把x一直设置为0
     if (p.x > SCREEN_WIDTH * 0.6) {
          frame.origin.x = 0;
-    } else {
-        CGRect frame = self.leftView.frame;
-        frame.origin.x = p.x - SCREEN_WIDTH * 0.6;
     }
-    self.leftView.frame = frame;
+    
+    _leftView.frame = frame;
     
     if (ges.state == UIGestureRecognizerStateEnded || ges.state == UIGestureRecognizerStateCancelled) {
         // 判断当前广告视图在屏幕上显示是否超过一半
-        if (CGRectContainsPoint(self.view.frame, self.leftView.center)) {
+        if (CGRectContainsPoint(self.view.frame, _leftView.center)) {
             // 如果超过,那么完全展示出来
             frame.origin.x = 0;
+            _panGesture.enabled = YES;
         }else{
             // 如果没有,隐藏
             frame.origin.x = -SCREEN_WIDTH * 0.6;
         }
         [UIView animateWithDuration:0.25 animations:^{
-            self.leftView.frame = frame;
+            _leftView.frame = frame;
         }];
     }
 }
@@ -170,39 +217,6 @@
         }];
     }
 }
-
-// 初始化左侧视图
-- (void)setupLeftView {
-    self.leftBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    self.leftBGView.backgroundColor = [UIColor blackColor];
-    self.leftBGView.alpha = 0;
-    self.leftBGView.hidden = YES;
-    [self.view addSubview:self.leftBGView];
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.6, SCREEN_HEIGHT)];
-    // 设置背景颜色
-    [self.view addSubview:view];
-    view.backgroundColor = [UIColor clearColor];
-    
-    // 开启高斯模糊
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    effectView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
-    [view addSubview:effectView];
-    
-    CGRect frame = view.frame;
-    // 将x值改成负的屏幕宽度,原因是因为默认就在屏幕的左边
-    frame.origin.x = -SCREEN_WIDTH * 0.6;
-    // 设置给view
-    view.frame = frame;
-    self.leftView = view;
-    
-    // 添加轻扫手势  -- 滑回
-    UISwipeGestureRecognizer *ges = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeView)];
-    ges.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:ges];
-}
-
 // 初始化右侧视图
 - (void)setupRightView {
     self.rightBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -238,7 +252,7 @@
 - (void)closeView {
     
     [UIView animateWithDuration:0.3 animations:^{
-        CGRect leftframe = self.leftView.frame;
+        CGRect leftframe = _leftView.frame;
         CGRect rightframe = self.rightView.frame;
         // 如果view已经隐藏
         if (leftframe.origin.x == -SCREEN_WIDTH * 0.6) {
@@ -251,7 +265,7 @@
             }
         } else {
             leftframe.origin.x = -SCREEN_WIDTH * 0.6;
-            self.leftView.frame = leftframe;
+            _leftView.frame = leftframe;
         }
         
         // 如果view已经隐藏
@@ -259,20 +273,17 @@
             return;
         } else {
             rightframe.origin.x = SCREEN_WIDTH;
-            self.leftView.frame = rightframe;
+            _leftView.frame = rightframe;
         }
     }];
-    self.leftBGView.hidden = YES;
     self.rightBGView.hidden = YES;
 }
 
 - (void)moreAction {
     [UIView animateWithDuration:0.25 animations:^{
-        CGRect frame = self.leftView.frame;
+        CGRect frame = _leftView.frame;
         frame.origin.x = 0;
-        self.leftView.frame = frame;
-        self.leftBGView.hidden = NO;
-        self.leftBGView.alpha = 0.3;
+        _leftView.frame = frame;
     }];
 }
 

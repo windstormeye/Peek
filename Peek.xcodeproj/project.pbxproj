@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744327FD1EE5850C00E20FAC /* LeftSliderView.m */; };
 		74559D821EE009BE0081A0A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D811EE009BE0081A0A5 /* main.m */; };
 		74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D841EE009BE0081A0A5 /* AppDelegate.m */; };
 		74559D881EE009BE0081A0A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D871EE009BE0081A0A5 /* ViewController.m */; };
@@ -41,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		45C9A47EC43E78E017A9676B /* Pods-Peek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.release.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.release.xcconfig"; sourceTree = "<group>"; };
+		744327FC1EE5850C00E20FAC /* LeftSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSliderView.h; sourceTree = "<group>"; };
+		744327FD1EE5850C00E20FAC /* LeftSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSliderView.m; sourceTree = "<group>"; };
 		74559D7D1EE009BE0081A0A5 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74559D811EE009BE0081A0A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74559D831EE009BE0081A0A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 		747E22E31EE27AD60078552D /* 侧滑菜单栏 */ = {
 			isa = PBXGroup;
 			children = (
+				744327FC1EE5850C00E20FAC /* LeftSliderView.h */,
+				744327FD1EE5850C00E20FAC /* LeftSliderView.m */,
 			);
 			name = "侧滑菜单栏";
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
+				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
 				74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */,
 				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
