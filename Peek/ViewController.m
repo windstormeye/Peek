@@ -7,19 +7,23 @@
 //
 
 #import "ViewController.h"
-#import "LeftSliderView.h"
+#import "leftHomeView.h"
+#import "PublishViewController.h"
+#import "EditViewController.h"
+#import "MessageViewController.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
 
 @property (nonatomic, strong) UIView *BGView;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+@property (nonatomic, strong) UIScreenEdgePanGestureRecognizer *edgePan;
 
 @property (nonatomic,strong) UIImagePickerController *imagePicker;
 @end
 
 @implementation ViewController
 {
-    LeftSliderView *_leftView;
+    leftHomeView *_leftView;
 }
 
 - (void)viewDidLoad {
@@ -27,12 +31,23 @@
     [self initView];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
 }
 
-- (void)initView {    
+- (void)initView {
+    
     [self initNavigationBar];
     self.navigationBar.backgroundColor = [UIColor clearColor];
     
@@ -66,22 +81,24 @@
     [self.rightBarButton addTarget:self action:@selector(friendAction) forControlEvents:1<<6];
 
     
-    _leftView = [[LeftSliderView alloc] init];
+//    _leftView = [[[NSBundle mainBundle] loadNibNamed:@"LeftSliderView" owner:self options:nil] firstObject];
+//    [self.view addSubview:_leftView];
+//    [self.view bringSubviewToFront:_leftView];
+
+    _leftView = [leftHomeView new];
+    _leftView.viewDelega = self;
     [self.view addSubview:_leftView];
     [self.view bringSubviewToFront:_leftView];
     
-    UIScreenEdgePanGestureRecognizer *edgePan = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(showLeftAd:)];
-    edgePan.edges = UIRectEdgeLeft;
-    [self.view addGestureRecognizer:edgePan];
+    _edgePan = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(showLeftAd:)];
+    _edgePan.edges = UIRectEdgeLeft;
+    [self.view addGestureRecognizer:_edgePan];
     
     _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     _panGesture.enabled = NO;
     [self.view addGestureRecognizer:_panGesture];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
 - (IBAction)takePhoto:(id)sender {
     [self presentViewController:self.imagePicker animated:YES completion:nil];
@@ -128,7 +145,6 @@
         CGRect frame = _leftView.frame;
         frame.origin.x = -SCREEN_WIDTH * 0.6;
         _panGesture.enabled = NO;
-        self.BGView.alpha = 0;
         self.BGView.hidden = YES;
         _leftView.frame = frame;
     }];
@@ -138,33 +154,25 @@
 - (void)panGesture:(UIPanGestureRecognizer *)ges {
     CGPoint p = [ges translationInView:self.view];
     NSLog(@"%@", NSStringFromCGPoint(p));
+    
     CGRect frame = _leftView.frame;
     
-    // 判断左右拖动问题
-    CGPoint velocity = [ges velocityInView:self.view];
-    if(velocity.x>0) {
-        NSLog(@"zzz");
-        frame.origin.x = 0;
-        return;
+    frame.origin.x = p.x;
+    
+    if (p.x > 0) {
+        if (_leftView.frame.origin.x == 0) {
+            frame.origin.x = 0;
+            _leftView.frame = frame;
+        } else if (_leftView.frame.origin.x < 0) {
+            frame.origin.x = 0;
+            _leftView.frame = frame;
+        }
     } else {
-        frame.origin.x = p.x;
-        
         _leftView.frame = frame;
         
-        if (ges.state == UIGestureRecognizerStateEnded || ges.state == UIGestureRecognizerStateCancelled) {
-            // 判断当前广告视图在屏幕上显示是否超过一半
-            if (CGRectContainsPoint(self.view.frame, _leftView.center)) {
-                // 如果超过,那么完全展示出来
-                frame.origin.x = 0;
-            }else{
-                // 如果没有,隐藏
-                frame.origin.x = -SCREEN_WIDTH * 0.6;
-                _panGesture.enabled = NO;
-                [UIView animateWithDuration:0.25 animations:^{
-                    self.BGView.alpha = 0;
-                    self.BGView.hidden = YES;
-                }];
-            }
+        if (ges.state == UIGestureRecognizerStateEnded) {
+            frame.origin.x = -SCREEN_WIDTH * 0.6;
+            _panGesture.enabled = NO;
             [UIView animateWithDuration:0.25 animations:^{
                 _leftView.frame = frame;
             }];
@@ -176,13 +184,13 @@
 - (void)showLeftAd:(UIScreenEdgePanGestureRecognizer *)ges {
     CGPoint p = [ges locationInView:self.view];
     NSLog(@"%@", NSStringFromCGPoint(p));
+    
     CGRect frame = _leftView.frame;
     frame.origin.x = p.x - SCREEN_WIDTH * 0.6;
     // 如果已经划出view
     if (frame.origin.x == 0) {
         return;
     }
-    
     // 更改adView的x值.当滑动距离超过view宽度时，则把x一直设置为0
     if (p.x > SCREEN_WIDTH * 0.6) {
          frame.origin.x = 0;
@@ -196,7 +204,6 @@
             // 如果超过,那么完全展示出来
             frame.origin.x = 0;
             _panGesture.enabled = YES;
-            self.BGView.alpha = 0.15;
             self.BGView.hidden = NO;
         }else{
             // 如果没有,隐藏
@@ -215,7 +222,6 @@
         CGRect frame = _leftView.frame;
         frame.origin.x = 0;
         _leftView.frame = frame;
-        self.BGView.alpha = 0.15;
         self.BGView.hidden = NO;
     }];
 }
@@ -224,5 +230,37 @@
     
 }
 
+- (void)myPublishAction {
+    PublishViewController *vc = [PublishViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+    CGRect frame = _leftView.frame;
+    frame.origin.x = -SCREEN_WIDTH * 0.6;
+    _panGesture.enabled = NO;
+    [UIView animateWithDuration:0.25 animations:^{
+        _leftView.frame = frame;
+    }];
+}
+
+- (void)editAction {
+    EditViewController *vc = [EditViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+    CGRect frame = _leftView.frame;
+    frame.origin.x = -SCREEN_WIDTH * 0.6;
+    _panGesture.enabled = NO;
+    [UIView animateWithDuration:0.25 animations:^{
+        _leftView.frame = frame;
+    }];
+}
+
+- (void)messageAction {
+    MessageViewController *vc = [MessageViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+    CGRect frame = _leftView.frame;
+    frame.origin.x = -SCREEN_WIDTH * 0.6;
+    _panGesture.enabled = NO;
+    [UIView animateWithDuration:0.25 animations:^{
+        _leftView.frame = frame;
+    }];
+}
 
 @end

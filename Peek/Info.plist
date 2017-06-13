@@ -7,7 +7,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Peek需要获取您的相机进行拍照</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
+	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

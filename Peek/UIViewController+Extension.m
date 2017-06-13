@@ -50,7 +50,7 @@ static const void *LeftBarButton = &LeftBarButton;
 -(void)initNavigationBar{
     self.navigationController.navigationBar.hidden = true;
     self.navigationBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
-    self.navigationBar.backgroundColor = mainDeepSkyBlue;
+    self.navigationBar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.navigationBar];
     
     self.leftBarButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 35, 28, 28)];
@@ -58,7 +58,7 @@ static const void *LeftBarButton = &LeftBarButton;
     [self.leftBarButton addTarget:self action:@selector(extentionBack) forControlEvents:1<<6];
     [self.view addSubview:self.leftBarButton];
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 32, SCREEN_WIDTH, 20)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 38, SCREEN_WIDTH, 20)];
     self.titleLabel.font = [UIFont systemFontOfSize:18];
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;

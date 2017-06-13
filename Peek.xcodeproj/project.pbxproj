@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744327FD1EE5850C00E20FAC /* LeftSliderView.m */; };
+		744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0E9D1EF003A3005D4133 /* leftHomeView.m */; };
+		744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA31EF00D2F005D4133 /* PublishViewController.m */; };
+		744F0EA81EF013AE005D4133 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA71EF013AE005D4133 /* EditViewController.m */; };
+		744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EAA1EF015B1005D4133 /* MessageViewController.m */; };
 		74559D821EE009BE0081A0A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D811EE009BE0081A0A5 /* main.m */; };
 		74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D841EE009BE0081A0A5 /* AppDelegate.m */; };
 		74559D881EE009BE0081A0A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D871EE009BE0081A0A5 /* ViewController.m */; };
@@ -20,6 +24,7 @@
 		74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */; };
 		74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBB1EE010230081A0A5 /* PJHUD.m */; };
 		74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */; };
+		74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F969311EE862F200C164BE /* LeftSliderView.xib */; };
 		88433AA5A4C7DDDB6B224BFA /* libPods-Peek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +49,14 @@
 		45C9A47EC43E78E017A9676B /* Pods-Peek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.release.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.release.xcconfig"; sourceTree = "<group>"; };
 		744327FC1EE5850C00E20FAC /* LeftSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSliderView.h; sourceTree = "<group>"; };
 		744327FD1EE5850C00E20FAC /* LeftSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSliderView.m; sourceTree = "<group>"; };
+		744F0E9C1EF003A3005D4133 /* leftHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = leftHomeView.h; sourceTree = "<group>"; };
+		744F0E9D1EF003A3005D4133 /* leftHomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = leftHomeView.m; sourceTree = "<group>"; };
+		744F0EA21EF00D2F005D4133 /* PublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishViewController.h; sourceTree = "<group>"; };
+		744F0EA31EF00D2F005D4133 /* PublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishViewController.m; sourceTree = "<group>"; };
+		744F0EA61EF013AE005D4133 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		744F0EA71EF013AE005D4133 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		744F0EA91EF015B1005D4133 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		744F0EAA1EF015B1005D4133 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		74559D7D1EE009BE0081A0A5 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74559D811EE009BE0081A0A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74559D831EE009BE0081A0A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -69,6 +82,7 @@
 		74559DBB1EE010230081A0A5 /* PJHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJHUD.m; sourceTree = "<group>"; };
 		74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PJUIImage+Extension.h"; sourceTree = "<group>"; };
 		74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PJUIImage+Extension.m"; sourceTree = "<group>"; };
+		74F969311EE862F200C164BE /* LeftSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftSliderView.xib; sourceTree = "<group>"; };
 		9C08E1DA4A63E424E541F8AF /* Pods-Peek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.debug.xcconfig"; sourceTree = "<group>"; };
 		AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Peek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -107,6 +121,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */ = {
+			isa = PBXGroup;
+			children = (
+				744F0EA21EF00D2F005D4133 /* PublishViewController.h */,
+				744F0EA31EF00D2F005D4133 /* PublishViewController.m */,
+			);
+			name = "我发布的卡片";
+			sourceTree = "<group>";
+		};
+		744F0EA01EF00CCF005D4133 /* 消息中心 */ = {
+			isa = PBXGroup;
+			children = (
+				744F0EA91EF015B1005D4133 /* MessageViewController.h */,
+				744F0EAA1EF015B1005D4133 /* MessageViewController.m */,
+			);
+			name = "消息中心";
+			sourceTree = "<group>";
+		};
+		744F0EA11EF00CD8005D4133 /* 更多 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "更多";
+			sourceTree = "<group>";
+		};
+		744F0EA51EF01392005D4133 /* 编辑个人资料 */ = {
+			isa = PBXGroup;
+			children = (
+				744F0EA61EF013AE005D4133 /* EditViewController.h */,
+				744F0EA71EF013AE005D4133 /* EditViewController.m */,
+			);
+			name = "编辑个人资料";
+			sourceTree = "<group>";
+		};
 		74559D741EE009BE0081A0A5 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +184,10 @@
 				74559D841EE009BE0081A0A5 /* AppDelegate.m */,
 				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
 				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
+				744F0EA11EF00CD8005D4133 /* 更多 */,
+				744F0EA01EF00CCF005D4133 /* 消息中心 */,
+				744F0EA51EF01392005D4133 /* 编辑个人资料 */,
+				744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */,
 				747E22E31EE27AD60078552D /* 侧滑菜单栏 */,
 				747E22E21EE27AC00078552D /* 首页 */,
 				74559DC11EE03AC00081A0A5 /* Extension */,
@@ -210,6 +262,9 @@
 			children = (
 				744327FC1EE5850C00E20FAC /* LeftSliderView.h */,
 				744327FD1EE5850C00E20FAC /* LeftSliderView.m */,
+				74F969311EE862F200C164BE /* LeftSliderView.xib */,
+				744F0E9C1EF003A3005D4133 /* leftHomeView.h */,
+				744F0E9D1EF003A3005D4133 /* leftHomeView.m */,
 			);
 			name = "侧滑菜单栏";
 			sourceTree = "<group>";
@@ -335,6 +390,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */,
 				74559D901EE009BF0081A0A5 /* LaunchScreen.storyboard in Resources */,
 				74559D8D1EE009BF0081A0A5 /* Assets.xcassets in Resources */,
 				74559D8B1EE009BF0081A0A5 /* Main.storyboard in Resources */,
@@ -410,13 +466,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */,
 				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
 				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
+				744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */,
 				74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */,
 				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
+				744F0EA81EF013AE005D4133 /* EditViewController.m in Sources */,
+				744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
