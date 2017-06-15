@@ -14,9 +14,9 @@
 
 @interface ViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
 
-@property (nonatomic, strong) UIView *BGView;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UIScreenEdgePanGestureRecognizer *edgePan;
+@property (weak, nonatomic) IBOutlet UIButton *camareBtn;
 
 @property (nonatomic,strong) UIImagePickerController *imagePicker;
 @end
@@ -43,13 +43,10 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-
 }
 
 - (void)initView {
-    
     [self initNavigationBar];
-    self.navigationBar.backgroundColor = [UIColor clearColor];
     
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 75) / 2, 35, 75, 25)];
     logoView.image = [UIImage imageNamed:@"peek"];
@@ -66,24 +63,10 @@
     effectView.frame = CGRectMake(0, 0, bgImgView.frame.size.width, bgImgView.frame.size.height);
     [bgImgView addSubview:effectView];
     
-    self.BGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [self.view addSubview:self.BGView];
-    self.BGView.backgroundColor = [UIColor blackColor];
-    self.BGView.hidden = YES;
-    self.BGView.alpha = 0;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Actiondo)];
-    
-    [self.BGView addGestureRecognizer:tapGesture];
-    
     [self.leftBarButton setImage:[UIImage imageNamed:@"汉堡线"] forState:0];
     [self.leftBarButton addTarget:self action:@selector(moreAction) forControlEvents:1<<6];
     [self.rightBarButton setImage:[UIImage imageNamed:@"朋友"] forState:0];
     [self.rightBarButton addTarget:self action:@selector(friendAction) forControlEvents:1<<6];
-
-    
-//    _leftView = [[[NSBundle mainBundle] loadNibNamed:@"LeftSliderView" owner:self options:nil] firstObject];
-//    [self.view addSubview:_leftView];
-//    [self.view bringSubviewToFront:_leftView];
 
     _leftView = [leftHomeView new];
     _leftView.viewDelega = self;
@@ -107,6 +90,22 @@
 #pragma mark - UIImagePickerController代理方法
 // 完成拍照后的回调方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // 选择的图片信息存储于info字典中
+    
+    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.view addSubview:img];
+    img.image = info[@"UIImagePickerControllerOriginalImage"];
+
+    
+    // 测试代码
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [img removeFromSuperview];
+    });
+    
+    NSLog(@"%@", info);
 }
 
 /**
@@ -145,7 +144,6 @@
         CGRect frame = _leftView.frame;
         frame.origin.x = -SCREEN_WIDTH * 0.6;
         _panGesture.enabled = NO;
-        self.BGView.hidden = YES;
         _leftView.frame = frame;
     }];
 }
@@ -204,7 +202,6 @@
             // 如果超过,那么完全展示出来
             frame.origin.x = 0;
             _panGesture.enabled = YES;
-            self.BGView.hidden = NO;
         }else{
             // 如果没有,隐藏
             frame.origin.x = -SCREEN_WIDTH * 0.6;
@@ -222,7 +219,6 @@
         CGRect frame = _leftView.frame;
         frame.origin.x = 0;
         _leftView.frame = frame;
-        self.BGView.hidden = NO;
     }];
 }
 

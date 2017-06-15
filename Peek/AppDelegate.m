@@ -17,14 +17,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [self.window makeKeyAndVisible];
-    //第一个视图控制器
-    ViewController *rootVC = [[ViewController alloc] init];
-    //将第一个视图控制器作为基栈视图控制器添加到导航视图控制器中
-    UINavigationController *navCtr = [[UINavigationController alloc] initWithRootViewController:rootVC];
-    //将导航视图控制器作为根视图控制器
-    self.window.rootViewController = navCtr;
+    UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ViewController *root1=[[ViewController alloc]init];
+    root1 = [mainStoryborad instantiateViewControllerWithIdentifier:@"ViewController"];
+    UINavigationController *nav1=[[UINavigationController alloc]initWithRootViewController:root1];
+    self.window.rootViewController=nav1;
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
@@ -33,19 +30,17 @@
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+
 }
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+
 }
 
 
