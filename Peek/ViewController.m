@@ -11,6 +11,7 @@
 #import "PublishViewController.h"
 #import "EditViewController.h"
 #import "MessageViewController.h"
+#import "PJLoginViewController.h"
 
 @interface ViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
 
@@ -39,7 +40,6 @@
     [super viewWillDisappear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -99,6 +99,7 @@
 
     
     // 测试代码
+    
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -227,14 +228,22 @@
 }
 
 - (void)myPublishAction {
-    PublishViewController *vc = [PublishViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-    CGRect frame = _leftView.frame;
-    frame.origin.x = -SCREEN_WIDTH * 0.6;
-    _panGesture.enabled = NO;
-    [UIView animateWithDuration:0.25 animations:^{
-        _leftView.frame = frame;
-    }];
+    if ([PJUser currentUser]) {
+        PublishViewController *vc = [PublishViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+        CGRect frame = _leftView.frame;
+        frame.origin.x = -SCREEN_WIDTH * 0.6;
+        _panGesture.enabled = NO;
+        [UIView animateWithDuration:0.25 animations:^{
+            _leftView.frame = frame;
+        }];
+    } else {
+        UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
+        PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
+        [self.navigationController presentViewController:vc animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void)editAction {
