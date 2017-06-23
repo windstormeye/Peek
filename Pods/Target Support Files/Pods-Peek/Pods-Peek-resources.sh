@@ -74,12 +74,26 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "FlatUIKit/Resources/flat-ui-icons-regular.ttf"
+  install_resource "FlatUIKit/Resources/Lato-Bold.ttf"
+  install_resource "FlatUIKit/Resources/Lato-Italic.ttf"
+  install_resource "FlatUIKit/Resources/Lato-Light.ttf"
+  install_resource "FlatUIKit/Resources/Lato-Regular.ttf"
   install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
+  install_resource "UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle"
+  install_resource "UMengUShare/UShareSDK/UMSocialUI/UMSocialSDKResources.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "FlatUIKit/Resources/flat-ui-icons-regular.ttf"
+  install_resource "FlatUIKit/Resources/Lato-Bold.ttf"
+  install_resource "FlatUIKit/Resources/Lato-Italic.ttf"
+  install_resource "FlatUIKit/Resources/Lato-Light.ttf"
+  install_resource "FlatUIKit/Resources/Lato-Regular.ttf"
   install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
+  install_resource "UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle"
+  install_resource "UMengUShare/UShareSDK/UMSocialUI/UMSocialSDKResources.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

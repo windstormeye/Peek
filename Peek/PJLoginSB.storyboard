@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginbgView" translatesAutoresizingMaskIntoConstraints="NO" id="TkY-5E-lio">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="TkY-5E-lio">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="673"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -39,6 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="loginbgView" width="320" height="520"/>
+        <image name="logo" width="994" height="992"/>
     </resources>
 </document>

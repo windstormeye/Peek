@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    /* 打开调试日志 */
+    [[UMSocialManager defaultManager] openLog:YES];
+    /* 设置友盟appkey */
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"594d2d64717c1901fe0014af"];
+    [self configUSharePlatforms];
+    
     UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ViewController *root1=[[ViewController alloc]init];
     root1 = [mainStoryborad instantiateViewControllerWithIdentifier:@"ViewController"];
@@ -24,10 +31,15 @@
     self.window.rootViewController=nav1;
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
+      
     return YES;
 }
 
+- (void)configUSharePlatforms
+{
+    /* 设置微信的appKey和appSecret */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx458b318a4997b2b1" appSecret:@"5571fa38c7a43e6b06a8fbae84febf41" redirectURL:@"http://mobile.umeng.com/social"];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 

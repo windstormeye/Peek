@@ -229,7 +229,7 @@
 				747E22E21EE27AC00078552D /* 首页 */,
 				74559DC11EE03AC00081A0A5 /* Extension */,
 				74559DC01EE03AB20081A0A5 /* Global */,
-				74559DC21EE03AD10081A0A5 /* other */,
+				74559DC21EE03AD10081A0A5 /* Other */,
 			);
 			path = Peek;
 			sourceTree = "<group>";
@@ -274,14 +274,14 @@
 			name = Extension;
 			sourceTree = "<group>";
 		};
-		74559DC21EE03AD10081A0A5 /* other */ = {
+		74559DC21EE03AD10081A0A5 /* Other */ = {
 			isa = PBXGroup;
 			children = (
 				74559D811EE009BE0081A0A5 /* main.m */,
 				74559DB61EE00CF10081A0A5 /* PrefixHeader.pch */,
 				74559D911EE009BF0081A0A5 /* Info.plist */,
 			);
-			name = other;
+			name = Other;
 			sourceTree = "<group>";
 		};
 		747E22E21EE27AC00078552D /* 首页 */ = {
@@ -674,6 +674,10 @@
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				INFOPLIST_FILE = Peek/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Peek",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = pjhubs.Peek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -687,6 +691,10 @@
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				INFOPLIST_FILE = Peek/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Peek",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = pjhubs.Peek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

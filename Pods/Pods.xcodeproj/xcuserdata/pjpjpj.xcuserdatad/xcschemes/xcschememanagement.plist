@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FlatUIKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JVFloatLabeledTextField.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,12 +37,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>70BC44266C6FFE30D2C57129458E070B</key>
+		<key>266E27D897FD7FD68078059CF4D7455F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9C75F9A0F11A8CB7C6DE62313F1DB8AB</key>
+		<key>70BC44266C6FFE30D2C57129458E070B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,7 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC22E42DB1E19C986CBD37ED9BB48F3F</key>
+		<key>CBFD817257A6ADC987ABE1A369B72625</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4FD78BFE5BD9641457B0C01CAF29FE3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6369DCF9EF8959EE460063E1C27CF48</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,21 +1,37 @@
 PODS:
   - BmobSDK (2.1.9)
+  - FlatUIKit (1.6.2)
+  - JVFloatLabeledTextField (1.1.1)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
   - SVProgressHUD (2.1.2)
+  - UMengUShare/Core (6.4.4):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.4)
+  - UMengUShare/Social/ReducedWeChat (6.4.4):
+    - UMengUShare/Core
+  - UMengUShare/UI (6.4.4):
+    - UMengUShare/Core
 
 DEPENDENCIES:
   - BmobSDK
+  - FlatUIKit
+  - JVFloatLabeledTextField
   - MJExtension
   - MJRefresh
   - SVProgressHUD
+  - UMengUShare/Social/ReducedWeChat
+  - UMengUShare/UI
 
 SPEC CHECKSUMS:
   BmobSDK: ecedc8fd992b43027b78cf42624fdb28e417e7db
+  FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
+  JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  UMengUShare: cd54ae52958426b79aa9193a7b02058d6a6d9aa0
 
-PODFILE CHECKSUM: 775ad7212f81a7a62aa6b09e45975c6433810f78
+PODFILE CHECKSUM: f033611cf00103fefd0305f92c60ac1b7c1dbda8
 
 COCOAPODS: 1.1.1

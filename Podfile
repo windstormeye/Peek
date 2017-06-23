@@ -3,4 +3,8 @@ pod 'MJRefresh'
 pod 'SVProgressHUD'
 pod 'BmobSDK'
 pod 'MJExtension'
+pod 'JVFloatLabeledTextField'
+pod 'FlatUIKit'
+pod 'UMengUShare/UI'
+pod 'UMengUShare/Social/ReducedWeChat'
 end

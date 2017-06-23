@@ -9,7 +9,6 @@
 #define headerRefresh @"header"
 #define footerRefresh @"footer"
 
-
 extern UIColor * mainRedColor;
 extern UIColor * mainBlackColor;
 extern UIColor * mainPurpleColor;
