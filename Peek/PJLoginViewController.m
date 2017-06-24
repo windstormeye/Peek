@@ -15,10 +15,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
 @property (nonatomic, strong) UITextField *nameTxt;
 @property (nonatomic, strong) UITextField *passwdTxt;
-@property (nonatomic, strong) UIButton *loginBtn;
-@property (nonatomic, strong) UIButton *signUpBtn;
+@property (nonatomic, strong) UITextField *securityTxt;
+@property (nonatomic, strong) FUIButton *loginBtn;
+@property (nonatomic, strong) FUIButton *signUpBtn;
+@property (nonatomic, strong) FUIButton *sendBtn;
 @property (nonatomic, strong) UIButton *signUpBtn_small;
 @property (nonatomic, strong) UIButton *loginBtn_small;
+@property (nonatomic, strong) UIView *pwLineView;
+@property (nonatomic, strong) UIView *securityLineView;
 @end
 
 @implementation PJLoginViewController
@@ -53,25 +57,27 @@
     logoImg.image = [UIImage imageNamed:@"logo"];
     [self.view addSubview:logoImg];
     
-    JVFloatLabeledTextField *nameTxt = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.6) / 2, CGRectGetMaxY(logoImg.frame) + 30, SCREEN_WIDTH * 0.6, 40)];
+    // 用户名输入框
+    JVFloatLabeledTextField *nameTxt = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.6) / 2, CGRectGetMaxY(logoImg.frame) + 30, SCREEN_WIDTH * 0.6 - 70, 40)];
     [self.view addSubview:nameTxt];
     self.nameTxt = nameTxt;
     nameTxt.textColor = [UIColor whiteColor];
     nameTxt.font = [UIFont systemFontOfSize:16];
     nameTxt.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"用户名", @"")
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"手机号码", @"")
                                     attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     nameTxt.floatingLabelFont = [UIFont boldSystemFontOfSize:11];
     nameTxt.floatingLabelTextColor = [UIColor lightGrayColor];
     nameTxt.floatingLabelActiveTextColor = mainDeepSkyBlue;
     nameTxt.clearButtonMode = UITextFieldViewModeWhileEditing;
     nameTxt.keepBaseline = YES;
+    
     // 用户名输入框下划线
-    UIView *nameLineView = [[UIView alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(nameTxt.frame) + 1, nameTxt.frame.size.width, 1)];
+    UIView *nameLineView = [[UIView alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(nameTxt.frame) + 1, SCREEN_WIDTH * 0.6, 1)];
     [self.view addSubview:nameLineView];
     nameLineView.backgroundColor = [UIColor lightGrayColor];
     // 密码输入框
-    JVFloatLabeledTextField *passwdTxt = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(nameTxt.frame) + 5, nameTxt.frame.size.width, 40)];
+    JVFloatLabeledTextField *passwdTxt = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(nameTxt.frame) + 5, SCREEN_WIDTH * 0.6, 40)];
     [self.view addSubview:passwdTxt];
     self.passwdTxt = passwdTxt;
     passwdTxt.textColor = [UIColor whiteColor];
@@ -86,11 +92,37 @@
     passwdTxt.clearButtonMode = UITextFieldViewModeWhileEditing;
     passwdTxt.keepBaseline = YES;
     // 密码输入框下划线
-    UIView *passwdLineView = [[UIView alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(passwdTxt.frame) + 1, nameTxt.frame.size.width, 1)];
+    UIView *passwdLineView = [[UIView alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(passwdTxt.frame) + 1, SCREEN_WIDTH * 0.6, 1)];
     [self.view addSubview:passwdLineView];
+    self.pwLineView = passwdLineView;
     passwdLineView.backgroundColor = [UIColor lightGrayColor];
+    
+    // 验证码输入框
+    JVFloatLabeledTextField *securityTxt = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(nameTxt.frame) + 5, SCREEN_WIDTH * 0.6, 40)];
+    [self.view addSubview:securityTxt];
+    self.securityTxt = securityTxt;
+    securityTxt.textColor = [UIColor whiteColor];
+    securityTxt.floatingLabelActiveTextColor = mainDeepSkyBlue;
+    securityTxt.secureTextEntry = YES;
+    securityTxt.font = [UIFont systemFontOfSize:16];
+    securityTxt.attributedPlaceholder =
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"验证码", @"")
+                                    attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    securityTxt.floatingLabelFont = [UIFont boldSystemFontOfSize:11];
+    securityTxt.floatingLabelTextColor = [UIColor lightGrayColor];
+    securityTxt.clearButtonMode = UITextFieldViewModeWhileEditing;
+    securityTxt.keepBaseline = YES;
+    securityTxt.hidden = YES;
+    
+    // 密码输入框下划线
+    UIView *securityLineView = [[UIView alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(passwdTxt.frame) + 1, SCREEN_WIDTH * 0.6, 1)];
+    [self.view addSubview:securityLineView];
+    self.securityLineView = securityLineView;
+    securityLineView.backgroundColor = [UIColor lightGrayColor];
+    self.securityLineView.hidden = YES;
+    
     // 登录按钮
-    FUIButton *loginBtn = [[FUIButton alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(passwdLineView.frame) + 50, nameTxt.frame.size.width, 40)];
+    FUIButton *loginBtn = [[FUIButton alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(passwdLineView.frame) + 50, SCREEN_WIDTH * 0.6, 40)];
     [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
     [self.view addSubview:loginBtn];
     self.loginBtn = loginBtn;
@@ -115,19 +147,33 @@
     signUpBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [signUpBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
+    // 发送验证码按钮
+    FUIButton *sendBtn = [[FUIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 0.6, nameTxt.frame.origin.y, 70, 30)];
+    [self.view addSubview:sendBtn];
+    [sendBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+    self.sendBtn = sendBtn;
+    sendBtn.hidden = YES;
+    [sendBtn addTarget:self action:@selector(sendBtnClick) forControlEvents:1<<6];
+    sendBtn.buttonColor = [UIColor orangeColor];
+    sendBtn.shadowColor = [UIColor colorWithRed:139/255.0 green:90/255.0 blue:43/255.0 alpha:1];
+    sendBtn.shadowHeight = 3.0f;
+    sendBtn.cornerRadius = 5.0f;
+    sendBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
     // 前往注册按钮
     UIButton *signUpBtn_small = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(loginBtn.frame) - 115, CGRectGetMaxY(loginBtn.frame) + 10, 115, 20)];
     [self.view addSubview:signUpBtn_small];
     self.signUpBtn_small = signUpBtn_small;
     signUpBtn_small.titleLabel.textAlignment = NSTextAlignmentCenter;
-    signUpBtn_small.font = [UIFont systemFontOfSize:12];
+    signUpBtn_small.titleLabel.font = [UIFont systemFontOfSize:12];
     [signUpBtn_small setTitle:@"没有账号？前往注册" forState:UIControlStateNormal];
     [signUpBtn_small addTarget:self action:@selector(signUpBtn_smallClick) forControlEvents:UIControlEventTouchUpInside];
     // 前往登录按钮
     UIButton *loginBtn_small = [[UIButton alloc] initWithFrame:CGRectMake(signUpBtn_small.frame.origin.x, signUpBtn_small.frame.origin.y, signUpBtn_small.frame.size.width, signUpBtn_small.frame.size.height)];
     [self.view addSubview:loginBtn_small];
     loginBtn_small.titleLabel.textAlignment = NSTextAlignmentCenter;
-    loginBtn_small.font = [UIFont systemFontOfSize:12];
+    loginBtn_small.titleLabel.font = [UIFont systemFontOfSize:12];
     [loginBtn_small setTintColor:[UIColor greenColor]];
     loginBtn_small.hidden = YES;
     self.loginBtn_small = loginBtn_small;
@@ -140,20 +186,44 @@
     [PJHUD showErrorWithStatus:@"未开放注册"];
 }
 
-// 点击前往登录
+// 点击前往注册
 - (void)signUpBtn_smallClick {
     self.loginBtn.hidden = YES;
     self.loginBtn_small.hidden = NO;
     self.signUpBtn_small.hidden = YES;
     self.signUpBtn.hidden = NO;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect frame = self.passwdTxt.frame;
+        frame = CGRectMake(self.passwdTxt.frame.origin.x, self.passwdTxt.frame.origin.y + 40, self.passwdTxt.frame.size.width, self.passwdTxt.frame.size.height);
+        self.passwdTxt.frame = frame;
+        self.pwLineView.frame = CGRectMake(frame.origin.x, self.pwLineView.frame.origin.y + 40, frame.size.width, 1);
+    } completion:^(BOOL finished) {
+        self.securityTxt.hidden = NO;
+        self.securityLineView.hidden = NO;
+        self.sendBtn.hidden = NO;
+    }];
 }
 
-// 点击前往注册
+// 点击前往登录
 - (void)loginBtn_smallClick {
     self.loginBtn.hidden = NO;
     self.loginBtn_small.hidden = YES;
     self.signUpBtn_small.hidden = NO;
     self.signUpBtn.hidden = YES;
+    self.sendBtn.hidden = YES;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.securityTxt.hidden = YES;
+        self.securityLineView.hidden = YES;
+        
+        CGRect frame = self.passwdTxt.frame;
+        frame = CGRectMake(self.passwdTxt.frame.origin.x, self.passwdTxt.frame.origin.y - 40, self.passwdTxt.frame.size.width, self.passwdTxt.frame.size.height);
+        self.passwdTxt.frame = frame;
+        self.pwLineView.frame = CGRectMake(frame.origin.x, self.pwLineView.frame.origin.y - 40, frame.size.width, 1);
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 // 登录
@@ -172,6 +242,37 @@
 
 - (void)back {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)sendBtnClick {
+    self.sendBtn.enabled = NO;
+    __block NSInteger second = 3;
+    //全局队列    默认优先级
+    dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //定时器模式  事件源
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, quene);
+    //NSEC_PER_SEC是秒，＊1是每秒
+    dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), NSEC_PER_SEC * 1, 0);
+    //设置响应dispatch源事件的block，在dispatch源指定的队列上运行
+    dispatch_source_set_event_handler(timer, ^{
+        //回调主线程，在主线程中操作UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (second >= 0) {
+                [self.sendBtn setTitle:[NSString stringWithFormat:@"%lds后重发",second] forState:UIControlStateNormal];
+                second--;
+            }
+            else
+            {
+                //这句话必须写否则会出问题
+                dispatch_source_cancel(timer);
+                self.sendBtn.enabled = YES;
+                [self.sendBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+                
+            }
+        });
+    });
+    //启动源
+    dispatch_resume(timer);
 }
 
 @end

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>IQKeyboardManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JVFloatLabeledTextField.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,6 +47,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>663F3244653A7B0C2E2F5309892636A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>70BC44266C6FFE30D2C57129458E070B</key>
 		<dict>
 			<key>primary</key>
@@ -52,12 +62,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CBFD817257A6ADC987ABE1A369B72625</key>
+		<key>B5BCEE0B04CD9F8AEE5F3A2B649A1F02</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F4FD78BFE5BD9641457B0C01CAF29FE3</key>
+		<key>E15CE09F6E8A48DAC747CC95437D6775</key>
 		<dict>
 			<key>primary</key>
 			<true/>

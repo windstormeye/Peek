@@ -15,6 +15,7 @@
 		744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA31EF00D2F005D4133 /* PublishViewController.m */; };
 		744F0EA81EF013AE005D4133 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA71EF013AE005D4133 /* EditViewController.m */; };
 		744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EAA1EF015B1005D4133 /* MessageViewController.m */; };
+		744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */; };
 		74559D821EE009BE0081A0A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D811EE009BE0081A0A5 /* main.m */; };
 		74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D841EE009BE0081A0A5 /* AppDelegate.m */; };
 		74559D881EE009BE0081A0A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D871EE009BE0081A0A5 /* ViewController.m */; };
@@ -65,6 +66,8 @@
 		744F0EA71EF013AE005D4133 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		744F0EA91EF015B1005D4133 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		744F0EAA1EF015B1005D4133 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		744FCBE31EFEAE3E008BAC63 /* PJKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJKeyboard.h; sourceTree = "<group>"; };
+		744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJKeyboard.m; sourceTree = "<group>"; };
 		74559D7D1EE009BE0081A0A5 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74559D811EE009BE0081A0A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74559D831EE009BE0081A0A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -129,14 +132,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		74006FD51EFC0154008A151C /* 登录 */ = {
+		74006FD51EFC0154008A151C /* 登录/注册 */ = {
 			isa = PBXGroup;
 			children = (
 				74006FD61EFC0166008A151C /* PJLoginViewController.h */,
 				74006FD71EFC0166008A151C /* PJLoginViewController.m */,
 				74006FDB1EFC0192008A151C /* PJLoginSB.storyboard */,
 			);
-			name = "登录";
+			name = "登录/注册";
 			sourceTree = "<group>";
 		};
 		74006FDD1EFC08D3008A151C /* PJHUD */ = {
@@ -191,6 +194,15 @@
 			name = "编辑个人资料";
 			sourceTree = "<group>";
 		};
+		744FCBE21EFEAE14008BAC63 /* PJKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				744FCBE31EFEAE3E008BAC63 /* PJKeyboard.h */,
+				744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */,
+			);
+			name = PJKeyboard;
+			sourceTree = "<group>";
+		};
 		74559D741EE009BE0081A0A5 = {
 			isa = PBXGroup;
 			children = (
@@ -220,7 +232,7 @@
 				74559D841EE009BE0081A0A5 /* AppDelegate.m */,
 				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
 				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
-				74006FD51EFC0154008A151C /* 登录 */,
+				74006FD51EFC0154008A151C /* 登录/注册 */,
 				744F0EA11EF00CD8005D4133 /* 更多 */,
 				744F0EA01EF00CCF005D4133 /* 消息中心 */,
 				744F0EA51EF01392005D4133 /* 编辑个人资料 */,
@@ -255,6 +267,7 @@
 		74559DC01EE03AB20081A0A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				744FCBE21EFEAE14008BAC63 /* PJKeyboard */,
 				74006FDE1EFC08DA008A151C /* PJUser */,
 				74559DB31EE00CCF0081A0A5 /* constant.h */,
 				74559DB41EE00CCF0081A0A5 /* constant.mm */,
@@ -514,6 +527,7 @@
 				744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */,
 				74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */,
 				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
+				744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */,
 				744F0EA81EF013AE005D4133 /* EditViewController.m in Sources */,
 				744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
@@ -673,6 +687,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				INFOPLIST_FILE = Peek/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -690,6 +705,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				INFOPLIST_FILE = Peek/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

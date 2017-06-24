@@ -7,4 +7,6 @@ pod 'JVFloatLabeledTextField'
 pod 'FlatUIKit'
 pod 'UMengUShare/UI'
 pod 'UMengUShare/Social/ReducedWeChat'
+pod 'SMSSDK'
+pod 'IQKeyboardManager'
 end

@@ -253,25 +253,41 @@
 }
 
 - (void)editAction {
-    EditViewController *vc = [EditViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-    CGRect frame = _leftView.frame;
-    frame.origin.x = -SCREEN_WIDTH * 0.6;
-    _panGesture.enabled = NO;
-    [UIView animateWithDuration:0.25 animations:^{
-        _leftView.frame = frame;
-    }];
+    if ([PJUser currentUser]) {
+        EditViewController *vc = [EditViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+        CGRect frame = _leftView.frame;
+        frame.origin.x = -SCREEN_WIDTH * 0.6;
+        _panGesture.enabled = NO;
+        [UIView animateWithDuration:0.25 animations:^{
+            _leftView.frame = frame;
+        }];
+    } else {
+        UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
+        PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
+        [self.navigationController presentViewController:vc animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void)messageAction {
-    MessageViewController *vc = [MessageViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-    CGRect frame = _leftView.frame;
-    frame.origin.x = -SCREEN_WIDTH * 0.6;
-    _panGesture.enabled = NO;
-    [UIView animateWithDuration:0.25 animations:^{
-        _leftView.frame = frame;
-    }];
+    if ([PJUser currentUser]) {
+        MessageViewController *vc = [MessageViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+        CGRect frame = _leftView.frame;
+        frame.origin.x = -SCREEN_WIDTH * 0.6;
+        _panGesture.enabled = NO;
+        [UIView animateWithDuration:0.25 animations:^{
+            _leftView.frame = frame;
+        }];
+    } else {
+        UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
+        PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
+        [self.navigationController presentViewController:vc animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
