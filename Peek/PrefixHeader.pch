@@ -13,4 +13,6 @@
 #import "PJUser.h"
 #import "SVProgressHUD.h"
 #import "PJKeyboard.h"
+#import <BmobSDK/Bmob.h>
+
 

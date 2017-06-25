@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>MOBAppSecret</key>
 	<string>71fb7e198d0098f48233d6d98e5cb73f</string>
 	<key>MOBAppKey</key>

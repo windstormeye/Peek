@@ -24,12 +24,13 @@
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"594d2d64717c1901fe0014af"];
     [self configUSharePlatforms];
     
+    [Bmob registerWithAppKey:@"91ea310c6307a2cdaaa4a66660b0ea23"];
+    
     UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ViewController *root1=[[ViewController alloc]init];
     root1 = [mainStoryborad instantiateViewControllerWithIdentifier:@"ViewController"];
     UINavigationController *nav1=[[UINavigationController alloc]initWithRootViewController:root1];
     self.window.rootViewController=nav1;
-    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
       
     return YES;
