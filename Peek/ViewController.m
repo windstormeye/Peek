@@ -83,8 +83,16 @@
     _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     _panGesture.enabled = NO;
     [self.view addGestureRecognizer:_panGesture];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginReload:) name:@"loginNo"object:nil];
 }
 
+// 登录成功的通知
+- (void)loginReload:(NSNotification *)no {
+    if (no.userInfo[@"isLogin"]) {
+        [_leftView setMessage:nil withUserName:[[BmobUser currentUser] objectForKey:@"nickname"] andUserID:[[BmobUser currentUser] objectForKey:@"username"]];
+    }
+}
 
 - (IBAction)takePhoto:(id)sender {
     [self presentViewController:self.imagePicker animated:YES completion:nil];
@@ -234,7 +242,7 @@
 }
 
 - (void)myPublishAction {
-    if ([PJUser currentUser]) {
+    if ([BmobUser currentUser]) {
         PublishViewController *vc = [PublishViewController new];
         [self.navigationController pushViewController:vc animated:YES];
         CGRect frame = _leftView.frame;
@@ -253,7 +261,7 @@
 }
 
 - (void)editAction {
-    if ([PJUser currentUser]) {
+    if ([BmobUser currentUser]) {
         EditViewController *vc = [EditViewController new];
         [self.navigationController pushViewController:vc animated:YES];
         CGRect frame = _leftView.frame;
@@ -272,7 +280,7 @@
 }
 
 - (void)messageAction {
-    if ([PJUser currentUser]) {
+    if ([BmobUser currentUser]) {
         MessageViewController *vc = [MessageViewController new];
         [self.navigationController pushViewController:vc animated:YES];
         CGRect frame = _leftView.frame;
@@ -288,6 +296,31 @@
             
         }];
     }
+}
+
+// 退出登录
+- (void)logoutAction {
+    [BmobUser logout];
+    UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
+    PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
+    [self.navigationController presentViewController:vc animated:YES completion:^{
+        [_leftView setMessage:nil withUserName:@"还未登录噢~" andUserID:nil];
+    }];
+}
+
+// 头像点击事件
+- (void)tapAvatar {
+    if ([BmobUser currentUser]) {
+        EditViewController *vc = [EditViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
+        PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
+        [self.navigationController presentViewController:vc animated:YES completion:^{
+            
+        }];
+    }
+    
 }
 
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType

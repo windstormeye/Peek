@@ -13,6 +13,8 @@
 - (void)myPublishAction;
 - (void)editAction;
 - (void)messageAction;
+- (void)logoutAction;
+- (void)tapAvatar;
 
 @end
 

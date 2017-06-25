@@ -38,6 +38,22 @@
     [self addSubview:scrollView];
 }
 
+- (void)setMessage:(UIImage *)avatar withUserName:(NSString *)username andUserID:(NSString *)userID {
+    if (avatar) {
+        _leftView.avatarImgView.image = avatar;
+    }
+    if (username == nil) {
+        _leftView.usernameLabel.text = @"还未设置昵称哦~";
+    } else {
+        _leftView.usernameLabel.text = username;
+    }
+    _leftView.useridLabel.text = userID;
+}
+
+- (void)tapAvatar {
+    [_viewDelega tapAvatar];
+}
+
 - (void)myPublishAction {
     [_viewDelega myPublishAction];
 }
@@ -48,6 +64,10 @@
 
 - (void)messageAction {
     [_viewDelega messageAction];
+}
+
+- (void)logoutAction {
+    [_viewDelega logoutAction];
 }
 
 @end

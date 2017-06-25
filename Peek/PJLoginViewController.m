@@ -239,10 +239,13 @@
 
 // 登录
 - (void)loginBtnClick {
+    [PJHUD showWithStatus:@""];
     [BmobUser loginInbackgroundWithAccount:self.nameTxt.text andPassword:self.passwdTxt.text block:^(BmobUser *user, NSError *error) {
         if (user) {
             [self dismissViewControllerAnimated:YES completion:^{
-                
+                [PJHUD dismiss];
+                NSNotification *notification = [NSNotification notificationWithName:@"loginNo" object:nil userInfo:@{@"isLogin":@true}];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
             }];
         } else {
             [PJHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", error]];
@@ -262,8 +265,8 @@
                 if (isSuccessful){
                     [PJHUD showSuccessWithStatus:@"注册成功"];
                     [self dismissViewControllerAnimated:YES completion:^{
-                        // 在此写下注册成功后的代码
-                    }];
+                        NSNotification *notification = [NSNotification notificationWithName:@"loginNo" object:nil userInfo:@{@"isLogin":@true}];
+                        [[NSNotificationCenter defaultCenter] postNotification:notification];                    }];
                 } else {
                     [PJHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", error]];
                 }

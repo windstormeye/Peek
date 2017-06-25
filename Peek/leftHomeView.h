@@ -14,6 +14,8 @@
 - (void)myPublishAction;
 - (void)editAction;
 - (void)messageAction;
+- (void)logoutAction;
+- (void)tapAvatar;
 
 @end
 
@@ -21,4 +23,5 @@
 
 @property (nonatomic, weak) id<leftHomeViewDelegate> viewDelega;
 
+- (void)setMessage:(UIImage *)avatar withUserName:(NSString *)username andUserID:(NSString *)userID;
 @end

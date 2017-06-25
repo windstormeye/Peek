@@ -10,7 +10,6 @@
 #import "UIViewController+Extension.h"
 #import "PJUIImage+Extension.h"
 #import "PJHUD.h"
-#import "PJUser.h"
 #import "SVProgressHUD.h"
 #import "PJKeyboard.h"
 #import <BmobSDK/Bmob.h>

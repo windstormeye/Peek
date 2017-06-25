@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74006FD71EFC0166008A151C /* PJLoginViewController.m */; };
 		74006FDC1EFC0192008A151C /* PJLoginSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74006FDB1EFC0192008A151C /* PJLoginSB.storyboard */; };
-		74006FE31EFC091E008A151C /* PJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 74006FE21EFC091E008A151C /* PJUser.m */; };
 		744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744327FD1EE5850C00E20FAC /* LeftSliderView.m */; };
 		744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0E9D1EF003A3005D4133 /* leftHomeView.m */; };
 		744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA31EF00D2F005D4133 /* PublishViewController.m */; };
@@ -54,8 +53,6 @@
 		74006FD61EFC0166008A151C /* PJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJLoginViewController.h; sourceTree = "<group>"; };
 		74006FD71EFC0166008A151C /* PJLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJLoginViewController.m; sourceTree = "<group>"; };
 		74006FDB1EFC0192008A151C /* PJLoginSB.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PJLoginSB.storyboard; sourceTree = "<group>"; };
-		74006FE11EFC091E008A151C /* PJUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJUser.h; sourceTree = "<group>"; };
-		74006FE21EFC091E008A151C /* PJUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJUser.m; sourceTree = "<group>"; };
 		744327FC1EE5850C00E20FAC /* LeftSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSliderView.h; sourceTree = "<group>"; };
 		744327FD1EE5850C00E20FAC /* LeftSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSliderView.m; sourceTree = "<group>"; };
 		744F0E9C1EF003A3005D4133 /* leftHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = leftHomeView.h; sourceTree = "<group>"; };
@@ -149,15 +146,6 @@
 				74559DBB1EE010230081A0A5 /* PJHUD.m */,
 			);
 			name = PJHUD;
-			sourceTree = "<group>";
-		};
-		74006FDE1EFC08DA008A151C /* PJUser */ = {
-			isa = PBXGroup;
-			children = (
-				74006FE11EFC091E008A151C /* PJUser.h */,
-				74006FE21EFC091E008A151C /* PJUser.m */,
-			);
-			name = PJUser;
 			sourceTree = "<group>";
 		};
 		744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */ = {
@@ -268,7 +256,6 @@
 			isa = PBXGroup;
 			children = (
 				744FCBE21EFEAE14008BAC63 /* PJKeyboard */,
-				74006FDE1EFC08DA008A151C /* PJUser */,
 				74559DB31EE00CCF0081A0A5 /* constant.h */,
 				74559DB41EE00CCF0081A0A5 /* constant.mm */,
 				74006FDD1EFC08D3008A151C /* PJHUD */,
@@ -519,7 +506,6 @@
 			files = (
 				744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */,
 				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
-				74006FE31EFC091E008A151C /* PJUser.m in Sources */,
 				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,

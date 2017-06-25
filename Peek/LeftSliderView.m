@@ -25,6 +25,26 @@
     _avatarImgView.layer.masksToBounds = YES;
     _avatarImgView.layer.borderColor = [UIColor whiteColor].CGColor;
     _avatarImgView.layer.borderWidth = 2;
+    _avatarImgView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    [_avatarImgView addGestureRecognizer:singleTap];
+    
+    if ([[BmobUser currentUser] objectForKey:@"nickname"]) {
+        _useridLabel.text = [[BmobUser currentUser] objectForKey:@"nickname"];
+    } else {
+        _useridLabel.text = @"";
+    }
+    
+    if ([[BmobUser currentUser] objectForKey:@"username"]) {
+        _usernameLabel.text = [[BmobUser currentUser] objectForKey:@"username"];
+    } else {
+        _usernameLabel.text = @"还未登录噢~";
+    }
+}
+
+- (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
+    [_viewDelegate tapAvatar];
 }
 
 - (IBAction)moreAction:(id)sender {
@@ -39,6 +59,7 @@
     [_viewDelegate editAction];
 }
 - (IBAction)logoutAction:(id)sender {
+    [_viewDelegate logoutAction];
 }
 
 @end
