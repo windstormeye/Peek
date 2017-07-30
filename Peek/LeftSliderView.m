@@ -23,24 +23,43 @@
     
     _avatarImgView.layer.cornerRadius = _avatarImgView.frame.size.width / 2;
     _avatarImgView.layer.masksToBounds = YES;
-    _avatarImgView.layer.borderColor = [UIColor whiteColor].CGColor;
-    _avatarImgView.layer.borderWidth = 2;
     _avatarImgView.userInteractionEnabled = YES;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    
+    _usernameLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)];
+    [_usernameLabel addGestureRecognizer:labelTapGestureRecognizer];
+    
+    UITapGestureRecognizer *labelTapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)];
+    _useridLabel.userInteractionEnabled = YES;
+    [_useridLabel addGestureRecognizer:labelTapGestureRecognizer2];
+    
     [_avatarImgView addGestureRecognizer:singleTap];
     
-    if ([[BmobUser currentUser] objectForKey:@"nickname"]) {
-        _useridLabel.text = [[BmobUser currentUser] objectForKey:@"nickname"];
+    [self setViewDate];
+}
+
+- (void)setViewDate {
+    if ([[BmobUser currentUser] objectForKey:@"username"]) {
+        _useridLabel.text = [[BmobUser currentUser] objectForKey:@"username"];
     } else {
         _useridLabel.text = @"";
     }
     
-    if ([[BmobUser currentUser] objectForKey:@"username"]) {
-        _usernameLabel.text = [[BmobUser currentUser] objectForKey:@"username"];
+    if ([[BmobUser currentUser] objectForKey:@"nickname"]) {
+        _usernameLabel.text = [[BmobUser currentUser] objectForKey:@"nickname"];
     } else {
-        _usernameLabel.text = @"还未登录噢~";
+        _usernameLabel.text = @"还未设置昵称哦~";
     }
+    
+    if ([[BmobUser currentUser] objectForKey:@"avatar_url"]) {
+        [_avatarImgView sd_setImageWithURL:[NSURL URLWithString:[[BmobUser currentUser] objectForKey:@"avatar_url"]]];
+    }
+}
+
+- (void)labelClick {
+    [_viewDelegate tapAvatar];
 }
 
 - (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {

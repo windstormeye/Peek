@@ -38,9 +38,9 @@
     [self addSubview:scrollView];
 }
 
-- (void)setMessage:(UIImage *)avatar withUserName:(NSString *)username andUserID:(NSString *)userID {
+- (void)setMessage:(NSString *)avatar withUserName:(NSString *)username andUserID:(NSString *)userID {
     if (avatar) {
-        _leftView.avatarImgView.image = avatar;
+        [_leftView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:avatar]];
     }
     if (username == nil) {
         _leftView.usernameLabel.text = @"还未设置昵称哦~";

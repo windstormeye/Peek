@@ -23,5 +23,5 @@
 
 @property (nonatomic, weak) id<leftHomeViewDelegate> viewDelega;
 
-- (void)setMessage:(UIImage *)avatar withUserName:(NSString *)username andUserID:(NSString *)userID;
+- (void)setMessage:(NSString *)avatar withUserName:(NSString *)username andUserID:(NSString *)userID;
 @end

@@ -85,6 +85,14 @@
     [self.view addGestureRecognizer:_panGesture];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginReload:) name:@"loginNo"object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeUserDateReload:) name:@"changeAvarta"object:nil];
+}
+
+// 用户资料的更新通知
+- (void)changeUserDateReload:(NSNotification *)no {
+    if (no.userInfo[@"isChange"]) {
+        [_leftView setMessage:[[BmobUser currentUser] objectForKey:@"avatar_url"] withUserName:[[BmobUser currentUser] objectForKey:@"nickname"] andUserID:[[BmobUser currentUser] objectForKey:@"username"]];
+    }
 }
 
 // 登录成功的通知
@@ -117,7 +125,7 @@
         [img removeFromSuperview];
     });
     
-    NSLog(@"%@", info);
+//    NSLog(@"%@", info);
 }
 
 /**
@@ -163,7 +171,7 @@
 // 左侧菜单栏滑动退出
 - (void)panGesture:(UIPanGestureRecognizer *)ges {
     CGPoint p = [ges translationInView:self.view];
-    NSLog(@"%@", NSStringFromCGPoint(p));
+//    NSLog(@"%@", NSStringFromCGPoint(p));
     
     CGRect frame = _leftView.frame;
     
@@ -193,7 +201,7 @@
 // 开启左侧滑功能
 - (void)showLeftAd:(UIScreenEdgePanGestureRecognizer *)ges {
     CGPoint p = [ges locationInView:self.view];
-    NSLog(@"%@", NSStringFromCGPoint(p));
+//    NSLog(@"%@", NSStringFromCGPoint(p));
     
     CGRect frame = _leftView.frame;
     frame.origin.x = p.x - SCREEN_WIDTH * 0.6;
@@ -245,12 +253,7 @@
     if ([BmobUser currentUser]) {
         PublishViewController *vc = [PublishViewController new];
         [self.navigationController pushViewController:vc animated:YES];
-        CGRect frame = _leftView.frame;
-        frame.origin.x = -SCREEN_WIDTH * 0.6;
-        _panGesture.enabled = NO;
-        [UIView animateWithDuration:0.25 animations:^{
-            _leftView.frame = frame;
-        }];
+        [self dismissLeftSlideView];
     } else {
         UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
         PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
@@ -264,12 +267,7 @@
     if ([BmobUser currentUser]) {
         EditViewController *vc = [EditViewController new];
         [self.navigationController pushViewController:vc animated:YES];
-        CGRect frame = _leftView.frame;
-        frame.origin.x = -SCREEN_WIDTH * 0.6;
-        _panGesture.enabled = NO;
-        [UIView animateWithDuration:0.25 animations:^{
-            _leftView.frame = frame;
-        }];
+        [self dismissLeftSlideView];
     } else {
         UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
         PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
@@ -283,12 +281,7 @@
     if ([BmobUser currentUser]) {
         MessageViewController *vc = [MessageViewController new];
         [self.navigationController pushViewController:vc animated:YES];
-        CGRect frame = _leftView.frame;
-        frame.origin.x = -SCREEN_WIDTH * 0.6;
-        _panGesture.enabled = NO;
-        [UIView animateWithDuration:0.25 animations:^{
-            _leftView.frame = frame;
-        }];
+        [self dismissLeftSlideView];
     } else {
         UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
         PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
@@ -313,6 +306,7 @@
     if ([BmobUser currentUser]) {
         EditViewController *vc = [EditViewController new];
         [self.navigationController pushViewController:vc animated:YES];
+        [self dismissLeftSlideView];
     } else {
         UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
         PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
@@ -351,6 +345,15 @@
                 UMSocialLogInfo(@"response data is %@",data);
             }
         }
+    }];
+}
+
+- (void)dismissLeftSlideView {
+    CGRect frame = _leftView.frame;
+    frame.origin.x = -SCREEN_WIDTH * 0.6;
+    _panGesture.enabled = NO;
+    [UIView animateWithDuration:0.25 animations:^{
+        _leftView.frame = frame;
     }];
 }
 

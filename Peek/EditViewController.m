@@ -7,12 +7,17 @@
 //
 
 #import "EditViewController.h"
+#import "PJEditTableView.h"
 
-@interface EditViewController ()
+@interface EditViewController () <PJEditTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
 @implementation EditViewController
+{
+    PJEditTableView *_kTableView;
+    UIImageView *_kAvatarImageVIew;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,6 +52,54 @@
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     effectView.frame = CGRectMake(0, 0, bgImgView.frame.size.width, bgImgView.frame.size.height);
     [bgImgView addSubview:effectView];
+    
+    _kTableView = [[PJEditTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_WIDTH - 64) style:UITableViewStyleGrouped];
+    _kTableView.tableDelegate = self;
+    [self.view addSubview:_kTableView];
+}
+
+- (void)PJEditTableViewChangeAvater:(UIImageView *)img {
+    _kAvatarImageVIew = img;
+    
+    //实例化照片选择控制器
+    UIImagePickerController *pickControl=[[UIImagePickerController alloc]init];
+    //设置照片源
+    [pickControl setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    //设置协议
+    [pickControl setDelegate:self];
+    //设置编辑
+    [pickControl setAllowsEditing:YES];
+    //选完图片之后回到的视图界面
+    [self presentViewController:pickControl animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    //    UIImage *image=info[@"UIImagePickerControllerOriginalImage"];
+    
+    UIImage *image=info[@"UIImagePickerControllerEditedImage"];
+    [_kAvatarImageVIew setImage:image];
+
+    //选取完图片之后关闭视图
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSData *data = UIImagePNGRepresentation(image);
+        BmobFile *file1 = [[BmobFile alloc]initWithFileName:[NSString stringWithFormat:@"%@_avatar.png", [[BmobUser currentUser] objectForKey:@"username"]] withFileData:data];
+        
+        [file1 saveInBackground:^(BOOL isSuccessful, NSError *error) {
+            //如果文件保存成功，则把文件添加到filetype列
+            if (isSuccessful) {
+                BmobUser *bUser = [BmobUser currentUser];
+                [bUser setObject:file1.url forKey:@"avatar_url"];
+                [bUser updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+                    NSLog(@"error %@",[error description]);
+                    NSNotification *notification = [NSNotification notificationWithName:@"changeAvarta" object:nil userInfo:@{@"isChange":@true}];
+                    [[NSNotificationCenter defaultCenter] postNotification:notification];
+                }];
+            }else{
+                //进行处理
+            }
+        }];
+    }];
 }
 
 @end
