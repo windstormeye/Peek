@@ -6,6 +6,12 @@ PODS:
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
   - MOBFoundation (3.0.0)
+  - RongCloudIM/IMKit (2.8.13):
+    - RongCloudIM/IMLib
+  - RongCloudIM/IMLib (2.8.13)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - SMSSDK (3.0.0):
     - MOBFoundation
   - SVProgressHUD (2.1.2)
@@ -24,6 +30,9 @@ DEPENDENCIES:
   - JVFloatLabeledTextField
   - MJExtension
   - MJRefresh
+  - RongCloudIM/IMKit
+  - RongCloudIM/IMLib
+  - SDWebImage
   - SMSSDK
   - SVProgressHUD
   - UMengUShare/Social/ReducedWeChat
@@ -37,10 +46,12 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   MOBFoundation: e6572a62983a44fa048c4038842ade1494c10059
+  RongCloudIM: bfaeb83dcfaf6b2039434f3692d328430de215c7
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SMSSDK: e4706231a3e6aa5620ec8a2d3fdc4d16870f746e
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   UMengUShare: cd54ae52958426b79aa9193a7b02058d6a6d9aa0
 
-PODFILE CHECKSUM: c2a671dc24803ea8a168ce0f478d333c1b0ac7b0
+PODFILE CHECKSUM: e850956b176d71963ec981dcc17b4da5ce076c16
 
 COCOAPODS: 1.1.1

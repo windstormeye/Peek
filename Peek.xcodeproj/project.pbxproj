@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74006FD71EFC0166008A151C /* PJLoginViewController.m */; };
 		74006FDC1EFC0192008A151C /* PJLoginSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74006FDB1EFC0192008A151C /* PJLoginSB.storyboard */; };
+		743C844C1F0B89F400D46EAC /* PJFriendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C844B1F0B89F400D46EAC /* PJFriendView.m */; };
+		743C844E1F0B8A0300D46EAC /* PJFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 743C844D1F0B8A0300D46EAC /* PJFriendView.xib */; };
+		743C84531F0B90A600D46EAC /* PJEditTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C84521F0B90A600D46EAC /* PJEditTableView.m */; };
+		743C845C1F0B91C700D46EAC /* PJEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C845A1F0B91C700D46EAC /* PJEditTableViewCell.m */; };
+		743C845D1F0B91C700D46EAC /* PJEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 743C845B1F0B91C700D46EAC /* PJEditTableViewCell.xib */; };
+		743C84631F0B97EE00D46EAC /* PJEditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C84621F0B97EE00D46EAC /* PJEditHeaderView.m */; };
+		743C84651F0B97FC00D46EAC /* PJEditHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 743C84641F0B97FC00D46EAC /* PJEditHeaderView.xib */; };
 		744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744327FD1EE5850C00E20FAC /* LeftSliderView.m */; };
 		744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0E9D1EF003A3005D4133 /* leftHomeView.m */; };
 		744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA31EF00D2F005D4133 /* PublishViewController.m */; };
@@ -27,6 +34,7 @@
 		74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */; };
 		74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBB1EE010230081A0A5 /* PJHUD.m */; };
 		74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */; };
+		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
 		74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F969311EE862F200C164BE /* LeftSliderView.xib */; };
 		88433AA5A4C7DDDB6B224BFA /* libPods-Peek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */; };
 /* End PBXBuildFile section */
@@ -53,6 +61,17 @@
 		74006FD61EFC0166008A151C /* PJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJLoginViewController.h; sourceTree = "<group>"; };
 		74006FD71EFC0166008A151C /* PJLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJLoginViewController.m; sourceTree = "<group>"; };
 		74006FDB1EFC0192008A151C /* PJLoginSB.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PJLoginSB.storyboard; sourceTree = "<group>"; };
+		743C844A1F0B89F400D46EAC /* PJFriendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJFriendView.h; sourceTree = "<group>"; };
+		743C844B1F0B89F400D46EAC /* PJFriendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJFriendView.m; sourceTree = "<group>"; };
+		743C844D1F0B8A0300D46EAC /* PJFriendView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PJFriendView.xib; sourceTree = "<group>"; };
+		743C84511F0B90A600D46EAC /* PJEditTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditTableView.h; sourceTree = "<group>"; };
+		743C84521F0B90A600D46EAC /* PJEditTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditTableView.m; sourceTree = "<group>"; };
+		743C84591F0B91C700D46EAC /* PJEditTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditTableViewCell.h; sourceTree = "<group>"; };
+		743C845A1F0B91C700D46EAC /* PJEditTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditTableViewCell.m; sourceTree = "<group>"; };
+		743C845B1F0B91C700D46EAC /* PJEditTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PJEditTableViewCell.xib; sourceTree = "<group>"; };
+		743C84611F0B97EE00D46EAC /* PJEditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditHeaderView.h; sourceTree = "<group>"; };
+		743C84621F0B97EE00D46EAC /* PJEditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditHeaderView.m; sourceTree = "<group>"; };
+		743C84641F0B97FC00D46EAC /* PJEditHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PJEditHeaderView.xib; sourceTree = "<group>"; };
 		744327FC1EE5850C00E20FAC /* LeftSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSliderView.h; sourceTree = "<group>"; };
 		744327FD1EE5850C00E20FAC /* LeftSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSliderView.m; sourceTree = "<group>"; };
 		744F0E9C1EF003A3005D4133 /* leftHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = leftHomeView.h; sourceTree = "<group>"; };
@@ -90,6 +109,8 @@
 		74559DBB1EE010230081A0A5 /* PJHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJHUD.m; sourceTree = "<group>"; };
 		74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PJUIImage+Extension.h"; sourceTree = "<group>"; };
 		74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PJUIImage+Extension.m"; sourceTree = "<group>"; };
+		74C63A3C1F47259400D0B35F /* PJModifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJModifyViewController.h; sourceTree = "<group>"; };
+		74C63A3D1F47259400D0B35F /* PJModifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJModifyViewController.m; sourceTree = "<group>"; };
 		74F969311EE862F200C164BE /* LeftSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftSliderView.xib; sourceTree = "<group>"; };
 		9C08E1DA4A63E424E541F8AF /* Pods-Peek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.debug.xcconfig"; sourceTree = "<group>"; };
 		AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Peek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +169,46 @@
 			name = PJHUD;
 			sourceTree = "<group>";
 		};
+		743C84461F0B893900D46EAC /* 朋友 */ = {
+			isa = PBXGroup;
+			children = (
+				743C844A1F0B89F400D46EAC /* PJFriendView.h */,
+				743C844B1F0B89F400D46EAC /* PJFriendView.m */,
+				743C844D1F0B8A0300D46EAC /* PJFriendView.xib */,
+			);
+			name = "朋友";
+			sourceTree = "<group>";
+		};
+		743C845E1F0B97C400D46EAC /* tableView */ = {
+			isa = PBXGroup;
+			children = (
+				743C845F1F0B97D000D46EAC /* cell */,
+				743C84511F0B90A600D46EAC /* PJEditTableView.h */,
+				743C84521F0B90A600D46EAC /* PJEditTableView.m */,
+			);
+			name = tableView;
+			sourceTree = "<group>";
+		};
+		743C845F1F0B97D000D46EAC /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				743C84591F0B91C700D46EAC /* PJEditTableViewCell.h */,
+				743C845A1F0B91C700D46EAC /* PJEditTableViewCell.m */,
+				743C845B1F0B91C700D46EAC /* PJEditTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		743C84601F0B97DA00D46EAC /* headerView */ = {
+			isa = PBXGroup;
+			children = (
+				743C84611F0B97EE00D46EAC /* PJEditHeaderView.h */,
+				743C84621F0B97EE00D46EAC /* PJEditHeaderView.m */,
+				743C84641F0B97FC00D46EAC /* PJEditHeaderView.xib */,
+			);
+			name = headerView;
+			sourceTree = "<group>";
+		};
 		744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +237,9 @@
 		744F0EA51EF01392005D4133 /* 编辑个人资料 */ = {
 			isa = PBXGroup;
 			children = (
+				74C63A3B1F47257000D0B35F /* 修改昵称 */,
+				743C84601F0B97DA00D46EAC /* headerView */,
+				743C845E1F0B97C400D46EAC /* tableView */,
 				744F0EA61EF013AE005D4133 /* EditViewController.h */,
 				744F0EA71EF013AE005D4133 /* EditViewController.m */,
 			);
@@ -220,12 +284,13 @@
 				74559D841EE009BE0081A0A5 /* AppDelegate.m */,
 				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
 				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
+				747E22E31EE27AD60078552D /* 个人中心 */,
+				743C84461F0B893900D46EAC /* 朋友 */,
 				74006FD51EFC0154008A151C /* 登录/注册 */,
 				744F0EA11EF00CD8005D4133 /* 更多 */,
 				744F0EA01EF00CCF005D4133 /* 消息中心 */,
 				744F0EA51EF01392005D4133 /* 编辑个人资料 */,
 				744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */,
-				747E22E31EE27AD60078552D /* 侧滑菜单栏 */,
 				747E22E21EE27AC00078552D /* 首页 */,
 				74559DC11EE03AC00081A0A5 /* Extension */,
 				74559DC01EE03AB20081A0A5 /* Global */,
@@ -294,7 +359,7 @@
 			name = "首页";
 			sourceTree = "<group>";
 		};
-		747E22E31EE27AD60078552D /* 侧滑菜单栏 */ = {
+		747E22E31EE27AD60078552D /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
 				744327FC1EE5850C00E20FAC /* LeftSliderView.h */,
@@ -303,7 +368,16 @@
 				744F0E9C1EF003A3005D4133 /* leftHomeView.h */,
 				744F0E9D1EF003A3005D4133 /* leftHomeView.m */,
 			);
-			name = "侧滑菜单栏";
+			name = "个人中心";
+			sourceTree = "<group>";
+		};
+		74C63A3B1F47257000D0B35F /* 修改昵称 */ = {
+			isa = PBXGroup;
+			children = (
+				74C63A3C1F47259400D0B35F /* PJModifyViewController.h */,
+				74C63A3D1F47259400D0B35F /* PJModifyViewController.m */,
+			);
+			name = "修改昵称";
 			sourceTree = "<group>";
 		};
 		82E88649A5E06163174BC06B /* Pods */ = {
@@ -428,8 +502,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */,
+				743C84651F0B97FC00D46EAC /* PJEditHeaderView.xib in Resources */,
 				74006FDC1EFC0192008A151C /* PJLoginSB.storyboard in Resources */,
+				743C844E1F0B8A0300D46EAC /* PJFriendView.xib in Resources */,
 				74559D901EE009BF0081A0A5 /* LaunchScreen.storyboard in Resources */,
+				743C845D1F0B91C700D46EAC /* PJEditTableViewCell.xib in Resources */,
 				74559D8D1EE009BF0081A0A5 /* Assets.xcassets in Resources */,
 				74559D8B1EE009BF0081A0A5 /* Main.storyboard in Resources */,
 			);
@@ -506,18 +583,23 @@
 			files = (
 				744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */,
 				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
+				74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */,
 				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
 				744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */,
+				743C845C1F0B91C700D46EAC /* PJEditTableViewCell.m in Sources */,
 				74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */,
 				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
 				744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */,
 				744F0EA81EF013AE005D4133 /* EditViewController.m in Sources */,
 				744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */,
+				743C844C1F0B89F400D46EAC /* PJFriendView.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
 				74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */,
+				743C84531F0B90A600D46EAC /* PJEditTableView.m in Sources */,
+				743C84631F0B97EE00D46EAC /* PJEditHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

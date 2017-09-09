@@ -98,7 +98,7 @@
 // 登录成功的通知
 - (void)loginReload:(NSNotification *)no {
     if (no.userInfo[@"isLogin"]) {
-        [_leftView setMessage:nil withUserName:[[BmobUser currentUser] objectForKey:@"nickname"] andUserID:[[BmobUser currentUser] objectForKey:@"username"]];
+        [_leftView setMessage:[[BmobUser currentUser] objectForKey:@"avatar_url"] withUserName:[[BmobUser currentUser] objectForKey:@"nickname"] andUserID:[[BmobUser currentUser] objectForKey:@"username"]];
     }
 }
 

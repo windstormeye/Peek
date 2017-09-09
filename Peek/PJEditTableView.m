@@ -87,6 +87,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [_tableDelegate PJEditTableViewDidSelected:indexPath.row];
+}
+
 - (void)PJEditHeaderViewChangeAvatar:(UIImageView *)img {
     [_tableDelegate PJEditTableViewChangeAvater:img];
 }

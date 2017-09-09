@@ -12,7 +12,7 @@
 #import <SMS_SDK/SMSSDK.h>
 
 
-@interface PJLoginViewController ()
+@interface PJLoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
 @property (nonatomic, strong) UITextField *nameTxt;
 @property (nonatomic, strong) UITextField *passwdTxt;
@@ -24,6 +24,9 @@
 @property (nonatomic, strong) UIButton *loginBtn_small;
 @property (nonatomic, strong) UIView *pwLineView;
 @property (nonatomic, strong) UIView *securityLineView;
+@property (nonatomic, strong) UIButton *forgetPasswdButton;
+@property (nonatomic, strong) UIButton *cancleBtn;
+@property (nonatomic, strong) UIButton *saveBtn;
 @end
 
 @implementation PJLoginViewController
@@ -102,12 +105,12 @@
     self.securityLineView = securityLineView;
     securityLineView.backgroundColor = [UIColor lightGrayColor];
     self.securityLineView.hidden = YES;
-
     
     // 密码输入框
     JVFloatLabeledTextField *passwdTxt = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(nameTxt.frame) + 5, SCREEN_WIDTH * 0.6, 40)];
     [self.view addSubview:passwdTxt];
     self.passwdTxt = passwdTxt;
+    self.passwdTxt.delegate = self;
     passwdTxt.textColor = [UIColor whiteColor];
     passwdTxt.floatingLabelActiveTextColor = mainDeepSkyBlue;
     passwdTxt.secureTextEntry = YES;
@@ -183,6 +186,14 @@
     self.loginBtn_small = loginBtn_small;
     [loginBtn_small setTitle:@"已有账号？前往登录" forState:UIControlStateNormal];
     [loginBtn_small addTarget:self action:@selector(loginBtn_smallClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    _forgetPasswdButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - (SCREEN_WIDTH - loginBtn.frame.size.width)/2 - 60, loginBtn_small.frame.origin.y + 20, 60, 30)];
+    _forgetPasswdButton.titleLabel.font = [UIFont systemFontOfSize:12];
+    [self.view addSubview:_forgetPasswdButton];
+    [_forgetPasswdButton setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [_forgetPasswdButton addTarget:self action:@selector(forgetBtnClickMethon) forControlEvents:UIControlEventTouchUpInside];
+    
+    
 }
 
 // 点击前往注册
@@ -239,6 +250,15 @@
 
 // 登录
 - (void)loginBtnClick {
+    if ([self.nameTxt.text isEqualToString:@""]) {
+        [PJHUD showErrorWithStatus:@"用户名错误"];
+        return;
+    }
+    if ([self.passwdTxt.text isEqualToString:@""]) {
+        [PJHUD showErrorWithStatus:@"密码错误"];
+        return;
+    }
+    
     [PJHUD showWithStatus:@""];
     [BmobUser loginInbackgroundWithAccount:self.nameTxt.text andPassword:self.passwdTxt.text block:^(BmobUser *user, NSError *error) {
         if (user) {
@@ -248,12 +268,24 @@
                 [[NSNotificationCenter defaultCenter] postNotification:notification];
             }];
         } else {
-            [PJHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", error]];
+            if (error.code == 101) {
+                [PJHUD showErrorWithStatus:@"用户名或密码错误"];
+            }
         }
-    }];}
+    }];
+}
 
 // 注册
 - (void)signUpBtnClick {
+    if ([self.nameTxt.text isEqualToString:@""]) {
+        [PJHUD showErrorWithStatus:@"用户名错误"];
+        return;
+    }
+    if ([self.passwdTxt.text isEqualToString:@""]) {
+        [PJHUD showErrorWithStatus:@"密码错误"];
+        return;
+    }
+    
     [PJHUD showWithStatus:@""];
     [SMSSDK commitVerificationCode:self.securityTxt.text phoneNumber:self.nameTxt.text zone:@"86" result:^(NSError *error) {
         if (!error) {
@@ -266,7 +298,8 @@
                     [PJHUD showSuccessWithStatus:@"注册成功"];
                     [self dismissViewControllerAnimated:YES completion:^{
                         NSNotification *notification = [NSNotification notificationWithName:@"loginNo" object:nil userInfo:@{@"isLogin":@true}];
-                        [[NSNotificationCenter defaultCenter] postNotification:notification];                    }];
+                        [[NSNotificationCenter defaultCenter] postNotification:notification];
+                    }];
                 } else {
                     [PJHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", error]];
                 }
@@ -323,6 +356,23 @@
     });
     //启动源
     dispatch_resume(timer);
+}
+
+- (void)forgetBtnClickMethon {
+    
+}
+
+- (void)cancleBtnClickMethon {
+    
+}
+
+- (void)saveBtnClickMethon {
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self loginBtnClick];
+    return true;
 }
 
 @end

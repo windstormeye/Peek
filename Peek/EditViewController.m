@@ -8,6 +8,7 @@
 
 #import "EditViewController.h"
 #import "PJEditTableView.h"
+#import "PJModifyViewController.h"
 
 @interface EditViewController () <PJEditTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -100,6 +101,20 @@
             }
         }];
     }];
+}
+
+-(void)PJEditTableViewDidSelected:(NSInteger)index {
+    PJModifyViewController *vc = [PJModifyViewController new];
+    if (index == 0) {
+        vc.titleText = @"修改昵称";
+    } else if (index == 1) {
+        vc.titleText = @"编辑邮箱";
+    } else if(index == 2)  {
+        vc.titleText = @"编辑手机";
+    } else {
+        
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

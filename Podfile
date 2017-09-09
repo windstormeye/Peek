@@ -1,6 +1,7 @@
 target 'Peek' do
 pod 'MJRefresh'
 pod 'SVProgressHUD'
+pod 'SDWebImage'
 pod 'BmobSDK'
 pod 'MJExtension'
 pod 'JVFloatLabeledTextField'
@@ -9,4 +10,6 @@ pod 'UMengUShare/UI'
 pod 'UMengUShare/Social/ReducedWeChat'
 pod 'SMSSDK'
 pod 'IQKeyboardManager'
+pod 'RongCloudIM/IMLib'
+pod 'RongCloudIM/IMKit'
 end

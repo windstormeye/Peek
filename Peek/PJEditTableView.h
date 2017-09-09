@@ -12,6 +12,7 @@
 @protocol PJEditTableViewDelegate <NSObject>
 
 - (void)PJEditTableViewChangeAvater:(UIImageView *)img;
+- (void)PJEditTableViewDidSelected:(NSInteger)index;
 
 @end
 
