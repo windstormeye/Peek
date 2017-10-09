@@ -24,7 +24,7 @@
 		744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */; };
 		74559D821EE009BE0081A0A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D811EE009BE0081A0A5 /* main.m */; };
 		74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D841EE009BE0081A0A5 /* AppDelegate.m */; };
-		74559D881EE009BE0081A0A5 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74559D871EE009BE0081A0A5 /* ViewController.mm */; };
+		74559D881EE009BE0081A0A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D871EE009BE0081A0A5 /* ViewController.m */; };
 		74559D8B1EE009BF0081A0A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74559D891EE009BF0081A0A5 /* Main.storyboard */; };
 		74559D8D1EE009BF0081A0A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74559D8C1EE009BF0081A0A5 /* Assets.xcassets */; };
 		74559D901EE009BF0081A0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */; };
@@ -36,6 +36,7 @@
 		74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */; };
 		74911B0D1F89E20B004A729A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74911B0C1F89E20B004A729A /* opencv2.framework */; };
 		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
+		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
 		74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F969311EE862F200C164BE /* LeftSliderView.xib */; };
 		88433AA5A4C7DDDB6B224BFA /* libPods-Peek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */; };
 /* End PBXBuildFile section */
@@ -90,7 +91,7 @@
 		74559D831EE009BE0081A0A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74559D841EE009BE0081A0A5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		74559D861EE009BE0081A0A5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		74559D871EE009BE0081A0A5 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		74559D871EE009BE0081A0A5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		74559D8A1EE009BF0081A0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		74559D8C1EE009BF0081A0A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74559D8F1EE009BF0081A0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -114,6 +115,8 @@
 		74911B0C1F89E20B004A729A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		74C63A3C1F47259400D0B35F /* PJModifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJModifyViewController.h; sourceTree = "<group>"; };
 		74C63A3D1F47259400D0B35F /* PJModifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJModifyViewController.m; sourceTree = "<group>"; };
+		74EAE19F1F8A05BC0071F82D /* PJOpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJOpenCV.h; sourceTree = "<group>"; };
+		74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PJOpenCV.mm; sourceTree = "<group>"; };
 		74F969311EE862F200C164BE /* LeftSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftSliderView.xib; sourceTree = "<group>"; };
 		9C08E1DA4A63E424E541F8AF /* Pods-Peek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.debug.xcconfig"; sourceTree = "<group>"; };
 		AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Peek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +292,7 @@
 				74559D841EE009BE0081A0A5 /* AppDelegate.m */,
 				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
 				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
+				74EAE19E1F8A059E0071F82D /* OpenCV */,
 				747E22E31EE27AD60078552D /* 个人中心 */,
 				743C84461F0B893900D46EAC /* 朋友 */,
 				74006FD51EFC0154008A151C /* 登录/注册 */,
@@ -360,7 +364,7 @@
 			children = (
 				74559D891EE009BF0081A0A5 /* Main.storyboard */,
 				74559D861EE009BE0081A0A5 /* ViewController.h */,
-				74559D871EE009BE0081A0A5 /* ViewController.mm */,
+				74559D871EE009BE0081A0A5 /* ViewController.m */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -392,6 +396,15 @@
 				74C63A3D1F47259400D0B35F /* PJModifyViewController.m */,
 			);
 			name = "修改昵称";
+			sourceTree = "<group>";
+		};
+		74EAE19E1F8A059E0071F82D /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				74EAE19F1F8A05BC0071F82D /* PJOpenCV.h */,
+				74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */,
+			);
+			name = OpenCV;
 			sourceTree = "<group>";
 		};
 		82E88649A5E06163174BC06B /* Pods */ = {
@@ -597,8 +610,9 @@
 			files = (
 				744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */,
 				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
+				74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */,
 				74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */,
-				74559D881EE009BE0081A0A5 /* ViewController.mm in Sources */,
+				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
@@ -717,7 +731,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -767,7 +781,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -793,6 +807,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pjhubs.Peek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -815,6 +830,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pjhubs.Peek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
