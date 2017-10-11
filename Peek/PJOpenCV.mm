@@ -40,7 +40,6 @@
     cv::Mat imgOriginal;
     cv::Mat imgHSV;
     
-    std::vector<cv::Mat> hsvSplit;
     UIImageToMat(image, imgOriginal);
     
     switch (image.imageOrientation) {
@@ -70,6 +69,8 @@
     int iHighV = 255;
 
     cv::cvtColor(imgOriginal, imgHSV, cv::COLOR_BGR2HSV);
+    
+    std::vector<cv::Mat> hsvSplit;
     cv::split(imgHSV, hsvSplit);
     cv::equalizeHist(hsvSplit[2],hsvSplit[2]);
     cv::merge(hsvSplit,imgHSV);
@@ -138,7 +139,60 @@
     //闭操作 (连接一些连通域)
     morphologyEx(imgThresholded, imgThresholded, cv::MORPH_CLOSE, element);
     
+    // 黑白翻转
+    int nrows=imgThresholded.rows;
+    int ncols=imgThresholded.cols*imgThresholded.channels();
+    if(imgThresholded.isContinuous()) {
+        ncols*=nrows;
+        nrows=1;
+    }
+    uchar *data;
+    // OpenCV中是BGR
+    for(int j=0;j<nrows;j++) {
+        data=imgThresholded.ptr<uchar>(j);
+        for(int i=0;i<ncols;i+=3) {
+            if (data[i] == 0) {
+                data[i] = 255;
+            } else {
+                data[i] = 0;
+            }
+            
+            if (data[i + 1] == 0) {
+                data[i + 1] = 255;
+            } else {
+                data[i + 1] = 0;
+            }
+            
+            if (data[i + 2] == 0) {
+                data[i + 2] = 255;
+            } else {
+                data[i + 2] = 0;
+            }
+        }
+    }
+    
     image = MatToUIImage(imgThresholded);
+    cv::Mat tempImage;
+    UIImageToMat(image, tempImage);
+    
+    cv::Mat three_channel = cv::Mat::zeros(tempImage.rows,tempImage.cols,CV_8UC3);
+    std::vector<cv::Mat> channels;
+    for (int i=0;i<3;i++) {
+        channels.push_back(tempImage);
+    }
+    
+    merge(channels,three_channel);
+    cv::cvtColor(three_channel, three_channel, cv::COLOR_BGR2BGRA);
+    for(int j=0;j < three_channel.rows;j++) {
+        data = three_channel.ptr<uchar>(j);
+        for(int i=0;i<three_channel.cols * three_channel.channels();i+=4) {
+            if (data[i] == 255 || data[i + 1] == 255 || data[i + 2] == 255) {
+                data[i + 3] = 0;
+            }
+        }
+    }
+    
+    image = MatToUIImage(three_channel);
     return image;
 }
 

@@ -113,19 +113,24 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     // 选择的图片信息存储于info字典中
     
-    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.9)];
+    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 1.33)];
     [self.view addSubview:img];
     img.image = info[@"UIImagePickerControllerOriginalImage"];
     
-//    img.image = [PJOpenCV imageToDiscernBlue:img.image];
-    img.image = [PJOpenCV imageToDiscernRed:img.image];
+    UIView *imgView = [[UIView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT - SCREEN_WIDTH * 1.33) / 2, SCREEN_WIDTH, SCREEN_WIDTH * 1.33)];
+    UIImageView *newImage = [[UIImageView alloc] initWithFrame:img.frame];
+    newImage.image = [PJOpenCV imageToDiscernRed:img.image];
+    [imgView addSubview:img];
+    [imgView addSubview:newImage];
+    [self.view addSubview:imgView];
+    
     
     // 测试代码
     
     double delayInSeconds = 3.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [img removeFromSuperview];
+        [imgView removeFromSuperview];
     });
     
 //    NSLog(@"%@", info);

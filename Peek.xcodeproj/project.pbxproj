@@ -34,6 +34,7 @@
 		74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */; };
 		74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBB1EE010230081A0A5 /* PJHUD.m */; };
 		74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */; };
+		7478D5351F8E008F00830CF3 /* PJCoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478D5341F8E008F00830CF3 /* PJCoreView.m */; };
 		74911B0D1F89E20B004A729A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74911B0C1F89E20B004A729A /* opencv2.framework */; };
 		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
 		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
@@ -111,6 +112,8 @@
 		74559DBB1EE010230081A0A5 /* PJHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJHUD.m; sourceTree = "<group>"; };
 		74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PJUIImage+Extension.h"; sourceTree = "<group>"; };
 		74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PJUIImage+Extension.m"; sourceTree = "<group>"; };
+		7478D5331F8E008F00830CF3 /* PJCoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJCoreView.h; sourceTree = "<group>"; };
+		7478D5341F8E008F00830CF3 /* PJCoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJCoreView.m; sourceTree = "<group>"; };
 		74911B071F89E165004A729A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../Downloads/opencv2.framework; sourceTree = "<group>"; };
 		74911B0C1F89E20B004A729A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		74C63A3C1F47259400D0B35F /* PJModifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJModifyViewController.h; sourceTree = "<group>"; };
@@ -301,6 +304,7 @@
 				744F0EA51EF01392005D4133 /* 编辑个人资料 */,
 				744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */,
 				747E22E21EE27AC00078552D /* 首页 */,
+				7478D5321F8E006100830CF3 /* Core */,
 				74559DC11EE03AC00081A0A5 /* Extension */,
 				74559DC01EE03AB20081A0A5 /* Global */,
 				74559DC21EE03AD10081A0A5 /* Other */,
@@ -357,6 +361,15 @@
 				74559D911EE009BF0081A0A5 /* Info.plist */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		7478D5321F8E006100830CF3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7478D5331F8E008F00830CF3 /* PJCoreView.h */,
+				7478D5341F8E008F00830CF3 /* PJCoreView.m */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		747E22E21EE27AC00078552D /* 首页 */ = {
@@ -625,6 +638,7 @@
 				744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */,
 				743C844C1F0B89F400D46EAC /* PJFriendView.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
+				7478D5351F8E008F00830CF3 /* PJCoreView.m in Sources */,
 				74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */,
 				743C84531F0B90A600D46EAC /* PJEditTableView.m in Sources */,
 				743C84631F0B97EE00D46EAC /* PJEditHeaderView.m in Sources */,
