@@ -135,9 +135,16 @@
     //开操作 (去除一些噪点)
     cv::Mat element = getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5));
     cv::morphologyEx(imgThresholded, imgThresholded, cv::MORPH_OPEN, element);
-    
     //闭操作 (连接一些连通域)
     morphologyEx(imgThresholded, imgThresholded, cv::MORPH_CLOSE, element);
+    
+    // 轮廓检测并填充轮廓内区域
+    std::vector<std::vector<cv::Point>> contours;
+    findContours(imgThresholded,contours,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE);
+    // 把找到的轮廓再次绘制成黑色
+    drawContours(imgThresholded,contours,-1, CV_RGB(255, 255, 255),10);
+    // 填充轮廓内区域
+    cv::fillPoly(imgThresholded, contours, CV_RGB(255, 255, 255));
     
     // 黑白翻转
     int nrows=imgThresholded.rows;
@@ -174,14 +181,14 @@
     image = MatToUIImage(imgThresholded);
     cv::Mat tempImage;
     UIImageToMat(image, tempImage);
-    
+    // 变透明
     cv::Mat three_channel = cv::Mat::zeros(tempImage.rows,tempImage.cols,CV_8UC3);
     std::vector<cv::Mat> channels;
     for (int i=0;i<3;i++) {
         channels.push_back(tempImage);
     }
-    
     merge(channels,three_channel);
+
     cv::cvtColor(three_channel, three_channel, cv::COLOR_BGR2BGRA);
     for(int j=0;j < three_channel.rows;j++) {
         data = three_channel.ptr<uchar>(j);
