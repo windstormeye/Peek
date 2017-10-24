@@ -38,7 +38,6 @@
     [_avatarImgView addGestureRecognizer:singleTap];
     [_EditBtn addTarget:self action:@selector(changeAvatar) forControlEvents:UIControlEventTouchUpInside];
 
-    
     [self setViewDate];
 }
 

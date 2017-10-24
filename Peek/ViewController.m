@@ -12,7 +12,7 @@
 #import "EditViewController.h"
 #import "MessageViewController.h"
 #import "PJLoginViewController.h"
-#import "PJOpenCV.h"
+#import "PJCardViewController.h"
 
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
@@ -111,29 +111,11 @@
 // 完成拍照后的回调方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [self dismissViewControllerAnimated:YES completion:nil];
-    // 选择的图片信息存储于info字典中
-    
-    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 1.33)];
-    [self.view addSubview:img];
-    img.image = info[@"UIImagePickerControllerOriginalImage"];
-    
-    UIView *imgView = [[UIView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT - SCREEN_WIDTH * 1.33) / 2, SCREEN_WIDTH, SCREEN_WIDTH * 1.33)];
-    UIImageView *newImage = [[UIImageView alloc] initWithFrame:img.frame];
-    newImage.image = [PJOpenCV imageToDiscernRed:img.image];
-    [imgView addSubview:img];
-    [imgView addSubview:newImage];
-    [self.view addSubview:imgView];
-    
-    
-    // 测试代码
-    
-//    double delayInSeconds = 3.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        [imgView removeFromSuperview];
-//    });
-    
-//    NSLog(@"%@", info);
+    // 选择的图片信息存储于info字典，在此可根据字典内容拿到编辑之后的图片
+    UIImage *tempImage = info[@"UIImagePickerControllerOriginalImage"];
+    PJCardViewController *vc = [PJCardViewController new];
+    vc.dealImageView = tempImage;
+    [self.navigationController pushViewController:vc animated:true];
 }
 
 /**

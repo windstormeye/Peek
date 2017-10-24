@@ -114,13 +114,13 @@
             break;
     }
     
-    int iLowH = 120;
+    int iLowH = 80;
     int iHighH = 180;
     
-    int iLowS = 90;
+    int iLowS = 25;
     int iHighS = 255;
     
-    int iLowV = 90;
+    int iLowV = 25;
     int iHighV = 255;
     
     cv::cvtColor(imgOriginal, imgHSV, cv::COLOR_BGR2HSV);

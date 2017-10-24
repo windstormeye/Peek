@@ -41,7 +41,6 @@
     bgImgView.image = [UIImage imageNamed:@"背景"];
     [self.view addSubview:bgImgView];
     [self.view sendSubviewToBack:bgImgView];
-    
     // 开启高斯模糊
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
