@@ -19,6 +19,7 @@
     PJCardBottomView *_kBottomView;
     UIView *_kImgContentView;
     UIImageView *_kAnswerImageView;
+    UIImageView *_kOldImageView;
     BOOL isTapic;
 }
 
@@ -47,10 +48,19 @@
 - (void)initView {
     isTapic = false;
     
-    
     [self initNavigationBar];
     self.titleLabel.text = @"卡片编辑";
     self.titleLabel.textColor = [UIColor blackColor];
+    CGRect frame = self.titleLabel.frame;
+    frame.origin.y -= 10;
+    self.titleLabel.frame = frame;
+    
+    UILabel *tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 0.25, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 8, SCREEN_WIDTH * 0.5, 10)];
+    [self.navigationBar addSubview:tipsLabel];
+    tipsLabel.text = @"压按图片触发显示效果";
+    tipsLabel.textAlignment = NSTextAlignmentCenter;
+    tipsLabel.font = [UIFont systemFontOfSize:12];
+    
     self.leftBarButton.hidden = true;
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     bgImgView.image = [UIImage imageNamed:@"背景"];
@@ -96,6 +106,7 @@
     UIImageView *oldImageView = [[UIImageView alloc] initWithFrame:newImageView.frame];
     newImageView.image = newImage;
     oldImageView.image = image;
+    _kOldImageView = oldImageView;
     [_kImgContentView addSubview:oldImageView];
     [_kImgContentView addSubview:newImageView];
     [self.view addSubview:_kImgContentView];
@@ -125,17 +136,50 @@
     if (_kAnswerImageView.alpha > 0.65) {
         _kAnswerImageView.alpha  = 1.0;
     }
-    
-    NSLog(@"move压力 ＝ %f", 1 - touch.force / 6);
-    
 }
 
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    _kAnswerImageView.alpha = 1;
+}
+
+// 图片上传
 -(void)PJCardBottomViewYesBtnClick {
-    NSLog(@"111");
+    [PJHUD showWithStatus:@"图片上传中..."];
+    NSData *data = UIImagePNGRepresentation([_kOldImageView.image imageCompress:500]);
+    BmobFile *file = [[BmobFile alloc]initWithFileName:[NSString stringWithFormat:@"%@%@.png", [[BmobUser currentUser] objectForKey:@"username"], [self getCurrentTimes]] withFileData:data];
+    [file saveInBackground:^(BOOL isSuccessful, NSError *error) {
+        if (isSuccessful) {
+            BmobObject  *post = [BmobObject objectWithClassName:@"User_image"];
+            [post setObject:file.url forKey:@"image_url"];
+            [post setObject:[BmobUser currentUser] forKey:@"author"];
+            [post saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+                if (isSuccessful) {
+                    [PJHUD showSuccessWithStatus:@"上传成功!"];
+                    AudioServicesPlaySystemSound(1521);
+                    [self.navigationController popViewControllerAnimated:true];
+                }else{
+                    if (error) {
+                        NSLog(@"%@",error);
+                    }
+                }
+            }];
+        }else{
+            //进行处理
+        }
+    }];
 }
 
 - (void)PJCardBottomViewNoBtnClick {
     [self.navigationController popViewControllerAnimated:true];
+}
+
+// 获取当前系统时间戳
+- (NSString*)getCurrentTimes{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYYMMddHHmmss"];
+    NSDate *datenow = [NSDate date];
+    NSString *currentTimeString = [formatter stringFromDate:datenow];
+    return currentTimeString;
 }
 
 @end

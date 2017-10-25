@@ -208,6 +208,15 @@
 			name = bottomView;
 			sourceTree = "<group>";
 		};
+		741324AF1FA037EB00FA0623 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				74559DB31EE00CCF0081A0A5 /* constant.h */,
+				74559DB41EE00CCF0081A0A5 /* constant.mm */,
+			);
+			name = Constant;
+			sourceTree = "<group>";
+		};
 		743C84461F0B893900D46EAC /* 朋友 */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,9 +371,8 @@
 		74559DC01EE03AB20081A0A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				741324AF1FA037EB00FA0623 /* Constant */,
 				744FCBE21EFEAE14008BAC63 /* PJKeyboard */,
-				74559DB31EE00CCF0081A0A5 /* constant.h */,
-				74559DB41EE00CCF0081A0A5 /* constant.mm */,
 				74006FDD1EFC08D3008A151C /* PJHUD */,
 			);
 			name = Global;
