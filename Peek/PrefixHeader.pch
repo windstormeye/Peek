@@ -14,5 +14,7 @@
 #import "PJKeyboard.h"
 #import <BmobSDK/Bmob.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <AudioToolbox/AudioToolbox.h>
+
 
 

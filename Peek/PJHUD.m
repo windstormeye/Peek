@@ -19,5 +19,8 @@
     [SVProgressHUD dismiss];
 }
 
++ (void)showInfoWithStatus:(NSString *)message {
+    [SVProgressHUD showInfoWithStatus:message];
+}
 
 @end

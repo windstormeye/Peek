@@ -22,13 +22,18 @@
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UIScreenEdgePanGestureRecognizer *edgePan;
 @property (weak, nonatomic) IBOutlet UIButton *camareBtn;
-
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 @property (nonatomic,strong) UIImagePickerController *imagePicker;
+@property (weak, nonatomic) IBOutlet UIButton *redCircleBtn;
+@property (weak, nonatomic) IBOutlet UIButton *blueCircleBtn;
+
 @end
 
 @implementation ViewController
 {
     leftHomeView *_leftView;
+    BOOL isRed;
+
 }
 
 - (void)viewDidLoad {
@@ -87,6 +92,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginReload:) name:@"loginNo"  object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeUserDateReload:) name:@"changeAvarta"  object:nil];
+    
+    _closeBtn.hidden = true;
+    isRed = true;
 }
 
 // 用户资料的更新通知
@@ -103,9 +111,69 @@
     }
 }
 
+// 拍照按钮
 - (IBAction)takePhoto:(id)sender {
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
+    [self redAndBlueBtnShow];
+
+    AudioServicesPlaySystemSound(1519);
 }
+
+- (IBAction)closeBtnClick:(id)sender {
+    [self redAndBlueBtnHidden];
+
+    AudioServicesPlaySystemSound(1519);
+}
+
+- (void)redAndBlueBtnShow {
+    [UIView animateWithDuration:0.1 animations:^{
+        CGRect redframe = _redCircleBtn.frame;
+        redframe.origin.y -= 60;
+        redframe.origin.x = SCREEN_WIDTH / 2 - _redCircleBtn.frame.size.width * 1.8;
+        _redCircleBtn.frame = redframe;
+        
+        CGRect blueframe = _blueCircleBtn.frame;
+        blueframe.origin.y -= 60;
+        blueframe.origin.x = SCREEN_WIDTH / 2 + _blueCircleBtn.frame.size.width * 0.8;
+        _blueCircleBtn.frame = blueframe;
+        
+        _camareBtn.hidden = true;
+        _closeBtn.hidden = false;
+    }];
+}
+
+- (void)redAndBlueBtnHidden {
+    [UIView animateWithDuration:0.1 animations:^{
+        CGRect redframe = _redCircleBtn.frame;
+        redframe.origin.y += 60;
+        redframe.origin.x = (SCREEN_WIDTH - redframe.size.width) / 2;
+        _redCircleBtn.frame = redframe;
+        
+        CGRect blueframe = _blueCircleBtn.frame;
+        blueframe.origin.y += 60;
+        blueframe.origin.x = (SCREEN_WIDTH - blueframe.size.width) / 2;
+        _blueCircleBtn.frame = blueframe;
+        
+        _camareBtn.hidden = false;
+        _closeBtn.hidden = true;
+    }];
+}
+
+- (IBAction)redBtnClick:(id)sender {
+    isRed = true;
+    [self presentViewController:self.imagePicker animated:YES completion:^{
+        [self redAndBlueBtnHidden];
+        [PJHUD showInfoWithStatus:@"请使用竖屏姿势拍照"];
+    }];
+}
+
+- (IBAction)blueBtnClick:(id)sender {
+    isRed = false;
+    [self presentViewController:self.imagePicker animated:YES completion:^{
+        [self redAndBlueBtnHidden];
+        [PJHUD showInfoWithStatus:@"请使用竖屏姿势拍照"];
+    }];
+}
+
 
 #pragma mark - UIImagePickerController代理方法
 // 完成拍照后的回调方法
@@ -114,6 +182,7 @@
     // 选择的图片信息存储于info字典，在此可根据字典内容拿到编辑之后的图片
     UIImage *tempImage = info[@"UIImagePickerControllerOriginalImage"];
     PJCardViewController *vc = [PJCardViewController new];
+    vc.isRed = isRed;
     vc.dealImageView = tempImage;
     [self.navigationController pushViewController:vc animated:true];
 }
@@ -161,12 +230,8 @@
 // 左侧菜单栏滑动退出
 - (void)panGesture:(UIPanGestureRecognizer *)ges {
     CGPoint p = [ges translationInView:self.view];
-//    NSLog(@"%@", NSStringFromCGPoint(p));
-    
     CGRect frame = _leftView.frame;
-    
     frame.origin.x = p.x;
-    
     if (p.x > 0) {
         if (_leftView.frame.origin.x == 0) {
             frame.origin.x = 0;
@@ -177,7 +242,6 @@
         }
     } else {
         _leftView.frame = frame;
-        
         if (ges.state == UIGestureRecognizerStateEnded) {
             frame.origin.x = -SCREEN_WIDTH * 0.6;
             _panGesture.enabled = NO;
@@ -229,6 +293,7 @@
         CGRect frame = _leftView.frame;
         frame.origin.x = 0;
         _leftView.frame = frame;
+        AudioServicesPlaySystemSound(1519);
     }];
 }
 

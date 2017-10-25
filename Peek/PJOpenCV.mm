@@ -62,10 +62,10 @@
     int iLowH = 0;
     int iHighH = 40;
 
-    int iLowS = 90;
+    int iLowS = 25;
     int iHighS = 255;
-
-    int iLowV = 90;
+    
+    int iLowV = 25;
     int iHighV = 255;
 
     cv::cvtColor(imgOriginal, imgHSV, cv::COLOR_BGR2HSV);
@@ -85,6 +85,32 @@
 
     //闭操作 (连接一些连通域)
     morphologyEx(imgThresholded, imgThresholded, cv::MORPH_CLOSE, element);
+    
+    // 轮廓检测并填充轮廓内区域
+    std::vector<std::vector<cv::Point>> contours;
+    findContours(imgThresholded,contours,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE);
+    
+    
+    cv::Mat Mask(imgThresholded.size(), CV_8U, cvScalar(0));
+    unsigned long widthStep = imgThresholded.step;
+    const int height = imgThresholded.rows;
+    uchar *sdata = imgThresholded.data;
+    uchar *ddata = Mask.data;
+    drawContours(imgThresholded,contours,-1, CV_RGB(255, 255, 255),10);
+
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < widthStep; w++)
+        {
+            ddata[w] &= sdata[w];
+        }
+        sdata += widthStep;
+        ddata += widthStep;
+    }
+    
+    imgThresholded = Mask.clone();
+    
+    
     
     image = MatToUIImage(imgThresholded);
     return image;
@@ -204,11 +230,30 @@
 }
 
 
-
-
-
-
-
+//void get_mask_image(const Mat& src, Mat& dst, vector<vector<Point>>& contours, int ID)
+//{
+//    if (src.empty()) return;
+//
+//
+//    Mat Mask(src.size(), CV_8U, Scalar(0));
+//    const int widthStep = src.step;
+//    const int height = src.rows;
+//    uchar *sdata = src.data;
+//    uchar *ddata = Mask.data;
+//    drawContours(Mask, contours, ID/*获得的轮廓序号*/, Scalar(255), CV_FILLED/*2*/);
+//
+//    for (int h = 0; h < height; h++)
+//    {
+//        for (int w = 0; w < widthStep; w++)
+//        {
+//            ddata[w] &= sdata[w];
+//        }
+//        sdata += widthStep;
+//        ddata += widthStep;
+//    }
+//
+//    dst = Mask.clone();
+//}
 
 
 

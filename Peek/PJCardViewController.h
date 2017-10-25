@@ -11,5 +11,6 @@
 @interface PJCardViewController : UIViewController
 
 @property (strong, nonatomic) UIImage *dealImageView;
+@property (nonatomic, assign) BOOL isRed;
 
 @end

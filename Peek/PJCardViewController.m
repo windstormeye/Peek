@@ -9,7 +9,6 @@
 #import "PJCardViewController.h"
 #import "PJOpenCV.h"
 #import "PJCardBottomView.h"
-#import <AudioToolbox/AudioToolbox.h>
 
 @interface PJCardViewController () <PJCardBottomViewDelegate>
 
@@ -85,6 +84,10 @@
     [self dealImageWithOpenCV:dealImageView];
 }
 
+- (void)setIsRed:(BOOL)isRed {
+    _isRed = isRed;
+}
+
 - (void)dealImageWithOpenCV:(UIImage *)image {
     _kImgContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 74, SCREEN_WIDTH, SCREEN_HEIGHT - 74 - 60)];
     _kImgContentView.userInteractionEnabled = true;
@@ -100,7 +103,12 @@
     // 注意考虑照片大小、方向、缩放问题
     
     UIImageView *newImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imgW, imgH)];
-    UIImage *newImage = [PJOpenCV imageToDiscernRed:image];
+    UIImage *newImage = [UIImage new];
+    if (_isRed) {
+        newImage = [PJOpenCV imageToDiscernRed:image];
+    } else {
+        newImage = [PJOpenCV imageToDiscernBlue:image];
+    }
     _kAnswerImageView = newImageView;
     newImageView.image = newImage;
     UIImageView *oldImageView = [[UIImageView alloc] initWithFrame:newImageView.frame];
@@ -154,9 +162,9 @@
             [post setObject:[BmobUser currentUser] forKey:@"author"];
             [post saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
                 if (isSuccessful) {
-                    [PJHUD showSuccessWithStatus:@"上传成功!"];
                     AudioServicesPlaySystemSound(1521);
                     [self.navigationController popViewControllerAnimated:true];
+                    [PJHUD showSuccessWithStatus:@"上传成功!"];
                 }else{
                     if (error) {
                         NSLog(@"%@",error);

@@ -33,6 +33,7 @@
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [scrollView addSubview:_leftView];
+    scrollView.showsVerticalScrollIndicator = false;
     scrollView.contentSize = CGSizeMake(0, self.frame.size.height + 0.5);
     scrollView.showsHorizontalScrollIndicator = false;
     [self addSubview:scrollView];
