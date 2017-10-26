@@ -19,6 +19,7 @@
 		743C845D1F0B91C700D46EAC /* PJEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 743C845B1F0B91C700D46EAC /* PJEditTableViewCell.xib */; };
 		743C84631F0B97EE00D46EAC /* PJEditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C84621F0B97EE00D46EAC /* PJEditHeaderView.m */; };
 		743C84651F0B97FC00D46EAC /* PJEditHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 743C84641F0B97FC00D46EAC /* PJEditHeaderView.xib */; };
+		7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */ = {isa = PBXBuildFile; fileRef = 7441BCDC1FA1A120005E37ED /* PJTapic.m */; };
 		744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744327FD1EE5850C00E20FAC /* LeftSliderView.m */; };
 		744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0E9D1EF003A3005D4133 /* leftHomeView.m */; };
 		744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA31EF00D2F005D4133 /* PublishViewController.m */; };
@@ -83,6 +84,8 @@
 		743C84611F0B97EE00D46EAC /* PJEditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditHeaderView.h; sourceTree = "<group>"; };
 		743C84621F0B97EE00D46EAC /* PJEditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditHeaderView.m; sourceTree = "<group>"; };
 		743C84641F0B97FC00D46EAC /* PJEditHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PJEditHeaderView.xib; sourceTree = "<group>"; };
+		7441BCDB1FA1A120005E37ED /* PJTapic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJTapic.h; sourceTree = "<group>"; };
+		7441BCDC1FA1A120005E37ED /* PJTapic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJTapic.m; sourceTree = "<group>"; };
 		744327FC1EE5850C00E20FAC /* LeftSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSliderView.h; sourceTree = "<group>"; };
 		744327FD1EE5850C00E20FAC /* LeftSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSliderView.m; sourceTree = "<group>"; };
 		744F0E9C1EF003A3005D4133 /* leftHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = leftHomeView.h; sourceTree = "<group>"; };
@@ -257,6 +260,15 @@
 			name = headerView;
 			sourceTree = "<group>";
 		};
+		7441BCDA1FA1A0FF005E37ED /* PJTapic */ = {
+			isa = PBXGroup;
+			children = (
+				7441BCDB1FA1A120005E37ED /* PJTapic.h */,
+				7441BCDC1FA1A120005E37ED /* PJTapic.m */,
+			);
+			name = PJTapic;
+			sourceTree = "<group>";
+		};
 		744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +383,7 @@
 		74559DC01EE03AB20081A0A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				7441BCDA1FA1A0FF005E37ED /* PJTapic */,
 				741324AF1FA037EB00FA0623 /* Constant */,
 				744FCBE21EFEAE14008BAC63 /* PJKeyboard */,
 				74006FDD1EFC08D3008A151C /* PJHUD */,
@@ -666,6 +679,7 @@
 				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
+				7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
 				741324A81F9DE58800FA0623 /* PJCardViewController.m in Sources */,
 				744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */,

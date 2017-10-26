@@ -40,7 +40,9 @@
 }
 
 - (void)setMessage:(NSString *)avatar withUserName:(NSString *)username andUserID:(NSString *)userID {
-    if (avatar) {
+    if ([avatar isEqualToString:@""]) {
+        _leftView.avatarImgView.image = [UIImage imageNamed:@"portraitDefault"];
+    } else {
         [_leftView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:avatar]];
     }
     if (username == nil) {

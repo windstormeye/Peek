@@ -114,14 +114,12 @@
 // 拍照按钮
 - (IBAction)takePhoto:(id)sender {
     [self redAndBlueBtnShow];
-
-    AudioServicesPlaySystemSound(1519);
+    [PJTapic selection];
 }
 
+// 关闭红蓝
 - (IBAction)closeBtnClick:(id)sender {
     [self redAndBlueBtnHidden];
-
-    AudioServicesPlaySystemSound(1519);
 }
 
 - (void)redAndBlueBtnShow {
@@ -348,12 +346,18 @@
 
 // 退出登录
 - (void)logoutAction {
-    [BmobUser logout];
-    UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
-    PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
-    [self.navigationController presentViewController:vc animated:YES completion:^{
-        [_leftView setMessage:nil withUserName:@"还未登录噢~" andUserID:nil];
-    }];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注意" message:@"退出当前账号后本地缓存数据将销毁，注意保存重要资料，是否继续？" preferredStyle:UIAlertControllerStyleAlert];
+    [PJTapic warning];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+         [BmobUser logout];
+        [_leftView setMessage:@"" withUserName:@"还未登录噢~" andUserID:nil];
+        
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 // 头像点击事件
