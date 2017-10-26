@@ -90,29 +90,41 @@
     std::vector<std::vector<cv::Point>> contours;
     findContours(imgThresholded,contours,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE);
     
-    
-    cv::Mat Mask(imgThresholded.size(), CV_8U, cvScalar(0));
-    unsigned long widthStep = imgThresholded.step;
-    const int height = imgThresholded.rows;
-    uchar *sdata = imgThresholded.data;
-    uchar *ddata = Mask.data;
-    drawContours(imgThresholded,contours,-1, CV_RGB(255, 255, 255),10);
-
-    for (int h = 0; h < height; h++)
+    std::vector<std::vector<cv::Point>> contours1;
+    for (int i = 0; i < contours.size(); ++i)
     {
-        for (int w = 0; w < widthStep; w++)
+        if (contours[i].size() > 200)//将比较小的轮廓剔除掉
         {
-            ddata[w] &= sdata[w];
+            contours1.push_back(contours[i]);
         }
-        sdata += widthStep;
-        ddata += widthStep;
     }
+    cv::Mat hole(imgThresholded.size(), CV_8U, cvScalar(0));
+    cv::drawContours(hole, contours1, -1, cvScalar(255), CV_FILLED); //在遮罩图层上，用白色像素填充轮廓
+    cv::Mat crop(imgOriginal.rows, imgOriginal.cols, CV_8UC3);
+    imgOriginal.copyTo(crop, hole);
     
-    imgThresholded = Mask.clone();
+//    cv::Mat Mask(imgThresholded.size(), CV_8U, cvScalar(0));
+//    unsigned long widthStep = imgThresholded.step;
+//    const int height = imgThresholded.rows;
+//    uchar *sdata = imgThresholded.data;
+//    uchar *ddata = Mask.data;
+//    drawContours(imgThresholded,contours, -1, CV_RGB(255, 255, 255), CV_FILLED);
+//
+//    for (int h = 0; h < height; h++)
+//    {
+//        for (int w = 0; w < widthStep; w++)
+//        {
+//            ddata[w] &= sdata[w];
+//        }
+//        sdata += widthStep;
+//        ddata += widthStep;
+//    }
+//
+//    imgThresholded = Mask.clone();
     
     
     
-    image = MatToUIImage(imgThresholded);
+    image = MatToUIImage(crop);
     return image;
 }
 

@@ -19,6 +19,7 @@
     UIView *_kImgContentView;
     UIImageView *_kAnswerImageView;
     UIImageView *_kOldImageView;
+    UIImageView *_kTagImageView;
     BOOL isTapic;
 }
 
@@ -76,12 +77,20 @@
     _kBottomView.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 60);
     _kBottomView.viewDelegate = self;
     [self.view addSubview:_kBottomView];
+    
+    _kTagImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 25, 40, 40)];
+    [self.navigationBar addSubview:_kTagImageView];
 }
 
 - (void)setDealImageView:(UIImage *)dealImageView {
     [PJHUD showWithStatus:@""];
     _dealImageView = dealImageView;
     [self dealImageWithOpenCV:dealImageView];
+    if (_isRed) {
+        _kTagImageView.image = [UIImage imageNamed:@"red_circle"];
+    } else {
+        _kTagImageView.image = [UIImage imageNamed:@"blue_circle"];
+    }
 }
 
 - (void)setIsRed:(BOOL)isRed {
@@ -91,6 +100,7 @@
 - (void)dealImageWithOpenCV:(UIImage *)image {
     _kImgContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 74, SCREEN_WIDTH, SCREEN_HEIGHT - 74 - 60)];
     _kImgContentView.userInteractionEnabled = true;
+    [self.view addSubview:_kImgContentView];
     CGFloat imgW = 0;
     CGFloat imgH = 0;
     CGFloat lwScale = 0;
@@ -106,18 +116,20 @@
     UIImage *newImage = [UIImage new];
     if (_isRed) {
         newImage = [PJOpenCV imageToDiscernRed:image];
+        _kAnswerImageView = newImageView;
+        newImageView.image = newImage;
+        UIImageView *oldImageView = [[UIImageView alloc] initWithFrame:newImageView.frame];
+        oldImageView.image = image;
+        _kOldImageView = oldImageView;
+        [_kImgContentView addSubview:oldImageView];
+        [_kImgContentView addSubview:newImageView];
     } else {
         newImage = [PJOpenCV imageToDiscernBlue:image];
+        newImageView.image = newImage;
+        _kAnswerImageView = newImageView;
+        [_kImgContentView addSubview:newImageView];
     }
-    _kAnswerImageView = newImageView;
-    newImageView.image = newImage;
-    UIImageView *oldImageView = [[UIImageView alloc] initWithFrame:newImageView.frame];
-    newImageView.image = newImage;
-    oldImageView.image = image;
-    _kOldImageView = oldImageView;
-    [_kImgContentView addSubview:oldImageView];
-    [_kImgContentView addSubview:newImageView];
-    [self.view addSubview:_kImgContentView];
+
     [PJHUD dismiss];
 }
 
@@ -131,6 +143,9 @@
 
 // 3D-Touch
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (!_isRed) {
+        return;
+    }
     NSArray *arrayTouch = [touches allObjects];
     UITouch *touch = (UITouch *)[arrayTouch lastObject];
     _kAnswerImageView.alpha = 1 - touch.force / 6;
