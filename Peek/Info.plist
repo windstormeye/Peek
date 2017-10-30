@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Peek想给您的相册添加照片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Peek想读取您的相册信息</string>
 	<key>LSApplicationCategoryType</key>

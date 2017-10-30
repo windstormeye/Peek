@@ -14,9 +14,6 @@
 #import "PJLoginViewController.h"
 #import "PJCardViewController.h"
 
-#import <UMSocialCore/UMSocialCore.h>
-#import <UShareUI/UShareUI.h>
-
 @interface ViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
@@ -291,15 +288,13 @@
         CGRect frame = _leftView.frame;
         frame.origin.x = 0;
         _leftView.frame = frame;
-        AudioServicesPlaySystemSound(1519);
+        [PJTapic selection];
     }];
 }
 
+// 朋友按钮点击事件
 - (void)friendAction {
-    //显示分享面板
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        [self shareWebPageToPlatformType:platformType];
-    }];
+
 }
 
 - (void)myPublishAction {
@@ -352,7 +347,7 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
          [BmobUser logout];
         [_leftView setMessage:@"" withUserName:@"还未登录噢~" andUserID:nil];
-        
+        [PJTapic succee];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         
@@ -374,37 +369,6 @@
         }];
     }
     
-}
-
-- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
-{
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    //创建网页内容对象
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"Peek" descr:@"带给你全新的知识学习方式" thumImage:[UIImage imageNamed:@"logo"]];
-    //设置网页地址
-    shareObject.webpageUrl = @"http://www.pjhubs.com";
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            UMSocialLogInfo(@"************Share fail with error %@*********",error);
-        }else{
-            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                UMSocialShareResponse *resp = data;
-                //分享结果消息
-                UMSocialLogInfo(@"response message is %@",resp.message);
-                //第三方原始返回的数据
-                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                
-            }else{
-                UMSocialLogInfo(@"response data is %@",data);
-            }
-        }
-    }];
 }
 
 - (void)dismissLeftSlideView {

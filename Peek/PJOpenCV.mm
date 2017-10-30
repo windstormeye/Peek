@@ -102,28 +102,7 @@
     cv::drawContours(hole, contours1, -1, cvScalar(255), CV_FILLED); //在遮罩图层上，用白色像素填充轮廓
     cv::Mat crop(imgOriginal.rows, imgOriginal.cols, CV_8UC3);
     imgOriginal.copyTo(crop, hole);
-    
-//    cv::Mat Mask(imgThresholded.size(), CV_8U, cvScalar(0));
-//    unsigned long widthStep = imgThresholded.step;
-//    const int height = imgThresholded.rows;
-//    uchar *sdata = imgThresholded.data;
-//    uchar *ddata = Mask.data;
-//    drawContours(imgThresholded,contours, -1, CV_RGB(255, 255, 255), CV_FILLED);
-//
-//    for (int h = 0; h < height; h++)
-//    {
-//        for (int w = 0; w < widthStep; w++)
-//        {
-//            ddata[w] &= sdata[w];
-//        }
-//        sdata += widthStep;
-//        ddata += widthStep;
-//    }
-//
-//    imgThresholded = Mask.clone();
-    
-    
-    
+
     image = MatToUIImage(crop);
     return image;
 }

@@ -10,6 +10,9 @@
 #import "PJOpenCV.h"
 #import "PJCardBottomView.h"
 
+#import <UMSocialCore/UMSocialCore.h>
+#import <UShareUI/UShareUI.h>
+
 @interface PJCardViewController () <PJCardBottomViewDelegate>
 
 @end
@@ -61,6 +64,10 @@
     tipsLabel.textAlignment = NSTextAlignmentCenter;
     tipsLabel.font = [UIFont systemFontOfSize:12];
     
+    [self.rightBarButton setImage:[UIImage imageNamed:@"card_share"] forState:UIControlStateNormal];
+    [self.rightBarButton addTarget:self action:@selector(rightbarButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     self.leftBarButton.hidden = true;
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     bgImgView.image = [UIImage imageNamed:@"背景"];
@@ -90,6 +97,37 @@
         _kTagImageView.image = [UIImage imageNamed:@"red_circle"];
     } else {
         _kTagImageView.image = [UIImage imageNamed:@"blue_circle"];
+    }
+}
+
+// 右键分享按钮点击事件
+- (void)rightbarButtonClick {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择" message:@"您要分享的方式" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"保存且分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImageWriteToSavedPhotosAlbum(_kOldImageView.image,self,@selector(image:didFinishSavingWithError:contextInfo:),NULL);
+        //显示分享面板
+        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+            [self shareWebPageToPlatformType:platformType withImage:_kOldImageView.image];
+        }];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //显示分享面板
+        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+            [self shareWebPageToPlatformType:platformType withImage:_kOldImageView.image];
+        }];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+- (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
+{
+    if (error) {
+        [PJHUD showErrorWithStatus:@"保存失败"];
+    }else{
+        [PJHUD showSuccessWithStatus:@"保存成功，可进入相册查看"];
     }
 }
 
@@ -167,29 +205,32 @@
 
 // 图片上传
 -(void)PJCardBottomViewYesBtnClick {
-    [PJHUD showWithStatus:@"图片上传中..."];
-    NSData *data = UIImagePNGRepresentation([_kOldImageView.image imageCompress:500]);
-    BmobFile *file = [[BmobFile alloc]initWithFileName:[NSString stringWithFormat:@"%@%@.png", [[BmobUser currentUser] objectForKey:@"username"], [self getCurrentTimes]] withFileData:data];
-    [file saveInBackground:^(BOOL isSuccessful, NSError *error) {
-        if (isSuccessful) {
-            BmobObject  *post = [BmobObject objectWithClassName:@"User_image"];
-            [post setObject:file.url forKey:@"image_url"];
-            [post setObject:[BmobUser currentUser] forKey:@"author"];
-            [post saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-                if (isSuccessful) {
-                    AudioServicesPlaySystemSound(1521);
-                    [self.navigationController popViewControllerAnimated:true];
-                    [PJHUD showSuccessWithStatus:@"上传成功!"];
-                }else{
-                    if (error) {
-                        NSLog(@"%@",error);
-                    }
-                }
-            }];
-        }else{
-            //进行处理
-        }
-    }];
+//    [PJHUD showWithStatus:@"图片上传中..."];
+//    NSData *data = UIImagePNGRepresentation([_kOldImageView.image imageCompress:500]);
+//    BmobFile *file = [[BmobFile alloc]initWithFileName:[NSString stringWithFormat:@"%@%@.png", [[BmobUser currentUser] objectForKey:@"username"], [self getCurrentTimes]] withFileData:data];
+//    [file saveInBackground:^(BOOL isSuccessful, NSError *error) {
+//        if (isSuccessful) {
+//            BmobObject  *post = [BmobObject objectWithClassName:@"User_image"];
+//            [post setObject:file.url forKey:@"image_url"];
+//            [post setObject:[BmobUser currentUser] forKey:@"author"];
+//            [post saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+//                if (isSuccessful) {
+//                    AudioServicesPlaySystemSound(1521);
+//                    [self.navigationController popViewControllerAnimated:true];
+//                    [PJHUD showSuccessWithStatus:@"上传成功!"];
+//                }else{
+//                    if (error) {
+//                        NSLog(@"%@",error);
+//                    }
+//                }
+//            }];
+//        }else{
+//            //进行处理
+//        }
+//    }];
+    
+    [PJTapic succee];
+    
 }
 
 - (void)PJCardBottomViewNoBtnClick {
@@ -203,6 +244,36 @@
     NSDate *datenow = [NSDate date];
     NSString *currentTimeString = [formatter stringFromDate:datenow];
     return currentTimeString;
+}
+
+// 调用分享
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType withImage:(UIImage *)image{
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    [shareObject setShareImage:image];
+    messageObject.shareObject = shareObject;
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            
+            NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *testPath = [documentPath stringByAppendingPathComponent:@"gameOver.png"];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            [fileManager removeItemAtPath:testPath error:nil];
+            
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+    }];
 }
 
 @end
