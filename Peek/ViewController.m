@@ -305,7 +305,8 @@
     } else {
         UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
         PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
-        [self.navigationController presentViewController:vc animated:YES completion:^{
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.navigationController presentViewController:nav animated:YES completion:^{
             
         }];
     }
@@ -319,7 +320,8 @@
     } else {
         UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
         PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
-        [self.navigationController presentViewController:vc animated:YES completion:^{
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.navigationController presentViewController:nav animated:YES completion:^{
             
         }];
     }
@@ -333,7 +335,8 @@
     } else {
         UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
         PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
-        [self.navigationController presentViewController:vc animated:YES completion:^{
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.navigationController presentViewController:nav animated:YES completion:^{
             
         }];
     }
@@ -341,18 +344,23 @@
 
 // 退出登录
 - (void)logoutAction {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注意" message:@"退出当前账号后本地缓存数据将销毁，注意保存重要资料，是否继续？" preferredStyle:UIAlertControllerStyleAlert];
-    [PJTapic warning];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-         [BmobUser logout];
-        [_leftView setMessage:@"" withUserName:@"还未登录噢~" andUserID:nil];
-        [PJTapic succee];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    if ([BmobUser currentUser]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注意" message:@"退出当前账号后本地缓存数据将销毁，注意保存重要资料，是否继续？" preferredStyle:UIAlertControllerStyleAlert];
+        [PJTapic warning];
         
-    }]];
-    [self presentViewController:alert animated:YES completion:nil];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            [BmobUser logout];
+            [_leftView setMessage:@"" withUserName:@"还未登录噢~" andUserID:nil];
+            [PJTapic succee];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [PJTapic error];
+        [PJHUD showErrorWithStatus:@"未登录"];
+    }
 }
 
 // 头像点击事件
@@ -364,7 +372,8 @@
     } else {
         UIStoryboard *SB = [UIStoryboard storyboardWithName:@"PJLoginSB" bundle:nil];
         PJLoginViewController *vc = [SB instantiateViewControllerWithIdentifier:@"PJLoginViewController"];
-        [self.navigationController presentViewController:vc animated:YES completion:^{
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.navigationController presentViewController:nav animated:YES completion:^{
             
         }];
     }

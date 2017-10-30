@@ -117,4 +117,8 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)PJEditHeaderViewToLargerImage:(UIImageView *)img {
+    
+}
+
 @end

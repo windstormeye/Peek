@@ -13,6 +13,8 @@
 
 - (void)PJEditTableViewChangeAvater:(UIImageView *)img;
 - (void)PJEditTableViewDidSelected:(NSInteger)index;
+- (void)PJEditHeaderViewToLargerImage:(UIImageView *)img;
+
 
 @end
 

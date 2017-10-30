@@ -9,6 +9,7 @@
 #import "PJLoginViewController.h"
 #import <JVFloatLabeledTextField/JVFloatLabeledTextField.h>
 #import "FUIButton.h"
+#import "PJUserForgetPasswdViewController.h"
 #import <SMS_SDK/SMSSDK.h>
 
 
@@ -30,6 +31,15 @@
 @end
 
 @implementation PJLoginViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,7 +72,7 @@
     [self.view addSubview:logoImg];
     
     // 用户名输入框
-    JVFloatLabeledTextField *nameTxt = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.6) / 2, CGRectGetMaxY(logoImg.frame) + 30, SCREEN_WIDTH * 0.6 - 70, 40)];
+    JVFloatLabeledTextField *nameTxt = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.6) / 2, CGRectGetMaxY(logoImg.frame) + 30, SCREEN_WIDTH * 0.6, 40)];
     [self.view addSubview:nameTxt];
     self.nameTxt = nameTxt;
     self.nameTxt.keyboardType = UIKeyboardTypeNumberPad;
@@ -74,7 +84,13 @@
     nameTxt.floatingLabelFont = [UIFont boldSystemFontOfSize:11];
     nameTxt.floatingLabelTextColor = [UIColor lightGrayColor];
     nameTxt.floatingLabelActiveTextColor = mainDeepSkyBlue;
-    nameTxt.clearButtonMode = UITextFieldViewModeWhileEditing;
+    // 自定义清除按钮
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(nameClearBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"login_clear"] forState:UIControlStateNormal];
+    [button setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
+    nameTxt.rightView = button;
+    nameTxt.rightViewMode = UITextFieldViewModeWhileEditing;
     nameTxt.keepBaseline = YES;
     
     // 用户名输入框下划线
@@ -95,7 +111,12 @@
                                     attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     securityTxt.floatingLabelFont = [UIFont boldSystemFontOfSize:11];
     securityTxt.floatingLabelTextColor = [UIColor lightGrayColor];
-    securityTxt.clearButtonMode = UITextFieldViewModeWhileEditing;
+    UIButton *securityTxtBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [securityTxtBtn addTarget:self action:@selector(securityBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [securityTxtBtn setImage:[UIImage imageNamed:@"login_clear"] forState:UIControlStateNormal];
+    [securityTxtBtn setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
+    securityTxt.rightView = securityTxtBtn;
+    securityTxt.rightViewMode = UITextFieldViewModeWhileEditing;
     securityTxt.keepBaseline = YES;
     securityTxt.hidden = YES;
     
@@ -120,8 +141,16 @@
                                     attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     passwdTxt.floatingLabelFont = [UIFont boldSystemFontOfSize:11];
     passwdTxt.floatingLabelTextColor = [UIColor lightGrayColor];
-    passwdTxt.clearButtonMode = UITextFieldViewModeWhileEditing;
+    // 自定义清除按钮
+    UIButton *passwdTxtBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [passwdTxtBtn addTarget:self action:@selector(passwdClearBtnClcik) forControlEvents:UIControlEventTouchUpInside];
+    [passwdTxtBtn setImage:[UIImage imageNamed:@"login_clear"] forState:UIControlStateNormal];
+    [passwdTxtBtn setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
+    passwdTxt.rightView = passwdTxtBtn;
+    passwdTxt.rightViewMode = UITextFieldViewModeWhileEditing;
     passwdTxt.keepBaseline = YES;
+    passwdTxt.returnKeyType = UIReturnKeyGo;
+
     // 密码输入框下划线
     UIView *passwdLineView = [[UIView alloc] initWithFrame:CGRectMake(nameTxt.frame.origin.x, CGRectGetMaxY(passwdTxt.frame) + 1, SCREEN_WIDTH * 0.6, 1)];
     [self.view addSubview:passwdLineView];
@@ -155,7 +184,7 @@
     [signUpBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     // 发送验证码按钮
-    FUIButton *sendBtn = [[FUIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 0.6, nameTxt.frame.origin.y, 70, 30)];
+    FUIButton *sendBtn = [[FUIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 0.6, nameTxt.frame.origin.y + 10, 70, 30)];
     [self.view addSubview:sendBtn];
     [sendBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
     self.sendBtn = sendBtn;
@@ -176,6 +205,7 @@
     signUpBtn_small.titleLabel.font = [UIFont systemFontOfSize:12];
     [signUpBtn_small setTitle:@"没有账号？前往注册" forState:UIControlStateNormal];
     [signUpBtn_small addTarget:self action:@selector(signUpBtn_smallClick) forControlEvents:UIControlEventTouchUpInside];
+    
     // 前往登录按钮
     UIButton *loginBtn_small = [[UIButton alloc] initWithFrame:CGRectMake(signUpBtn_small.frame.origin.x, signUpBtn_small.frame.origin.y, signUpBtn_small.frame.size.width, signUpBtn_small.frame.size.height)];
     [self.view addSubview:loginBtn_small];
@@ -192,8 +222,18 @@
     [self.view addSubview:_forgetPasswdButton];
     [_forgetPasswdButton setTitle:@"忘记密码" forState:UIControlStateNormal];
     [_forgetPasswdButton addTarget:self action:@selector(forgetBtnClickMethon) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+}
+
+- (void)nameClearBtnClick {
+    _nameTxt.text = @"";
+}
+
+- (void)passwdClearBtnClcik {
+    _passwdTxt.text = @"";
+}
+
+- (void)securityBtnClick {
+    _securityTxt.text = @"";
 }
 
 // 点击前往注册
@@ -202,6 +242,10 @@
     self.loginBtn_small.hidden = NO;
     self.signUpBtn_small.hidden = YES;
     self.signUpBtn.hidden = NO;
+    
+    CGRect nameTxtFrame = _nameTxt.frame;
+    nameTxtFrame.size.width -= 85;
+    _nameTxt.frame = nameTxtFrame;
     
     [UIView animateWithDuration:0.25 animations:^{
         CGRect frame = self.passwdTxt.frame;
@@ -229,6 +273,10 @@
     self.loginBtn_small.hidden = YES;
     self.signUpBtn_small.hidden = NO;
     self.signUpBtn.hidden = YES;
+    
+    CGRect nameTxtFrame = _nameTxt.frame;
+    nameTxtFrame.size.width += 75;
+    _nameTxt.frame = nameTxtFrame;
     
     [UIView animateWithDuration:0.25 animations:^{
         self.securityTxt.hidden = YES;
@@ -359,7 +407,8 @@
 }
 
 - (void)forgetBtnClickMethon {
-    
+    PJUserForgetPasswdViewController *vc = [PJUserForgetPasswdViewController new];
+    [self.navigationController pushViewController:vc animated:true];
 }
 
 - (void)cancleBtnClickMethon {

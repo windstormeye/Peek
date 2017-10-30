@@ -48,7 +48,7 @@
 }
 
 - (void)showBGViewWithAnimate {
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         _bgView.hidden = NO;
         _bgView.alpha = 1;
     } completion:^(BOOL finished) {
@@ -72,7 +72,7 @@
 }
 
 - (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
-    [_viewDeleget PJEditHeaderViewChangeAvatar:_avatarImgView];
+    [_viewDeleget PJEditHeaderViewToLargerImage:_avatarImgView];
 }
 
 @end

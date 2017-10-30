@@ -57,7 +57,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PJEditTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PJEditTableViewCell" forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     switch (indexPath.row) {
         case 0:
             cell.nameLabel.text = @"昵称";
@@ -93,6 +93,10 @@
 
 - (void)PJEditHeaderViewChangeAvatar:(UIImageView *)img {
     [_tableDelegate PJEditTableViewChangeAvater:img];
+}
+
+- (void)PJEditHeaderViewToLargerImage:(UIImageView *)img {
+    [_tableDelegate PJEditHeaderViewToLargerImage:img];
 }
 
 @end

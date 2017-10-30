@@ -11,6 +11,7 @@
 @protocol PJEditHeaderViewDelegete <NSObject>
 
 - (void)PJEditHeaderViewChangeAvatar:(UIImageView *)img;
+- (void)PJEditHeaderViewToLargerImage:(UIImageView *)img;
 
 @end
 

@@ -38,6 +38,8 @@
 		74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */; };
 		74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBB1EE010230081A0A5 /* PJHUD.m */; };
 		74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */; };
+		7463F3F51FA753D600125448 /* PJUserForgetPasswdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463F3F41FA753D600125448 /* PJUserForgetPasswdViewController.m */; };
+		7463F3F91FA7555D00125448 /* Register.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463F3F81FA7555D00125448 /* Register.m */; };
 		7478D5351F8E008F00830CF3 /* PJCoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478D5341F8E008F00830CF3 /* PJCoreView.m */; };
 		74911B0D1F89E20B004A729A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74911B0C1F89E20B004A729A /* opencv2.framework */; };
 		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
@@ -123,6 +125,10 @@
 		74559DBB1EE010230081A0A5 /* PJHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJHUD.m; sourceTree = "<group>"; };
 		74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PJUIImage+Extension.h"; sourceTree = "<group>"; };
 		74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PJUIImage+Extension.m"; sourceTree = "<group>"; };
+		7463F3F31FA753D600125448 /* PJUserForgetPasswdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserForgetPasswdViewController.h; sourceTree = "<group>"; };
+		7463F3F41FA753D600125448 /* PJUserForgetPasswdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserForgetPasswdViewController.m; sourceTree = "<group>"; };
+		7463F3F71FA7555D00125448 /* Register.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Register.h; sourceTree = "<group>"; };
+		7463F3F81FA7555D00125448 /* Register.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Register.m; sourceTree = "<group>"; };
 		7478D5331F8E008F00830CF3 /* PJCoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJCoreView.h; sourceTree = "<group>"; };
 		7478D5341F8E008F00830CF3 /* PJCoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJCoreView.m; sourceTree = "<group>"; };
 		74911B071F89E165004A729A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../Downloads/opencv2.framework; sourceTree = "<group>"; };
@@ -345,6 +351,7 @@
 				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
 				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
 				747E22E31EE27AD60078552D /* 个人中心 */,
+				7463F3F21FA753A300125448 /* 忘记密码 */,
 				743C84461F0B893900D46EAC /* 朋友 */,
 				74006FD51EFC0154008A151C /* 登录/注册 */,
 				744F0EA11EF00CD8005D4133 /* 更多 */,
@@ -383,6 +390,7 @@
 		74559DC01EE03AB20081A0A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				7463F3F61FA754EF00125448 /* Register */,
 				7441BCDA1FA1A0FF005E37ED /* PJTapic */,
 				741324AF1FA037EB00FA0623 /* Constant */,
 				744FCBE21EFEAE14008BAC63 /* PJKeyboard */,
@@ -411,6 +419,24 @@
 				74559D911EE009BF0081A0A5 /* Info.plist */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		7463F3F21FA753A300125448 /* 忘记密码 */ = {
+			isa = PBXGroup;
+			children = (
+				7463F3F31FA753D600125448 /* PJUserForgetPasswdViewController.h */,
+				7463F3F41FA753D600125448 /* PJUserForgetPasswdViewController.m */,
+			);
+			name = "忘记密码";
+			sourceTree = "<group>";
+		};
+		7463F3F61FA754EF00125448 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				7463F3F71FA7555D00125448 /* Register.h */,
+				7463F3F81FA7555D00125448 /* Register.m */,
+			);
+			name = Register;
 			sourceTree = "<group>";
 		};
 		7478D5321F8E006100830CF3 /* Core */ = {
@@ -673,6 +699,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */,
+				7463F3F51FA753D600125448 /* PJUserForgetPasswdViewController.m in Sources */,
 				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
 				74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */,
 				74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */,
@@ -695,6 +722,7 @@
 				7478D5351F8E008F00830CF3 /* PJCoreView.m in Sources */,
 				74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */,
 				743C84531F0B90A600D46EAC /* PJEditTableView.m in Sources */,
+				7463F3F91FA7555D00125448 /* Register.m in Sources */,
 				743C84631F0B97EE00D46EAC /* PJEditHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
