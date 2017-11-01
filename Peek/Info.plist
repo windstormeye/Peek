@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Peek想给您的相册添加照片</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Peek想读取您的相册信息</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
-	<key>MOBAppSecret</key>
-	<string>71fb7e198d0098f48233d6d98e5cb73f</string>
-	<key>MOBAppKey</key>
-	<string>1eed14aaba72c</string>
 	<key>CFBundleAllowMixedLocalizations</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -41,6 +31,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
@@ -48,8 +40,16 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MOBAppKey</key>
+	<string>1eed14aaba72c</string>
+	<key>MOBAppSecret</key>
+	<string>71fb7e198d0098f48233d6d98e5cb73f</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Peek需要获取您的相机进行拍照</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Peek想给您的相册添加照片</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Peek想读取您的相册信息</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -61,8 +61,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

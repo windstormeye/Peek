@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    nickName,
+    email,
+    phone,
+    passwd
+} ModifyType;
+
 @interface PJModifyViewController : UIViewController
 
-@property (nonatomic, assign) NSString *titleText;
+// 提供外部传入的titleName方法
+- (void)initWithTitleLabelName:(NSString *)name;
+
 @property (nonatomic, strong) UILabel *tipsLabel;
+@property (nonatomic, assign) ModifyType type;
 
 @end

@@ -18,6 +18,7 @@
 {
     PJEditTableView *_kTableView;
     UIImageView *_kAvatarImageVIew;
+    UIView *_kBigImageView;
 }
 
 - (void)viewDidLoad {
@@ -57,6 +58,26 @@
     _kTableView = [[PJEditTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_WIDTH - 64) style:UITableViewStyleGrouped];
     _kTableView.tableDelegate = self;
     [self.view addSubview:_kTableView];
+    
+    _kBigImageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.view addSubview:_kBigImageView];
+//    _kBigImageView.backgroundColor = [UIColor blackColor];
+    UIVisualEffectView *effectBigView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    effectBigView.frame = CGRectMake(0, 0, _kBigImageView.frame.size.width, _kBigImageView.frame.size.height);
+    [_kBigImageView addSubview:effectBigView];
+    _kBigImageView.alpha = 0;
+    _kBigImageView.hidden = true;
+    UITapGestureRecognizer *viewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTap)];
+    [_kBigImageView addGestureRecognizer:viewTap];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyReload:) name:@"modifyNo"  object:nil];
+}
+
+// 收到更新昵称通知
+- (void)modifyReload:(NSNotification *)no {
+    if (no.userInfo[@"isModify"]) {
+        [_kTableView reloadData];
+    }
 }
 
 - (void)PJEditTableViewChangeAvater:(UIImageView *)img {
@@ -105,20 +126,53 @@
 
 -(void)PJEditTableViewDidSelected:(NSInteger)index {
     PJModifyViewController *vc = [PJModifyViewController new];
+    NSString *nameStr = @"";
     if (index == 0) {
-        vc.titleText = @"修改昵称";
+        nameStr = @"修改昵称";
+        [vc initWithTitleLabelName:nameStr];
+        vc.type = nickName;
     } else if (index == 1) {
-        vc.titleText = @"编辑邮箱";
+        nameStr = @"编辑邮箱";
+        [vc initWithTitleLabelName:nameStr];
+        vc.type = email;
     } else if(index == 2)  {
-        vc.titleText = @"编辑手机";
+        nameStr = @"编辑手机";
+        [vc initWithTitleLabelName:nameStr];
+        vc.type = phone;
     } else {
-        
+        nameStr = @"修改密码";
+        [vc initWithTitleLabelName:nameStr];
+        vc.type = passwd;
     }
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+// 点击消失头像大图
+- (void)viewTap {
+    [UIView animateWithDuration:0.2 animations:^{
+        _kBigImageView.alpha = 0;
+    } completion:^(BOOL finished) {
+        _kBigImageView.hidden = true;
+    }];
+    for (UIView *view in _kBigImageView.subviews) {
+        if (view.tag == 1000) {
+            [view removeFromSuperview];
+        }
+    }
+}
+
+// 点击放大头像
 - (void)PJEditHeaderViewToLargerImage:(UIImageView *)img {
-    
+    UIImageView *bigImg = [[UIImageView alloc] initWithImage:img.image];
+    bigImg.tag = 1000;
+    [_kBigImageView addSubview:bigImg];
+    bigImg.frame = CGRectMake(0, (SCREEN_HEIGHT - SCREEN_WIDTH)/2, SCREEN_WIDTH, SCREEN_WIDTH);
+    bigImg.alpha = 0;
+    [UIView animateWithDuration:0.2 animations:^{
+        _kBigImageView.hidden = false;
+        _kBigImageView.alpha = 1;
+        bigImg.alpha = 1;
+    }];
 }
 
 @end

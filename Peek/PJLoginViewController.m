@@ -28,6 +28,7 @@
 @property (nonatomic, strong) UIButton *forgetPasswdButton;
 @property (nonatomic, strong) UIButton *cancleBtn;
 @property (nonatomic, strong) UIButton *saveBtn;
+@property (nonatomic, strong) UIImageView *kLogoImg;
 @end
 
 @implementation PJLoginViewController
@@ -69,6 +70,7 @@
     logoImg.layer.cornerRadius = logoImg.frame.size.width * 0.2;
     logoImg.layer.masksToBounds = YES;
     logoImg.image = [UIImage imageNamed:@"logo"];
+    _kLogoImg = logoImg;
     [self.view addSubview:logoImg];
     
     // 用户名输入框
@@ -244,7 +246,7 @@
     self.signUpBtn.hidden = NO;
     
     CGRect nameTxtFrame = _nameTxt.frame;
-    nameTxtFrame.size.width -= 85;
+    nameTxtFrame.size.width -= _sendBtn.frame.size.width;
     _nameTxt.frame = nameTxtFrame;
     
     [UIView animateWithDuration:0.25 animations:^{
@@ -275,7 +277,7 @@
     self.signUpBtn.hidden = YES;
     
     CGRect nameTxtFrame = _nameTxt.frame;
-    nameTxtFrame.size.width += 75;
+    nameTxtFrame.size.width = _passwdTxt.frame.size.width;
     _nameTxt.frame = nameTxtFrame;
     
     [UIView animateWithDuration:0.25 animations:^{

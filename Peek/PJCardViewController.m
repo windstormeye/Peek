@@ -87,6 +87,7 @@
     
     _kTagImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 25, 40, 40)];
     [self.navigationBar addSubview:_kTagImageView];
+
 }
 
 - (void)setDealImageView:(UIImage *)dealImageView {
@@ -122,6 +123,8 @@
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
 {
     if (error) {
@@ -184,6 +187,7 @@
     if (!_isRed) {
         return;
     }
+    // 支持3Dtouch
     NSArray *arrayTouch = [touches allObjects];
     UITouch *touch = (UITouch *)[arrayTouch lastObject];
     _kAnswerImageView.alpha = 1 - touch.force / 6;
@@ -197,6 +201,7 @@
     if (_kAnswerImageView.alpha > 0.65) {
         _kAnswerImageView.alpha  = 1.0;
     }
+
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

@@ -16,6 +16,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "PJTapic.h"
+#import "PJDevice.h"
 
 
-
+ 
