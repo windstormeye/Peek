@@ -47,13 +47,11 @@
     bgImgView.image = [UIImage imageNamed:@"背景"];
     [self.view addSubview:bgImgView];
     [self.view sendSubviewToBack:bgImgView];
-    
     // 开启高斯模糊
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     effectView.frame = CGRectMake(0, 0, bgImgView.frame.size.width, bgImgView.frame.size.height);
     [bgImgView addSubview:effectView];
-    
     
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0,64 + 30, SCREEN_WIDTH, 60)];
     [self.view addSubview:bgView];
@@ -68,7 +66,6 @@
     _kFocusTxt.keyboardType = UIKeyboardTypeNamePhonePad;
     _kFocusTxt.returnKeyType = UIReturnKeyDone;
     _kFocusTxt.textAlignment = NSTextAlignmentCenter;
-    _kFocusTxt.delegate = self;
     // 使其成为第一响应者
     [_kFocusTxt becomeFirstResponder];
     
@@ -148,6 +145,7 @@
 }
 
 - (void)phoneInitView {
+    _kFocusTxt.delegate = self;
     _kFocusTxt.keyboardType = UIKeyboardTypePhonePad;
     NSString *nickNameStr = [[BmobUser currentUser] objectForKey:@"username"];
     nickNameStr = [self divisionPhoneString:nickNameStr];
@@ -180,10 +178,17 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-   
-   // 解决再次删除的问题
-   
-    return true;
+    if (range.length && _kFocusTxt.text.length < 14) {
+        return true;
+    }
+    if (!range.length && _kFocusTxt.text.length < 13) {
+        if (range.location == 3 || range.location == 8) {
+            NSString *tempStr = _kFocusTxt.text;
+            _kFocusTxt.text = [NSString stringWithFormat:@"%@ ", tempStr];
+        }
+        return true;
+    }
+    return false;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -221,7 +226,15 @@
 
 - (void)updateNickName {
     [PJHUD showWithStatus:@""];
-
+    
+    // 修改后的姓名与原姓名一致，假成功
+    NSString *namaString = [[BmobUser currentUser] objectForKey:@"nickname"];
+    if ([_kFocusTxt.text isEqualToString:namaString]) {
+        [PJHUD showSuccessWithStatus:@"修改成功"];
+        [self.navigationController popViewControllerAnimated:true];
+        return;
+    }
+    
     BmobUser *bUser = [BmobUser currentUser];
     [bUser setObject:_kFocusTxt.text forKey:@"nickname"];
     [bUser updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
@@ -235,6 +248,14 @@
 - (void)updateEmail {
     [PJHUD showWithStatus:@""];
     
+    // 修改后的email与原email一致，假成功
+    NSString *emailString = [[BmobUser currentUser] objectForKey:@"email"];
+    if ([_kFocusTxt.text isEqualToString:emailString]) {
+        [PJHUD showSuccessWithStatus:@"修改成功"];
+        [self.navigationController popViewControllerAnimated:true];
+        return;
+    }
+    
     BmobUser *bUser = [BmobUser currentUser];
     [bUser setObject:_kFocusTxt.text forKey:@"email"];
     [bUser updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
@@ -246,6 +267,14 @@
 
 - (void)updatePhone {
     [PJHUD showWithStatus:@""];
+    
+    // 修改后的电话与原电话一致，假成功
+    NSString *phoneString = [[BmobUser currentUser] objectForKey:@"username"];
+    if ([_kFocusTxt.text isEqualToString:phoneString]) {
+        [PJHUD showSuccessWithStatus:@"修改成功"];
+        [self.navigationController popViewControllerAnimated:true];
+        return;
+    }
     
     BmobUser *bUser = [BmobUser currentUser];
     [bUser setObject:_kFocusTxt.text forKey:@"username"];
@@ -267,6 +296,13 @@
     }
     if (![_kOneTxt.text isEqualToString:_kSecondTxt.text]) {
         [PJHUD showErrorWithStatus:@"两次新密码输入有误"];
+        return;
+    }
+    
+    // 修改后的密码与原密码一致，假成功
+    if ([_kFocusTxt.text isEqualToString:_kSecondTxt.text]) {
+        [PJHUD showSuccessWithStatus:@"修改成功"];
+        [self.navigationController popViewControllerAnimated:true];
         return;
     }
     

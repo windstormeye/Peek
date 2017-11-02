@@ -306,7 +306,7 @@
 		744F0EA51EF01392005D4133 /* 编辑个人资料 */ = {
 			isa = PBXGroup;
 			children = (
-				74C63A3B1F47257000D0B35F /* 修改昵称 */,
+				74C63A3B1F47257000D0B35F /* 修改资料 */,
 				743C84601F0B97DA00D46EAC /* headerView */,
 				743C845E1F0B97C400D46EAC /* tableView */,
 				744F0EA61EF013AE005D4133 /* EditViewController.h */,
@@ -491,13 +491,13 @@
 			name = PJDevice;
 			sourceTree = "<group>";
 		};
-		74C63A3B1F47257000D0B35F /* 修改昵称 */ = {
+		74C63A3B1F47257000D0B35F /* 修改资料 */ = {
 			isa = PBXGroup;
 			children = (
 				74C63A3C1F47259400D0B35F /* PJModifyViewController.h */,
 				74C63A3D1F47259400D0B35F /* PJModifyViewController.m */,
 			);
-			name = "修改昵称";
+			name = "修改资料";
 			sourceTree = "<group>";
 		};
 		74EAE19E1F8A059E0071F82D /* OpenCV */ = {
