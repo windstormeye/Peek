@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "leftHomeView.h"
+#import "PJFriendHomeView.h"
 #import "PublishViewController.h"
 #import "EditViewController.h"
 #import "MessageViewController.h"
@@ -18,6 +19,7 @@
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UIScreenEdgePanGestureRecognizer *edgePan;
+@property (nonatomic, strong) UIScreenEdgePanGestureRecognizer *rightedgePan;
 @property (weak, nonatomic) IBOutlet UIButton *camareBtn;
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 @property (nonatomic,strong) UIImagePickerController *imagePicker;
@@ -29,8 +31,9 @@
 @implementation ViewController
 {
     leftHomeView *_leftView;
+    PJFriendHomeView *_kRightView;
     BOOL isRed;
-
+    BOOL isLeft;
 }
 
 - (void)viewDidLoad {
@@ -74,14 +77,25 @@
     [self.rightBarButton setImage:[UIImage imageNamed:@"朋友"] forState:0];
     [self.rightBarButton addTarget:self action:@selector(friendAction) forControlEvents:1<<6];
 
+    // 左 个人中心
     _leftView = [leftHomeView new];
     _leftView.viewDelega = self;
     [self.view addSubview:_leftView];
     [self.view bringSubviewToFront:_leftView];
     
+    // 右 好友列表
+    _kRightView = [PJFriendHomeView new];
+//    _kRightView.viewDelega = self;
+    [self.view addSubview:_kRightView];
+    [self.view bringSubviewToFront:_kRightView];
+    
     _edgePan = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(showLeftAd:)];
     _edgePan.edges = UIRectEdgeLeft;
     [self.view addGestureRecognizer:_edgePan];
+    
+    _rightedgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(showRightAd:)];
+    _rightedgePan.edges = UIRectEdgeRight;
+    [self.view addGestureRecognizer:_rightedgePan];
     
     _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     _panGesture.enabled = NO;
@@ -92,6 +106,7 @@
     
     _closeBtn.hidden = true;
     isRed = true;
+    isLeft = true;
 }
 
 // 用户资料的更新通知
@@ -222,27 +237,50 @@
     }];
 }
 
-// 左侧菜单栏滑动退出
+// 菜单栏滑动退出
 - (void)panGesture:(UIPanGestureRecognizer *)ges {
     CGPoint p = [ges translationInView:self.view];
-    CGRect frame = _leftView.frame;
-    frame.origin.x = p.x;
-    if (p.x > 0) {
-        if (_leftView.frame.origin.x == 0) {
-            frame.origin.x = 0;
+    if (isLeft) {
+        CGRect frame = _leftView.frame;
+        frame.origin.x = p.x;
+        if (p.x > 0) {
+            if (_leftView.frame.origin.x == 0) {
+                frame.origin.x = 0;
+                _leftView.frame = frame;
+            } else if (_leftView.frame.origin.x < 0) {
+                frame.origin.x = 0;
+                _leftView.frame = frame;
+            }
+        } else {
             _leftView.frame = frame;
-        } else if (_leftView.frame.origin.x < 0) {
-            frame.origin.x = 0;
-            _leftView.frame = frame;
+            if (ges.state == UIGestureRecognizerStateEnded) {
+                frame.origin.x = -SCREEN_WIDTH * 0.6;
+                _panGesture.enabled = NO;
+                [UIView animateWithDuration:0.25 animations:^{
+                    _leftView.frame = frame;
+                }];
+            }
         }
     } else {
-        _leftView.frame = frame;
-        if (ges.state == UIGestureRecognizerStateEnded) {
-            frame.origin.x = -SCREEN_WIDTH * 0.6;
-            _panGesture.enabled = NO;
-            [UIView animateWithDuration:0.25 animations:^{
-                _leftView.frame = frame;
-            }];
+        CGRect frame = _kRightView.frame;
+        frame.origin.x = p.x + SCREEN_WIDTH * 0.4;
+        if (p.x > 0) {
+            _kRightView.frame = frame;
+            if (ges.state == UIGestureRecognizerStateEnded) {
+                frame.origin.x = SCREEN_WIDTH;
+                _panGesture.enabled = NO;
+                [UIView animateWithDuration:0.25 animations:^{
+                    _kRightView.frame = frame;
+                }];
+            }
+        } else {
+            if (_kRightView.frame.origin.x == SCREEN_WIDTH * 0.4) {
+                frame.origin.x = SCREEN_WIDTH * 0.4;
+                _kRightView.frame = frame;
+            } else if (_kRightView.frame.origin.x < SCREEN_WIDTH * 0.4) {
+                frame.origin.x = SCREEN_WIDTH * 0.4;
+                _kRightView.frame = frame;
+            }
         }
     }
 }
@@ -258,7 +296,6 @@
     if (frame.origin.x == 0) {
         return;
     }
-    // 更改adView的x值.当滑动距离超过view宽度时，则把x一直设置为0
     if (p.x > SCREEN_WIDTH * 0.6) {
          frame.origin.x = 0;
     }
@@ -271,6 +308,7 @@
             // 如果超过,那么完全展示出来
             frame.origin.x = 0;
             _panGesture.enabled = YES;
+            isLeft = true;
         }else{
             // 如果没有,隐藏
             frame.origin.x = -SCREEN_WIDTH * 0.6;
@@ -292,9 +330,52 @@
     }];
 }
 
+// 展示右侧图
+- (void)showRightAd:(UIScreenEdgePanGestureRecognizer *)ges {
+    CGPoint p = [ges locationInView:self.view];
+    
+    CGRect frame = _kRightView.frame;
+    frame.origin.x = p.x;
+    // 如果已经划出view
+    if (_kRightView.frame.origin.x == SCREEN_WIDTH * 0.4) {
+        _panGesture.enabled = YES;
+        isLeft = false;
+        return;
+    }
+    if (p.x < SCREEN_WIDTH * 0.4) {
+        frame.origin.x = SCREEN_WIDTH * 0.4;
+    }
+
+    _kRightView.frame = frame;
+
+    if (ges.state == UIGestureRecognizerStateEnded || ges.state == UIGestureRecognizerStateCancelled) {
+        // 判断当前广告视图在屏幕上显示是否超过一半
+        if (CGRectContainsPoint(self.view.frame, _kRightView.center)) {
+            // 如果超过,那么完全展示出来
+            frame.origin.x = SCREEN_WIDTH * 0.4;
+            _panGesture.enabled = YES;
+            isLeft = false;
+        }else{
+            // 如果没有,隐藏
+            frame.origin.x = SCREEN_WIDTH;
+        }
+        [UIView animateWithDuration:0.25 animations:^{
+            _kRightView.frame = frame;
+        }];
+    }
+}
+
+
 // 朋友按钮点击事件
 - (void)friendAction {
-
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect frame = _kRightView.frame;
+        frame.origin.x = SCREEN_WIDTH * 0.4;
+        _kRightView.frame = frame;
+        _panGesture.enabled = true;
+        isLeft = false;
+        [PJTapic selection];
+    }];
 }
 
 - (void)myPublishAction {
