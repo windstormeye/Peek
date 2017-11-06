@@ -10,6 +10,10 @@
 
 @interface PJFriendTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *userImgView;
+
+
 @property (nonatomic,  strong) NSDictionary *cellDict;
 
 @end

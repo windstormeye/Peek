@@ -28,10 +28,11 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无昵称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBu-rR-ejv">
                         <rect key="frame" x="53" y="13" width="43" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Ocg-oF-P9M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="2Kb-Vb-5DH"/>
                     <constraint firstItem="oBu-rR-ejv" firstAttribute="leading" secondItem="Ocg-oF-P9M" secondAttribute="trailing" constant="8" id="PJe-F4-oeI"/>
@@ -39,6 +40,11 @@
                     <constraint firstItem="Ocg-oF-P9M" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="smd-vL-0wa"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="nameLabel" destination="oBu-rR-ejv" id="va8-EW-pFi"/>
+                <outlet property="userImgView" destination="Ocg-oF-P9M" id="A3w-mY-506"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

@@ -32,6 +32,7 @@
 {
     leftHomeView *_leftView;
     PJFriendHomeView *_kRightView;
+    UIView *_kBackView;
     BOOL isRed;
     BOOL isLeft;
 }
@@ -77,6 +78,13 @@
     [self.rightBarButton setImage:[UIImage imageNamed:@"朋友"] forState:0];
     [self.rightBarButton addTarget:self action:@selector(friendAction) forControlEvents:1<<6];
 
+    // 背景图
+    _kBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.view addSubview:_kBackView];
+    _kBackView.backgroundColor = RGB(0, 0, 0);
+    _kBackView.hidden = true;
+    _kBackView.alpha = 0;
+    
     // 左 个人中心
     _leftView = [leftHomeView new];
     _leftView.viewDelega = self;
@@ -259,6 +267,11 @@
                 [UIView animateWithDuration:0.25 animations:^{
                     _leftView.frame = frame;
                 }];
+                [UIView animateWithDuration:0.25 animations:^{
+                    _kBackView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    _kBackView.hidden = true;
+                }];
             }
         }
     } else {
@@ -271,6 +284,11 @@
                 _panGesture.enabled = NO;
                 [UIView animateWithDuration:0.25 animations:^{
                     _kRightView.frame = frame;
+                }];
+                [UIView animateWithDuration:0.25 animations:^{
+                    _kBackView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    _kBackView.hidden = true;
                 }];
             }
         } else {
@@ -309,9 +327,18 @@
             frame.origin.x = 0;
             _panGesture.enabled = YES;
             isLeft = true;
+            _kBackView.hidden = false;
+            [UIView animateWithDuration:0.25 animations:^{
+                _kBackView.alpha = 0.5;
+            }];
         }else{
             // 如果没有,隐藏
             frame.origin.x = -SCREEN_WIDTH * 0.6;
+            [UIView animateWithDuration:0.25 animations:^{
+                _kBackView.alpha = 0;
+            } completion:^(BOOL finished) {
+                _kBackView.hidden = true;
+            }];
         }
         [UIView animateWithDuration:0.25 animations:^{
             _leftView.frame = frame;
@@ -321,11 +348,14 @@
 }
 
 - (void)moreAction {
+    _kBackView.hidden = false;
     [UIView animateWithDuration:0.25 animations:^{
         _panGesture.enabled = YES;
         CGRect frame = _leftView.frame;
         frame.origin.x = 0;
         _leftView.frame = frame;
+        isLeft = true;
+        _kBackView.alpha = 0.5;
         [PJTapic selection];
     }];
 }
@@ -340,6 +370,10 @@
     if (_kRightView.frame.origin.x == SCREEN_WIDTH * 0.4) {
         _panGesture.enabled = YES;
         isLeft = false;
+        _kBackView.hidden = false;
+        [UIView animateWithDuration:0.25 animations:^{
+            _kBackView.alpha = 0.5;
+        }];
         return;
     }
     if (p.x < SCREEN_WIDTH * 0.4) {
@@ -355,9 +389,18 @@
             frame.origin.x = SCREEN_WIDTH * 0.4;
             _panGesture.enabled = YES;
             isLeft = false;
+            _kBackView.hidden = false;
+            [UIView animateWithDuration:0.25 animations:^{
+                _kBackView.alpha = 0.5;
+            }];
         }else{
             // 如果没有,隐藏
             frame.origin.x = SCREEN_WIDTH;
+            [UIView animateWithDuration:0.25 animations:^{
+                _kBackView.alpha = 0;
+            } completion:^(BOOL finished) {
+                _kBackView.hidden = true;
+            }];
         }
         [UIView animateWithDuration:0.25 animations:^{
             _kRightView.frame = frame;
@@ -368,12 +411,14 @@
 
 // 朋友按钮点击事件
 - (void)friendAction {
+    _kBackView.hidden = false;
     [UIView animateWithDuration:0.25 animations:^{
         CGRect frame = _kRightView.frame;
         frame.origin.x = SCREEN_WIDTH * 0.4;
         _kRightView.frame = frame;
         _panGesture.enabled = true;
         isLeft = false;
+        _kBackView.alpha = 0.5;
         [PJTapic selection];
     }];
 }
