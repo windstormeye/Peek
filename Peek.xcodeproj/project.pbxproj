@@ -43,7 +43,9 @@
 		74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */; };
 		7463F3F51FA753D600125448 /* PJUserForgetPasswdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463F3F41FA753D600125448 /* PJUserForgetPasswdViewController.m */; };
 		7463F3F91FA7555D00125448 /* Register.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463F3F81FA7555D00125448 /* Register.m */; };
-		7478D5351F8E008F00830CF3 /* PJCoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478D5341F8E008F00830CF3 /* PJCoreView.m */; };
+		749766292046E741006F47F6 /* PJUserLoginCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 749766282046E741006F47F6 /* PJUserLoginCom.m */; };
+		7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 7497662B2046E74E006F47F6 /* PJUserRegister.m */; };
+		749766352046ECCF006F47F6 /* PJNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 749766342046ECCF006F47F6 /* PJNetWorkManager.m */; };
 		74A0D6221FA8A860006AB335 /* PJDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0D6211FA8A860006AB335 /* PJDevice.m */; };
 		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
 		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
@@ -137,9 +139,14 @@
 		7463F3F41FA753D600125448 /* PJUserForgetPasswdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserForgetPasswdViewController.m; sourceTree = "<group>"; };
 		7463F3F71FA7555D00125448 /* Register.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Register.h; sourceTree = "<group>"; };
 		7463F3F81FA7555D00125448 /* Register.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Register.m; sourceTree = "<group>"; };
-		7478D5331F8E008F00830CF3 /* PJCoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJCoreView.h; sourceTree = "<group>"; };
-		7478D5341F8E008F00830CF3 /* PJCoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJCoreView.m; sourceTree = "<group>"; };
 		74911B071F89E165004A729A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../Downloads/opencv2.framework; sourceTree = "<group>"; };
+		749766272046E741006F47F6 /* PJUserLoginCom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserLoginCom.h; sourceTree = "<group>"; };
+		749766282046E741006F47F6 /* PJUserLoginCom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserLoginCom.m; sourceTree = "<group>"; };
+		7497662A2046E74E006F47F6 /* PJUserRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserRegister.h; sourceTree = "<group>"; };
+		7497662B2046E74E006F47F6 /* PJUserRegister.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserRegister.m; sourceTree = "<group>"; };
+		749766322046EB08006F47F6 /* PJNetWorkPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJNetWorkPath.h; sourceTree = "<group>"; };
+		749766332046ECCF006F47F6 /* PJNetWorkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJNetWorkManager.h; sourceTree = "<group>"; };
+		749766342046ECCF006F47F6 /* PJNetWorkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNetWorkManager.m; sourceTree = "<group>"; };
 		74A0D6201FA8A860006AB335 /* PJDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJDevice.h; sourceTree = "<group>"; };
 		74A0D6211FA8A860006AB335 /* PJDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJDevice.m; sourceTree = "<group>"; };
 		74C63A3C1F47259400D0B35F /* PJModifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJModifyViewController.h; sourceTree = "<group>"; };
@@ -379,20 +386,9 @@
 				74559D841EE009BE0081A0A5 /* AppDelegate.m */,
 				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
 				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
-				747E22E31EE27AD60078552D /* 个人中心 */,
-				7463F3F21FA753A300125448 /* 忘记密码 */,
-				743C84461F0B893900D46EAC /* 朋友 */,
-				74006FD51EFC0154008A151C /* 登录/注册 */,
-				744F0EA11EF00CD8005D4133 /* 更多 */,
-				744F0EA01EF00CCF005D4133 /* 消息中心 */,
-				744F0EA51EF01392005D4133 /* 编辑个人资料 */,
-				744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */,
-				741324A51F9DE56100FA0623 /* 卡片编辑 */,
-				747E22E21EE27AC00078552D /* 首页 */,
-				74EAE19E1F8A059E0071F82D /* OpenCV */,
-				7478D5321F8E006100830CF3 /* Core */,
-				74559DC11EE03AC00081A0A5 /* Extension */,
-				74559DC01EE03AB20081A0A5 /* Global */,
+				749766232046E68F006F47F6 /* Ability */,
+				749766222046E672006F47F6 /* Com */,
+				749766212046E65D006F47F6 /* Page */,
 				74559DC21EE03AD10081A0A5 /* Other */,
 			);
 			path = Peek;
@@ -469,15 +465,6 @@
 			name = Register;
 			sourceTree = "<group>";
 		};
-		7478D5321F8E006100830CF3 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				7478D5331F8E008F00830CF3 /* PJCoreView.h */,
-				7478D5341F8E008F00830CF3 /* PJCoreView.m */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
 		747E22E21EE27AC00078552D /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +493,79 @@
 				744C3C371FAD9B2D00767B42 /* opencv2.framework */,
 			);
 			name = framework;
+			sourceTree = "<group>";
+		};
+		749766212046E65D006F47F6 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				747E22E31EE27AD60078552D /* 个人中心 */,
+				7463F3F21FA753A300125448 /* 忘记密码 */,
+				743C84461F0B893900D46EAC /* 朋友 */,
+				74006FD51EFC0154008A151C /* 登录/注册 */,
+				744F0EA11EF00CD8005D4133 /* 更多 */,
+				744F0EA01EF00CCF005D4133 /* 消息中心 */,
+				744F0EA51EF01392005D4133 /* 编辑个人资料 */,
+				744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */,
+				741324A51F9DE56100FA0623 /* 卡片编辑 */,
+				747E22E21EE27AC00078552D /* 首页 */,
+			);
+			name = Page;
+			sourceTree = "<group>";
+		};
+		749766222046E672006F47F6 /* Com */ = {
+			isa = PBXGroup;
+			children = (
+				749766242046E716006F47F6 /* User */,
+			);
+			name = Com;
+			sourceTree = "<group>";
+		};
+		749766232046E68F006F47F6 /* Ability */ = {
+			isa = PBXGroup;
+			children = (
+				7497662D2046E93A006F47F6 /* Network */,
+				74559DC11EE03AC00081A0A5 /* Extension */,
+				74559DC01EE03AB20081A0A5 /* Global */,
+				74EAE19E1F8A059E0071F82D /* OpenCV */,
+			);
+			name = Ability;
+			sourceTree = "<group>";
+		};
+		749766242046E716006F47F6 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				749766262046E721006F47F6 /* register */,
+				749766252046E71C006F47F6 /* login */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		749766252046E71C006F47F6 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				749766272046E741006F47F6 /* PJUserLoginCom.h */,
+				749766282046E741006F47F6 /* PJUserLoginCom.m */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		749766262046E721006F47F6 /* register */ = {
+			isa = PBXGroup;
+			children = (
+				7497662A2046E74E006F47F6 /* PJUserRegister.h */,
+				7497662B2046E74E006F47F6 /* PJUserRegister.m */,
+			);
+			name = register;
+			sourceTree = "<group>";
+		};
+		7497662D2046E93A006F47F6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				749766322046EB08006F47F6 /* PJNetWorkPath.h */,
+				749766332046ECCF006F47F6 /* PJNetWorkManager.h */,
+				749766342046ECCF006F47F6 /* PJNetWorkManager.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		74A0D61F1FA8A84E006AB335 /* PJDevice */ = {
@@ -691,13 +751,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Peek-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D26890AC09E5B447A4BED1B2 /* [CP] Copy Pods Resources */ = {
@@ -706,9 +769,26 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Peek/Pods-Peek-resources.sh",
+				"${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialUI/UMSocialSDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -743,8 +823,10 @@
 				74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */,
 				74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */,
 				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
+				749766292046E741006F47F6 /* PJUserLoginCom.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
+				7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */,
 				7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
 				741324A81F9DE58800FA0623 /* PJCardViewController.m in Sources */,
@@ -761,9 +843,9 @@
 				744C3C3C1FADB33A00767B42 /* PJFriendHomeView.m in Sources */,
 				744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
-				7478D5351F8E008F00830CF3 /* PJCoreView.m in Sources */,
 				74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */,
 				743C84531F0B90A600D46EAC /* PJEditTableView.m in Sources */,
+				749766352046ECCF006F47F6 /* PJNetWorkManager.m in Sources */,
 				7463F3F91FA7555D00125448 /* Register.m in Sources */,
 				743C84631F0B97EE00D46EAC /* PJEditHeaderView.m in Sources */,
 			);
