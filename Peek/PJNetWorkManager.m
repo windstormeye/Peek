@@ -14,15 +14,15 @@
 @implementation PJNetWorkManager
 
 + (void)getRequestWithHost:(NSString *)host path:(NSString *)path params:(NSDictionary *)params success:(void (^)(NSDictionary *response))succesBlock failed:(void (^)(NSDictionary *response))failBlock {
-    NSURLSessionDataTask *dataTask = [[self class] createGetRequest:host path:path params:params success:succesBlock failed:failBlock];
+//    NSURLSessionDataTask *dataTask = [[self class] createGetRequest:host path:path params:params success:succesBlock failed:failBlock];
 }
 
 + (void)postRequestWithHost:(NSString *)host path:(NSString *)path params:(NSDictionary *)params success:(void (^)(NSDictionary *))succesBlock failed:(void (^)(NSDictionary *))failBlock {
     
 }
 
-+ (NSURLSessionDataTask *)createGetRequest:(NSString *)host path:(NSString *)path params:(NSDictionary *)params success:(void(^)(NSDictionary *response)) successBlock failed:(void(^)(NSDictionary* response)) failBlock {
-    
-}
+//+ (NSURLSessionDataTask *)createGetRequest:(NSString *)host path:(NSString *)path params:(NSDictionary *)params success:(void(^)(NSDictionary *response)) successBlock failed:(void(^)(NSDictionary* response)) failBlock {
+//
+//}
 
 @end
