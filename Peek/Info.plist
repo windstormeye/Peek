@@ -6,6 +6,8 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>PLook</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -45,13 +47,11 @@
 	<key>MOBAppSecret</key>
 	<string>71fb7e198d0098f48233d6d98e5cb73f</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Peek需要获取您的相机进行拍照</string>
+	<string>PLook需要获取您的相机进行拍照</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Peek想给您的相册添加照片</string>
+	<string>PLook想给您的相册添加照片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Peek想读取您的相册信息</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>PLook想读取您的相册信息</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
