@@ -8,8 +8,7 @@
  *
  *  @return 返回压缩后的图片
  */
--(UIImage *) imageCompress:(CGFloat)targetWidth
-{
+-(UIImage *) imageCompress:(CGFloat)targetWidth {
     CGFloat width = self.size.width;
     CGFloat height = self.size.height;
     CGFloat targetHeight = (targetWidth / width) * height;
@@ -20,8 +19,7 @@
     return newImage;
 }
 
-- (UIImage *)imageWithColor:(UIColor *)color
-{
+- (UIImage *)imageWithColor:(UIColor *)color {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextTranslateCTM(context, 0, self.size.height);

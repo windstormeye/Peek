@@ -52,8 +52,6 @@
 	<string>PLook想给您的相册添加照片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>PLook想读取您的相册信息</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

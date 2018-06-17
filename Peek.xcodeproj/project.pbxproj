@@ -29,12 +29,11 @@
 		744F0EA81EF013AE005D4133 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA71EF013AE005D4133 /* EditViewController.m */; };
 		744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EAA1EF015B1005D4133 /* MessageViewController.m */; };
 		744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */; };
+		7454D8F520D6C3950004C83E /* PJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7454D8F420D6C3950004C83E /* PJBaseViewController.m */; };
 		74559D821EE009BE0081A0A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D811EE009BE0081A0A5 /* main.m */; };
 		74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D841EE009BE0081A0A5 /* AppDelegate.m */; };
-		74559D881EE009BE0081A0A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D871EE009BE0081A0A5 /* ViewController.m */; };
-		74559D8B1EE009BF0081A0A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74559D891EE009BF0081A0A5 /* Main.storyboard */; };
+		74559D881EE009BE0081A0A5 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D871EE009BE0081A0A5 /* HomeViewController.m */; };
 		74559D8D1EE009BF0081A0A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74559D8C1EE009BF0081A0A5 /* Assets.xcassets */; };
-		74559D901EE009BF0081A0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */; };
 		74559D9B1EE009BF0081A0A5 /* PeekTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D9A1EE009BF0081A0A5 /* PeekTests.m */; };
 		74559DA61EE009BF0081A0A5 /* PeekUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DA51EE009BF0081A0A5 /* PeekUITests.m */; };
 		74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74559DB41EE00CCF0081A0A5 /* constant.mm */; };
@@ -110,15 +109,15 @@
 		744F0EAA1EF015B1005D4133 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		744FCBE31EFEAE3E008BAC63 /* PJKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJKeyboard.h; sourceTree = "<group>"; };
 		744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJKeyboard.m; sourceTree = "<group>"; };
+		7454D8F320D6C3950004C83E /* PJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJBaseViewController.h; sourceTree = "<group>"; };
+		7454D8F420D6C3950004C83E /* PJBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJBaseViewController.m; sourceTree = "<group>"; };
 		74559D7D1EE009BE0081A0A5 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74559D811EE009BE0081A0A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74559D831EE009BE0081A0A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74559D841EE009BE0081A0A5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		74559D861EE009BE0081A0A5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		74559D871EE009BE0081A0A5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		74559D8A1EE009BF0081A0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		74559D861EE009BE0081A0A5 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		74559D871EE009BE0081A0A5 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		74559D8C1EE009BF0081A0A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		74559D8F1EE009BF0081A0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74559D911EE009BF0081A0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74559D961EE009BF0081A0A5 /* PeekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74559D9A1EE009BF0081A0A5 /* PeekTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeekTests.m; sourceTree = "<group>"; };
@@ -357,6 +356,15 @@
 			name = PJKeyboard;
 			sourceTree = "<group>";
 		};
+		7454D8F620D6C3980004C83E /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				7454D8F320D6C3950004C83E /* PJBaseViewController.h */,
+				7454D8F420D6C3950004C83E /* PJBaseViewController.m */,
+			);
+			name = BaseClass;
+			sourceTree = "<group>";
+		};
 		74559D741EE009BE0081A0A5 = {
 			isa = PBXGroup;
 			children = (
@@ -384,7 +392,6 @@
 			children = (
 				74559D831EE009BE0081A0A5 /* AppDelegate.h */,
 				74559D841EE009BE0081A0A5 /* AppDelegate.m */,
-				74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */,
 				74559D8C1EE009BF0081A0A5 /* Assets.xcassets */,
 				749766232046E68F006F47F6 /* Ability */,
 				749766222046E672006F47F6 /* Com */,
@@ -425,7 +432,7 @@
 			name = Global;
 			sourceTree = "<group>";
 		};
-		74559DC11EE03AC00081A0A5 /* Extension */ = {
+		74559DC11EE03AC00081A0A5 /* Category */ = {
 			isa = PBXGroup;
 			children = (
 				74559DB71EE00FB70081A0A5 /* UIViewController+Extension.h */,
@@ -433,7 +440,7 @@
 				74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */,
 				74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */,
 			);
-			name = Extension;
+			name = Category;
 			sourceTree = "<group>";
 		};
 		74559DC21EE03AD10081A0A5 /* Other */ = {
@@ -468,9 +475,8 @@
 		747E22E21EE27AC00078552D /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
-				74559D891EE009BF0081A0A5 /* Main.storyboard */,
-				74559D861EE009BE0081A0A5 /* ViewController.h */,
-				74559D871EE009BE0081A0A5 /* ViewController.m */,
+				74559D861EE009BE0081A0A5 /* HomeViewController.h */,
+				74559D871EE009BE0081A0A5 /* HomeViewController.m */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -523,8 +529,9 @@
 		749766232046E68F006F47F6 /* Ability */ = {
 			isa = PBXGroup;
 			children = (
+				7454D8F620D6C3980004C83E /* BaseClass */,
 				7497662D2046E93A006F47F6 /* Network */,
-				74559DC11EE03AC00081A0A5 /* Extension */,
+				74559DC11EE03AC00081A0A5 /* Category */,
 				74559DC01EE03AB20081A0A5 /* Global */,
 				74EAE19E1F8A059E0071F82D /* OpenCV */,
 			);
@@ -720,11 +727,9 @@
 				74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */,
 				743C84651F0B97FC00D46EAC /* PJEditHeaderView.xib in Resources */,
 				74006FDC1EFC0192008A151C /* PJLoginSB.storyboard in Resources */,
-				74559D901EE009BF0081A0A5 /* LaunchScreen.storyboard in Resources */,
 				743C845D1F0B91C700D46EAC /* PJEditTableViewCell.xib in Resources */,
 				744C3C461FADB38800767B42 /* PJFriendTableViewCell.xib in Resources */,
 				74559D8D1EE009BF0081A0A5 /* Assets.xcassets in Resources */,
-				74559D8B1EE009BF0081A0A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,7 +827,8 @@
 				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
 				74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */,
 				74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */,
-				74559D881EE009BE0081A0A5 /* ViewController.m in Sources */,
+				7454D8F520D6C3950004C83E /* PJBaseViewController.m in Sources */,
+				74559D881EE009BE0081A0A5 /* HomeViewController.m in Sources */,
 				749766292046E741006F47F6 /* PJUserLoginCom.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
@@ -881,25 +887,6 @@
 			targetProxy = 74559DA21EE009BF0081A0A5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		74559D891EE009BF0081A0A5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				74559D8A1EE009BF0081A0A5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		74559D8E1EE009BF0081A0A5 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				74559D8F1EE009BF0081A0A5 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		74559DA81EE009BF0081A0A5 /* Debug */ = {
@@ -1020,7 +1007,7 @@
 					"$(PROJECT_DIR)/Peek",
 				);
 				INFOPLIST_FILE = Peek/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1044,7 +1031,7 @@
 					"$(PROJECT_DIR)/Peek",
 				);
 				INFOPLIST_FILE = Peek/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

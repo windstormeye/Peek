@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PJBaseViewController.h"
 
-@interface ViewController : UIViewController
+@interface HomeViewController : PJBaseViewController
 
 
 @end

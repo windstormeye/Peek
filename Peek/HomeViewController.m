@@ -6,7 +6,7 @@
 //  Copyright © 2017年 #incloud. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "leftHomeView.h"
 #import "PJFriendHomeView.h"
 #import "PublishViewController.h"
@@ -15,20 +15,20 @@
 #import "PJLoginViewController.h"
 #import "PJCardViewController.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
+@interface HomeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UIScreenEdgePanGestureRecognizer *edgePan;
 @property (nonatomic, strong) UIScreenEdgePanGestureRecognizer *rightedgePan;
-@property (weak, nonatomic) IBOutlet UIButton *camareBtn;
-@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
+@property (weak, nonatomic) UIButton *camareBtn;
+@property (weak, nonatomic) UIButton *closeBtn;
 @property (nonatomic,strong) UIImagePickerController *imagePicker;
-@property (weak, nonatomic) IBOutlet UIButton *redCircleBtn;
-@property (weak, nonatomic) IBOutlet UIButton *blueCircleBtn;
+@property (weak, nonatomic) UIButton *redCircleBtn;
+@property (weak, nonatomic) UIButton *blueCircleBtn;
 
 @end
 
-@implementation ViewController
+@implementation HomeViewController
 {
     leftHomeView *_leftView;
     PJFriendHomeView *_kRightView;
@@ -42,48 +42,10 @@
     [self initView];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (void)initView {
-    [self initNavigationBar];
     
-    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 75) / 2, 35, 75, 25)];
-    logoView.image = [UIImage imageNamed:@"peek"];
-    [self.navigationBar addSubview:logoView];
-    
-    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    bgImgView.image = [UIImage imageNamed:@"背景"];
-    [self.view addSubview:bgImgView];
-    [self.view sendSubviewToBack:bgImgView];
-    
-    // 开启高斯模糊
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    effectView.frame = CGRectMake(0, 0, bgImgView.frame.size.width, bgImgView.frame.size.height);
-    [bgImgView addSubview:effectView];
-    
-    [self.leftBarButton setImage:[UIImage imageNamed:@"汉堡线"] forState:0];
-    [self.leftBarButton addTarget:self action:@selector(moreAction) forControlEvents:1<<6];
-    [self.rightBarButton setImage:[UIImage imageNamed:@"朋友"] forState:0];
-    [self.rightBarButton addTarget:self action:@selector(friendAction) forControlEvents:1<<6];
-
-    // 背景图
-    _kBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [self.view addSubview:_kBackView];
-    _kBackView.backgroundColor = RGB(0, 0, 0);
-    _kBackView.hidden = true;
-    _kBackView.alpha = 0;
+    self.title = @"小册";
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // 左 个人中心
     _leftView = [leftHomeView new];

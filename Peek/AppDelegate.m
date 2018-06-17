@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "Register.h"
 
 
@@ -22,12 +22,10 @@
     
     [Register registerShareSDK:application didFinishLaunchingWithOptions:launchOptions];
     
-    UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ViewController *root1=[[ViewController alloc]init];
-    root1 = [mainStoryborad instantiateViewControllerWithIdentifier:@"ViewController"];
-    UINavigationController *nav1=[[UINavigationController alloc]initWithRootViewController:root1];
-    self.window.rootViewController=nav1;
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:[HomeViewController new]];
+    self.window.rootViewController = vc;
+    [self.window makeKeyAndVisible];
       
     return YES;
 }
