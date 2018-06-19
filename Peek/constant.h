@@ -9,6 +9,10 @@
 #define headerRefresh @"header"
 #define footerRefresh @"footer"
 
+#ifndef iPhoneX
+#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#endif
+
 extern UIColor * mainRedColor;
 extern UIColor * mainBlackColor;
 extern UIColor * mainPurpleColor;

@@ -15,6 +15,8 @@
 #import "PJLoginViewController.h"
 #import "PJCardViewController.h"
 
+#import "PJNoteCollectionView.h"
+
 @interface HomeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
@@ -26,10 +28,11 @@
 @property (weak, nonatomic) UIButton *redCircleBtn;
 @property (weak, nonatomic) UIButton *blueCircleBtn;
 
+@property (nonatomic, readwrite, strong) UIImageView *avatar;
+
 @end
 
-@implementation HomeViewController
-{
+@implementation HomeViewController {
     leftHomeView *_leftView;
     PJFriendHomeView *_kRightView;
     UIView *_kBackView;
@@ -45,8 +48,30 @@
 - (void)initView {
     
     self.title = @"小册";
+    self.navItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
     self.view.backgroundColor = [UIColor whiteColor];
     
+    if ([BmobUser currentUser]) {
+        [self avartarBarButtonItemAction:@selector(gotoUserCenter) imageURL:[[BmobUser currentUser] objectForKey:@"avatar_url"]];
+    } else {
+        [self rightBarBtuttonItemAction:@selector(gotoUserCenter) imageName:@"avatar"];
+    }
+    
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH * 0.4, SCREEN_WIDTH * 0.4 * 1.5);
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.minimumLineSpacing = 15;
+    layout.minimumInteritemSpacing = 15;
+    layout.sectionInset = UIEdgeInsetsMake(25, 25, 25, 25);
+    PJNoteCollectionView *collectionView = [[PJNoteCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 64) collectionViewLayout:layout];
+    if (iPhoneX) {
+        collectionView.height -= 20;
+    }
+    [self.view addSubview:collectionView];
+    collectionView.dataArray = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"", @"", @"", @"", @"",];
+    [collectionView reloadData];
+    [collectionView layoutIfNeeded];
+
     // 左 个人中心
     _leftView = [leftHomeView new];
     _leftView.viewDelega = self;
@@ -77,6 +102,10 @@
     _closeBtn.hidden = true;
     isRed = true;
     isLeft = true;
+}
+
+- (void)gotoUserCenter {
+    NSLog(@"2333");
 }
 
 // 用户资料的更新通知

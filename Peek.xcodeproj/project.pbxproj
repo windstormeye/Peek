@@ -30,6 +30,8 @@
 		744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EAA1EF015B1005D4133 /* MessageViewController.m */; };
 		744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */; };
 		7454D8F520D6C3950004C83E /* PJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7454D8F420D6C3950004C83E /* PJBaseViewController.m */; };
+		7454D8FE20D7FA740004C83E /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 7454D8FD20D7FA740004C83E /* UIView+Position.m */; };
+		7454D90820D8056B0004C83E /* PJNoteCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7454D90720D8056B0004C83E /* PJNoteCollectionViewCell.m */; };
 		74559D821EE009BE0081A0A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D811EE009BE0081A0A5 /* main.m */; };
 		74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D841EE009BE0081A0A5 /* AppDelegate.m */; };
 		74559D881EE009BE0081A0A5 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559D871EE009BE0081A0A5 /* HomeViewController.m */; };
@@ -46,10 +48,12 @@
 		7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 7497662B2046E74E006F47F6 /* PJUserRegister.m */; };
 		749766352046ECCF006F47F6 /* PJNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 749766342046ECCF006F47F6 /* PJNetWorkManager.m */; };
 		74A0D6221FA8A860006AB335 /* PJDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0D6211FA8A860006AB335 /* PJDevice.m */; };
+		74C5CDE520D8AE9500DB072C /* PJNoteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */; };
+		74C5CDE920D8E5E100DB072C /* PJTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDE820D8E5E100DB072C /* PJTool.m */; };
 		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
 		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
 		74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F969311EE862F200C164BE /* LeftSliderView.xib */; };
-		88433AA5A4C7DDDB6B224BFA /* libPods-Peek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */; };
+		A0038FE46C4EB26A0654D260 /* libPods-Peek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A4DADE82B40BD4012F8D7D /* libPods-Peek.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +115,10 @@
 		744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJKeyboard.m; sourceTree = "<group>"; };
 		7454D8F320D6C3950004C83E /* PJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJBaseViewController.h; sourceTree = "<group>"; };
 		7454D8F420D6C3950004C83E /* PJBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJBaseViewController.m; sourceTree = "<group>"; };
+		7454D8FC20D7FA740004C83E /* UIView+Position.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Position.h"; sourceTree = "<group>"; };
+		7454D8FD20D7FA740004C83E /* UIView+Position.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Position.m"; sourceTree = "<group>"; };
+		7454D90620D8056B0004C83E /* PJNoteCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJNoteCollectionViewCell.h; sourceTree = "<group>"; };
+		7454D90720D8056B0004C83E /* PJNoteCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNoteCollectionViewCell.m; sourceTree = "<group>"; };
 		74559D7D1EE009BE0081A0A5 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74559D811EE009BE0081A0A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74559D831EE009BE0081A0A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -148,13 +156,17 @@
 		749766342046ECCF006F47F6 /* PJNetWorkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNetWorkManager.m; sourceTree = "<group>"; };
 		74A0D6201FA8A860006AB335 /* PJDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJDevice.h; sourceTree = "<group>"; };
 		74A0D6211FA8A860006AB335 /* PJDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJDevice.m; sourceTree = "<group>"; };
+		74C5CDE320D8AE9500DB072C /* PJNoteCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJNoteCollectionView.h; sourceTree = "<group>"; };
+		74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNoteCollectionView.m; sourceTree = "<group>"; };
+		74C5CDE720D8E5E100DB072C /* PJTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJTool.h; sourceTree = "<group>"; };
+		74C5CDE820D8E5E100DB072C /* PJTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJTool.m; sourceTree = "<group>"; };
 		74C63A3C1F47259400D0B35F /* PJModifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJModifyViewController.h; sourceTree = "<group>"; };
 		74C63A3D1F47259400D0B35F /* PJModifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJModifyViewController.m; sourceTree = "<group>"; };
 		74EAE19F1F8A05BC0071F82D /* PJOpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJOpenCV.h; sourceTree = "<group>"; };
 		74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PJOpenCV.mm; sourceTree = "<group>"; };
 		74F969311EE862F200C164BE /* LeftSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftSliderView.xib; sourceTree = "<group>"; };
+		86A4DADE82B40BD4012F8D7D /* libPods-Peek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Peek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C08E1DA4A63E424E541F8AF /* Pods-Peek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.debug.xcconfig"; sourceTree = "<group>"; };
-		AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Peek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				744C3C381FAD9B2D00767B42 /* opencv2.framework in Frameworks */,
-				88433AA5A4C7DDDB6B224BFA /* libPods-Peek.a in Frameworks */,
+				A0038FE46C4EB26A0654D260 /* libPods-Peek.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				74911B071F89E165004A729A /* opencv2.framework */,
-				AD334BD8D1421A96A83C2CCB /* libPods-Peek.a */,
+				86A4DADE82B40BD4012F8D7D /* libPods-Peek.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -365,6 +377,17 @@
 			name = BaseClass;
 			sourceTree = "<group>";
 		};
+		7454D8FF20D802E90004C83E /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				74C5CDE320D8AE9500DB072C /* PJNoteCollectionView.h */,
+				74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */,
+				7454D90620D8056B0004C83E /* PJNoteCollectionViewCell.h */,
+				7454D90720D8056B0004C83E /* PJNoteCollectionViewCell.m */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
 		74559D741EE009BE0081A0A5 = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +445,7 @@
 		74559DC01EE03AB20081A0A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				74C5CDE620D8E5D300DB072C /* PJTool */,
 				74A0D61F1FA8A84E006AB335 /* PJDevice */,
 				7463F3F61FA754EF00125448 /* Register */,
 				7441BCDA1FA1A0FF005E37ED /* PJTapic */,
@@ -439,6 +463,8 @@
 				74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */,
 				74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */,
 				74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */,
+				7454D8FC20D7FA740004C83E /* UIView+Position.h */,
+				7454D8FD20D7FA740004C83E /* UIView+Position.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -477,6 +503,7 @@
 			children = (
 				74559D861EE009BE0081A0A5 /* HomeViewController.h */,
 				74559D871EE009BE0081A0A5 /* HomeViewController.m */,
+				7454D8FF20D802E90004C83E /* CollectionView */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -504,6 +531,7 @@
 		749766212046E65D006F47F6 /* Page */ = {
 			isa = PBXGroup;
 			children = (
+				747E22E21EE27AC00078552D /* 首页 */,
 				747E22E31EE27AD60078552D /* 个人中心 */,
 				7463F3F21FA753A300125448 /* 忘记密码 */,
 				743C84461F0B893900D46EAC /* 朋友 */,
@@ -513,7 +541,6 @@
 				744F0EA51EF01392005D4133 /* 编辑个人资料 */,
 				744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */,
 				741324A51F9DE56100FA0623 /* 卡片编辑 */,
-				747E22E21EE27AC00078552D /* 首页 */,
 			);
 			name = Page;
 			sourceTree = "<group>";
@@ -582,6 +609,15 @@
 				74A0D6211FA8A860006AB335 /* PJDevice.m */,
 			);
 			name = PJDevice;
+			sourceTree = "<group>";
+		};
+		74C5CDE620D8E5D300DB072C /* PJTool */ = {
+			isa = PBXGroup;
+			children = (
+				74C5CDE720D8E5E100DB072C /* PJTool.h */,
+				74C5CDE820D8E5E100DB072C /* PJTool.m */,
+			);
+			name = PJTool;
 			sourceTree = "<group>";
 		};
 		74C63A3B1F47257000D0B35F /* 修改资料 */ = {
@@ -682,6 +718,7 @@
 					74559D7C1EE009BE0081A0A5 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = U6J5965DZK;
+						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 					};
 					74559D951EE009BF0081A0A5 = {
@@ -806,9 +843,26 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Peek/Pods-Peek-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/FlatUIKit/FlatUIKit.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlatUIKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -828,12 +882,14 @@
 				74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */,
 				74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */,
 				7454D8F520D6C3950004C83E /* PJBaseViewController.m in Sources */,
+				74C5CDE520D8AE9500DB072C /* PJNoteCollectionView.m in Sources */,
 				74559D881EE009BE0081A0A5 /* HomeViewController.m in Sources */,
 				749766292046E741006F47F6 /* PJUserLoginCom.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
 				7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */,
 				7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */,
+				7454D8FE20D7FA740004C83E /* UIView+Position.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
 				741324A81F9DE58800FA0623 /* PJCardViewController.m in Sources */,
 				744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */,
@@ -841,6 +897,7 @@
 				74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */,
 				74A0D6221FA8A860006AB335 /* PJDevice.m in Sources */,
 				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
+				7454D90820D8056B0004C83E /* PJNoteCollectionViewCell.m in Sources */,
 				741324AC1F9EEAA500FA0623 /* PJCardBottomView.m in Sources */,
 				744C3C451FADB38800767B42 /* PJFriendTableViewCell.m in Sources */,
 				744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */,
@@ -854,6 +911,7 @@
 				749766352046ECCF006F47F6 /* PJNetWorkManager.m in Sources */,
 				7463F3F91FA7555D00125448 /* Register.m in Sources */,
 				743C84631F0B97EE00D46EAC /* PJEditHeaderView.m in Sources */,
+				74C5CDE920D8E5E100DB072C /* PJTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1059,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1015,6 +1074,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pjhubs.Peek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1025,6 +1086,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1039,6 +1101,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pjhubs.Peek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
