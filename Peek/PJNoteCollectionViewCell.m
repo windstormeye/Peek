@@ -18,25 +18,36 @@
 - (void)initView {
     
     self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowOpacity = 0.3;
-    self.layer.shadowRadius = 15.0;
+    self.layer.shadowOpacity = 0.2;
+    self.layer.shadowRadius = 10.0;
     self.layer.shadowOffset = CGSizeMake(0, 0);
     
     UIImageView *pageImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
     [self addSubview:pageImageView];
-    pageImageView.image = [UIImage imageNamed:@"backImage"];
+    pageImageView.image = [UIImage imageNamed:self.dataSource[@"itemImageName"]];
+    pageImageView.contentMode = UIViewContentModeScaleAspectFill;
+    pageImageView.clipsToBounds = YES;
     //通过贝塞尔曲线生成圆角
     CAShapeLayer *maskLayer = [CAShapeLayer new];
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:pageImageView.bounds cornerRadius:8.0].CGPath;
     pageImageView.layer.mask = maskLayer;
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, self.width, 30)];
-    [self addSubview:titleLabel];
-    titleLabel.text = @"一个人的旅程";
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 40, self.width, 40)];
+    [self addSubview:contentView];
+    contentView.backgroundColor = [UIColor blackColor];
+    contentView.alpha = 0.3;
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(8.0, 8.0)];
+    CAShapeLayer *pathMaskLayer = [CAShapeLayer new];
+    pathMaskLayer.frame = contentView.bounds;
+    pathMaskLayer.path = path.CGPath;
+    contentView.layer.mask = pathMaskLayer;
     
-    UILabel *descLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.height - 100, self.width, 100)];
-    descLabel.text = @"一个的旅程，一个人的朝圣，一个人永远在路上，不忘初心，砥砺前行";
-    [self addSubview:descLabel];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, contentView.width - 10, contentView.height)];
+    titleLabel.bottom = contentView.bottom;
+    [self addSubview:titleLabel];
+    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.text = self.dataSource[@"itemName"];
 }
 
 @end

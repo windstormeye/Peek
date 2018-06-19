@@ -28,7 +28,7 @@
 @property (weak, nonatomic) UIButton *redCircleBtn;
 @property (weak, nonatomic) UIButton *blueCircleBtn;
 
-@property (nonatomic, readwrite, strong) UIImageView *avatar;
+@property (nonatomic, readwrite, strong) UIButton *homeButton;
 
 @end
 
@@ -46,20 +46,13 @@
 }
 
 - (void)initView {
-    
-    self.title = @"小册";
-    self.navItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
+    self.navBar.hidden = YES;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    if ([BmobUser currentUser]) {
-        [self avartarBarButtonItemAction:@selector(gotoUserCenter) imageURL:[[BmobUser currentUser] objectForKey:@"avatar_url"]];
-    } else {
-        [self rightBarBtuttonItemAction:@selector(gotoUserCenter) imageName:@"avatar"];
-    }
     
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.itemSize = CGSizeMake(SCREEN_WIDTH * 0.4, SCREEN_WIDTH * 0.4 * 1.5);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.headerReferenceSize=CGSizeMake(self.view.width, 100);
     layout.minimumLineSpacing = 15;
     layout.minimumInteritemSpacing = 15;
     layout.sectionInset = UIEdgeInsetsMake(25, 25, 25, 25);
@@ -68,9 +61,20 @@
         collectionView.height -= 20;
     }
     [self.view addSubview:collectionView];
-    collectionView.dataArray = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"", @"", @"", @"", @"",];
+    collectionView.dataArray = @[@{@"itemImageName" : @"backImage", @"itemName" : @"一个人的旅程"},
+                                 @{@"itemImageName" : @"banner", @"itemName" : @"我的校园时光"}];
     [collectionView reloadData];
-    [collectionView layoutIfNeeded];
+    
+    self.homeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.height - 90, 70, 70)];
+    self.homeButton.centerX = self.view.centerX;
+    [self.view addSubview:self.homeButton];
+    [self.homeButton setImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
+    self.homeButton.layer.cornerRadius = self.homeButton.width / 2;
+    self.homeButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.homeButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.homeButton.layer.shadowOpacity = 0.6;
+    self.homeButton.layer.shadowRadius = 5;
+    
 
     // 左 个人中心
     _leftView = [leftHomeView new];

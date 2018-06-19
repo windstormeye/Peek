@@ -73,9 +73,7 @@ static const void *LeftBarButton = &LeftBarButton;
 -(void)extentionBack{
     [self.navigationController popViewControllerAnimated:true];
 }
--(void)viewDidDisappear:(BOOL)animated{
-    [PJHUD dismiss];
-}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:true];

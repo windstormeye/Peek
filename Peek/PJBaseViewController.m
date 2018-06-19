@@ -44,6 +44,7 @@
 - (void)setIsLargeTitle:(BOOL)isLargeTitle {
     _isLargeTitle = isLargeTitle;
     self.navBar.prefersLargeTitles = isLargeTitle;
+    self.navItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
 }
 
 - (void)leftBarButtonItemAction:(SEL)action {

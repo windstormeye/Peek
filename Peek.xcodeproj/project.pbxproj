@@ -50,6 +50,7 @@
 		74A0D6221FA8A860006AB335 /* PJDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0D6211FA8A860006AB335 /* PJDevice.m */; };
 		74C5CDE520D8AE9500DB072C /* PJNoteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */; };
 		74C5CDE920D8E5E100DB072C /* PJTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDE820D8E5E100DB072C /* PJTool.m */; };
+		74C5CDED20D94F8400DB072C /* PJNoteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDEC20D94F8400DB072C /* PJNoteHeaderView.m */; };
 		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
 		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
 		74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F969311EE862F200C164BE /* LeftSliderView.xib */; };
@@ -160,6 +161,8 @@
 		74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNoteCollectionView.m; sourceTree = "<group>"; };
 		74C5CDE720D8E5E100DB072C /* PJTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJTool.h; sourceTree = "<group>"; };
 		74C5CDE820D8E5E100DB072C /* PJTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJTool.m; sourceTree = "<group>"; };
+		74C5CDEB20D94F8400DB072C /* PJNoteHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJNoteHeaderView.h; sourceTree = "<group>"; };
+		74C5CDEC20D94F8400DB072C /* PJNoteHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNoteHeaderView.m; sourceTree = "<group>"; };
 		74C63A3C1F47259400D0B35F /* PJModifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJModifyViewController.h; sourceTree = "<group>"; };
 		74C63A3D1F47259400D0B35F /* PJModifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJModifyViewController.m; sourceTree = "<group>"; };
 		74EAE19F1F8A05BC0071F82D /* PJOpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJOpenCV.h; sourceTree = "<group>"; };
@@ -503,6 +506,7 @@
 			children = (
 				74559D861EE009BE0081A0A5 /* HomeViewController.h */,
 				74559D871EE009BE0081A0A5 /* HomeViewController.m */,
+				74C5CDEA20D94F7500DB072C /* headerView */,
 				7454D8FF20D802E90004C83E /* CollectionView */,
 			);
 			name = "首页";
@@ -618,6 +622,15 @@
 				74C5CDE820D8E5E100DB072C /* PJTool.m */,
 			);
 			name = PJTool;
+			sourceTree = "<group>";
+		};
+		74C5CDEA20D94F7500DB072C /* headerView */ = {
+			isa = PBXGroup;
+			children = (
+				74C5CDEB20D94F8400DB072C /* PJNoteHeaderView.h */,
+				74C5CDEC20D94F8400DB072C /* PJNoteHeaderView.m */,
+			);
+			name = headerView;
 			sourceTree = "<group>";
 		};
 		74C63A3B1F47257000D0B35F /* 修改资料 */ = {
@@ -895,6 +908,7 @@
 				744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */,
 				743C845C1F0B91C700D46EAC /* PJEditTableViewCell.m in Sources */,
 				74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */,
+				74C5CDED20D94F8400DB072C /* PJNoteHeaderView.m in Sources */,
 				74A0D6221FA8A860006AB335 /* PJDevice.m in Sources */,
 				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
 				7454D90820D8056B0004C83E /* PJNoteCollectionViewCell.m in Sources */,
