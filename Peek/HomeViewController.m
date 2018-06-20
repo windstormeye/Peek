@@ -57,11 +57,11 @@
                                 forControlEvents:UIControlEventValueChanged];
     
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake(SCREEN_WIDTH * 0.4, SCREEN_WIDTH * 0.4 * 1.5);
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH * 0.4, SCREEN_WIDTH * 0.4 * 1.3);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.headerReferenceSize=CGSizeMake(self.view.width, 100);
-    layout.minimumLineSpacing = 15;
-    layout.minimumInteritemSpacing = 15;
+    layout.minimumLineSpacing = 25;
+    layout.minimumInteritemSpacing = 25;
     layout.sectionInset = UIEdgeInsetsMake(25, 25, 25, 25);
     self.collectionView = [[PJNoteCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) collectionViewLayout:layout];
     if (iPhoneX) {
