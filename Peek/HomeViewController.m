@@ -16,6 +16,7 @@
 #import "PJCardViewController.h"
 
 #import "PJNoteCollectionView.h"
+#import "PJHomeBottomView.h"
 
 @interface HomeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
 
@@ -28,7 +29,8 @@
 @property (weak, nonatomic) UIButton *redCircleBtn;
 @property (weak, nonatomic) UIButton *blueCircleBtn;
 
-@property (nonatomic, readwrite, strong) UIButton *homeButton;
+@property (nonatomic, readwrite, strong) PJNoteCollectionView *collectionView;
+@property (nonatomic, readwrite, strong) UIRefreshControl *collectionViewRefreshControl;
 
 @end
 
@@ -49,6 +51,11 @@
     self.navBar.hidden = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.collectionViewRefreshControl = [UIRefreshControl new];
+    [self.collectionViewRefreshControl addTarget:self
+                                          action:@selector(refreshAction)
+                                forControlEvents:UIControlEventValueChanged];
+    
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.itemSize = CGSizeMake(SCREEN_WIDTH * 0.4, SCREEN_WIDTH * 0.4 * 1.5);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -56,26 +63,23 @@
     layout.minimumLineSpacing = 15;
     layout.minimumInteritemSpacing = 15;
     layout.sectionInset = UIEdgeInsetsMake(25, 25, 25, 25);
-    PJNoteCollectionView *collectionView = [[PJNoteCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 64) collectionViewLayout:layout];
+    self.collectionView = [[PJNoteCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) collectionViewLayout:layout];
     if (iPhoneX) {
-        collectionView.height -= 20;
+        self.collectionView.height -= 20;
     }
-    [self.view addSubview:collectionView];
-    collectionView.dataArray = @[@{@"itemImageName" : @"backImage", @"itemName" : @"一个人的旅程"},
-                                 @{@"itemImageName" : @"banner", @"itemName" : @"我的校园时光"}];
-    [collectionView reloadData];
-    
-    self.homeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.height - 90, 70, 70)];
-    self.homeButton.centerX = self.view.centerX;
-    [self.view addSubview:self.homeButton];
-    [self.homeButton setImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-    self.homeButton.layer.cornerRadius = self.homeButton.width / 2;
-    self.homeButton.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.homeButton.layer.shadowOffset = CGSizeMake(0, 0);
-    self.homeButton.layer.shadowOpacity = 0.6;
-    self.homeButton.layer.shadowRadius = 5;
-    
+    [self.collectionView addSubview:self.collectionViewRefreshControl];
+    self.collectionView.alwaysBounceVertical = YES;
+    [self.view addSubview:self.collectionView];
+    self.collectionView.dataArray = @[@{@"itemImageName" : @"backImage", @"itemName" : @"一个人的旅程"},
+                                 @{@"itemImageName" : @"banner", @"itemName" : @"我的校园时光"},
+                                 @{@"itemImageName" : @"banner2", @"itemName" : @"你要很努力才行啊！"},
+                                 @{@"itemImageName" : @"banner3", @"itemName" : @"加油做自己💪"},
+                                 @{@"itemImageName" : @"banner4", @"itemName" : @"每一天都要过好！"},];
+    [self.collectionView reloadData];
 
+    PJHomeBottomView *bottomView = [[PJHomeBottomView alloc] initWithFrame:CGRectMake(0, self.view.height - 100, self.view.width, 100)];
+    [self.view addSubview:bottomView];
+    
     // 左 个人中心
     _leftView = [leftHomeView new];
     _leftView.viewDelega = self;
@@ -110,6 +114,14 @@
 
 - (void)gotoUserCenter {
     NSLog(@"2333");
+}
+
+-(void)refreshAction
+{
+    NSLog(@"下拉刷新");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.collectionViewRefreshControl endRefreshing]; //结束刷新
+    });
 }
 
 // 用户资料的更新通知
