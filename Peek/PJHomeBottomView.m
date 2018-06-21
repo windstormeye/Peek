@@ -12,7 +12,11 @@
 
 @property (nonatomic, readwrite, strong) UIImageView *homeImageView;
 @property (nonatomic, readwrite, strong) UIButton *homeButton;
-@property (nonatomic, readwrite, assign) CGFloat homeImageViewAngle;
+@property (nonatomic, readwrite ,strong) CADisplayLink *link;
+
+@property (nonatomic, readwrite, assign) BOOL isTapHomeButton;
+@property (nonatomic, readwrite, strong) NSTimer *timer;
+
 
 @end
 
@@ -27,7 +31,7 @@
 }
 
 - (void)initView {
-    self.homeImageViewAngle = 1;
+    self.isTapHomeButton = NO;
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = self.bounds;
@@ -42,7 +46,7 @@
     //添加到根视图控制器的layer上
     [self.layer addSublayer:gradientLayer];
     
-    self.homeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.height - 90, 70, 70)];
+    self.homeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.height - 70) / 2, 70, 70)];
     self.homeImageView.centerX = self.centerX;
     [self addSubview:self.homeImageView];
     self.homeImageView.image = [UIImage imageNamed:@"home_button"];
@@ -56,21 +60,33 @@
     [self addSubview:self.homeButton];
     [self.homeButton addTarget:self action:@selector(homeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self homeButtonStartAnimation];
+    self.timer = [[NSTimer alloc] initWithFireDate:[NSDate distantFuture] interval:0.05 target:self selector:@selector(angleChange) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)homeButtonClick:(UIButton *)sender {
-    NSLog(@"2333");
+    if (self.isTapHomeButton) {
+        [self.timer setFireDate:[NSDate distantFuture]];
+        self.isTapHomeButton = !self.isTapHomeButton;
+    } else {
+        [UIView animateWithDuration:0.1 animations:^{
+            // 放大
+            self.homeImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            [PJTapic tap];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.homeImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                [PJTapic tipsTap];
+                [self.timer setFireDate:[NSDate date]];
+                self.isTapHomeButton = !self.isTapHomeButton;
+            }];
+        }];
+    }
 }
 
-- (void)homeButtonStartAnimation {
-    CGAffineTransform endAngle = CGAffineTransformMakeRotation(self.homeImageViewAngle * (M_PI / 180.0f));
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        self.homeImageView.transform = endAngle;
-    } completion:^(BOOL finished) {
-        self.homeImageViewAngle += 10;
-        [self homeButtonStartAnimation];
-    }];
+- (void)angleChange {
+    CGFloat angle = 3 * M_PI / 180.0;
+    self.homeImageView.transform = CGAffineTransformRotate(self.homeImageView.transform, angle);
 }
 
 @end

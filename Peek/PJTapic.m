@@ -10,7 +10,7 @@
 
 @implementation PJTapic
 
-+ (void)selection {
++ (void)select {
     UISelectionFeedbackGenerator *generator = [UISelectionFeedbackGenerator new];
     [generator selectionChanged];
     [generator prepare];
@@ -32,6 +32,14 @@
     UINotificationFeedbackGenerator *generator = [[UINotificationFeedbackGenerator alloc] init];
     [generator notificationOccurred:UINotificationFeedbackTypeError];
     [generator prepare];
+}
+
++ (void)tap {
+    [[[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight] impactOccurred];
+}
+
++ (void)tipsTap {
+    [[[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy] impactOccurred];
 }
 
 @end

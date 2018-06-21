@@ -141,7 +141,7 @@
 // 拍照按钮
 - (IBAction)takePhoto:(id)sender {
     [self redAndBlueBtnShow];
-    [PJTapic selection];
+    [PJTapic select];
 }
 
 // 关闭红蓝
@@ -363,7 +363,7 @@
         _leftView.frame = frame;
         isLeft = true;
         _kBackView.alpha = 0.5;
-        [PJTapic selection];
+        [PJTapic select];
     }];
 }
 
@@ -426,7 +426,7 @@
         _panGesture.enabled = true;
         isLeft = false;
         _kBackView.alpha = 0.5;
-        [PJTapic selection];
+        [PJTapic select];
     }];
 }
 

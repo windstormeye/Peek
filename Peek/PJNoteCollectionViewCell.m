@@ -19,7 +19,7 @@
     
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOpacity = 0.4;
-    self.layer.shadowRadius = 8.0;
+    self.layer.shadowRadius = 5.0;
     self.layer.shadowOffset = CGSizeMake(-5, -5);
     // 背景图
     UIImageView *pageImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
@@ -28,13 +28,19 @@
     pageImageView.contentMode = UIViewContentModeScaleAspectFill;
     pageImageView.clipsToBounds = YES;
     pageImageView.layer.cornerRadius = 2;
+    // 背景图底部书本效果线
+    UIView *pageImageBottomLineView = [[UIView alloc] initWithFrame:CGRectMake(4, pageImageView.bottom - 1, pageImageView.width - 4, 1)];
+    pageImageBottomLineView.backgroundColor = [UIColor grayColor];
+    [pageImageView addSubview:pageImageBottomLineView];
+    
     // 第二张背景图
     UIImageView *secondImageView = [[UIImageView alloc] initWithFrame:pageImageView.frame];
+    secondImageView.width -= 3;
+    secondImageView.y += 3;
     secondImageView.image = [UIImage imageNamed:self.dataSource[@"itemImageName"]];
     secondImageView.contentMode = UIViewContentModeScaleAspectFill;
     secondImageView.clipsToBounds = YES;
     secondImageView.layer.cornerRadius = 2;
-    secondImageView.y += 5;
     [self addSubview:secondImageView];
     [self sendSubviewToBack:secondImageView];
     // 切底右下圆角
@@ -46,7 +52,7 @@
     secondImageViewPathMaskLayer.path = secondImageViewPath.CGPath;
     secondImageView.layer.mask = secondImageViewPathMaskLayer;
     // 底部书本效果线
-    UIView *bookLineView = [[UIView alloc] initWithFrame:CGRectMake(4, self.height - 18, self.width - 6, 16)];
+    UIView *bookLineView = [[UIView alloc] initWithFrame:CGRectMake(4, self.height - 17, secondImageView.width - 3, 16)];
     [secondImageView addSubview:bookLineView];
     bookLineView.backgroundColor = [UIColor whiteColor];
     UIBezierPath *bookLineViewPath = [UIBezierPath bezierPathWithRoundedRect:bookLineView.bounds
@@ -57,18 +63,12 @@
     bookLineViewPathMaskLayer.frame = bookLineView.bounds;
     bookLineViewPathMaskLayer.path = bookLineViewPath.CGPath;
     bookLineView.layer.mask = bookLineViewPathMaskLayer;
-    // 左部书本效果线
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(4, 0, 4, self.height)];
-    [pageImageView addSubview:lineView];
-    lineView.alpha = 0.55;
-    // 左部书本渐变效果
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = lineView.bounds;
-    gradientLayer.colors =@[(__bridge id)[UIColor grayColor].CGColor, (__bridge id)[UIColor clearColor].CGColor, (__bridge id)[UIColor clearColor].CGColor];
-    gradientLayer.locations = @[@0.01];
-    gradientLayer.endPoint = CGPointMake(1.0, 0);
-    gradientLayer.startPoint = CGPointMake(0.0, 0.0);
-    [lineView.layer addSublayer:gradientLayer];
+    
+    UIView *secondImageCoverView = [[UIView alloc] initWithFrame:secondImageView.frame];
+    [secondImageView addSubview:secondImageCoverView];
+    secondImageCoverView.backgroundColor = [UIColor blackColor];
+    secondImageCoverView.alpha = 0.3;
+    
     // 背景图右上、右下圆角
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:pageImageView.bounds
                                                byRoundingCorners:UIRectCornerTopRight | UIRectCornerBottomRight
@@ -79,7 +79,7 @@
     pageImageView.layer.mask = pathMaskLayer;
 
     // titleLabelCotentView
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 40, self.width, 45)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 45, self.width, 45)];
     [self addSubview:contentView];
     contentView.backgroundColor = [UIColor blackColor];
     contentView.alpha = 0.3;

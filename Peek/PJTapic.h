@@ -10,9 +10,11 @@
 
 @interface PJTapic : NSObject
 
-+ (void)selection;
++ (void)select;
 + (void)succee;
 + (void)error;
 + (void)warning;
++ (void)tap;
++ (void)tipsTap;
 
 @end
