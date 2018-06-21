@@ -32,6 +32,7 @@
 
 - (void)initView {
     self.isTapHomeButton = NO;
+    self.isNeedRotationButton = YES;
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = self.bounds;
@@ -60,11 +61,29 @@
     [self addSubview:self.homeButton];
     [self.homeButton addTarget:self action:@selector(homeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    if (iPhoneX) {
+        self.homeImageView.y -= 10;
+        self.homeButton.y -= 10;
+    }
+    
     self.timer = [[NSTimer alloc] initWithFireDate:[NSDate distantFuture] interval:0.05 target:self selector:@selector(angleChange) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)homeButtonClick:(UIButton *)sender {
+    if (!self.isNeedRotationButton) {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.homeImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            [PJTapic tap];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.homeImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                [PJTapic tipsTap];
+                [self.viewDelegate homeBottomViewButtonClick];
+            }];
+        }];
+        return;
+    }
     if (self.isTapHomeButton) {
         [self.timer setFireDate:[NSDate distantFuture]];
         self.isTapHomeButton = !self.isTapHomeButton;

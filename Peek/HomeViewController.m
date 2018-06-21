@@ -17,8 +17,9 @@
 
 #import "PJNoteCollectionView.h"
 #import "PJHomeBottomView.h"
+#import "Peek-Swift.h"
 
-@interface HomeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate>
+@interface HomeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, leftHomeViewDelegate, PJHomeBottomViewDelegate>
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UIScreenEdgePanGestureRecognizer *edgePan;
@@ -29,8 +30,12 @@
 @property (weak, nonatomic) UIButton *redCircleBtn;
 @property (weak, nonatomic) UIButton *blueCircleBtn;
 
+@property (nonatomic, readwrite, assign) BOOL isShowCollectionView;
+
 @property (nonatomic, readwrite, strong) PJNoteCollectionView *collectionView;
 @property (nonatomic, readwrite, strong) UIRefreshControl *collectionViewRefreshControl;
+@property (nonatomic, readwrite, strong) PJHomeBottomView *bottomView;
+@property (nonatomic, readwrite, strong) PJCameraView *cameraView;
 
 @end
 
@@ -51,6 +56,8 @@
     self.navBar.hidden = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.isShowCollectionView = YES;
+    
     self.collectionViewRefreshControl = [UIRefreshControl new];
     [self.collectionViewRefreshControl addTarget:self
                                           action:@selector(refreshAction)
@@ -64,9 +71,6 @@
     layout.minimumInteritemSpacing = 25;
     layout.sectionInset = UIEdgeInsetsMake(25, 25, 25, 25);
     self.collectionView = [[PJNoteCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) collectionViewLayout:layout];
-    if (iPhoneX) {
-        self.collectionView.height -= 20;
-    }
     [self.collectionView addSubview:self.collectionViewRefreshControl];
     self.collectionView.alwaysBounceVertical = YES;
     [self.view addSubview:self.collectionView];
@@ -77,8 +81,16 @@
                                  @{@"itemImageName" : @"banner4", @"itemName" : @"每一天都要过好！"},];
     [self.collectionView reloadData];
 
-    PJHomeBottomView *bottomView = [[PJHomeBottomView alloc] initWithFrame:CGRectMake(0, self.view.height - 100, self.view.width, 100)];
-    [self.view addSubview:bottomView];
+    self.bottomView = [[PJHomeBottomView alloc] initWithFrame:CGRectMake(0, self.view.height - 100, self.view.width, 100)];
+    self.bottomView.viewDelegate = self;
+    [self.view addSubview:self.bottomView];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraViewPan:)];
+    [self.bottomView addGestureRecognizer:pan];
+    
+    self.cameraView = [[PJCameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.view addSubview:self.cameraView];
+    self.cameraView.hidden = YES;
+    self.cameraView.alpha = 0;
     
     // 左 个人中心
     _leftView = [leftHomeView new];
@@ -100,7 +112,7 @@
     _rightedgePan.edges = UIRectEdgeRight;
     [self.view addGestureRecognizer:_rightedgePan];
     
-    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraViewPan:)];
     _panGesture.enabled = NO;
     [self.view addGestureRecognizer:_panGesture];
     
@@ -116,12 +128,58 @@
     NSLog(@"2333");
 }
 
--(void)refreshAction
-{
+-(void)refreshAction {
     NSLog(@"下拉刷新");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.collectionViewRefreshControl endRefreshing]; //结束刷新
+        [self.collectionViewRefreshControl endRefreshing];
     });
+}
+
+- (void)cameraViewPan:(UIPanGestureRecognizer *)ges {
+    if (!self.isShowCollectionView) {
+        return;
+    }
+    CGPoint p = [ges translationInView:self.bottomView];
+    CGRect frame = self.collectionView.frame;
+    frame.origin.y = p.y;
+    self.collectionView.frame = frame;
+    if (ges.state == UIGestureRecognizerStateEnded) {
+        if (frame.origin.y < -self.view.height / 2) {
+            frame.origin.y = - self.collectionView.height;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.collectionView.frame = frame;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    self.isShowCollectionView = NO;
+                    self.cameraView.hidden = NO;
+                    [UIView animateWithDuration:0.25 animations:^{
+                        self.cameraView.alpha = 1;
+                    }];
+                    [UIView animateWithDuration:0.25 animations:^{
+                        self.cameraView.alpha = 1;
+                    } completion:^(BOOL finished) {
+                        if (finished) {
+                            self.bottomView.isNeedRotationButton = false;
+                            [self.view bringSubviewToFront:self.bottomView];
+                        }
+                    }];
+                }
+            }];
+        } else {
+            frame.origin.y = 0;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.collectionView.frame = frame;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    self.isShowCollectionView = YES;
+                }
+            }];
+        }
+    }
+}
+
+- (void)homeBottomViewButtonClick {
+    [self.cameraView takePhoto];
 }
 
 // 用户资料的更新通知

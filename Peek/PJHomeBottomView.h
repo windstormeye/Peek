@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PJHomeBottomViewDelegate <NSObject>
+
+- (void)homeBottomViewButtonClick;
+
+@end
+
 @interface PJHomeBottomView : UIView
+
+@property (nonatomic, readwrite, assign) BOOL isNeedRotationButton;
+@property (nonatomic, readwrite, weak) id<PJHomeBottomViewDelegate> viewDelegate;
 
 @end

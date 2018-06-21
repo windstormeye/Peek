@@ -42,6 +42,7 @@
 		74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DB81EE00FB70081A0A5 /* UIViewController+Extension.m */; };
 		74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBB1EE010230081A0A5 /* PJHUD.m */; };
 		74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */; };
+		745F334A20DC0099009C1991 /* PJCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745F334920DC0099009C1991 /* PJCameraView.swift */; };
 		7463F3F51FA753D600125448 /* PJUserForgetPasswdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463F3F41FA753D600125448 /* PJUserForgetPasswdViewController.m */; };
 		7463F3F91FA7555D00125448 /* Register.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463F3F81FA7555D00125448 /* Register.m */; };
 		749766292046E741006F47F6 /* PJUserLoginCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 749766282046E741006F47F6 /* PJUserLoginCom.m */; };
@@ -144,6 +145,8 @@
 		74559DBB1EE010230081A0A5 /* PJHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJHUD.m; sourceTree = "<group>"; };
 		74559DBD1EE010310081A0A5 /* PJUIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PJUIImage+Extension.h"; sourceTree = "<group>"; };
 		74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PJUIImage+Extension.m"; sourceTree = "<group>"; };
+		745F334820DC0098009C1991 /* Peek-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Peek-Bridging-Header.h"; sourceTree = "<group>"; };
+		745F334920DC0099009C1991 /* PJCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJCameraView.swift; sourceTree = "<group>"; };
 		7463F3F31FA753D600125448 /* PJUserForgetPasswdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserForgetPasswdViewController.h; sourceTree = "<group>"; };
 		7463F3F41FA753D600125448 /* PJUserForgetPasswdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserForgetPasswdViewController.m; sourceTree = "<group>"; };
 		7463F3F71FA7555D00125448 /* Register.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Register.h; sourceTree = "<group>"; };
@@ -481,9 +484,18 @@
 				74911B091F89E1BF004A729A /* framework */,
 				74559D811EE009BE0081A0A5 /* main.m */,
 				74559DB61EE00CF10081A0A5 /* PrefixHeader.pch */,
+				745F334820DC0098009C1991 /* Peek-Bridging-Header.h */,
 				74559D911EE009BF0081A0A5 /* Info.plist */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		745F334320DBDAB1009C1991 /* CameraView */ = {
+			isa = PBXGroup;
+			children = (
+				745F334920DC0099009C1991 /* PJCameraView.swift */,
+			);
+			name = CameraView;
 			sourceTree = "<group>";
 		};
 		7463F3F21FA753A300125448 /* 忘记密码 */ = {
@@ -509,6 +521,7 @@
 			children = (
 				74559D861EE009BE0081A0A5 /* HomeViewController.h */,
 				74559D871EE009BE0081A0A5 /* HomeViewController.m */,
+				745F334320DBDAB1009C1991 /* CameraView */,
 				74C5CDEE20DA062700DB072C /* bottomView */,
 				74C5CDEA20D94F7500DB072C /* headerView */,
 				7454D8FF20D802E90004C83E /* CollectionView */,
@@ -913,6 +926,7 @@
 				749766292046E741006F47F6 /* PJUserLoginCom.m in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
+				745F334A20DC0099009C1991 /* PJCameraView.swift in Sources */,
 				7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */,
 				7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */,
 				7454D8FE20D7FA740004C83E /* UIView+Position.m in Sources */,
@@ -1102,6 +1116,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pjhubs.Peek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Peek/Peek-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1129,6 +1144,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pjhubs.Peek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Peek/Peek-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1137,6 +1153,7 @@
 		74559DAE1EE009BF0081A0A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				INFOPLIST_FILE = PeekTests/Info.plist;
@@ -1150,6 +1167,7 @@
 		74559DAF1EE009BF0081A0A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				INFOPLIST_FILE = PeekTests/Info.plist;
@@ -1163,6 +1181,7 @@
 		74559DB11EE009BF0081A0A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				INFOPLIST_FILE = PeekUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1175,6 +1194,7 @@
 		74559DB21EE009BF0081A0A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = U6J5965DZK;
 				INFOPLIST_FILE = PeekUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
