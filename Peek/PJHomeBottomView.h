@@ -16,7 +16,7 @@
 
 @interface PJHomeBottomView : UIView
 
-@property (nonatomic, readwrite, assign) BOOL isNeedRotationButton;
+@property (nonatomic, readwrite, assign) BOOL isShowHomeButton;
 @property (nonatomic, readwrite, weak) id<PJHomeBottomViewDelegate> viewDelegate;
 
 @end

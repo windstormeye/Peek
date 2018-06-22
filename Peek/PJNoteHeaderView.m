@@ -27,9 +27,15 @@
     [self addSubview:titleLabel];
     [titleLabel sizeToFit];
     
-    UIButton *searchButton = [[UIButton alloc] initWithFrame:CGRectMake(titleLabel.right, titleLabel.y, 40, 40)];
+    UIButton *searchButton = [[UIButton alloc] initWithFrame:CGRectMake(titleLabel.right + 5, titleLabel.y, 40, 40)];
     [self addSubview:searchButton];
     [searchButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    [searchButton addTarget:self action:@selector(searchButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(searchButton.right, searchButton.y, searchButton.width, searchButton.height)];
+    [self addSubview:addButton];
+    [addButton setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    [addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *avatarButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 40 - 25, 0, 40, 40)];
     avatarButton.centerY = self.centerY;
@@ -44,6 +50,14 @@
     }
     avatarButton.layer.cornerRadius = avatarButton.width / 2;
     avatarButton.layer.masksToBounds = YES;
+}
+
+- (void)searchButtonClick {
+    [PJTapic tap];
+}
+
+- (void)addButtonClick {
+    [PJTapic tap];
 }
 
 @end

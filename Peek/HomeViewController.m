@@ -36,6 +36,8 @@
 @property (nonatomic, readwrite, strong) UIRefreshControl *collectionViewRefreshControl;
 @property (nonatomic, readwrite, strong) PJHomeBottomView *bottomView;
 @property (nonatomic, readwrite, strong) PJCameraView *cameraView;
+@property (nonatomic, readwrite, strong) UIView *cameraTopView;
+@property (nonatomic, readwrite, strong) UIView *cameraCaverView;
 
 @end
 
@@ -87,6 +89,35 @@
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraViewPan:)];
     [self.bottomView addGestureRecognizer:pan];
     
+    self.cameraTopView = ({
+        UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bottomView.width, self.bottomView.height / 3 * 2)];
+        [self.view addSubview:topView];
+        topView.alpha = 0;
+        topView.hidden = YES;
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraTopViewPan:)];
+        [topView addGestureRecognizer:pan];
+        
+        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = topView.bounds;
+        gradientLayer.colors =@[(__bridge id)[UIColor whiteColor].CGColor, (__bridge id)[UIColor colorWithWhite:2.0 alpha:0.01].CGColor];
+        gradientLayer.locations = @[@0.1];
+        gradientLayer.endPoint = CGPointMake(0.0, 1.0);
+        gradientLayer.startPoint = CGPointMake(0.0, 0.0);
+        [topView.layer addSublayer:gradientLayer];
+
+        topView;
+    });
+    
+    self.cameraCaverView = ({
+        UIView *caverView = [[UIView alloc] initWithFrame:self.view.frame];
+        [self.view addSubview:caverView];
+        caverView.backgroundColor = [UIColor whiteColor];
+        caverView.alpha = 0;
+        caverView.hidden = YES;
+        caverView;
+    });
+    
     self.cameraView = [[PJCameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.view addSubview:self.cameraView];
     self.cameraView.hidden = YES;
@@ -124,10 +155,6 @@
     isLeft = true;
 }
 
-- (void)gotoUserCenter {
-    NSLog(@"2333");
-}
-
 -(void)refreshAction {
     NSLog(@"下拉刷新");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -135,14 +162,58 @@
     });
 }
 
+- (void)cameraTopViewPan:(UIPanGestureRecognizer *)ges {
+    
+    [self.view bringSubviewToFront:self.cameraCaverView];
+    [self.view bringSubviewToFront:self.collectionView];
+    
+    CGPoint p = [ges translationInView:self.bottomView];
+    CGRect frame = self.collectionView.frame;
+    frame.origin.y = p.y - self.collectionView.height;
+    self.collectionView.frame = frame;
+
+    self.cameraCaverView.hidden = NO;
+    self.cameraCaverView.alpha = p.y * 0.0015625;
+    
+    if (ges.state == UIGestureRecognizerStateEnded) {
+        if (frame.origin.y > -self.view.height / 2) {
+            frame.origin.y = 0;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.collectionView.frame = frame;
+            } completion:^(BOOL finished) {
+                self.cameraView.hidden = YES;
+                self.cameraTopView.hidden = YES;
+                self.cameraCaverView.hidden = YES;
+                self.isShowCollectionView = YES;
+
+                [self.view bringSubviewToFront:self.bottomView];
+                self.bottomView.isShowHomeButton = NO;
+            }];
+        } else {
+            [UIView animateWithDuration:0.25 animations:^{
+                self.collectionView.y = -self.collectionView.height;
+            } completion:^(BOOL finished) {
+                self.cameraCaverView.hidden = YES;
+                self.cameraCaverView.alpha = 0;
+            }];
+        }
+    }
+    
+}
+
 - (void)cameraViewPan:(UIPanGestureRecognizer *)ges {
     if (!self.isShowCollectionView) {
         return;
     }
+    
     CGPoint p = [ges translationInView:self.bottomView];
     CGRect frame = self.collectionView.frame;
     frame.origin.y = p.y;
+    
+    self.cameraView.hidden = NO;
+    self.cameraView.alpha = -p.y * 0.0015625;
     self.collectionView.frame = frame;
+    
     if (ges.state == UIGestureRecognizerStateEnded) {
         if (frame.origin.y < -self.view.height / 2) {
             frame.origin.y = - self.collectionView.height;
@@ -151,16 +222,18 @@
             } completion:^(BOOL finished) {
                 if (finished) {
                     self.isShowCollectionView = NO;
-                    self.cameraView.hidden = NO;
                     [UIView animateWithDuration:0.25 animations:^{
                         self.cameraView.alpha = 1;
                     }];
                     [UIView animateWithDuration:0.25 animations:^{
                         self.cameraView.alpha = 1;
+                        self.cameraTopView.hidden = NO;
+                        self.cameraTopView.alpha = 1;
                     } completion:^(BOOL finished) {
                         if (finished) {
-                            self.bottomView.isNeedRotationButton = false;
+                            [self.view bringSubviewToFront:self.cameraTopView];
                             [self.view bringSubviewToFront:self.bottomView];
+                            self.bottomView.isShowHomeButton = YES;
                         }
                     }];
                 }
@@ -172,6 +245,8 @@
             } completion:^(BOOL finished) {
                 if (finished) {
                     self.isShowCollectionView = YES;
+                    self.cameraView.hidden = YES;
+                    self.cameraView.alpha = 0;
                 }
             }];
         }
