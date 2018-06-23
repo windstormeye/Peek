@@ -10,6 +10,10 @@ import UIKit
 import AVFoundation
 import Photos
 
+@objc protocol PJCameraViewDelegate {
+    @objc func getTakePhoto(image: UIImage);
+}
+
 class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private var session: AVCaptureSession?
@@ -19,6 +23,8 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
     
     private var isPhoto: Bool = false
     private(set) var isFrontCamera: Bool?
+    
+    @objc public var cameraViewDelegate: PJCameraViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,6 +106,7 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
             let image = UIImage.init(cgImage: quartzImage!,
                                      scale: 1.0,
                                      orientation: .right)
+            cameraViewDelegate?.getTakePhoto(image: image)
             PHPhotoLibrary.shared().performChanges({
                 PHAssetChangeRequest.creationRequestForAsset(from: image)
             }) { (saved, erroe) in
