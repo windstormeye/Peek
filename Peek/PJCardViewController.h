@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PJBaseViewController.h"
 
-@interface PJCardViewController : UIViewController
+@interface PJCardViewController : PJBaseViewController
 
 @property (strong, nonatomic) UIImage *dealImageView;
 @property (nonatomic, assign) BOOL isRed;

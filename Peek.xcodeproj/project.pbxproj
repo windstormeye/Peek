@@ -55,6 +55,12 @@
 		74C5CDF120DA063D00DB072C /* PJHomeBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDF020DA063C00DB072C /* PJHomeBottomView.m */; };
 		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
 		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
+		74EB3ED720DF7354001F0E0C /* PJPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EB3ED620DF7354001F0E0C /* PJPhotoViewController.m */; };
+		74EB3EDA20DF85C1001F0E0C /* PJSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */; };
+		74EC312320DF86B1005FC688 /* PJTools-UIView+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC312220DF86B1005FC688 /* PJTools-UIView+Position.swift */; };
+		74EC312620DF870A005FC688 /* constant-Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC312520DF870A005FC688 /* constant-Swift.swift */; };
+		74EC312820DF8736005FC688 /* PJLanguageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC312720DF8735005FC688 /* PJLanguageHelper.swift */; };
+		74EC312B20DF8B06005FC688 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 74EC312D20DF8B06005FC688 /* Localizable.strings */; };
 		74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F969311EE862F200C164BE /* LeftSliderView.xib */; };
 		A0038FE46C4EB26A0654D260 /* libPods-Peek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A4DADE82B40BD4012F8D7D /* libPods-Peek.a */; };
 /* End PBXBuildFile section */
@@ -173,6 +179,14 @@
 		74C63A3D1F47259400D0B35F /* PJModifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJModifyViewController.m; sourceTree = "<group>"; };
 		74EAE19F1F8A05BC0071F82D /* PJOpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJOpenCV.h; sourceTree = "<group>"; };
 		74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PJOpenCV.mm; sourceTree = "<group>"; };
+		74EB3ED520DF7354001F0E0C /* PJPhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJPhotoViewController.h; sourceTree = "<group>"; };
+		74EB3ED620DF7354001F0E0C /* PJPhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJPhotoViewController.m; sourceTree = "<group>"; };
+		74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJSegmentView.swift; sourceTree = "<group>"; };
+		74EC312220DF86B1005FC688 /* PJTools-UIView+Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PJTools-UIView+Position.swift"; sourceTree = "<group>"; };
+		74EC312520DF870A005FC688 /* constant-Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constant-Swift.swift"; sourceTree = "<group>"; };
+		74EC312720DF8735005FC688 /* PJLanguageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJLanguageHelper.swift; sourceTree = "<group>"; };
+		74EC312C20DF8B06005FC688 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		74EC312E20DF8C25005FC688 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		74F969311EE862F200C164BE /* LeftSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftSliderView.xib; sourceTree = "<group>"; };
 		86A4DADE82B40BD4012F8D7D /* libPods-Peek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Peek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C08E1DA4A63E424E541F8AF /* Pods-Peek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Peek/Pods-Peek.debug.xcconfig"; sourceTree = "<group>"; };
@@ -236,6 +250,8 @@
 		741324A51F9DE56100FA0623 /* 卡片编辑 */ = {
 			isa = PBXGroup;
 			children = (
+				74EB3ED520DF7354001F0E0C /* PJPhotoViewController.h */,
+				74EB3ED620DF7354001F0E0C /* PJPhotoViewController.m */,
 				741324A91F9EEA8300FA0623 /* bottomView */,
 				741324A61F9DE58800FA0623 /* PJCardViewController.h */,
 				741324A71F9DE58800FA0623 /* PJCardViewController.m */,
@@ -258,6 +274,7 @@
 			children = (
 				74559DB31EE00CCF0081A0A5 /* constant.h */,
 				74559DB41EE00CCF0081A0A5 /* constant.mm */,
+				74EC312520DF870A005FC688 /* constant-Swift.swift */,
 			);
 			name = Constant;
 			sourceTree = "<group>";
@@ -454,6 +471,9 @@
 		74559DC01EE03AB20081A0A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				74EC312420DF86B9005FC688 /* SwiftTool */,
+				74EC312220DF86B1005FC688 /* PJTools-UIView+Position.swift */,
+				74EC312720DF8735005FC688 /* PJLanguageHelper.swift */,
 				74C5CDE620D8E5D300DB072C /* PJTool */,
 				74A0D61F1FA8A84E006AB335 /* PJDevice */,
 				7463F3F61FA754EF00125448 /* Register */,
@@ -486,6 +506,7 @@
 				74559DB61EE00CF10081A0A5 /* PrefixHeader.pch */,
 				745F334820DC0098009C1991 /* Peek-Bridging-Header.h */,
 				74559D911EE009BF0081A0A5 /* Info.plist */,
+				74EC312D20DF8B06005FC688 /* Localizable.strings */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -521,6 +542,7 @@
 			children = (
 				74559D861EE009BE0081A0A5 /* HomeViewController.h */,
 				74559D871EE009BE0081A0A5 /* HomeViewController.m */,
+				74EB3ED820DF85C1001F0E0C /* SegmentView */,
 				745F334320DBDAB1009C1991 /* CameraView */,
 				74C5CDEE20DA062700DB072C /* bottomView */,
 				74C5CDEA20D94F7500DB072C /* headerView */,
@@ -677,6 +699,21 @@
 			name = OpenCV;
 			sourceTree = "<group>";
 		};
+		74EB3ED820DF85C1001F0E0C /* SegmentView */ = {
+			isa = PBXGroup;
+			children = (
+				74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */,
+			);
+			path = SegmentView;
+			sourceTree = "<group>";
+		};
+		74EC312420DF86B9005FC688 /* SwiftTool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SwiftTool;
+			sourceTree = "<group>";
+		};
 		82E88649A5E06163174BC06B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,6 +818,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 74559D741EE009BE0081A0A5;
 			productRefGroup = 74559D7E1EE009BE0081A0A5 /* Products */;
@@ -804,6 +842,7 @@
 				743C84651F0B97FC00D46EAC /* PJEditHeaderView.xib in Resources */,
 				74006FDC1EFC0192008A151C /* PJLoginSB.storyboard in Resources */,
 				743C845D1F0B91C700D46EAC /* PJEditTableViewCell.xib in Resources */,
+				74EC312B20DF8B06005FC688 /* Localizable.strings in Resources */,
 				744C3C461FADB38800767B42 /* PJFriendTableViewCell.xib in Resources */,
 				74559D8D1EE009BF0081A0A5 /* Assets.xcassets in Resources */,
 			);
@@ -918,16 +957,21 @@
 				744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */,
 				7463F3F51FA753D600125448 /* PJUserForgetPasswdViewController.m in Sources */,
 				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
+				74EC312620DF870A005FC688 /* constant-Swift.swift in Sources */,
 				74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */,
 				74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */,
 				7454D8F520D6C3950004C83E /* PJBaseViewController.m in Sources */,
+				74EC312820DF8736005FC688 /* PJLanguageHelper.swift in Sources */,
 				74C5CDE520D8AE9500DB072C /* PJNoteCollectionView.m in Sources */,
 				74559D881EE009BE0081A0A5 /* HomeViewController.m in Sources */,
 				749766292046E741006F47F6 /* PJUserLoginCom.m in Sources */,
+				74EC312320DF86B1005FC688 /* PJTools-UIView+Position.swift in Sources */,
 				74559DB51EE00CCF0081A0A5 /* constant.mm in Sources */,
+				74EB3EDA20DF85C1001F0E0C /* PJSegmentView.swift in Sources */,
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
 				745F334A20DC0099009C1991 /* PJCameraView.swift in Sources */,
 				7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */,
+				74EB3ED720DF7354001F0E0C /* PJPhotoViewController.m in Sources */,
 				7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */,
 				7454D8FE20D7FA740004C83E /* UIView+Position.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
@@ -988,11 +1032,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		74EC312D20DF8B06005FC688 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74EC312C20DF8B06005FC688 /* en */,
+				74EC312E20DF8C25005FC688 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		74559DA81EE009BF0081A0A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1049,6 +1106,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

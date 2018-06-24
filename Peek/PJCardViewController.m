@@ -8,17 +8,12 @@
 
 #import "PJCardViewController.h"
 #import "PJOpenCV.h"
-#import "PJCardBottomView.h"
-
-#import <UMSocialCore/UMSocialCore.h>
-#import <UShareUI/UShareUI.h>
 
 @interface PJCardViewController ()
 
 @end
 
 @implementation PJCardViewController {
-    PJCardBottomView *_kBottomView;
     UIView *_kImgContentView;
     UIImageView *_kAnswerImageView;
     UIImageView *_kOldImageView;
@@ -38,12 +33,10 @@
 
 - (void)initView {
     isTapic = false;
+    self.isRed = YES;
     
-}
-
-- (void)setDealImageView:(UIImage *)dealImageView {
-    _dealImageView = dealImageView;
-    [self dealImageWithOpenCV:dealImageView];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
 }
 
 - (void)dealImageWithOpenCV:(UIImage *)image {

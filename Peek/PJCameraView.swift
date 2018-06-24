@@ -11,7 +11,7 @@ import AVFoundation
 import Photos
 
 @objc protocol PJCameraViewDelegate {
-    @objc func getTakePhoto(image: UIImage);
+    func swipeGesture(direction: UISwipeGestureRecognizerDirection)
 }
 
 class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -20,11 +20,9 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
     private var videoInput: AVCaptureDeviceInput?
     private var imageOutput: AVCapturePhotoOutput?
     private var previewLayer: AVCaptureVideoPreviewLayer?
-    
     private var isPhoto: Bool = false
-    private(set) var isFrontCamera: Bool?
     
-    @objc public var cameraViewDelegate: PJCameraViewDelegate?
+    @objc public var viewDelegate: PJCameraViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +36,14 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
     
     private func initView() {
         self.backgroundColor = UIColor.black
-        isFrontCamera = false
+        
+        let leftSwipeGes = UISwipeGestureRecognizer.init(target: self, action: #selector(swipeGestuer(swipe:)))
+        leftSwipeGes.direction = .left;
+        self.addGestureRecognizer(leftSwipeGes)
+        
+        let rightSwipeGes = UISwipeGestureRecognizer.init(target: self, action: #selector(swipeGestuer(swipe:)))
+        rightSwipeGes.direction = .right
+        self.addGestureRecognizer(rightSwipeGes)
     }
     
     private func initAVCaptureSession() {
@@ -71,6 +76,10 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
         session?.startRunning()
     }
 
+    @objc private func swipeGestuer(swipe: UISwipeGestureRecognizer) {
+        viewDelegate?.swipeGesture(direction: swipe.direction)
+    }
+    
     @objc public func takePhoto() {
         isPhoto = true
     }
@@ -106,13 +115,11 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
             let image = UIImage.init(cgImage: quartzImage!,
                                      scale: 1.0,
                                      orientation: .right)
-            cameraViewDelegate?.getTakePhoto(image: image)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "getImage"), object: nil, userInfo: ["image" : image])
             PHPhotoLibrary.shared().performChanges({
                 PHAssetChangeRequest.creationRequestForAsset(from: image)
             }) { (saved, erroe) in
                 if saved {
-                    // using PJTapic will crash.
-                    AudioServicesPlaySystemSound(1519)
                 }
             }
         }

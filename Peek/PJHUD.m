@@ -1,5 +1,6 @@
 
 #import "PJHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @implementation PJHUD
 

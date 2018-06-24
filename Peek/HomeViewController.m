@@ -7,13 +7,7 @@
 //
 
 #import "HomeViewController.h"
-#import "leftHomeView.h"
-#import "PJFriendHomeView.h"
-#import "PublishViewController.h"
-#import "EditViewController.h"
-#import "MessageViewController.h"
-#import "PJLoginViewController.h"
-#import "PJCardViewController.h"
+#import "PJPhotoViewController.h"
 
 #import "PJNoteCollectionView.h"
 #import "PJHomeBottomView.h"
@@ -26,29 +20,89 @@
 @property (nonatomic, readwrite, strong) PJNoteCollectionView *collectionView;
 @property (nonatomic, readwrite, strong) PJHomeBottomView *bottomView;
 @property (nonatomic, readwrite, strong) PJCameraView *cameraView;
+@property (nonatomic, readwrite, strong) PJSegmentView *segmentView;
 
 @property (nonatomic, readwrite, strong) UIRefreshControl *collectionViewRefreshControl;
 @property (nonatomic, readwrite, strong) UIView *cameraTopView;
 @property (nonatomic, readwrite, strong) UIView *cameraCaverView;
+@property (nonatomic, readwrite, assign) NSInteger segmentIndex;
 
 @end
 
-@implementation HomeViewController {
-    leftHomeView *_leftView;
-    PJFriendHomeView *_kRightView;
-    UIView *_kBackView;
-    BOOL isRed;
-    BOOL isLeft;
-}
+@implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
 }
 
+// MARK: layz load
+
+- (UIView *)cameraTopView {
+    if (!_cameraTopView) {
+        _cameraTopView = ({
+            UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bottomView.width, self.bottomView.height / 3 * 2)];
+            [self.view addSubview:topView];
+            topView.alpha = 0;
+            topView.hidden = YES;
+            
+            UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraTopViewPan:)];
+            [topView addGestureRecognizer:pan];
+            
+            CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+            gradientLayer.frame = topView.bounds;
+            gradientLayer.colors =@[(__bridge id)[UIColor whiteColor].CGColor, (__bridge id)[UIColor colorWithWhite:2.0 alpha:0.01].CGColor];
+            gradientLayer.locations = @[@0.1];
+            gradientLayer.endPoint = CGPointMake(0.0, 1.0);
+            gradientLayer.startPoint = CGPointMake(0.0, 0.0);
+            [topView.layer addSublayer:gradientLayer];
+            
+            _segmentView = ({
+                PJSegmentView *segmentView = [[PJSegmentView alloc] initWithFrame:CGRectMake(0, 0, topView.width / 2, topView.height / 2)];
+                segmentView.centerX = topView.centerX;
+                segmentView.centerY = topView.centerY;
+                [topView addSubview:segmentView];
+                segmentView.menuArray = @[@"红色", @"蓝色"];
+                segmentView;
+            });
+            
+            topView;
+        });
+    }
+    return _cameraTopView;
+}
+
+- (UIView *)cameraCaverView {
+    if (!_cameraCaverView) {
+        _cameraCaverView = ({
+            UIView *caverView = [[UIView alloc] initWithFrame:self.view.frame];
+            [self.view addSubview:caverView];
+            caverView.backgroundColor = [UIColor whiteColor];
+            caverView.alpha = 0;
+            caverView.hidden = YES;
+            caverView;
+        });
+    }
+    return _cameraCaverView;
+}
+
+- (PJCameraView *)cameraView {
+    if (!_cameraView) {
+        _cameraView = [[PJCameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [self.view addSubview:_cameraView];
+        _cameraView.hidden = YES;
+        _cameraView.alpha = 0;
+        _cameraView.viewDelegate = self;
+    }
+    return _cameraView;
+}
+
+// MARK: life cycle
+
 - (void)initView {
     self.navBar.hidden = YES;
     self.view.backgroundColor = [UIColor whiteColor];
+    self.segmentIndex = 0;
     
     self.isShowCollectionView = YES;
     
@@ -75,50 +129,20 @@
                                  @{@"itemImageName" : @"banner4", @"itemName" : @"每一天都要过好！"},];
     [self.collectionView reloadData];
 
+    
     self.bottomView = [[PJHomeBottomView alloc] initWithFrame:CGRectMake(0, self.view.height - 100, self.view.width, 100)];
     self.bottomView.viewDelegate = self;
     [self.view addSubview:self.bottomView];
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraViewPan:)];
     [self.bottomView addGestureRecognizer:pan];
-    
-    self.cameraTopView = ({
-        UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bottomView.width, self.bottomView.height / 3 * 2)];
-        [self.view addSubview:topView];
-        topView.alpha = 0;
-        topView.hidden = YES;
-        
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraTopViewPan:)];
-        [topView addGestureRecognizer:pan];
-        
-        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = topView.bounds;
-        gradientLayer.colors =@[(__bridge id)[UIColor whiteColor].CGColor, (__bridge id)[UIColor colorWithWhite:2.0 alpha:0.01].CGColor];
-        gradientLayer.locations = @[@0.1];
-        gradientLayer.endPoint = CGPointMake(0.0, 1.0);
-        gradientLayer.startPoint = CGPointMake(0.0, 0.0);
-        [topView.layer addSublayer:gradientLayer];
-
-        topView;
-    });
-    
-    self.cameraCaverView = ({
-        UIView *caverView = [[UIView alloc] initWithFrame:self.view.frame];
-        [self.view addSubview:caverView];
-        caverView.backgroundColor = [UIColor whiteColor];
-        caverView.alpha = 0;
-        caverView.hidden = YES;
-        caverView;
-    });
-    
-    self.cameraView = [[PJCameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [self.view addSubview:self.cameraView];
-    self.cameraView.hidden = YES;
-    self.cameraView.cameraViewDelegate = self;
-    self.cameraView.alpha = 0;
 }
 
+
+// MARK: UI response
 - (void)homeBottomViewButtonClick {
     [self.cameraView takePhoto];
+    PJPhotoViewController *vc = [PJPhotoViewController new];
+    [self.navigationController pushViewController:vc animated:true];
 }
 
 -(void)refreshAction {
@@ -126,13 +150,6 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.collectionViewRefreshControl endRefreshing];
     });
-}
-
-- (void)getTakePhotoWithImage:(UIImage *)image {
-    PJCardViewController *vc = [PJCardViewController new];
-    vc.isRed = isRed;
-    vc.dealImageView = image;
-    [self.navigationController pushViewController:vc animated:true];
 }
 
 - (void)cameraTopViewPan:(UIPanGestureRecognizer *)ges {
@@ -224,6 +241,20 @@
             }];
         }
     }
+}
+
+- (void)swipeGestureWithDirection:(UISwipeGestureRecognizerDirection)direction {
+    if (direction == UISwipeGestureRecognizerDirectionLeft) {
+        if (self.segmentIndex != 0) {
+            self.segmentIndex --;
+        }
+    } else {
+        if (self.segmentIndex < self.segmentView.menuArray.count - 1) {
+            self.segmentIndex ++;
+        }
+    }
+    self.segmentView.segmentIndex = [NSNumber numberWithInteger:self.segmentIndex];
+    [self.segmentView menuMoveByIndexWithIndex:self.segmentIndex];
 }
 
 @end

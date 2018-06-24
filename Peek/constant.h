@@ -13,6 +13,11 @@
 #define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 #endif
 
+#pragma mark - block define
+
+#define Weakfy(obj) autoreleasepool{} __weak typeof(obj) obj##Weak = obj;
+#define Strongfy(obj) autoreleasepool{} __strong typeof(obj) obj = obj##Weak;
+
 extern UIColor * mainRedColor;
 extern UIColor * mainBlackColor;
 extern UIColor * mainPurpleColor;
