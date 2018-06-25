@@ -12,6 +12,7 @@ import Photos
 
 @objc protocol PJCameraViewDelegate {
     func swipeGesture(direction: UISwipeGestureRecognizerDirection)
+    func cameraView(_ takePhotoImage: UIImage)
 }
 
 class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -115,11 +116,13 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
             let image = UIImage.init(cgImage: quartzImage!,
                                      scale: 1.0,
                                      orientation: .right)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "getImage"), object: nil, userInfo: ["image" : image])
             PHPhotoLibrary.shared().performChanges({
                 PHAssetChangeRequest.creationRequestForAsset(from: image)
             }) { (saved, erroe) in
                 if saved {
+                    DispatchQueue.main.async(){
+                        self.viewDelegate?.cameraView(image)
+                    }
                 }
             }
         }

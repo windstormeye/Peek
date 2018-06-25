@@ -22,13 +22,7 @@
 - (void)initView {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImage:) name:@"getImage" object:nil];
 }
 
-- (void)getImage:(NSNotification *)notify {
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
-    imageView.image = notify.userInfo[@"image"];
-    [self.view addSubview:imageView];
-}
 
 @end

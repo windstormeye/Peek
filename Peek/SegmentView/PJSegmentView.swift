@@ -55,10 +55,8 @@ class PJSegmentView: UIView {
     
     private func initScrollView() {
         if self.scrollView == nil {
-            self.scrollView = UIScrollView.init(frame: CGRect.init(x: 0,
-                                                                   y: 0,
-                                                                   width: self.width,
-                                                                   height: self.height))
+            self.scrollView = UIScrollView.init(frame: CGRect.init(x: 0, y: 0,
+width: self.width + 10, height: self.height))
             self.scrollView?.showsVerticalScrollIndicator = false
             self.scrollView?.showsHorizontalScrollIndicator = false
             self.addSubview(self.scrollView!)
@@ -83,11 +81,7 @@ class PJSegmentView: UIView {
             let btn = UIButton.init(frame: CGRect.init(x: CGFloat(Int(menuWidth!) * i), y: 0, width: menuWidth!, height: self.scrollView!.height))
             btn.setTitle(PJLanguageHelper.getString(key: self.menuArray[i]), for: .normal)
             btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-            if i == 0 {
-                btn.setTitleColor(UIColor.orange, for: .normal)
-            } else {
-                btn.setTitleColor(UIColor.lightGray, for: .normal)
-            }
+            btn.setTitleColor(UIColor.black, for: .normal)
             btn.tag = i
             btn.addTarget(self, action: #selector(tipButtonClick(button:)), for: .touchUpInside)
             self.btnArray?.append(btn)
@@ -95,18 +89,19 @@ class PJSegmentView: UIView {
         }
         
         if self.tipView == nil {
+            let firstBtn = self.btnArray![0]
             self.tipView = UIView.init(frame: CGRect.init(
                 x: 0,
-                y: self.height - 3,
-                width: getStringLength(string: PJLanguageHelper.getString(key: self.menuArray[0])),
-                height: 3)
+                y: 0,
+                width: getStringLength(string: PJLanguageHelper.getString(key: self.menuArray[0])) + 10,
+                height: firstBtn.height)
             )
-            let firstBtn = self.btnArray![0]
             self.tipView?.centerX = firstBtn.centerX
-            self.tipView?.layer.cornerRadius = (self.tipView?.height)! / 2
+            self.tipView?.layer.cornerRadius = (tipView?.height)! / 2
             self.tipView?.layer.masksToBounds = true
-            self.tipView?.backgroundColor = UIColor.orange
+            self.tipView?.backgroundColor = PJRGB(r: 238, g: 99, b: 99)
             self.scrollView?.addSubview(self.tipView!)
+            scrollView?.sendSubview(toBack: tipView!)
         }
         
         NotificationCenter.default.addObserver(self,
@@ -122,7 +117,7 @@ class PJSegmentView: UIView {
             btn.setTitle(PJLanguageHelper.getString(key: self.menuArray[i]), for: .normal)
         }
         let firstBtn = self.btnArray![0]
-        tipView?.width = getStringLength(string: (firstBtn.titleLabel?.text)!)
+        tipView?.width = getStringLength(string: (firstBtn.titleLabel?.text)!) + 15
         tipView?.centerX = firstBtn.centerX
     }
     
@@ -133,14 +128,27 @@ class PJSegmentView: UIView {
     
     @objc private func tipViewChange(button: UIButton) {
         UIView.animate(withDuration: 0.25, animations: {
-            self.tipView?.width = getStringLength(string: (button.titleLabel?.text)!)
+            self.tipView?.width = getStringLength(string: (button.titleLabel?.text)!) + 10
             self.tipView?.centerX = button.centerX
+            switch button.tag {
+            case 0:
+                self.tipView?.backgroundColor = PJRGB(r: 238, g: 99, b: 99)
+                break;
+            case 1:
+                self.tipView?.backgroundColor = PJRGB(r: 0, g: 191, b: 255)
+                break;
+            case 2:
+                self.tipView?.backgroundColor = PJRGB(r: 119, g: 136, b: 153)
+                break;
+            default:
+                break;
+            }
             for btn in self.btnArray! {
-                btn.setTitleColor(UIColor.lightGray, for: .normal)
+                btn.setTitleColor(UIColor.black, for: .normal)
             }
         }) { (_) in
             self.moveScrollView()
-            button.setTitleColor(UIColor.orange, for: .normal)
+            button.setTitleColor(UIColor.black, for: .normal)
         }
     }
     

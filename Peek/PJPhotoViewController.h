@@ -11,4 +11,6 @@
 
 @interface PJPhotoViewController : PJBaseViewController
 
+@property (nonatomic, readwrite, strong) NSArray *dataArray;
+
 @end

@@ -27,6 +27,8 @@
 @property (nonatomic, readwrite, strong) UIView *cameraCaverView;
 @property (nonatomic, readwrite, assign) NSInteger segmentIndex;
 
+@property (nonatomic, readwrite, strong) NSMutableArray *imageArray;
+
 @end
 
 @implementation HomeViewController
@@ -62,7 +64,7 @@
                 segmentView.centerX = topView.centerX;
                 segmentView.centerY = topView.centerY;
                 [topView addSubview:segmentView];
-                segmentView.menuArray = @[@"红色", @"蓝色"];
+                segmentView.menuArray = @[@"红色", @"蓝色", @"整版扫描"];
                 segmentView;
             });
             
@@ -86,17 +88,6 @@
     return _cameraCaverView;
 }
 
-- (PJCameraView *)cameraView {
-    if (!_cameraView) {
-        _cameraView = [[PJCameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [self.view addSubview:_cameraView];
-        _cameraView.hidden = YES;
-        _cameraView.alpha = 0;
-        _cameraView.viewDelegate = self;
-    }
-    return _cameraView;
-}
-
 // MARK: life cycle
 
 - (void)initView {
@@ -105,6 +96,7 @@
     self.segmentIndex = 0;
     
     self.isShowCollectionView = YES;
+    self.imageArray = [NSMutableArray new];
     
     self.collectionViewRefreshControl = [UIRefreshControl new];
     [self.collectionViewRefreshControl addTarget:self
@@ -129,6 +121,11 @@
                                  @{@"itemImageName" : @"banner4", @"itemName" : @"每一天都要过好！"},];
     [self.collectionView reloadData];
 
+    self.cameraView = [[PJCameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.view addSubview:self.cameraView];
+    self.cameraView.hidden = YES;
+    self.cameraView.alpha = 0;
+    self.cameraView.viewDelegate = self;
     
     self.bottomView = [[PJHomeBottomView alloc] initWithFrame:CGRectMake(0, self.view.height - 100, self.view.width, 100)];
     self.bottomView.viewDelegate = self;
@@ -141,8 +138,6 @@
 // MARK: UI response
 - (void)homeBottomViewButtonClick {
     [self.cameraView takePhoto];
-    PJPhotoViewController *vc = [PJPhotoViewController new];
-    [self.navigationController pushViewController:vc animated:true];
 }
 
 -(void)refreshAction {
@@ -241,6 +236,23 @@
             }];
         }
     }
+}
+
+// MARK: delegate
+
+- (void)cameraView:(UIImage *)takePhotoImage {
+//    PJPhotoViewController *vc = [PJPhotoViewController new];
+//    [self.navigationController pushViewController:vc animated:true];
+    [self.imageArray addObject:takePhotoImage];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.cameraView.frame];
+    imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+    imageView.image = takePhotoImage;
+    [self.view addSubview:imageView];
+    [UIView animateWithDuration:0.25 animations:^{
+        imageView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+        imageView.right = self.cameraView.width - 50;
+        imageView.y = self.cameraView.height / 3;
+    }];
 }
 
 - (void)swipeGestureWithDirection:(UISwipeGestureRecognizerDirection)direction {

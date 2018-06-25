@@ -13,6 +13,11 @@ import UIKit
 let PJSCREEN_HEIGHT = CGFloat(UIScreen.main.bounds.height)
 let PJSCREEN_WIDTH = CGFloat(UIScreen.main.bounds.width)
 
+// 颜色相关
+func PJRGB(r: CGFloat, g:CGFloat, b:CGFloat) -> UIColor {
+    return UIColor.init(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1)
+}
+
 // 计算字符串长度
 func getStringLength(string: String) -> CGFloat {
     let count = string.count;
