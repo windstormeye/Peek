@@ -247,12 +247,32 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.cameraView.frame];
     imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
     imageView.image = takePhotoImage;
+    imageView.layer.cornerRadius = 50;
+    imageView.layer.borderWidth = 10;
+    imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    imageView.layer.masksToBounds = YES;
     [self.view addSubview:imageView];
-    [UIView animateWithDuration:0.25 animations:^{
-        imageView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-        imageView.right = self.cameraView.width - 50;
-        imageView.y = self.cameraView.height / 3;
+    
+    /// TODO: 给拍摄的照片添加点击事件
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoImageTapClick)];
+    [imageView addGestureRecognizer:tap];
+    
+    NSInteger imageCount = self.imageArray.count;
+    if (imageCount > 3) {
+        imageCount = 3;
+    }
+    [UIView animateWithDuration:0.4 animations:^{
+        imageView.transform = CGAffineTransformMakeScale(0.08, 0.08);
+        imageView.right = self.cameraView.width - 5;
+        imageView.y = self.cameraTopView.bottom;
+        
+        imageView.y += imageCount * 2;
+        imageView.x -= imageCount * 2;
     }];
+}
+
+- (void)photoImageTapClick {
+    NSLog(@"2333");
 }
 
 - (void)swipeGestureWithDirection:(UISwipeGestureRecognizerDirection)direction {

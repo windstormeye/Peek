@@ -17,6 +17,7 @@ import Photos
 
 class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
 
+    private var device: AVCaptureDevice?
     private var session: AVCaptureSession?
     private var videoInput: AVCaptureDeviceInput?
     private var imageOutput: AVCapturePhotoOutput?
@@ -24,6 +25,27 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
     private var isPhoto: Bool = false
     
     @objc public var viewDelegate: PJCameraViewDelegate?
+    
+    lazy var focusView: UIView? = {
+        let focusView = UIView.init(frame: .zero)
+        self.addSubview(focusView)
+        focusView.center = self.center
+        focusView.width = 100
+        focusView.height = 100
+        focusView.backgroundColor = .clear
+        // 对焦框
+        let boder = CAShapeLayer.init()
+        boder.strokeColor = UIColor.init(red: 238/255.0, green: 173/255.0, blue: 14/255.0, alpha: 1.0).cgColor
+        boder.path = UIBezierPath.init(roundedRect: focusView.bounds, cornerRadius: 0).cgPath
+        boder.frame = focusView.bounds
+        boder.lineWidth = 1.0
+        boder.fillColor = UIColor.clear.cgColor
+        boder.lineCap = "square"
+        boder.lineDashPattern = [10, 5]
+        focusView.layer .addSublayer(boder)
+        
+        return focusView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +73,7 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
         
         session = AVCaptureSession.init()
         
-        let device = AVCaptureDevice.default(for: AVMediaType.video)
+        device = AVCaptureDevice.default(for: AVMediaType.video)
         videoInput = try! AVCaptureDeviceInput.init(device: device!)
     
         // init OutPut
@@ -75,6 +97,44 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
         self.layer.addSublayer(previewLayer!)
         
         session?.startRunning()
+        
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapClick(ges:)))
+        self.addGestureRecognizer(tap)
+        
+    }
+
+    deinit {
+        
+    }
+    
+    @objc private func tapClick(ges: UITapGestureRecognizer) {
+        focus(at: ges.location(in: self))
+    }
+    
+    private func focus(at point: CGPoint) {
+        let size: CGSize = self.bounds.size
+        let focusPoint = CGPoint(x: point.y / size.height, y: 1 - point.x / size.width)
+        if try! device?.lockForConfiguration() != nil {
+            //对焦模式和对焦点
+            if (device?.isFocusModeSupported(.autoFocus))! {
+                device?.focusPointOfInterest = focusPoint
+                device?.focusMode = .autoFocus
+            }
+            if (device?.isExposureModeSupported(.autoExpose))! {
+                device?.exposurePointOfInterest = focusPoint
+                device?.exposureMode = .autoExpose
+            }
+            device?.unlockForConfiguration()
+            //设置对焦动画
+            focusView?.center = point
+            focusView?.isHidden = false
+            self.focusView?.transform = CGAffineTransform(scaleX: 2, y: 2)
+            UIView.animate(withDuration: 0.25, animations: {
+                self.focusView?.transform = .identity
+            }) { finished in
+                self.focusView?.isHidden = true
+            }
+        }
     }
 
     @objc private func swipeGestuer(swipe: UISwipeGestureRecognizer) {
