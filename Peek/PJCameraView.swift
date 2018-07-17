@@ -30,8 +30,8 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
         let focusView = UIView.init(frame: .zero)
         self.addSubview(focusView)
         focusView.center = self.center
-        focusView.width = 100
-        focusView.height = 100
+        focusView.width = 70
+        focusView.height = 70
         focusView.backgroundColor = .clear
         // 对焦框
         let boder = CAShapeLayer.init()
@@ -132,11 +132,17 @@ class PJCameraView: UIView, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOut
             UIView.animate(withDuration: 0.25, animations: {
                 self.focusView?.transform = .identity
             }) { finished in
-                self.focusView?.isHidden = true
+                if finished {
+                    self.perform(#selector(PJCameraView.hiddenFocusView), with: nil, afterDelay: 0.5)
+                }
             }
         }
     }
 
+    @objc private func hiddenFocusView() {
+        self.focusView?.isHidden = true
+    }
+    
     @objc private func swipeGestuer(swipe: UISwipeGestureRecognizer) {
         viewDelegate?.swipeGesture(direction: swipe.direction)
     }

@@ -7,10 +7,9 @@
 //
 
 #import "HomeViewController.h"
-#import "PJPhotoViewController.h"
-
 #import "PJNoteCollectionView.h"
 #import "PJHomeBottomView.h"
+#import "PJEditImageViewController.h"
 #import "Peek-Swift.h"
 
 @interface HomeViewController () <PJHomeBottomViewDelegate, PJCameraViewDelegate>
@@ -241,8 +240,6 @@
 // MARK: delegate
 
 - (void)cameraView:(UIImage *)takePhotoImage {
-//    PJPhotoViewController *vc = [PJPhotoViewController new];
-//    [self.navigationController pushViewController:vc animated:true];
     [self.imageArray addObject:takePhotoImage];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.cameraView.frame];
     imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
@@ -256,6 +253,7 @@
     /// TODO: 给拍摄的照片添加点击事件
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoImageTapClick)];
     [imageView addGestureRecognizer:tap];
+    imageView.userInteractionEnabled = YES;
     
     NSInteger imageCount = self.imageArray.count;
     if (imageCount > 3) {
@@ -272,7 +270,9 @@
 }
 
 - (void)photoImageTapClick {
-    NSLog(@"2333");
+    PJEditImageViewController *vc = [PJEditImageViewController new];
+    vc.imageArray = self.imageArray;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)swipeGestureWithDirection:(UISwipeGestureRecognizerDirection)direction {
