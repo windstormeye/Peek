@@ -44,10 +44,6 @@
     [self addSubview:self.unDoBtn];
     self.unDoBtn.tag = 1000;
     [self.unDoBtn setImage:[UIImage imageNamed:@"btn_revoke"] forState:UIControlStateNormal];
-    [self.unDoBtn setImage:[UIImage imageNamed:@"btn_revoke"] forState:UIControlStateHighlighted];
-    [self.unDoBtn setImage:[UIImage imageNamed:@"btn_revoke_h"] forState:UIControlStateSelected];
-    [self.unDoBtn setImage:[UIImage imageNamed:@"btn_revoke_h"]
-                  forState:UIControlStateSelected | UIControlStateHighlighted];
     [self.unDoBtn addTarget:self action: @selector(undoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // 颜色选择
@@ -99,10 +95,8 @@
             self.blurBtn.selected = NO;
             break;
         case 1001:
-            self.unDoBtn.selected = NO;
             self.blurBtn.selected = NO;
         case 1002:
-            self.unDoBtn.selected = NO;
             self.strokeBtn.selected = NO;
     }
 }

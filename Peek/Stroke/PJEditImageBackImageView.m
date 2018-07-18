@@ -91,14 +91,14 @@
     CGContextRef context = CGBitmapContextCreate (nil,
                                                   width,
                                                   height,
-                                                  kBitsPerComponent,        //每个颜色值8bit
-                                                  width*kPixelChannelCount, //每一行的像素点占用的字节数，每个像素点的ARGB四个通道各占8个bit
+                                                  kBitsPerComponent,        // 每个颜色值8bit
+                                                  width*kPixelChannelCount, // 每一行的像素点占用的字节数，每个像素点的ARGB四个通道各占8个bit
                                                   colorSpace,
                                                   kCGImageAlphaPremultipliedLast);
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), imgRef);
     unsigned char *bitmapData = CGBitmapContextGetData (context);
     
-    //这里把BitmapData进行马赛克转换,就是用一个点的颜色填充一个level*level的正方形
+    // 这里把BitmapData进行马赛克转换,就是用一个点的颜色填充一个level*level的正方形
     unsigned char pixel[kPixelChannelCount] = {0};
     NSUInteger index,preIndex;
     for (NSUInteger i = 0; i < height - 1 ; i++) {
@@ -119,7 +119,7 @@
     
     NSInteger dataLength = width*height* kPixelChannelCount;
     CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, bitmapData, dataLength, NULL);
-    //创建要输出的图像
+    // 创建要输出的图像
     CGImageRef mosaicImageRef = CGImageCreate(width, height,
                                               kBitsPerComponent,
                                               kBitsPerPixel,
@@ -145,7 +145,7 @@
     } else {
         resultImage = [UIImage imageWithCGImage:resultImageRef];
     }
-    //释放
+    // 释放
     if(resultImageRef){
         CFRelease(resultImageRef);
     }

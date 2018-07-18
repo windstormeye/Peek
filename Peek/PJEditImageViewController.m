@@ -20,26 +20,20 @@
 @property (nonatomic, readwrite, strong) PJEditImageBottomView *bottomView;
 @property (nonatomic, readwrite, strong) PJEditImageBackImageView *touchView;
 @property (nonatomic, readwrite, strong) PJEditImageBottomColorView *colorView;
+@property (nonatomic, readwrite, strong) PJEditImageScrollView *imageScrollView;
+
 
 @property (nonatomic, readwrite, strong) UIImageView *imgView;
-@property (nonatomic, readwrite, strong) PJEditImageScrollView *imageScrollView;
 @property (nonatomic, readwrite, strong) UIButton *cancleBtn;
 @property (nonatomic, readwrite, strong) UIButton *finishBtn;
 @property (nonatomic, readwrite, strong) NSMutableArray *imageViewArray;
 
-@property (nonatomic, readwrite, assign) NSInteger page;
+@property (nonatomic, readwrite, assign) int page;
 @property (nonatomic, readwrite, assign) BOOL isBlur;
 
 @end
 
 @implementation PJEditImageViewController
-
-- (NSArray *)imageArray {
-    if (!_imageArray) {
-        _imageArray = [NSMutableArray new];
-    }
-    return _imageArray;
-}
 
 - (PJEditImageScrollView *)imageScrollView {
     if (!_imageScrollView) {
@@ -60,7 +54,7 @@
             imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
             
             // 添加绘制view
-            PJEditImageBackImageView *touchView = [PJEditImageBackImageView initWithImage:image frame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT) lineWidth:5 lineColor:[UIColor blackColor]];
+            PJEditImageBackImageView *touchView = [PJEditImageBackImageView initWithImage:image frame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT) lineWidth:5 lineColor:RGB(50, 50, 50)];
             touchView.tag = 2000 + index;
             touchView.userInteractionEnabled = YES;
             [imageView addSubview:touchView];
@@ -91,6 +85,7 @@
 - (void)initView {
     self.isBlur = false;
     self.page = 0;
+    self.imageViewArray = [NSMutableArray new];
     
     [self.view addSubview:self.imageScrollView];
     
@@ -111,9 +106,9 @@
     [self.view addSubview:self.bottomView];
     self.bottomView.viewDelegate = self;
     
-    CGFloat marginX = (PJSCREEN_WIDTH - 50 * 4) / 5;
-    self.colorView = [[PJEditImageBottomColorView alloc] initWithFrame:CGRectMake(marginX * 2 + 50, PJSCREEN_HEIGHT - 180 - 50, 50, 180)];
+    self.colorView = [[PJEditImageBottomColorView alloc] initWithFrame:self.bottomView.frame];
     [self.view addSubview:self.colorView];
+    self.colorView.top = PJSCREEN_HEIGHT;
     self.colorView.viewDelegate = self;
     self.colorView.hidden = true;
 }
@@ -130,29 +125,62 @@
 
 - (void)PJEditImageBottomViewColorViewShow {
     self.colorView.hidden = !self.colorView.hidden;
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.colorView.bottom = PJSCREEN_HEIGHT;
+    } completion:nil];
 }
 
 - (void)PJEditImageBottomColorViewSelectedColor:(UIColor *)color {
-    [self.touchView setStrokeColor:color];
-    self.colorView.hidden = !self.colorView.hidden;
-    self.touchView.isBlur = false;
+    PJEditImageBackImageView *touchView = [self getTouchView];
+    if (touchView) {
+        [touchView setStrokeColor:color];
+        touchView.isBlur = false;
+    }
     _isBlur = false;
+    
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.colorView.top = PJSCREEN_HEIGHT;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            self.colorView.hidden = !self.colorView.hidden;
+        }
+    }];
 }
 
 - (void)PJEditImageBottomViewBackBtnClick {
-    [self.touchView revokeScreen];
+    PJEditImageBackImageView *touchView = [self getTouchView];
+    if (touchView) {
+        [touchView revokeScreen];
+    }
 }
 
 - (void)PJEditImageBottomViewBlurBtnClick {
     _isBlur = !_isBlur;
-    self.touchView.isBlur = _isBlur;
+    PJEditImageBackImageView *touchView = [self getTouchView];
+    if (touchView) {
+        touchView.isBlur = _isBlur;
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // 滑动时添加轻微震动
     [PJTapic select];
     CGFloat offsetX = scrollView.contentOffset.x;
-    self.page = (offsetX + 0.5 * scrollView.width) / scrollView.width;
+    self.page = (int)(offsetX + 0.5 * scrollView.width) / scrollView.width;
+}
+
+// 获取当前imageView上的touchView
+- (PJEditImageBackImageView *)getTouchView {
+    UIImageView *imageView = self.imageViewArray[self.page];
+    NSInteger index = 0;
+    PJEditImageBackImageView *touchView = nil;
+    for (UIView *view in imageView.subviews) {
+        if (view.tag == 2000 + self.page) {
+            touchView = (PJEditImageBackImageView *)view;
+        }
+        index ++;
+    }
+    return touchView;
 }
 
 @end
