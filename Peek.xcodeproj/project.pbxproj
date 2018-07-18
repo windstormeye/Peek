@@ -55,6 +55,7 @@
 		74ADA76920FD8B580044C966 /* PJEditImageBackImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA75E20FD8B580044C966 /* PJEditImageBackImageView.m */; };
 		74ADA76A20FD8B580044C966 /* PJEditImageBottomColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76020FD8B580044C966 /* PJEditImageBottomColorView.m */; };
 		74ADA76B20FD8B580044C966 /* PJEditImageStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76420FD8B580044C966 /* PJEditImageStroke.m */; };
+		74ADA76F20FEE31E0044C966 /* PJEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76E20FEE31E0044C966 /* PJEditImageScrollView.swift */; };
 		74C5CDE520D8AE9500DB072C /* PJNoteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */; };
 		74C5CDE920D8E5E100DB072C /* PJTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDE820D8E5E100DB072C /* PJTool.m */; };
 		74C5CDED20D94F8400DB072C /* PJNoteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDEC20D94F8400DB072C /* PJNoteHeaderView.m */; };
@@ -184,6 +185,7 @@
 		74ADA76320FD8B580044C966 /* PJEditImageBottomColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageBottomColorView.h; sourceTree = "<group>"; };
 		74ADA76420FD8B580044C966 /* PJEditImageStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditImageStroke.m; sourceTree = "<group>"; };
 		74ADA76520FD8B580044C966 /* PJEditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageViewController.h; sourceTree = "<group>"; };
+		74ADA76E20FEE31E0044C966 /* PJEditImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJEditImageScrollView.swift; sourceTree = "<group>"; };
 		74C5CDE320D8AE9500DB072C /* PJNoteCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJNoteCollectionView.h; sourceTree = "<group>"; };
 		74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNoteCollectionView.m; sourceTree = "<group>"; };
 		74C5CDE720D8E5E100DB072C /* PJTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJTool.h; sourceTree = "<group>"; };
@@ -673,6 +675,7 @@
 			children = (
 				74ADA76520FD8B580044C966 /* PJEditImageViewController.h */,
 				74ADA75A20FD8B580044C966 /* PJEditImageViewController.m */,
+				74ADA76D20FEE2E10044C966 /* scrollView */,
 				74ADA76C20FD8DB10044C966 /* bottomView */,
 				74ADA75C20FD8B580044C966 /* Stroke */,
 			);
@@ -701,6 +704,14 @@
 				74ADA75920FD8B580044C966 /* PJEditImageBottomView.m */,
 			);
 			path = bottomView;
+			sourceTree = "<group>";
+		};
+		74ADA76D20FEE2E10044C966 /* scrollView */ = {
+			isa = PBXGroup;
+			children = (
+				74ADA76E20FEE31E0044C966 /* PJEditImageScrollView.swift */,
+			);
+			path = scrollView;
 			sourceTree = "<group>";
 		};
 		74C5CDE620D8E5D300DB072C /* PJTool */ = {
@@ -1044,6 +1055,7 @@
 				74C5CDF120DA063D00DB072C /* PJHomeBottomView.m in Sources */,
 				744C3C3C1FADB33A00767B42 /* PJFriendHomeView.m in Sources */,
 				744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */,
+				74ADA76F20FEE31E0044C966 /* PJEditImageScrollView.swift in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
 				74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */,
 				743C84531F0B90A600D46EAC /* PJEditTableView.m in Sources */,

@@ -25,6 +25,7 @@
 
 + (PJEditImageBackImageView *)initWithImage:(UIImage *)image frame:(CGRect)frame lineWidth:(CGFloat)lineWidth lineColor:(UIColor *)lineColor {
     PJEditImageBackImageView *backGourp = [[PJEditImageBackImageView alloc] initWithFrame:frame];
+    backGourp.userInteractionEnabled = YES;
     backGourp.frame = frame;
     backGourp.image = image;
     backGourp.lineColor = lineColor;

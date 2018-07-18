@@ -3,3 +3,4 @@
 //
 
 #import "PJEditImageViewController.h"
+#import "PJEditImageTouchView.h"

@@ -13,6 +13,9 @@
 
 @interface PJEditImageBottomView()
 
+@property (nonatomic, readwrite, strong) UIButton *unDoBtn;
+@property (nonatomic, readwrite, strong) UIButton *strokeBtn;
+@property (nonatomic, readwrite, strong) UIButton *blurBtn;
 
 @end
 
@@ -37,36 +40,71 @@
     CGFloat marginX = (PJSCREEN_WIDTH - btnW * 4) / 5;
     
     // 撤回
-    UIButton *unDoBtn = [[UIButton alloc] initWithFrame:CGRectMake(marginX, 0, btnW, btnH)];
-    [self addSubview:unDoBtn];
-    [unDoBtn setImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
-    [unDoBtn addTarget:self action: @selector(undoBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.unDoBtn = [[UIButton alloc] initWithFrame:CGRectMake(marginX, 0, btnW, btnH)];
+    [self addSubview:self.unDoBtn];
+    self.unDoBtn.tag = 1000;
+    [self.unDoBtn setImage:[UIImage imageNamed:@"btn_revoke"] forState:UIControlStateNormal];
+    [self.unDoBtn setImage:[UIImage imageNamed:@"btn_revoke"] forState:UIControlStateHighlighted];
+    [self.unDoBtn setImage:[UIImage imageNamed:@"btn_revoke_h"] forState:UIControlStateSelected];
+    [self.unDoBtn setImage:[UIImage imageNamed:@"btn_revoke_h"]
+                  forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.unDoBtn addTarget:self action: @selector(undoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // 颜色选择
-    UIButton *strokeBtn = [[UIButton alloc] initWithFrame:CGRectMake(unDoBtn.frame.origin.x + unDoBtn.frame.size.width + marginX, 0, 50, 50)];
-    [self addSubview:strokeBtn];
-    [strokeBtn setImage:[UIImage imageNamed:@"stroke"] forState:UIControlStateNormal];
-    [strokeBtn addTarget:self action:@selector(strokeBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.strokeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    self.strokeBtn.centerX = self.centerX;
+    [self addSubview:self.strokeBtn];
+    self.strokeBtn.tag = 1001;
+    [self.strokeBtn setImage:[UIImage imageNamed:@"btn_pen"] forState:UIControlStateNormal];
+    [self.strokeBtn setImage:[UIImage imageNamed:@"btn_pen"] forState:UIControlStateHighlighted];
+    [self.strokeBtn setImage:[UIImage imageNamed:@"btn_pen_h"] forState:UIControlStateSelected];
+    [self.strokeBtn setImage:[UIImage imageNamed:@"btn_pen_h"]
+                    forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.strokeBtn addTarget:self action:@selector(strokeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // 马赛克
-    UIButton *blurBtn = [[UIButton alloc] initWithFrame:CGRectMake(strokeBtn.frame.origin.x + strokeBtn.frame.size.width + marginX, 0, btnW, btnH)];
-    [self addSubview:blurBtn];
-    [blurBtn setImage:[UIImage imageNamed:@"blur"] forState:UIControlStateNormal];
-    [blurBtn addTarget:self action:@selector(blurBtnClick) forControlEvents:UIControlEventTouchUpInside];
-
+    self.blurBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.width - marginX - btnW, 0, btnW, btnH)];
+    [self addSubview:self.blurBtn];
+    self.blurBtn.tag = 1002;
+    [self.blurBtn setImage:[UIImage imageNamed:@"btn_mosaic"] forState:UIControlStateNormal];
+    [self.blurBtn setImage:[UIImage imageNamed:@"btn_mosaic"] forState:UIControlStateHighlighted];
+    [self.blurBtn setImage:[UIImage imageNamed:@"btn_mosaic_h"] forState:UIControlStateSelected];
+    [self.blurBtn setImage:[UIImage imageNamed:@"btn_mosaic_h"]
+                  forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.blurBtn addTarget:self action:@selector(blurBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)undoBtnClick {
+- (void)undoBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    [self changeState:sender.tag];
     [_viewDelegate PJEditImageBottomViewBackBtnClick];
 }
 
-- (void)strokeBtnClick {
+- (void)strokeBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    [self changeState:sender.tag];
     [_viewDelegate PJEditImageBottomViewColorViewShow];
 }
 
-- (void)blurBtnClick {
+- (void)blurBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    [self changeState:sender.tag];
     [_viewDelegate PJEditImageBottomViewBlurBtnClick];
 }
 
+- (void)changeState:(NSInteger)buttonTag {
+    switch (buttonTag) {
+        case 1000:
+            self.strokeBtn.selected = NO;
+            self.blurBtn.selected = NO;
+            break;
+        case 1001:
+            self.unDoBtn.selected = NO;
+            self.blurBtn.selected = NO;
+        case 1002:
+            self.unDoBtn.selected = NO;
+            self.strokeBtn.selected = NO;
+    }
+}
 
 @end
