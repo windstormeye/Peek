@@ -20,7 +20,7 @@ class PJEditImageScrollView: UIScrollView {
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event)
-        if (view?.isKind(of: PJEditImageTouchView.self))! {
+        if ((view?.isKind(of: PJEditImageTouchView.self))! || (view?.isKind(of: UIImageView.self))!) {
             self.isScrollEnabled = false
         } else {
             self.isScrollEnabled = true

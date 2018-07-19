@@ -17,7 +17,6 @@
     UIView *_kImgContentView;
     UIImageView *_kAnswerImageView;
     UIImageView *_kOldImageView;
-    UIImageView *_kTagImageView;
     BOOL isTapic;
 }
 
@@ -36,7 +35,7 @@
     self.isRed = YES;
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    [self dealImageWithOpenCV:self.dealImageView];
 }
 
 - (void)dealImageWithOpenCV:(UIImage *)image {

@@ -56,6 +56,8 @@
 		74ADA76A20FD8B580044C966 /* PJEditImageBottomColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76020FD8B580044C966 /* PJEditImageBottomColorView.m */; };
 		74ADA76B20FD8B580044C966 /* PJEditImageStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76420FD8B580044C966 /* PJEditImageStroke.m */; };
 		74ADA76F20FEE31E0044C966 /* PJEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76E20FEE31E0044C966 /* PJEditImageScrollView.swift */; };
+		74ADA779210015410044C966 /* PJRecognizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA778210015410044C966 /* PJRecognizeViewController.m */; };
+		74ADA77E210021700044C966 /* UIImage+Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA77D210021700044C966 /* UIImage+Tag.m */; };
 		74C5CDE520D8AE9500DB072C /* PJNoteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */; };
 		74C5CDE920D8E5E100DB072C /* PJTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDE820D8E5E100DB072C /* PJTool.m */; };
 		74C5CDED20D94F8400DB072C /* PJNoteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDEC20D94F8400DB072C /* PJNoteHeaderView.m */; };
@@ -186,6 +188,10 @@
 		74ADA76420FD8B580044C966 /* PJEditImageStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditImageStroke.m; sourceTree = "<group>"; };
 		74ADA76520FD8B580044C966 /* PJEditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageViewController.h; sourceTree = "<group>"; };
 		74ADA76E20FEE31E0044C966 /* PJEditImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJEditImageScrollView.swift; sourceTree = "<group>"; };
+		74ADA777210015410044C966 /* PJRecognizeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJRecognizeViewController.h; sourceTree = "<group>"; };
+		74ADA778210015410044C966 /* PJRecognizeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJRecognizeViewController.m; sourceTree = "<group>"; };
+		74ADA77A2100213B0044C966 /* UIImage+Tag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tag.h"; sourceTree = "<group>"; };
+		74ADA77D210021700044C966 /* UIImage+Tag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tag.m"; sourceTree = "<group>"; };
 		74C5CDE320D8AE9500DB072C /* PJNoteCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJNoteCollectionView.h; sourceTree = "<group>"; };
 		74C5CDE420D8AE9500DB072C /* PJNoteCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNoteCollectionView.m; sourceTree = "<group>"; };
 		74C5CDE720D8E5E100DB072C /* PJTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJTool.h; sourceTree = "<group>"; };
@@ -267,6 +273,8 @@
 		741324A51F9DE56100FA0623 /* 卡片编辑 */ = {
 			isa = PBXGroup;
 			children = (
+				74ADA76D20FEE2E10044C966 /* backScrollView */,
+				74ADA7742100118B0044C966 /* recognizeViewController */,
 				74ADA75820FD8AF90044C966 /* EditViewController */,
 				741324A91F9EEA8300FA0623 /* bottomView */,
 				741324A61F9DE58800FA0623 /* PJCardViewController.h */,
@@ -510,6 +518,8 @@
 				74559DBE1EE010310081A0A5 /* PJUIImage+Extension.m */,
 				7454D8FC20D7FA740004C83E /* UIView+Position.h */,
 				7454D8FD20D7FA740004C83E /* UIView+Position.m */,
+				74ADA77A2100213B0044C966 /* UIImage+Tag.h */,
+				74ADA77D210021700044C966 /* UIImage+Tag.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -675,26 +685,13 @@
 			children = (
 				74ADA76520FD8B580044C966 /* PJEditImageViewController.h */,
 				74ADA75A20FD8B580044C966 /* PJEditImageViewController.m */,
-				74ADA76D20FEE2E10044C966 /* scrollView */,
+				74ADA77321000E9B0044C966 /* backImageView */,
+				74ADA77221000E560044C966 /* bottomColorView */,
+				74ADA77121000E410044C966 /* stroke */,
+				74ADA77021000E310044C966 /* touchView */,
 				74ADA76C20FD8DB10044C966 /* bottomView */,
-				74ADA75C20FD8B580044C966 /* Stroke */,
 			);
 			name = EditViewController;
-			sourceTree = "<group>";
-		};
-		74ADA75C20FD8B580044C966 /* Stroke */ = {
-			isa = PBXGroup;
-			children = (
-				74ADA75D20FD8B580044C966 /* PJEditImageTouchView.m */,
-				74ADA75E20FD8B580044C966 /* PJEditImageBackImageView.m */,
-				74ADA75F20FD8B580044C966 /* PJEditImageStroke.h */,
-				74ADA76020FD8B580044C966 /* PJEditImageBottomColorView.m */,
-				74ADA76120FD8B580044C966 /* PJEditImageTouchView.h */,
-				74ADA76220FD8B580044C966 /* PJEditImageBackImageView.h */,
-				74ADA76320FD8B580044C966 /* PJEditImageBottomColorView.h */,
-				74ADA76420FD8B580044C966 /* PJEditImageStroke.m */,
-			);
-			path = Stroke;
 			sourceTree = "<group>";
 		};
 		74ADA76C20FD8DB10044C966 /* bottomView */ = {
@@ -706,12 +703,58 @@
 			path = bottomView;
 			sourceTree = "<group>";
 		};
-		74ADA76D20FEE2E10044C966 /* scrollView */ = {
+		74ADA76D20FEE2E10044C966 /* backScrollView */ = {
 			isa = PBXGroup;
 			children = (
 				74ADA76E20FEE31E0044C966 /* PJEditImageScrollView.swift */,
 			);
-			path = scrollView;
+			path = backScrollView;
+			sourceTree = "<group>";
+		};
+		74ADA77021000E310044C966 /* touchView */ = {
+			isa = PBXGroup;
+			children = (
+				74ADA76120FD8B580044C966 /* PJEditImageTouchView.h */,
+				74ADA75D20FD8B580044C966 /* PJEditImageTouchView.m */,
+			);
+			path = touchView;
+			sourceTree = "<group>";
+		};
+		74ADA77121000E410044C966 /* stroke */ = {
+			isa = PBXGroup;
+			children = (
+				74ADA75F20FD8B580044C966 /* PJEditImageStroke.h */,
+				74ADA76420FD8B580044C966 /* PJEditImageStroke.m */,
+			);
+			name = stroke;
+			path = Stroke/stroke;
+			sourceTree = "<group>";
+		};
+		74ADA77221000E560044C966 /* bottomColorView */ = {
+			isa = PBXGroup;
+			children = (
+				74ADA76320FD8B580044C966 /* PJEditImageBottomColorView.h */,
+				74ADA76020FD8B580044C966 /* PJEditImageBottomColorView.m */,
+			);
+			path = bottomColorView;
+			sourceTree = "<group>";
+		};
+		74ADA77321000E9B0044C966 /* backImageView */ = {
+			isa = PBXGroup;
+			children = (
+				74ADA75E20FD8B580044C966 /* PJEditImageBackImageView.m */,
+				74ADA76220FD8B580044C966 /* PJEditImageBackImageView.h */,
+			);
+			path = backImageView;
+			sourceTree = "<group>";
+		};
+		74ADA7742100118B0044C966 /* recognizeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				74ADA777210015410044C966 /* PJRecognizeViewController.h */,
+				74ADA778210015410044C966 /* PJRecognizeViewController.m */,
+			);
+			name = recognizeViewController;
 			sourceTree = "<group>";
 		};
 		74C5CDE620D8E5D300DB072C /* PJTool */ = {
@@ -1014,6 +1057,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74ADA77E210021700044C966 /* UIImage+Tag.m in Sources */,
 				744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */,
 				7463F3F51FA753D600125448 /* PJUserForgetPasswdViewController.m in Sources */,
 				74559DBF1EE010310081A0A5 /* PJUIImage+Extension.m in Sources */,
@@ -1032,6 +1076,7 @@
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
 				745F334A20DC0099009C1991 /* PJCameraView.swift in Sources */,
 				74ADA76620FD8B580044C966 /* PJEditImageBottomView.m in Sources */,
+				74ADA779210015410044C966 /* PJRecognizeViewController.m in Sources */,
 				7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */,
 				7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */,
 				7454D8FE20D7FA740004C83E /* UIView+Position.m in Sources */,

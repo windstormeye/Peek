@@ -10,6 +10,9 @@
 #import "PJNoteCollectionView.h"
 #import "PJHomeBottomView.h"
 #import "PJEditImageViewController.h"
+#import "PJRecognizeViewController.h"
+#import "PJCardViewController.h"
+#import "UIImage+Tag.h"
 #import "Peek-Swift.h"
 
 @interface HomeViewController () <PJHomeBottomViewDelegate, PJCameraViewDelegate>
@@ -240,7 +243,9 @@
 // MARK: delegate
 
 - (void)cameraView:(UIImage *)takePhotoImage {
+    takePhotoImage.type = [NSString stringWithFormat:@"%d", (int)self.segmentIndex];
     [self.imageArray addObject:takePhotoImage];
+    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.cameraView.frame];
     imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
     imageView.image = takePhotoImage;
@@ -250,7 +255,6 @@
     imageView.layer.masksToBounds = YES;
     [self.view addSubview:imageView];
     
-    /// TODO: 给拍摄的照片添加点击事件
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoImageTapClick)];
     [imageView addGestureRecognizer:tap];
     imageView.userInteractionEnabled = YES;
@@ -270,8 +274,10 @@
 }
 
 - (void)photoImageTapClick {
-    PJEditImageViewController *vc = [PJEditImageViewController new];
+    PJRecognizeViewController *vc = [PJRecognizeViewController new];
     vc.imageArray = self.imageArray;
+//    PJCardViewController *vc = [PJCardViewController new];
+//    vc.dealImageView = self.imageArray[0];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
