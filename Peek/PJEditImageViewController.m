@@ -42,19 +42,22 @@
         _imageScrollView.userInteractionEnabled = YES;
         
         NSInteger index = 0;
-        for (UIImage *image in self.imageArray) {
+        for (UIImageView *imageView in self.imageViewDataArray) {
             UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(index * PJSCREEN_WIDTH, 0, _imageScrollView.width, _imageScrollView.height)];
             backView.backgroundColor = [UIColor clearColor];
             [_imageScrollView addSubview:backView];
             
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT)];
-            imageView.image = image;
             imageView.userInteractionEnabled = YES;
+            // 问题有可能出在这，因为重新addSubview到了一个新的view上。
             [backView addSubview:imageView];
-            imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+//            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT)];
+//            imageView.image = image;
+//            imageView.userInteractionEnabled = YES;
+//            [backView addSubview:imageView];
+//            imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
             
             // 添加绘制view
-            PJEditImageBackImageView *touchView = [PJEditImageBackImageView initWithImage:image frame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT) lineWidth:5 lineColor:RGB(50, 50, 50)];
+            PJEditImageBackImageView *touchView = [PJEditImageBackImageView initWithImage:imageView.image frame:CGRectMake(0, 0, imageView.width, imageView.height) lineWidth:5 lineColor:RGB(50, 50, 50)];
             touchView.tag = 2000 + index;
             touchView.userInteractionEnabled = YES;
             [imageView addSubview:touchView];
@@ -64,7 +67,7 @@
             
             index ++;
         }
-        _imageScrollView.contentSize = CGSizeMake(self.imageArray.count * PJSCREEN_WIDTH, 0);
+        _imageScrollView.contentSize = CGSizeMake(self.imageViewDataArray.count * PJSCREEN_WIDTH, 0);
         _imageScrollView.showsHorizontalScrollIndicator = NO;
         _imageScrollView.pagingEnabled = YES;
     }
@@ -92,7 +95,7 @@
     self.cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 50, 20)];
     [self.view addSubview:self.cancleBtn];
     [self.cancleBtn addTarget:self action:@selector(cancleBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.cancleBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [self.cancleBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
     [self.cancleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width - 10 - 50, 30, 50, 20)];
@@ -114,7 +117,7 @@
 }
 
 - (void)cancleBtnClick {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)finishBtnClick {

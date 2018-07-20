@@ -27,9 +27,14 @@
 @property (nonatomic, readwrite, strong) UIRefreshControl *collectionViewRefreshControl;
 @property (nonatomic, readwrite, strong) UIView *cameraTopView;
 @property (nonatomic, readwrite, strong) UIView *cameraCaverView;
-@property (nonatomic, readwrite, assign) NSInteger segmentIndex;
 
+@property (nonatomic, readwrite, assign) NSInteger segmentIndex;
+@property (nonatomic, readwrite, assign) BOOL isRecaptrue;
+@property (nonatomic, readwrite, assign) NSInteger recaptrueIndex;
+// 拍摄的照片
 @property (nonatomic, readwrite, strong) NSMutableArray *imageArray;
+// 右上角照片imageView集合
+@property (nonatomic, readwrite, strong) NSMutableArray *imageViewArray;
 
 @end
 
@@ -94,11 +99,14 @@
 
 - (void)initView {
     self.navBar.hidden = YES;
+    self.isRecaptrue = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.segmentIndex = 0;
+    self.recaptrueIndex = 0;
     
     self.isShowCollectionView = YES;
     self.imageArray = [NSMutableArray new];
+    self.imageViewArray = [NSMutableArray new];
     
     self.collectionViewRefreshControl = [UIRefreshControl new];
     [self.collectionViewRefreshControl addTarget:self
@@ -132,8 +140,14 @@
     self.bottomView = [[PJHomeBottomView alloc] initWithFrame:CGRectMake(0, self.view.height - 100, self.view.width, 100)];
     self.bottomView.viewDelegate = self;
     [self.view addSubview:self.bottomView];
+    
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraViewPan:)];
     [self.bottomView addGestureRecognizer:pan];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(PJRecognizeViewControllerRecaptrue:)
+                                                 name:PJRecognizeViewControllerRecaptrueNotification
+                                               object:nil];
 }
 
 
@@ -244,6 +258,13 @@
 
 - (void)cameraView:(UIImage *)takePhotoImage {
     takePhotoImage.type = [NSString stringWithFormat:@"%d", (int)self.segmentIndex];
+    if (self.isRecaptrue) {
+        self.imageArray[self.recaptrueIndex] = takePhotoImage;
+        [self photoImageTapClick];
+        self.isRecaptrue = NO;
+        return;
+    }
+    
     [self.imageArray addObject:takePhotoImage];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.cameraView.frame];
@@ -270,15 +291,28 @@
         
         imageView.y += imageCount * 2;
         imageView.x -= imageCount * 2;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.imageViewArray addObject:imageView];
+        }
     }];
 }
 
 - (void)photoImageTapClick {
     PJRecognizeViewController *vc = [PJRecognizeViewController new];
-    vc.imageArray = self.imageArray;
-//    PJCardViewController *vc = [PJCardViewController new];
-//    vc.dealImageView = self.imageArray[0];
-    [self presentViewController:vc animated:YES completion:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    vc.imageArray = [self.imageArray mutableCopy];
+    // 初始值为0，也相当于重头开始
+    vc.photoIndex = self.recaptrueIndex;
+
+    [self presentViewController:nav animated:YES completion:^{
+        for (UIImageView *imageView in self.imageViewArray) {
+            [imageView removeFromSuperview];
+        }
+        [self.imageViewArray removeAllObjects];
+        [self.imageArray removeAllObjects];
+        self.recaptrueIndex = 0;
+    }];
 }
 
 - (void)swipeGestureWithDirection:(UISwipeGestureRecognizerDirection)direction {
@@ -293,6 +327,16 @@
     }
     self.segmentView.segmentIndex = [NSNumber numberWithInteger:self.segmentIndex];
     [self.segmentView menuMoveByIndexWithIndex:self.segmentIndex];
+}
+
+- (void)PJRecognizeViewControllerRecaptrue:(NSNotification *)notify {
+    self.recaptrueIndex = [notify.userInfo[@"index"] intValue];
+    self.imageArray = notify.userInfo[@"imageArray"];
+    self.isRecaptrue = YES;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:PJRecognizeViewControllerRecaptrueNotification];
 }
 
 @end

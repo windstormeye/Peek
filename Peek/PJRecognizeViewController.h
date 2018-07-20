@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "PJBaseViewController.h"
 
-@interface PJRecognizeViewController : PJBaseViewController
+UIKIT_EXTERN NSNotificationName const PJRecognizeViewControllerRecaptrueNotification;
+UIKIT_EXTERN NSNotificationName const PJRecognizeViewControllerImageViewArrayNotification;
 
+@interface PJRecognizeViewController : UIViewController
+
+// 必传参数
 @property (nonatomic, readwrite, strong) NSArray *imageArray;
+@property (nonatomic, readwrite, assign) NSInteger photoIndex;
 
 @end

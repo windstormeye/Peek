@@ -10,7 +10,6 @@
 
 @interface PJEditImageViewController : UIViewController
 
-@property (nonatomic, strong) UIImage *inputImage;
-@property (nonatomic, strong) NSArray *imageArray;
+@property (nonatomic, readwrite, copy) NSArray *imageViewDataArray;
 
 @end
