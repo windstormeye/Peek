@@ -8,6 +8,11 @@
 
 #import "PJEditImageTouchView.h"
 #import "PJEditImageStroke.h"
+#import <QuartzCore/QuartzCore.h>
+
+#define kBitsPerComponent (8)
+#define kBitsPerPixel (32)
+#define kPixelChannelCount (4)
 
 @interface PJEditImageTouchView()
 
@@ -79,6 +84,37 @@
         [self.layer addSublayer:self.shapeLayer];
         self.imageLayer.mask = self.shapeLayer;
     }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame image:(UIImage *)image {
+    self = [self initWithFrame:frame];
+    self.image = [self transToMosaicImage:image blockLevel:20];
+    
+    long double rotate =0.0;
+    CGRect rect;
+    float translateX =0;
+    float translateY =0;
+    float scaleX =1.0;
+    float scaleY =1.0;
+    rotate = 3 *M_PI_2;
+    rect = CGRectMake(0,0, self.image.size.height, self.image.size.width);
+    translateX = -rect.size.height;
+    translateY = 0;
+    scaleY = rect.size.width/rect.size.height;
+    scaleX = rect.size.height/rect.size.width;
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context =UIGraphicsGetCurrentContext();
+    //做CTM变换
+    CGContextTranslateCTM(context,0.0, rect.size.height);
+    CGContextScaleCTM(context,1.0, -1.0);
+    CGContextRotateCTM(context, rotate);
+    CGContextTranslateCTM(context, translateX, translateY);
+    CGContextScaleCTM(context, scaleX, scaleY);
+    //绘制图片
+    CGContextDrawImage(context,CGRectMake(0,0, rect.size.width, rect.size.height), self.image.CGImage);
+    self.image =UIGraphicsGetImageFromCurrentImageContext();
+    
     return self;
 }
 
@@ -229,5 +265,91 @@
         CGPathRelease(self.blurPath);
     }
 }
+
+- (UIImage *)transToMosaicImage:(UIImage*)orginImage blockLevel:(NSUInteger)level {
+    //获取BitmapData
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGImageRef imgRef = orginImage.CGImage;
+    CGFloat width = CGImageGetWidth(imgRef);
+    CGFloat height = CGImageGetHeight(imgRef);
+    CGContextRef context = CGBitmapContextCreate (nil,
+                                                  width,
+                                                  height,
+                                                  kBitsPerComponent,        // 每个颜色值8bit
+                                                  width*kPixelChannelCount, // 每一行的像素点占用的字节数，每个像素点的ARGB四个通道各占8个bit
+                                                  colorSpace,
+                                                  kCGImageAlphaPremultipliedLast);
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), imgRef);
+    unsigned char *bitmapData = CGBitmapContextGetData (context);
+    
+    // 这里把BitmapData进行马赛克转换,就是用一个点的颜色填充一个level*level的正方形
+    unsigned char pixel[kPixelChannelCount] = {0};
+    NSUInteger index,preIndex;
+    for (NSUInteger i = 0; i < height - 1 ; i++) {
+        for (NSUInteger j = 0; j < width - 1; j++) {
+            index = i * width + j;
+            if (i % level == 0) {
+                if (j % level == 0) {
+                    memcpy(pixel, bitmapData + kPixelChannelCount*index, kPixelChannelCount);
+                }else{
+                    memcpy(bitmapData + kPixelChannelCount*index, pixel, kPixelChannelCount);
+                }
+            } else {
+                preIndex = (i-1)*width +j;
+                memcpy(bitmapData + kPixelChannelCount*index, bitmapData + kPixelChannelCount*preIndex, kPixelChannelCount);
+            }
+        }
+    }
+    
+    NSInteger dataLength = width*height* kPixelChannelCount;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, bitmapData, dataLength, NULL);
+    // 创建要输出的图像
+    CGImageRef mosaicImageRef = CGImageCreate(width, height,
+                                              kBitsPerComponent,
+                                              kBitsPerPixel,
+                                              width*kPixelChannelCount ,
+                                              colorSpace,
+                                              kCGImageAlphaPremultipliedLast,
+                                              provider,
+                                              NULL, NO,
+                                              kCGRenderingIntentDefault);
+    CGContextRef outputContext = CGBitmapContextCreate(nil,
+                                                       width,
+                                                       height,
+                                                       kBitsPerComponent,
+                                                       width*kPixelChannelCount,
+                                                       colorSpace,
+                                                       kCGImageAlphaPremultipliedLast);
+    CGContextDrawImage(outputContext, CGRectMake(0.0f, 0.0f, width, height), mosaicImageRef);
+    CGImageRef resultImageRef = CGBitmapContextCreateImage(outputContext);
+    UIImage *resultImage = nil;
+    if([UIImage respondsToSelector:@selector(imageWithCGImage:scale:orientation:)]) {
+        float scale = [[UIScreen mainScreen] scale];
+        resultImage = [UIImage imageWithCGImage:resultImageRef scale:scale orientation:UIImageOrientationUp];
+    } else {
+        resultImage = [UIImage imageWithCGImage:resultImageRef];
+    }
+    // 释放
+    if(resultImageRef){
+        CFRelease(resultImageRef);
+    }
+    if(mosaicImageRef){
+        CFRelease(mosaicImageRef);
+    }
+    if(colorSpace){
+        CGColorSpaceRelease(colorSpace);
+    }
+    if(provider){
+        CGDataProviderRelease(provider);
+    }
+    if(context){
+        CGContextRelease(context);
+    }
+    if(outputContext){
+        CGContextRelease(outputContext);
+    }
+    return resultImage;
+}
+
 
 @end

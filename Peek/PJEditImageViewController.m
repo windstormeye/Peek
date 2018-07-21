@@ -10,12 +10,13 @@
 #import "PJEditImageBottomView.h"
 #import "PJEditImageBackImageView.h"
 #import "PJEditImageBottomColorView.h"
+#import "PJEditImageTouchView.h"
 #import "Peek-Swift.h"
 
 #define PJSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define PJSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-@interface PJEditImageViewController () <PJEditImageBottomViewDelegate, PJEditImageBottomColorViewDelegate, UIScrollViewDelegate>
+@interface PJEditImageViewController () <PJEditImageBottomViewDelegate, PJEditImageBottomColorViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, readwrite, strong) PJEditImageBottomView *bottomView;
 @property (nonatomic, readwrite, strong) PJEditImageBackImageView *touchView;
@@ -37,33 +38,60 @@
 
 - (PJEditImageScrollView *)imageScrollView {
     if (!_imageScrollView) {
-        _imageScrollView = [[PJEditImageScrollView alloc] initWithFrame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT - self.bottomView.height)];
+        _imageScrollView = [[PJEditImageScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
         _imageScrollView.delegate = self;
-        _imageScrollView.userInteractionEnabled = YES;
         
         NSInteger index = 0;
         for (UIImageView *imageView in self.imageViewDataArray) {
-            UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(index * PJSCREEN_WIDTH, 0, _imageScrollView.width, _imageScrollView.height)];
+            UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(index * PJSCREEN_WIDTH, -20, _imageScrollView.width, _imageScrollView.height)];
             backView.backgroundColor = [UIColor clearColor];
             [_imageScrollView addSubview:backView];
             
-            imageView.userInteractionEnabled = YES;
-            // 问题有可能出在这，因为重新addSubview到了一个新的view上。
-            [backView addSubview:imageView];
-//            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT)];
-//            imageView.image = image;
-//            imageView.userInteractionEnabled = YES;
-//            [backView addSubview:imageView];
-//            imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            // 需要手动全部遍历出来
+            UIImageView *tempImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT)];
+            tempImageView.image = imageView.image;
+            tempImageView.userInteractionEnabled = YES;
+            [backView addSubview:tempImageView];
+            tempImageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            for (UIImageView *view in imageView.subviews) {
+                UIImageView *imgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                imgview.image = view.image;
+                [tempImageView addSubview:imgview];
+            }
             
-            // 添加绘制view
-            PJEditImageBackImageView *touchView = [PJEditImageBackImageView initWithImage:imageView.image frame:CGRectMake(0, 0, imageView.width, imageView.height) lineWidth:5 lineColor:RGB(50, 50, 50)];
-            touchView.tag = 2000 + index;
-            touchView.userInteractionEnabled = YES;
-            [imageView addSubview:touchView];
-            [imageView sendSubviewToBack:touchView];
+            UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchAction:)];
+            pinch.delegate = self;
+            [tempImageView addGestureRecognizer:pinch];
             
-            [self.imageViewArray addObject:imageView];
+            UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+            pan.delegate = self;
+            pan.minimumNumberOfTouches = 2;
+            pan.maximumNumberOfTouches = 2;
+            [tempImageView addGestureRecognizer:pan];
+            
+            PJEditImageTouchView *drawView = [[PJEditImageTouchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) image:tempImageView.image];
+            drawView.userInteractionEnabled = YES;
+            drawView.tag = 2000 + index;
+            [tempImageView addSubview:drawView];
+            
+            //创建一个蓝色的Layer
+            CALayer *foregroundLayer        = [CALayer layer];
+            foregroundLayer.bounds          = CGRectMake(0, 0, backView.width * 0.8, backView.height * 0.8);
+            foregroundLayer.backgroundColor = [UIColor redColor].CGColor;
+            //创建一个路径
+            UIBezierPath *apath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, backView.width, backView.height) cornerRadius:0];
+            //创建maskLayer
+            CAShapeLayer *maskLayer = [CAShapeLayer layer];
+            maskLayer.path = apath.CGPath;
+            maskLayer.fillColor = [UIColor whiteColor].CGColor;
+            maskLayer.fillRule = kCAFillRuleEvenOdd;
+            //设置位置
+            foregroundLayer.position = self.view.center;
+            //设置mask
+            foregroundLayer.mask = maskLayer;
+            [backView.layer addSublayer:foregroundLayer];
+            
+            [self.imageViewArray addObject:tempImageView];
             
             index ++;
         }
@@ -114,6 +142,26 @@
     self.colorView.top = PJSCREEN_HEIGHT;
     self.colorView.viewDelegate = self;
     self.colorView.hidden = true;
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
+- (void)pinchAction:(UIPinchGestureRecognizer *)pinch {
+    if (pinch.state==UIGestureRecognizerStateBegan || pinch.state==UIGestureRecognizerStateChanged) {
+        UIImageView *imageView = self.imageViewArray[self.page];
+        imageView.transform = CGAffineTransformScale(imageView.transform, pinch.scale, pinch.scale);
+        pinch.scale=1;
+    }
+}
+
+- (void)panAction:(UIPanGestureRecognizer *)pan {
+    CGPoint p = [pan translationInView:self.view];
+    UIImageView *imageView = self.imageViewArray[self.page];
+    CGRect frame = CGRectMake(p.x, p.y, imageView.width, imageView.height);
+    imageView.frame = frame;
+    self.imageViewArray[self.page] = imageView;
 }
 
 - (void)cancleBtnClick {
@@ -122,6 +170,28 @@
 
 - (void)finishBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (CAShapeLayer *)maskStyle2:(CGRect)rect {
+    //
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
+    
+    CGFloat x = rect.size.width/2.0;
+    CGFloat y = rect.size.height/2.0;
+    CGFloat radius = MIN(x, y)*0.8;
+    
+    UIBezierPath *cycle = [UIBezierPath bezierPathWithArcCenter:CGPointMake(x, y)
+                                                         radius:radius
+                                                     startAngle:0.0
+                                                       endAngle:2*M_PI
+                                                      clockwise:YES];
+    [path appendPath:cycle];
+    //
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = [path CGPath];
+    maskLayer.fillRule = kCAFillRuleEvenOdd;
+    
+    return maskLayer;
 }
 
 # pragma mark delegate
@@ -134,7 +204,7 @@
 }
 
 - (void)PJEditImageBottomColorViewSelectedColor:(UIColor *)color {
-    PJEditImageBackImageView *touchView = [self getTouchView];
+    PJEditImageTouchView *touchView = [self getTouchView];
     if (touchView) {
         [touchView setStrokeColor:color];
         touchView.isBlur = false;
@@ -151,7 +221,7 @@
 }
 
 - (void)PJEditImageBottomViewBackBtnClick {
-    PJEditImageBackImageView *touchView = [self getTouchView];
+    PJEditImageTouchView *touchView = [self getTouchView];
     if (touchView) {
         [touchView revokeScreen];
     }
@@ -159,7 +229,7 @@
 
 - (void)PJEditImageBottomViewBlurBtnClick {
     _isBlur = !_isBlur;
-    PJEditImageBackImageView *touchView = [self getTouchView];
+    PJEditImageTouchView *touchView = [self getTouchView];
     if (touchView) {
         touchView.isBlur = _isBlur;
     }
@@ -172,14 +242,19 @@
     self.page = (int)(offsetX + 0.5 * scrollView.width) / scrollView.width;
 }
 
+// 多手势并发
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
 // 获取当前imageView上的touchView
-- (PJEditImageBackImageView *)getTouchView {
+- (PJEditImageTouchView *)getTouchView {
     UIImageView *imageView = self.imageViewArray[self.page];
     NSInteger index = 0;
-    PJEditImageBackImageView *touchView = nil;
+    PJEditImageTouchView *touchView = nil;
     for (UIView *view in imageView.subviews) {
         if (view.tag == 2000 + self.page) {
-            touchView = (PJEditImageBackImageView *)view;
+            touchView = (PJEditImageTouchView *)view;
         }
         index ++;
     }
