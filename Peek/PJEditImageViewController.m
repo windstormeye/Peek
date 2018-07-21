@@ -74,22 +74,23 @@
             drawView.tag = 2000 + index;
             [tempImageView addSubview:drawView];
             
-            //创建一个蓝色的Layer
-            CALayer *foregroundLayer        = [CALayer layer];
-            foregroundLayer.bounds          = CGRectMake(0, 0, backView.width * 0.8, backView.height * 0.8);
-            foregroundLayer.backgroundColor = [UIColor redColor].CGColor;
-            //创建一个路径
-            UIBezierPath *apath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, backView.width, backView.height) cornerRadius:0];
-            //创建maskLayer
-            CAShapeLayer *maskLayer = [CAShapeLayer layer];
-            maskLayer.path = apath.CGPath;
-            maskLayer.fillColor = [UIColor whiteColor].CGColor;
-            maskLayer.fillRule = kCAFillRuleEvenOdd;
-            //设置位置
-            foregroundLayer.position = self.view.center;
-            //设置mask
-            foregroundLayer.mask = maskLayer;
-            [backView.layer addSublayer:foregroundLayer];
+            CAShapeLayer* cropLayer = [[CAShapeLayer alloc] init];
+            [backView.layer addSublayer:cropLayer];
+            // 创建一个绘制路径
+            CGMutablePathRef path =CGPathCreateMutable();
+            // 空心矩形的rect
+            CGRect cropRect = CGRectMake(backView.width * 0.1, backView.height * 0.1, backView.width * 0.8, backView.height * 0.8);
+            // 绘制rect
+            CGPathAddRect(path, nil, backView.bounds);
+            CGPathAddRect(path, nil, cropRect);
+            // 设置填充规则(重点)
+            [cropLayer setFillRule:kCAFillRuleEvenOdd];
+            // 关联绘制的path
+            [cropLayer setPath:path];
+            // 设置填充的颜色
+            [cropLayer setFillColor:[[UIColor whiteColor] CGColor]];
+            
+            
             
             [self.imageViewArray addObject:tempImageView];
             
@@ -149,19 +150,45 @@
 }
 
 - (void)pinchAction:(UIPinchGestureRecognizer *)pinch {
+    CGFloat scale = pinch.scale;
     if (pinch.state==UIGestureRecognizerStateBegan || pinch.state==UIGestureRecognizerStateChanged) {
         UIImageView *imageView = self.imageViewArray[self.page];
-        imageView.transform = CGAffineTransformScale(imageView.transform, pinch.scale, pinch.scale);
-        pinch.scale=1;
+        NSLog(@"%f", pinch.scale);
+        if (scale > 2) {
+            scale = 2;
+        } else if (scale < 1) {
+            scale = 0.9;
+        }
+        imageView.transform = CGAffineTransformMakeScale(scale, scale);
+        self.imageViewArray[self.page] = imageView;
     }
 }
 
 - (void)panAction:(UIPanGestureRecognizer *)pan {
-    CGPoint p = [pan translationInView:self.view];
-    UIImageView *imageView = self.imageViewArray[self.page];
-    CGRect frame = CGRectMake(p.x, p.y, imageView.width, imageView.height);
-    imageView.frame = frame;
-    self.imageViewArray[self.page] = imageView;
+    if (pan.state == UIGestureRecognizerStateBegan || pan.state == UIGestureRecognizerStateChanged) {
+        CGPoint p = [pan translationInView:self.view];
+        UIImageView *imageView = self.imageViewArray[self.page];
+        CGRect frame = CGRectMake(p.x, p.y, imageView.width, imageView.height);
+        imageView.frame = frame;
+        self.imageViewArray[self.page] = imageView;
+    } else if (pan.state == UIGestureRecognizerStateEnded) {
+        UIImageView *imageView = self.imageViewArray[self.page];
+        NSLog(@"%f", imageView.transform.tx);
+        if (imageView.transform.tx == 1 || imageView.transform.ty == 1) {
+            if (imageView.x != self.view.width * 0.1 || imageView.y != self.view.height * 0.1) {
+                CGRect frame = imageView.frame;
+                frame.origin.x = self.view.width * 0.1;
+                frame.origin.y = self.view.height * 0.1;
+                [UIView animateWithDuration:0.25 animations:^{
+                    imageView.frame = frame;
+                } completion:^(BOOL finished) {
+                    if (finished) {
+                        self.imageViewArray[self.page] = imageView;
+                    }
+                }];
+            }
+        }
+    }
 }
 
 - (void)cancleBtnClick {
@@ -236,8 +263,10 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    // 滑动时添加轻微震动
-    [PJTapic select];
+    if (self.imageViewArray.count != 1) {
+        [PJTapic select];
+    }
+
     CGFloat offsetX = scrollView.contentOffset.x;
     self.page = (int)(offsetX + 0.5 * scrollView.width) / scrollView.width;
 }

@@ -36,7 +36,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peek/PJRecognizeViewController.m"
-            timestampString = "553835611.036155"
+            timestampString = "553841692.910567"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "159"
@@ -52,12 +52,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peek/PJRecognizeViewController.m"
-            timestampString = "553835611.0365551"
+            timestampString = "553841692.910822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "223"
             endingLineNumber = "223"
             landmarkName = "-rightSwipe"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peek/PJEditImageViewController.m"
+            timestampString = "553841692.910889"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "-pinchAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
