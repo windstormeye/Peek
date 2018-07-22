@@ -14,7 +14,7 @@
 - (void)strokeWithContext:(CGContextRef)context {
     CGContextSetStrokeColorWithColor(context, [_lineColor CGColor]);
     CGContextSetFillColorWithColor(context, [_lineColor CGColor]);
-    CGContextSetLineWidth(context, 10);
+    CGContextSetLineWidth(context, 5);
     CGContextSetBlendMode(context, _blendMode);
     CGContextSetLineJoin(context, kCGLineJoinRound);
     CGContextBeginPath(context);

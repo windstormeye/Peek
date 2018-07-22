@@ -11,7 +11,6 @@
 #import "PJHomeBottomView.h"
 #import "PJEditImageViewController.h"
 #import "PJRecognizeViewController.h"
-#import "PJCardViewController.h"
 #import "UIImage+Tag.h"
 #import "Peek-Swift.h"
 

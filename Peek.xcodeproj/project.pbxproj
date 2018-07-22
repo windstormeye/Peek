@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74006FD71EFC0166008A151C /* PJLoginViewController.m */; };
 		74006FDC1EFC0192008A151C /* PJLoginSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74006FDB1EFC0192008A151C /* PJLoginSB.storyboard */; };
-		741324A81F9DE58800FA0623 /* PJCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741324A71F9DE58800FA0623 /* PJCardViewController.m */; };
-		741324AC1F9EEAA500FA0623 /* PJCardBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741324AB1F9EEAA500FA0623 /* PJCardBottomView.m */; };
-		741324AE1F9EEAB200FA0623 /* PJCardBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741324AD1F9EEAB200FA0623 /* PJCardBottomView.xib */; };
 		743C84531F0B90A600D46EAC /* PJEditTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C84521F0B90A600D46EAC /* PJEditTableView.m */; };
 		743C845C1F0B91C700D46EAC /* PJEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C845A1F0B91C700D46EAC /* PJEditTableViewCell.m */; };
 		743C845D1F0B91C700D46EAC /* PJEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 743C845B1F0B91C700D46EAC /* PJEditTableViewCell.xib */; };
@@ -52,7 +49,6 @@
 		74ADA76620FD8B580044C966 /* PJEditImageBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA75920FD8B580044C966 /* PJEditImageBottomView.m */; };
 		74ADA76720FD8B580044C966 /* PJEditImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA75A20FD8B580044C966 /* PJEditImageViewController.m */; };
 		74ADA76820FD8B580044C966 /* PJEditImageTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA75D20FD8B580044C966 /* PJEditImageTouchView.m */; };
-		74ADA76920FD8B580044C966 /* PJEditImageBackImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA75E20FD8B580044C966 /* PJEditImageBackImageView.m */; };
 		74ADA76A20FD8B580044C966 /* PJEditImageBottomColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76020FD8B580044C966 /* PJEditImageBottomColorView.m */; };
 		74ADA76B20FD8B580044C966 /* PJEditImageStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76420FD8B580044C966 /* PJEditImageStroke.m */; };
 		74ADA76F20FEE31E0044C966 /* PJEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADA76E20FEE31E0044C966 /* PJEditImageScrollView.swift */; };
@@ -95,11 +91,6 @@
 		74006FD61EFC0166008A151C /* PJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJLoginViewController.h; sourceTree = "<group>"; };
 		74006FD71EFC0166008A151C /* PJLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJLoginViewController.m; sourceTree = "<group>"; };
 		74006FDB1EFC0192008A151C /* PJLoginSB.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PJLoginSB.storyboard; sourceTree = "<group>"; };
-		741324A61F9DE58800FA0623 /* PJCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJCardViewController.h; sourceTree = "<group>"; };
-		741324A71F9DE58800FA0623 /* PJCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJCardViewController.m; sourceTree = "<group>"; };
-		741324AA1F9EEAA500FA0623 /* PJCardBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJCardBottomView.h; sourceTree = "<group>"; };
-		741324AB1F9EEAA500FA0623 /* PJCardBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJCardBottomView.m; sourceTree = "<group>"; };
-		741324AD1F9EEAB200FA0623 /* PJCardBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PJCardBottomView.xib; sourceTree = "<group>"; };
 		743C84511F0B90A600D46EAC /* PJEditTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditTableView.h; sourceTree = "<group>"; };
 		743C84521F0B90A600D46EAC /* PJEditTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditTableView.m; sourceTree = "<group>"; };
 		743C84591F0B91C700D46EAC /* PJEditTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditTableViewCell.h; sourceTree = "<group>"; };
@@ -179,11 +170,9 @@
 		74ADA75A20FD8B580044C966 /* PJEditImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditImageViewController.m; sourceTree = "<group>"; };
 		74ADA75B20FD8B580044C966 /* PJEditImageBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageBottomView.h; sourceTree = "<group>"; };
 		74ADA75D20FD8B580044C966 /* PJEditImageTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditImageTouchView.m; sourceTree = "<group>"; };
-		74ADA75E20FD8B580044C966 /* PJEditImageBackImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditImageBackImageView.m; sourceTree = "<group>"; };
 		74ADA75F20FD8B580044C966 /* PJEditImageStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageStroke.h; sourceTree = "<group>"; };
 		74ADA76020FD8B580044C966 /* PJEditImageBottomColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditImageBottomColorView.m; sourceTree = "<group>"; };
 		74ADA76120FD8B580044C966 /* PJEditImageTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageTouchView.h; sourceTree = "<group>"; };
-		74ADA76220FD8B580044C966 /* PJEditImageBackImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageBackImageView.h; sourceTree = "<group>"; };
 		74ADA76320FD8B580044C966 /* PJEditImageBottomColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageBottomColorView.h; sourceTree = "<group>"; };
 		74ADA76420FD8B580044C966 /* PJEditImageStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJEditImageStroke.m; sourceTree = "<group>"; };
 		74ADA76520FD8B580044C966 /* PJEditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJEditImageViewController.h; sourceTree = "<group>"; };
@@ -276,21 +265,8 @@
 				74ADA76D20FEE2E10044C966 /* backScrollView */,
 				74ADA7742100118B0044C966 /* recognizeViewController */,
 				74ADA75820FD8AF90044C966 /* EditViewController */,
-				741324A91F9EEA8300FA0623 /* bottomView */,
-				741324A61F9DE58800FA0623 /* PJCardViewController.h */,
-				741324A71F9DE58800FA0623 /* PJCardViewController.m */,
 			);
 			name = "卡片编辑";
-			sourceTree = "<group>";
-		};
-		741324A91F9EEA8300FA0623 /* bottomView */ = {
-			isa = PBXGroup;
-			children = (
-				741324AA1F9EEAA500FA0623 /* PJCardBottomView.h */,
-				741324AB1F9EEAA500FA0623 /* PJCardBottomView.m */,
-				741324AD1F9EEAB200FA0623 /* PJCardBottomView.xib */,
-			);
-			name = bottomView;
 			sourceTree = "<group>";
 		};
 		741324AF1FA037EB00FA0623 /* Constant */ = {
@@ -685,7 +661,6 @@
 			children = (
 				74ADA76520FD8B580044C966 /* PJEditImageViewController.h */,
 				74ADA75A20FD8B580044C966 /* PJEditImageViewController.m */,
-				74ADA77321000E9B0044C966 /* backImageView */,
 				74ADA77221000E560044C966 /* bottomColorView */,
 				74ADA77121000E410044C966 /* stroke */,
 				74ADA77021000E310044C966 /* touchView */,
@@ -737,15 +712,6 @@
 				74ADA76020FD8B580044C966 /* PJEditImageBottomColorView.m */,
 			);
 			path = bottomColorView;
-			sourceTree = "<group>";
-		};
-		74ADA77321000E9B0044C966 /* backImageView */ = {
-			isa = PBXGroup;
-			children = (
-				74ADA75E20FD8B580044C966 /* PJEditImageBackImageView.m */,
-				74ADA76220FD8B580044C966 /* PJEditImageBackImageView.h */,
-			);
-			path = backImageView;
 			sourceTree = "<group>";
 		};
 		74ADA7742100118B0044C966 /* recognizeViewController */ = {
@@ -940,7 +906,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				741324AE1F9EEAB200FA0623 /* PJCardBottomView.xib in Resources */,
 				74F969321EE862F200C164BE /* LeftSliderView.xib in Resources */,
 				743C84651F0B97FC00D46EAC /* PJEditHeaderView.xib in Resources */,
 				74006FDC1EFC0192008A151C /* PJLoginSB.storyboard in Resources */,
@@ -1081,9 +1046,7 @@
 				7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */,
 				7454D8FE20D7FA740004C83E /* UIView+Position.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
-				741324A81F9DE58800FA0623 /* PJCardViewController.m in Sources */,
 				74ADA76720FD8B580044C966 /* PJEditImageViewController.m in Sources */,
-				74ADA76920FD8B580044C966 /* PJEditImageBackImageView.m in Sources */,
 				744F0EAB1EF015B1005D4133 /* MessageViewController.m in Sources */,
 				743C845C1F0B91C700D46EAC /* PJEditTableViewCell.m in Sources */,
 				74559DBC1EE010230081A0A5 /* PJHUD.m in Sources */,
@@ -1092,7 +1055,6 @@
 				74A0D6221FA8A860006AB335 /* PJDevice.m in Sources */,
 				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
 				7454D90820D8056B0004C83E /* PJNoteCollectionViewCell.m in Sources */,
-				741324AC1F9EEAA500FA0623 /* PJCardBottomView.m in Sources */,
 				744C3C451FADB38800767B42 /* PJFriendTableViewCell.m in Sources */,
 				744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */,
 				744F0EA81EF013AE005D4133 /* EditViewController.m in Sources */,

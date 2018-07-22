@@ -8,18 +8,18 @@
 
 #import "PJEditImageViewController.h"
 #import "PJEditImageBottomView.h"
-#import "PJEditImageBackImageView.h"
 #import "PJEditImageBottomColorView.h"
 #import "PJEditImageTouchView.h"
 #import "Peek-Swift.h"
 
 #define PJSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define PJSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define MaxSCale 2.0  //最大缩放比例
+#define MinScale 1.0  //最小缩放比例
 
 @interface PJEditImageViewController () <PJEditImageBottomViewDelegate, PJEditImageBottomColorViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, readwrite, strong) PJEditImageBottomView *bottomView;
-@property (nonatomic, readwrite, strong) PJEditImageBackImageView *touchView;
 @property (nonatomic, readwrite, strong) PJEditImageBottomColorView *colorView;
 @property (nonatomic, readwrite, strong) PJEditImageScrollView *imageScrollView;
 
@@ -28,6 +28,8 @@
 @property (nonatomic, readwrite, strong) UIButton *cancleBtn;
 @property (nonatomic, readwrite, strong) UIButton *finishBtn;
 @property (nonatomic, readwrite, strong) NSMutableArray *imageViewArray;
+@property (nonatomic, readwrite, assign) CGPoint centerPoint;
+@property (nonatomic, readwrite, assign) CGFloat lastScale;
 
 @property (nonatomic, readwrite, assign) int page;
 @property (nonatomic, readwrite, assign) BOOL isBlur;
@@ -91,7 +93,6 @@
             [cropLayer setFillColor:[[UIColor whiteColor] CGColor]];
             
             
-            
             [self.imageViewArray addObject:tempImageView];
             
             index ++;
@@ -118,6 +119,7 @@
     self.isBlur = false;
     self.page = 0;
     self.imageViewArray = [NSMutableArray new];
+    self.lastScale = 1.0;
     
     [self.view addSubview:self.imageScrollView];
     
@@ -149,46 +151,141 @@
     }
 }
 
-- (void)pinchAction:(UIPinchGestureRecognizer *)pinch {
-    CGFloat scale = pinch.scale;
-    if (pinch.state==UIGestureRecognizerStateBegan || pinch.state==UIGestureRecognizerStateChanged) {
-        UIImageView *imageView = self.imageViewArray[self.page];
-        NSLog(@"%f", pinch.scale);
-        if (scale > 2) {
-            scale = 2;
-        } else if (scale < 1) {
-            scale = 0.9;
-        }
-        imageView.transform = CGAffineTransformMakeScale(scale, scale);
-        self.imageViewArray[self.page] = imageView;
+- (void)pinchAction:(UIPinchGestureRecognizer *)pinchGesture {
+    UIView *view = pinchGesture.view;
+    UIImageView *imageView = self.imageViewArray[self.page];
+    
+    if (pinchGesture.state == UIGestureRecognizerStateBegan ||
+        pinchGesture.state == UIGestureRecognizerStateChanged) {
+        view.transform = CGAffineTransformScale(view.transform, pinchGesture.scale, pinchGesture.scale);
+        pinchGesture.scale = 1;
     }
+    if (pinchGesture.state == UIGestureRecognizerStateEnded) {
+        if (imageView.frame.size.width <= self.view.width * 0.8 ) {
+            [UIView animateWithDuration:0.25 animations:^{
+                view.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            }];
+        }
+        if (imageView.frame.size.width > 3 * self.view.width * 0.8) {
+            [UIView animateWithDuration:0.25 animations:^{
+                view.transform = CGAffineTransformMakeScale(2.4, 2.4);
+            }];
+        }
+    }
+    
+    /*
+     *  防止因为放缩过程中的连滞，导致只有一个手指在放缩，
+     *  最终导致centerPoint在该单一手指位置，而不是两个手指的中间位置。
+     */
+    if([pinchGesture numberOfTouches] < 2) {
+        return;
+    }
+    if(pinchGesture.state == UIGestureRecognizerStateBegan) {
+        self.centerPoint = [pinchGesture locationInView:pinchGesture.view];
+        pinchGesture.scale=1.0;
+    }
+
+    [pinchGesture.view.layer setAffineTransform:CGAffineTransformScale(pinchGesture.view.transform, pinchGesture.scale, pinchGesture.scale)];
+    pinchGesture.scale = 1.0;
+
+    CGPoint nowPoint = [pinchGesture locationInView:pinchGesture.view];
+    [pinchGesture.view.layer setAffineTransform:
+     CGAffineTransformTranslate(pinchGesture.view.transform, nowPoint.x - self.centerPoint.x, nowPoint.y - self.centerPoint.y)];
+    self.centerPoint = [pinchGesture locationInView:pinchGesture.view];
 }
 
 - (void)panAction:(UIPanGestureRecognizer *)pan {
-    if (pan.state == UIGestureRecognizerStateBegan || pan.state == UIGestureRecognizerStateChanged) {
-        CGPoint p = [pan translationInView:self.view];
-        UIImageView *imageView = self.imageViewArray[self.page];
-        CGRect frame = CGRectMake(p.x, p.y, imageView.width, imageView.height);
-        imageView.frame = frame;
-        self.imageViewArray[self.page] = imageView;
-    } else if (pan.state == UIGestureRecognizerStateEnded) {
-        UIImageView *imageView = self.imageViewArray[self.page];
-        NSLog(@"%f", imageView.transform.tx);
-        if (imageView.transform.tx == 1 || imageView.transform.ty == 1) {
-            if (imageView.x != self.view.width * 0.1 || imageView.y != self.view.height * 0.1) {
-                CGRect frame = imageView.frame;
-                frame.origin.x = self.view.width * 0.1;
-                frame.origin.y = self.view.height * 0.1;
+    //获取拖拽手势在self.view 的拖拽姿态
+    CGPoint p = [pan translationInView:self.view];
+    //改变panGestureRecognizer.view的中心点 就是self.imageView的中心点
+    pan.view.center = CGPointMake(pan.view.center.x + p.x, pan.view.center.y + p.y);
+    if (pan.state == UIGestureRecognizerStateEnded) {
+        if (pan.view.width == self.view.width * 0.8) {
+            if (pan.view.x != self.view.width * 0.1 || pan.view.y != self.view.height * 0.1) {
                 [UIView animateWithDuration:0.25 animations:^{
-                    imageView.frame = frame;
+                    pan.view.x = self.view.width * 0.1;
+                    pan.view.y = self.view.height * 0.1;
                 } completion:^(BOOL finished) {
                     if (finished) {
-                        self.imageViewArray[self.page] = imageView;
+                        [PJTapic select];
                     }
+                }];
+            }
+        } else {
+            // 上部白边出现
+            if (pan.view.y > self.view.height * 0.1 && pan.view.x < self.view.width * 0.1 && pan.view.right > self.view.width * 0.9) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    pan.view.y = self.view.height * 0.1;
+                } completion:^(BOOL finished) {
+                    [PJTapic select];
+                }];
+            }
+            // 左部白边出现
+            if (pan.view.left > self.view.width * 0.1 && pan.view.right > self.view.width * 0.9 && pan.view.top < self.view.height * 0.1 && pan.view.bottom > self.view.height * 0.9) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    pan.view.x = self.view.width * 0.1;
+                } completion:^(BOOL finished) {
+                    [PJTapic select];
+                }];
+            }
+            // 右部白边出现
+            if (pan.view.right < self.view.width * 0.9 && pan.view.left < self.view.width * 0.1 && pan.view.top < self.view.height * 0.1) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    pan.view.right = self.view.width * 0.9;
+                } completion:^(BOOL finished) {
+                    [PJTapic select];
+                }];
+            }
+            // 下部空白出现
+            if (pan.view.bottom < self.view.height * 0.9 && pan.view.left < self.view.width * 0.1 && pan.view.right > self.view.width * 0.9) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    pan.view.bottom = self.view.height * 0.9;
+                } completion:^(BOOL finished) {
+                    [PJTapic select];
+                }];
+            }
+            
+            // 左上角白边出现
+            if (pan.view.x > self.view.width * 0.1 && pan.view.y > self.view.height * 0.1) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    pan.view.x = self.view.width * 0.1;
+                    pan.view.y = self.view.height * 0.1;
+                } completion:^(BOOL finished) {
+                    [PJTapic select];
+                }];
+            }
+            // 右上角白边出现
+            if (pan.view.right < self.view.width * 0.9 && pan.view.y > self.view.height * 0.1) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    pan.view.right = self.view.width * 0.9;
+                    pan.view.y = self.view.height * 0.1;
+                } completion:^(BOOL finished) {
+                    [PJTapic select];
+                }];
+            }
+            // 左下角白边出现
+            if (pan.view.left > self.view.width * 0.1 && pan.view.bottom < self.view.height * 0.9) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    pan.view.left = self.view.width * 0.1;
+                    pan.view.bottom = self.view.height * 0.9;
+                } completion:^(BOOL finished) {
+                    [PJTapic select];
+                }];
+            }
+            // 右下角白边出现
+            if (pan.view.right < self.view.width * 0.9 && pan.view.left < self.view.width * 0.1 && pan.view.top < self.view.height * 0.1 && pan.view.bottom < self.view.height * 0.9) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    pan.view.right = self.view.width * 0.9;
+                    pan.view.bottom = self.view.height * 0.9;
+                } completion:^(BOOL finished) {
+                    [PJTapic select];
                 }];
             }
         }
     }
+    
+    //重置拖拽手势的姿态
+    [pan setTranslation:CGPointZero inView:self.view];
 }
 
 - (void)cancleBtnClick {
@@ -263,10 +360,6 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if (self.imageViewArray.count != 1) {
-        [PJTapic select];
-    }
-
     CGFloat offsetX = scrollView.contentOffset.x;
     self.page = (int)(offsetX + 0.5 * scrollView.width) / scrollView.width;
 }
