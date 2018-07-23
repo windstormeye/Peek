@@ -13,6 +13,8 @@
 
 // 是否为马赛克
 @property (nonatomic, assign) BOOL isBlur;
+// 是否为画笔
+@property (nonatomic, readwrite, assign) BOOL isStroke;
 // 图片
 @property (nonatomic, strong) UIImage *image;
 

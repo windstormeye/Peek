@@ -56,11 +56,6 @@
                 [btn setImage:[UIImage imageNamed:@"btn_yellow_s"] forState:UIControlStateSelected];
                 break;
         }
-        
-        // 默认选中黑色
-        if (i == 0) {
-            btn.selected = YES;
-        }
         [self.btnArray addObject:btn];
     }
     
@@ -83,9 +78,6 @@
         case 4:
             [_viewDelegate PJEditImageBottomColorViewSelectedColor:RGB(244, 240, 163)]; break;
     }
-    
-    
-    
 }
 
 

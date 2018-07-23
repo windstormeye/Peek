@@ -66,9 +66,10 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _stroks = [[NSMutableArray alloc] initWithCapacity:1];
+        self.stroks = [[NSMutableArray alloc] initWithCapacity:1];
         self.blurPath = CGPathCreateMutable();
         self.backgroundColor = [UIColor clearColor];
+        self.isStroke = NO;
 
         self.imageLayer = [CALayer layer];
         self.imageLayer.frame = self.bounds;
@@ -82,6 +83,7 @@
         self.shapeLayer.strokeColor = [UIColor blueColor].CGColor;
         self.shapeLayer.fillColor = nil;
         [self.layer addSublayer:self.shapeLayer];
+        
         self.imageLayer.mask = self.shapeLayer;
     }
     return self;
@@ -127,67 +129,79 @@
 // drawRect是内存杀手，后续解决这个问题
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    for (PJEditImageStroke *stroke in _stroks) {
-        [stroke strokeWithContext:context];
+    if (self.isStroke) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        for (PJEditImageStroke *stroke in _stroks) {
+            [stroke strokeWithContext:context];
+        }
     }
-    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    if (_isBlur) {
-        UITouch *touch = [touches anyObject];
-        CGPoint point = [touch locationInView:self];
-        CGPathMoveToPoint(self.blurPath, NULL, point.x, point.y);
-        CGMutablePathRef path = CGPathCreateMutableCopy(self.blurPath);
-        self.shapeLayer.path = path;
-        CGPathRelease(path);
-        self.appendPaths = [NSMutableArray array];
-        [self.appendPaths addObject:[NSValue valueWithCGPoint:point]];
-        [self.fingerTouchArr addObject:@(true)];
-    } else {
-        currentPath = CGPathCreateMutable();
-        PJEditImageStroke *stroke = [[PJEditImageStroke alloc] init];
-        stroke.path = currentPath;
-        stroke.blendMode = _isEarse ? kCGBlendModeDestinationIn : kCGBlendModeNormal;
-        stroke.strokeWidth = _isEarse ? 20.0 : _lineWidth;
-        stroke.lineColor = _isEarse ? [UIColor clearColor] : _lineColor;
-        [_stroks addObject:stroke];
-        UITouch *touch = [touches anyObject];
-        CGPoint point = [touch locationInView:self];
-        CGPathMoveToPoint(currentPath, NULL, point.x, point.y);
-        [self.fingerTouchArr addObject:@(false)];
+    
+    if (self.isStroke) {
+        if (_isBlur) {
+            UITouch *touch = [touches anyObject];
+            CGPoint point = [touch locationInView:self];
+            CGPathMoveToPoint(self.blurPath, NULL, point.x, point.y);
+            CGMutablePathRef path = CGPathCreateMutableCopy(self.blurPath);
+            self.shapeLayer.path = path;
+            CGPathRelease(path);
+            
+            self.appendPaths = [NSMutableArray array];
+            [self.appendPaths addObject:[NSValue valueWithCGPoint:point]];
+            [self.fingerTouchArr addObject:@(true)];
+        } else {
+            currentPath = CGPathCreateMutable();
+            PJEditImageStroke *stroke = [[PJEditImageStroke alloc] init];
+            stroke.path = currentPath;
+            stroke.blendMode = _isEarse ? kCGBlendModeDestinationIn : kCGBlendModeNormal;
+            stroke.strokeWidth = _isEarse ? 20.0 : _lineWidth;
+            stroke.lineColor = _isEarse ? [UIColor clearColor] : _lineColor;
+            [self.stroks addObject:stroke];
+            
+            UITouch *touch = [touches anyObject];
+            CGPoint point = [touch locationInView:self];
+            CGPathMoveToPoint(currentPath, NULL, point.x, point.y);
+            [self.fingerTouchArr addObject:@(false)];
+        }
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
-    if (_isBlur) {
-        UITouch *touch = [touches anyObject];
-        CGPoint point = [touch locationInView:self];
-        CGPathAddLineToPoint(self.blurPath, NULL, point.x, point.y);
-        CGMutablePathRef path = CGPathCreateMutableCopy(self.blurPath);
-        self.shapeLayer.path = path;
-        CGPathRelease(path);
-        [self.appendPaths addObject:[NSValue valueWithCGPoint:point]];
-    } else {
-        UITouch *touch = [touches anyObject];
-        CGPoint point = [touch locationInView:self];
-        CGPathAddLineToPoint(currentPath, NULL, point.x, point.y);
-        [self setNeedsDisplay];
+    if (self.isStroke) {
+        if (_isBlur) {
+            UITouch *touch = [touches anyObject];
+            CGPoint point = [touch locationInView:self];
+            CGPathAddLineToPoint(self.blurPath, NULL, point.x, point.y);
+            CGMutablePathRef path = CGPathCreateMutableCopy(self.blurPath);
+            self.shapeLayer.path = path;
+            CGPathRelease(path);
+            
+            [self.appendPaths addObject:[NSValue valueWithCGPoint:point]];
+        } else {
+            UITouch *touch = [touches anyObject];
+            CGPoint point = [touch locationInView:self];
+            CGPathAddLineToPoint(currentPath, NULL, point.x, point.y);
+            
+            [self setNeedsDisplay];
+        }
     }
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    if (_isBlur) {
-        [self.allPaths addObject:self.appendPaths];
+    if (self.isStroke) {
+        if (_isBlur) {
+            [self.allPaths addObject:self.appendPaths];
+        }
     }
 }
 
 //清除
-- (void)clear{
+- (void)clear {
     [self.allPaths removeAllObjects];
     self.blurPath = CGPathCreateMutable();
     CGPathMoveToPoint(self.blurPath, NULL, 0, 0);
@@ -197,7 +211,7 @@
 }
 
 //撤回
-- (void)back{
+- (void)back {
     [self.allPaths removeLastObject];
     self.blurPath = CGPathCreateMutable();
     //如果撤回步骤大于0次执行撤回 否则执行清除操作
@@ -254,16 +268,6 @@
 - (void)setStrokeColor:(UIColor *)lineColor {
     _isEarse = NO;
     self.lineColor = lineColor;
-}
-
-// 因为不支持ARC，需要手动释放
-- (void)dealloc {
-    if (currentPath) {
-        CGPathRelease(currentPath);
-    }
-    if (self.blurPath) {
-        CGPathRelease(self.blurPath);
-    }
 }
 
 - (UIImage *)transToMosaicImage:(UIImage*)orginImage blockLevel:(NSUInteger)level {
@@ -351,5 +355,14 @@
     return resultImage;
 }
 
+// 因为不支持ARC，需要手动释放
+- (void)dealloc {
+    if (currentPath) {
+        CGPathRelease(currentPath);
+    }
+    if (self.blurPath) {
+        CGPathRelease(self.blurPath);
+    }
+}
 
 @end

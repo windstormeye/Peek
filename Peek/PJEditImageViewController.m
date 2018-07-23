@@ -155,20 +155,27 @@
     UIView *view = pinchGesture.view;
     UIImageView *imageView = self.imageViewArray[self.page];
     
+    if(pinchGesture.state == UIGestureRecognizerStateBegan) {
+        self.lastScale = [pinchGesture scale];
+        [self getTouchView].isStroke = NO;
+    }
+    
     if (pinchGesture.state == UIGestureRecognizerStateBegan ||
         pinchGesture.state == UIGestureRecognizerStateChanged) {
-        view.transform = CGAffineTransformScale(view.transform, pinchGesture.scale, pinchGesture.scale);
-        pinchGesture.scale = 1;
+        CGFloat currentScale = [[view.layer valueForKeyPath:@"transform.scale"] floatValue];
+        const CGFloat kMaxScale = 3.0;
+        CGFloat newScale = 1 -  (self.lastScale - pinchGesture.scale);
+        newScale = MIN(newScale, kMaxScale / currentScale);
+        if (newScale != kMaxScale) {
+            view.transform = CGAffineTransformScale(view.transform, newScale, newScale);
+        }
+        self.lastScale = pinchGesture.scale;
     }
+    
     if (pinchGesture.state == UIGestureRecognizerStateEnded) {
-        if (imageView.frame.size.width <= self.view.width * 0.8 ) {
+        if (imageView.frame.size.width < self.view.width * 0.8) {
             [UIView animateWithDuration:0.25 animations:^{
                 view.transform = CGAffineTransformMakeScale(0.8, 0.8);
-            }];
-        }
-        if (imageView.frame.size.width > 3 * self.view.width * 0.8) {
-            [UIView animateWithDuration:0.25 animations:^{
-                view.transform = CGAffineTransformMakeScale(2.4, 2.4);
             }];
         }
     }
@@ -181,20 +188,23 @@
         return;
     }
     if(pinchGesture.state == UIGestureRecognizerStateBegan) {
-        self.centerPoint = [pinchGesture locationInView:pinchGesture.view];
+        self.centerPoint = [pinchGesture locationInView:view];
         pinchGesture.scale=1.0;
     }
 
-    [pinchGesture.view.layer setAffineTransform:CGAffineTransformScale(pinchGesture.view.transform, pinchGesture.scale, pinchGesture.scale)];
+    [view.layer setAffineTransform:CGAffineTransformScale(view.transform, pinchGesture.scale, pinchGesture.scale)];
     pinchGesture.scale = 1.0;
 
-    CGPoint nowPoint = [pinchGesture locationInView:pinchGesture.view];
-    [pinchGesture.view.layer setAffineTransform:
-     CGAffineTransformTranslate(pinchGesture.view.transform, nowPoint.x - self.centerPoint.x, nowPoint.y - self.centerPoint.y)];
-    self.centerPoint = [pinchGesture locationInView:pinchGesture.view];
+    CGPoint nowPoint = [pinchGesture locationInView:view];
+    [view.layer setAffineTransform:
+     CGAffineTransformTranslate(view.transform, nowPoint.x - self.centerPoint.x, nowPoint.y - self.centerPoint.y)];
+    self.centerPoint = [pinchGesture locationInView:view];
 }
 
 - (void)panAction:(UIPanGestureRecognizer *)pan {
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        [self getTouchView].isStroke = NO;
+    }
     //获取拖拽手势在self.view 的拖拽姿态
     CGPoint p = [pan translationInView:self.view];
     //改变panGestureRecognizer.view的中心点 就是self.imageView的中心点
@@ -296,28 +306,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (CAShapeLayer *)maskStyle2:(CGRect)rect {
-    //
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
-    
-    CGFloat x = rect.size.width/2.0;
-    CGFloat y = rect.size.height/2.0;
-    CGFloat radius = MIN(x, y)*0.8;
-    
-    UIBezierPath *cycle = [UIBezierPath bezierPathWithArcCenter:CGPointMake(x, y)
-                                                         radius:radius
-                                                     startAngle:0.0
-                                                       endAngle:2*M_PI
-                                                      clockwise:YES];
-    [path appendPath:cycle];
-    //
-    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-    maskLayer.path = [path CGPath];
-    maskLayer.fillRule = kCAFillRuleEvenOdd;
-    
-    return maskLayer;
-}
-
 # pragma mark delegate
 
 - (void)PJEditImageBottomViewColorViewShow {
@@ -331,9 +319,10 @@
     PJEditImageTouchView *touchView = [self getTouchView];
     if (touchView) {
         [touchView setStrokeColor:color];
-        touchView.isBlur = false;
+        touchView.isBlur = NO;
+        touchView.isStroke = YES;
     }
-    _isBlur = false;
+    self.isBlur = false;
     
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.colorView.top = PJSCREEN_HEIGHT;
@@ -348,18 +337,21 @@
     PJEditImageTouchView *touchView = [self getTouchView];
     if (touchView) {
         [touchView revokeScreen];
+        touchView.isStroke = NO;
     }
 }
 
 - (void)PJEditImageBottomViewBlurBtnClick {
-    _isBlur = !_isBlur;
+    self.isBlur = !self.isBlur;
     PJEditImageTouchView *touchView = [self getTouchView];
     if (touchView) {
-        touchView.isBlur = _isBlur;
+        touchView.isBlur = self.isBlur;
+        touchView.isStroke = NO;
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self getTouchView].isStroke = NO;
     CGFloat offsetX = scrollView.contentOffset.x;
     self.page = (int)(offsetX + 0.5 * scrollView.width) / scrollView.width;
 }
