@@ -11,5 +11,6 @@
 @interface PJNoteCollectionView : UICollectionView
 
 @property (nonatomic, readwrite, strong) NSArray *dataArray;
+@property (nonatomic, readwrite, assign) BOOL isUserHeader;
 
 @end

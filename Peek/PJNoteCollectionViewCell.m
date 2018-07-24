@@ -7,11 +7,12 @@
 //
 
 #import "PJNoteCollectionViewCell.h"
+#import "Note+CoreDataProperties.h"
 
 @implementation PJNoteCollectionViewCell
 
-- (void)setDataSource:(NSDictionary *)dataSource {
-    _dataSource = dataSource;
+- (void)setNote:(Note *)note {
+    _note = note;
     [self initView];
 }
 
@@ -24,7 +25,7 @@
     // 背景图
     UIImageView *pageImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
     [self addSubview:pageImageView];
-    pageImageView.image = [UIImage imageNamed:self.dataSource[@"itemImageName"]];
+    pageImageView.image = [UIImage imageWithData:self.note.itemImage];
     pageImageView.contentMode = UIViewContentModeScaleAspectFill;
     pageImageView.clipsToBounds = YES;
     pageImageView.layer.cornerRadius = 2;
@@ -37,7 +38,7 @@
     UIImageView *secondImageView = [[UIImageView alloc] initWithFrame:pageImageView.frame];
     secondImageView.width -= 3;
     secondImageView.y += 3;
-    secondImageView.image = [UIImage imageNamed:self.dataSource[@"itemImageName"]];
+    secondImageView.image = [UIImage imageWithData:self.note.itemImage];
     secondImageView.contentMode = UIViewContentModeScaleAspectFill;
     secondImageView.clipsToBounds = YES;
     secondImageView.layer.cornerRadius = 2;
@@ -98,7 +99,7 @@
     [self addSubview:titleLabel];
     titleLabel.font = [UIFont systemFontOfSize:14];
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = self.dataSource[@"itemName"];
+    titleLabel.text = self.note.itemName;
 }
 
 @end

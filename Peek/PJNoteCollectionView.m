@@ -30,10 +30,15 @@ static NSString * const resureIdentifier = @"PJNoteCollectioview";
     self.delegate = self;
     self.dataSource = self;
     self.showsVerticalScrollIndicator = false;
+    self.alwaysBounceVertical = YES;
     
     self.dataArray = [@[] mutableCopy];
 
     [self registerClass:[PJNoteCollectionViewCell class] forCellWithReuseIdentifier:@"PJNoteCollectioview"];
+}
+
+- (void)setIsUserHeader:(BOOL)isUserHeader {
+    _isUserHeader = isUserHeader;
     [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"PJNoteHeaderView"];
 }
 
@@ -48,23 +53,25 @@ static NSString * const resureIdentifier = @"PJNoteCollectioview";
             [view removeFromSuperview];
         }
     }
-    cell.dataSource = self.dataArray[indexPath.row];
+    cell.note = self.dataArray[indexPath.row];
     return cell;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    //如果是头视图
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"PJNoteHeaderView" forIndexPath:indexPath];
-        if (header) {
-            for (UIView *view in header.subviews) {
-                [view removeFromSuperview];
+    if (self.isUserHeader) {
+        //如果是头视图
+        if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+            UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"PJNoteHeaderView" forIndexPath:indexPath];
+            if (header) {
+                for (UIView *view in header.subviews) {
+                    [view removeFromSuperview];
+                }
             }
+            PJNoteHeaderView *headerView = [[PJNoteHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.width, 100)];
+            //头视图添加view
+            [header addSubview:headerView];
+            return header;
         }
-        PJNoteHeaderView *headerView = [[PJNoteHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.width, 100)];
-        //头视图添加view
-        [header addSubview:headerView];
-        return header;
     }
     //如果底部视图
     //    if([kind isEqualToString:UICollectionElementKindSectionFooter]){

@@ -10,4 +10,17 @@
 
 @implementation PJTool
 
++ (UIImageView *)convertCreateImageWithUIView:(UIView *)view {
+    UIGraphicsBeginImageContext(view.bounds.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    [view.layer renderInContext:ctx];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.frame];
+    imageView.image = newImage;
+    
+    return imageView;
+}
+
 @end

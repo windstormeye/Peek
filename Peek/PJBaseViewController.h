@@ -14,6 +14,7 @@
 @property (nonatomic, readwrite, strong) UINavigationItem *navItem;
 @property (nonatomic, readwrite, assign) CGFloat statusBarHeight;
 @property (nonatomic, readwrite, assign) BOOL isLargeTitle;
+@property (nonatomic, readwrite, assign) BOOL isBottomShadow;
 
 
 - (void)leftBarButtonItemAction:(SEL)action;

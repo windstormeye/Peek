@@ -10,5 +10,6 @@
 
 @interface PJTool : NSObject
 
++ (UIImageView *)convertCreateImageWithUIView:(UIView *)view;
 
 @end

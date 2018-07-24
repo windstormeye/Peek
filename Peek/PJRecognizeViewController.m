@@ -10,6 +10,7 @@
 #import "PJOpenCV.h"
 #import "UIImage+Tag.h"
 #import "PJEditImageViewController.h"
+#import "PJCardImageView.h"
 
 NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRecognizeViewControllerRecaptrueNotification";
 
@@ -26,6 +27,7 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
 @property (nonatomic, readwrite, strong) UIButton *trashBtn;
 @property (nonatomic, readwrite, strong) UIView *bottomView;
 @property (nonatomic, readwrite, strong) UIImageView *tempImageView;
+@property (nonatomic, readwrite, strong) UILabel *tipsLabel;
 
 @end
 
@@ -43,8 +45,8 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
 - (void)initView {
     self.navigationController.navigationBar.hidden = YES;
     self.imageViewArray = [NSMutableArray new];
-    
     self.view.backgroundColor = [UIColor whiteColor];
+    
     self.cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 30, 50, 20)];
     [self.view addSubview:self.cancleBtn];
     [self.cancleBtn addTarget:self action:@selector(cancleBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -57,23 +59,40 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
     [self.finishBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [self.finishBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
+    UILabel *tipsLabel = [UILabel new];
+    if (self.imageArray.count > 1) {
+        tipsLabel.text = @"重按显示识别效果\n    轻扫切换内容";
+        tipsLabel.font = [UIFont boldSystemFontOfSize:12];
+    } else {
+        tipsLabel.text = @"重按显示识别效果";
+        tipsLabel.font = [UIFont boldSystemFontOfSize:14];
+    }
+    tipsLabel.numberOfLines = 2;
+    
+    tipsLabel.textColor = [UIColor blackColor];
+    [tipsLabel sizeToFit];
+    tipsLabel.height = 50;
+    tipsLabel.centerX = self.view.centerX;
+    tipsLabel.centerY = self.finishBtn.centerY;
+    [self.view addSubview:tipsLabel];
+    
     for (UIImage *image in self.imageArray) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        imageView.image = image;
-        imageView.userInteractionEnabled = YES;
-        imageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        PJCardImageView *cardImageview = [[PJCardImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        cardImageview.image = image;
+        cardImageview.userInteractionEnabled = YES;
+        cardImageview.transform = CGAffineTransformMakeScale(0.8, 0.8);
         
         UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundViewSwipe:)];
         leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-        [imageView addGestureRecognizer:leftSwipe];
+        [cardImageview addGestureRecognizer:leftSwipe];
         
         UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundViewSwipe:)];
         rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-        [imageView addGestureRecognizer:rightSwipe];
+        [cardImageview addGestureRecognizer:rightSwipe];
 
-        [self.imageViewArray addObject:imageView];
+        [self.imageViewArray addObject:cardImageview];
         
-        [self dealImageWithOpenCV:image contentView:imageView isRed:image.type.intValue];
+        [self dealImageWithOpenCV:image contentView:cardImageview isRed:image.type.intValue];
     }
     
     self.page = (int)self.photoIndex;
@@ -119,6 +138,26 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
 
 // 下一步
 - (void)rightBtnClick {
+    if (self.imageViewArray.count == 0) {
+        [PJTapic error];
+        [UIView animateWithDuration:0.25 animations:^{
+            self.tipsLabel.transform = CGAffineTransformMakeRotation(5 * M_PI/180.0);
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.tipsLabel.transform = CGAffineTransformMakeRotation(-5 * M_PI/180.0);
+                } completion:^(BOOL finished) {
+                    if (finished) {
+                        [UIView animateWithDuration:0.25 animations:^{
+                            self.tipsLabel.transform = CGAffineTransformMakeRotation(0 * M_PI/180.0);
+                        }];
+                    }
+                }];
+            }
+        }];
+        
+        return;
+    }
     PJEditImageViewController *vc = [PJEditImageViewController new];
     vc.imageViewDataArray = [self.imageViewArray mutableCopy];
     [self.navigationController pushViewController:vc animated:YES];
@@ -165,18 +204,23 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
                             self.bottomView.top = self.view.height;
                         } completion:^(BOOL finished) {
                             if (finished) {
-                                UILabel *tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 15)];
-                                [self.view addSubview:tipsLabel];
-                                tipsLabel.text = @"空空如也~快去拍一些吧";
-                                [tipsLabel sizeToFit];
-                                tipsLabel.centerX = self.view.centerX;
-                                tipsLabel.centerY = self.view.centerY;
-                                tipsLabel.textColor = [UIColor blackColor];
-                                tipsLabel.font = [UIFont systemFontOfSize:15];
-                                tipsLabel.alpha = 0;
+                                self.tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 15)];
+                                [self.view addSubview:self.tipsLabel];
+                                self.tipsLabel.text = @"空空如也~快去拍一些吧";
+                                [self.tipsLabel sizeToFit];
+                                self.tipsLabel.centerX = self.view.centerX;
+                                self.tipsLabel.centerY = self.view.centerY;
+                                self.tipsLabel.textColor = [UIColor blackColor];
+                                self.tipsLabel.font = [UIFont systemFontOfSize:15];
+                                self.tipsLabel.alpha = 0;
                                 
                                 [UIView animateWithDuration:0.25 animations:^{
-                                    tipsLabel.alpha = 1;
+                                    self.tipsLabel.alpha = 1;
+                                } completion:^(BOOL finished) {
+                                    if (finished) {
+                                        [self.finishBtn setTitleColor:RGB(150, 150, 150)
+                                                             forState:UIControlStateNormal];
+                                    }
                                 }];
                             }
                         }];
@@ -253,58 +297,54 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
     }
     self.page = page;
     if (self.imageViewArray.count != 0) {
-        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.tempImageView.right = 0;
-            self.tempImageView.alpha = 0;
-        } completion:^(BOOL finished) {
-            if (finished) {
-                [self.tempImageView removeFromSuperview];
-                self.tempImageView = nil;
-                
-                UIImageView *imageView = self.imageViewArray[page];
-                imageView.centerX = self.view.centerX;
-                imageView.transform = CGAffineTransformMakeScale(0.7, 0.7);
-                imageView.alpha = 1;
-                [self.view addSubview:imageView];
-                self.tempImageView = imageView;
-                [UIView animateWithDuration:0.25
-                                      delay:0
-                                    options:UIViewAnimationOptionCurveEaseIn
-                                 animations:^{
-                                     self.tempImageView.alpha = 1;
-                                     self.tempImageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-                                 } completion:^(BOOL finished) {
-                                     
-                                     [PJTapic select];
-                                     self.bottomButton.enabled = YES;
-                                     self.trashBtn.enabled = YES;
-                                 }];
-            }
-        }];
+        [UIView animateWithDuration:0.25 delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.tempImageView.right = 0;
+                             self.tempImageView.alpha = 0;
+                         } completion:^(BOOL finished) {
+                             if (finished) {
+                                 [self.tempImageView removeFromSuperview];
+                                 self.tempImageView = nil;
+                                 
+                                 UIImageView *imageView = self.imageViewArray[page];
+                                 imageView.centerX = self.view.centerX;
+                                 imageView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+                                 imageView.alpha = 1;
+                                 [self.view addSubview:imageView];
+                                 self.tempImageView = imageView;
+                                [UIView animateWithDuration:0.25
+                                                      delay:0
+                                                    options:UIViewAnimationOptionCurveEaseIn
+                                                 animations:^{
+                                                     self.tempImageView.alpha = 1;
+                                                     self.tempImageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+                                                 } completion:^(BOOL finished) {
+                                                     [PJTapic select];
+                                                     self.bottomButton.enabled = YES;
+                                                     self.trashBtn.enabled = YES;
+                                                 }];
+                             }
+                         }];
     }
 }
 
-- (void)dealImageWithOpenCV:(UIImage *)image contentView:(UIView *)contentView isRed:(NSInteger)type {
+- (void)dealImageWithOpenCV:(UIImage *)image contentView:(PJCardImageView *)contentView isRed:(NSInteger)type {
     UIImageView *newImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     UIImage *newImage = [UIImage new];
     if (type == 0) {
         newImage = [PJOpenCV imageToDiscernRed:image];
         UIImageView *_kAnswerImageView = newImageView;
         newImageView.image = newImage;
-        [contentView addSubview:_kAnswerImageView];
-        
         _kAnswerImageView.userInteractionEnabled = YES;
-        
-        // 标识
         _kAnswerImageView.tag = 1002;
+        contentView.openvcImageView = _kAnswerImageView;
     } else {
         newImage = [PJOpenCV imageToDiscernBlue:image];
         newImageView.image = newImage;
         UIImageView *_kAnswerImageView = newImageView;
-        [contentView addSubview:_kAnswerImageView];
-        
-        // 标识
         _kAnswerImageView.tag = 1002;
+        contentView.openvcImageView = _kAnswerImageView;
     }
 }
 
@@ -320,13 +360,8 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
         return;
     }
     
-    UIImageView *_kAnswerImageView = nil;
-    UIImageView *imageView = self.imageViewArray[page];
-    for (UIImageView *tampImageView in imageView.subviews) {
-        if (tampImageView.tag == 1002) {
-            _kAnswerImageView = tampImageView;
-        }
-    }
+    PJCardImageView *cardImageView = self.imageViewArray[page];
+    UIImageView *_kAnswerImageView = cardImageView.openvcImageView;
     // 支持3Dtouch
     NSArray *arrayTouch = [touches allObjects];
     UITouch *touch = (UITouch *)[arrayTouch lastObject];
@@ -341,7 +376,6 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
     if (_kAnswerImageView.alpha > 0.65) {
         _kAnswerImageView.alpha  = 1.0;
     }
-
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -349,13 +383,8 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
     if (page >= self.imageViewArray.count) {
         return;
     }
-    UIImageView *_kAnswerImageView = nil;
-    UIImageView *imageView = self.imageViewArray[page];
-    for (UIImageView *tampImageView in imageView.subviews) {
-        if (tampImageView.tag == 1002) {
-            _kAnswerImageView = tampImageView;
-        }
-    }
+    PJCardImageView *cardImageView = self.imageViewArray[page];
+    UIImageView *_kAnswerImageView = cardImageView.openvcImageView;
     _kAnswerImageView.alpha = 1;
 }
 

@@ -13,6 +13,7 @@
 #import "PJRecognizeViewController.h"
 #import "UIImage+Tag.h"
 #import "Peek-Swift.h"
+#import "PJCoreDateHelper.h"
 
 @interface HomeViewController () <PJHomeBottomViewDelegate, PJCameraViewDelegate>
 
@@ -112,6 +113,11 @@
                                           action:@selector(refreshAction)
                                 forControlEvents:UIControlEventValueChanged];
     
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isFirstComming"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(true) forKey:@"isFirstComming"];
+        [[PJCoreDateHelper shareInstance] initNoteDate];
+    }
+    
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.itemSize = CGSizeMake(SCREEN_WIDTH * 0.4, SCREEN_WIDTH * 0.4 * 1.3);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -120,14 +126,10 @@
     layout.minimumInteritemSpacing = 25;
     layout.sectionInset = UIEdgeInsetsMake(25, 25, 25, 25);
     self.collectionView = [[PJNoteCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) collectionViewLayout:layout];
+    self.collectionView.isUserHeader = YES;
     [self.collectionView addSubview:self.collectionViewRefreshControl];
-    self.collectionView.alwaysBounceVertical = YES;
     [self.view addSubview:self.collectionView];
-    self.collectionView.dataArray = @[@{@"itemImageName" : @"backImage", @"itemName" : @"一个人的旅程"},
-                                 @{@"itemImageName" : @"banner", @"itemName" : @"我的校园时光"},
-                                 @{@"itemImageName" : @"banner2", @"itemName" : @"你要很努力才行啊！"},
-                                 @{@"itemImageName" : @"banner3", @"itemName" : @"加油做自己💪"},
-                                 @{@"itemImageName" : @"banner4", @"itemName" : @"每一天都要过好！"},];
+    self.collectionView.dataArray = [[PJCoreDateHelper shareInstance] getNoteData];
     [self.collectionView reloadData];
 
     self.cameraView = [[PJCameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];

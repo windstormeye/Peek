@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class Note;
 @interface PJNoteCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, readwrite, strong) NSDictionary *dataSource;
+@property (nonatomic, readwrite, strong) Note *note;
 
 @end

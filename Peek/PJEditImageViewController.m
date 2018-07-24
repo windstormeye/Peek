@@ -10,6 +10,9 @@
 #import "PJEditImageBottomView.h"
 #import "PJEditImageBottomColorView.h"
 #import "PJEditImageTouchView.h"
+#import "PJCardImageView.h"
+#import "PJChoiceNoteViewController.h"
+#import "PJTool.h"
 #import "Peek-Swift.h"
 
 #define PJSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -27,6 +30,8 @@
 @property (nonatomic, readwrite, strong) UIImageView *imgView;
 @property (nonatomic, readwrite, strong) UIButton *cancleBtn;
 @property (nonatomic, readwrite, strong) UIButton *finishBtn;
+@property (nonatomic, readwrite, strong) UILabel *tipsLabel;
+
 @property (nonatomic, readwrite, strong) NSMutableArray *imageViewArray;
 @property (nonatomic, readwrite, assign) CGPoint centerPoint;
 @property (nonatomic, readwrite, assign) CGFloat lastScale;
@@ -44,37 +49,35 @@
         _imageScrollView.delegate = self;
         
         NSInteger index = 0;
-        for (UIImageView *imageView in self.imageViewDataArray) {
+        for (PJCardImageView *cardImageView in self.imageViewDataArray) {
             UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(index * PJSCREEN_WIDTH, -20, _imageScrollView.width, _imageScrollView.height)];
             backView.backgroundColor = [UIColor clearColor];
             [_imageScrollView addSubview:backView];
             
             // 需要手动全部遍历出来
-            UIImageView *tempImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT)];
-            tempImageView.image = imageView.image;
-            tempImageView.userInteractionEnabled = YES;
-            [backView addSubview:tempImageView];
-            tempImageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-            for (UIImageView *view in imageView.subviews) {
-                UIImageView *imgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-                imgview.image = view.image;
-                [tempImageView addSubview:imgview];
-            }
+            PJCardImageView *tempCardImageView = [[PJCardImageView alloc] initWithFrame:CGRectMake(0, 0, PJSCREEN_WIDTH, PJSCREEN_HEIGHT)];
+            tempCardImageView.image = cardImageView.image;
+            tempCardImageView.userInteractionEnabled = YES;
+            [backView addSubview:tempCardImageView];
+            tempCardImageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            UIImageView *opencvImageView = [[UIImageView alloc] initWithFrame:cardImageView.openvcImageView.frame];
+            opencvImageView.image = cardImageView.openvcImageView.image;
+            tempCardImageView.openvcImageView = opencvImageView;
             
             UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchAction:)];
             pinch.delegate = self;
-            [tempImageView addGestureRecognizer:pinch];
+            [tempCardImageView addGestureRecognizer:pinch];
             
             UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
             pan.delegate = self;
             pan.minimumNumberOfTouches = 2;
             pan.maximumNumberOfTouches = 2;
-            [tempImageView addGestureRecognizer:pan];
+            [tempCardImageView addGestureRecognizer:pan];
             
-            PJEditImageTouchView *drawView = [[PJEditImageTouchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) image:tempImageView.image];
+            PJEditImageTouchView *drawView = [[PJEditImageTouchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) image:tempCardImageView.image];
             drawView.userInteractionEnabled = YES;
             drawView.tag = 2000 + index;
-            [tempImageView addSubview:drawView];
+            tempCardImageView.touchView = drawView;
             
             CAShapeLayer* cropLayer = [[CAShapeLayer alloc] init];
             [backView.layer addSublayer:cropLayer];
@@ -93,7 +96,7 @@
             [cropLayer setFillColor:[[UIColor whiteColor] CGColor]];
             
             
-            [self.imageViewArray addObject:tempImageView];
+            [self.imageViewArray addObject:tempCardImageView];
             
             index ++;
         }
@@ -134,6 +137,16 @@
     [self.finishBtn addTarget:self action:@selector(finishBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.finishBtn setTitle:@"完成" forState:UIControlStateNormal];
     [self.finishBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    self.tipsLabel = [UILabel new];
+    self.tipsLabel.text = @"图片编辑";
+    self.tipsLabel.font = [UIFont boldSystemFontOfSize:17];
+    [self.view addSubview:self.tipsLabel];
+    self.tipsLabel.textColor = [UIColor blackColor];
+    [self.tipsLabel sizeToFit];
+    self.tipsLabel.centerX = self.view.centerX;
+    self.tipsLabel.centerY = self.finishBtn.centerY;
+    
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.bottomView = [PJEditImageBottomView new];
@@ -303,7 +316,14 @@
 }
 
 - (void)finishBtnClick {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    PJChoiceNoteViewController *vc = [PJChoiceNoteViewController new];
+    NSInteger index = 0;
+    for (PJCardImageView *card in self.imageViewArray) {
+        card.touchImageView = [PJTool convertCreateImageWithUIView:card.touchView];
+        index ++;
+    }
+    vc.cardImageViewArray = self.imageViewArray;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 # pragma mark delegate
@@ -329,6 +349,7 @@
     } completion:^(BOOL finished) {
         if (finished) {
             self.colorView.hidden = !self.colorView.hidden;
+            [self changeTipslabelText];
         }
     }];
 }
@@ -339,6 +360,7 @@
         [touchView revokeScreen];
         touchView.isStroke = NO;
     }
+    [self changeTipslabelText];
 }
 
 - (void)PJEditImageBottomViewBlurBtnClick {
@@ -348,6 +370,7 @@
         touchView.isBlur = self.isBlur;
         touchView.isStroke = NO;
     }
+    [self changeTipslabelText];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -373,6 +396,23 @@
         index ++;
     }
     return touchView;
+}
+
+- (void)changeTipslabelText {
+    if (self.isBlur) {
+        self.tipsLabel.text = @"马赛克只对原内容生效";
+        self.tipsLabel.textColor = [UIColor orangeColor];
+        self.tipsLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self.tipsLabel sizeToFit];
+        self.tipsLabel.centerX = self.view.centerX;
+    } else {
+        self.tipsLabel.text = @"图片编辑";
+        self.tipsLabel.font = [UIFont boldSystemFontOfSize:17];
+        self.tipsLabel.textColor = [UIColor blackColor];
+        [self.tipsLabel sizeToFit];
+        self.tipsLabel.centerX = self.view.centerX;
+        self.tipsLabel.centerY = self.finishBtn.centerY;
+    }
 }
 
 @end

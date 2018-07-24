@@ -23,10 +23,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor blackColor]};
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.navigationController.navigationBar.layer.shadowOpacity = 0.1;
-    self.navigationController.navigationBar.layer.shadowRadius = 8.0;
-    self.navigationController.navigationBar.layer.shadowOffset = CGSizeMake(0, 2);
 }
 
 - (UINavigationBar *)navBar {
@@ -45,6 +41,16 @@
     _isLargeTitle = isLargeTitle;
     self.navBar.prefersLargeTitles = isLargeTitle;
     self.navItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
+}
+
+- (void)setIsBottomShadow:(BOOL)isBottomShadow {
+    _isBottomShadow = isBottomShadow;
+    if (isBottomShadow) {
+        self.navigationController.navigationBar.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.navigationController.navigationBar.layer.shadowOpacity = 0.1;
+        self.navigationController.navigationBar.layer.shadowRadius = 8.0;
+        self.navigationController.navigationBar.layer.shadowOffset = CGSizeMake(0, 2);
+    }
 }
 
 - (void)leftBarButtonItemAction:(SEL)action {
