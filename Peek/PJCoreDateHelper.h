@@ -15,4 +15,7 @@
 - (void)initNoteDate;
 - (NSArray *)getNoteData;
 
+- (void)updateNoteContentData:(NSArray *)imageViewArray noteIndex:(NSInteger)noteIndex;
+- (NSArray *)getCardData:(NSInteger)noteIndex;
+
 @end

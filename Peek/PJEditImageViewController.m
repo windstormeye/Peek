@@ -132,10 +132,10 @@
     [self.cancleBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
     [self.cancleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width - 10 - 50, 30, 50, 20)];
+    self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width - 10 - 80, 30, 80, 20)];
     [self.view addSubview:self.finishBtn];
     [self.finishBtn addTarget:self action:@selector(finishBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.finishBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [self.finishBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [self.finishBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     self.tipsLabel = [UILabel new];

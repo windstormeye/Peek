@@ -59,7 +59,6 @@ static NSString * const resureIdentifier = @"PJNoteCollectioview";
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if (self.isUserHeader) {
-        //如果是头视图
         if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
             UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"PJNoteHeaderView" forIndexPath:indexPath];
             if (header) {
@@ -73,11 +72,11 @@ static NSString * const resureIdentifier = @"PJNoteCollectioview";
             return header;
         }
     }
-    //如果底部视图
-    //    if([kind isEqualToString:UICollectionElementKindSectionFooter]){
-    //
-    //    }
     return nil;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self.viewDelegate PJNoteCollectionViewdidSelectedIndex:indexPath.row];
 }
 
 

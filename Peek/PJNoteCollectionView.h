@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PJNoteCollectionViewDelegate <NSObject>
+
+- (void)PJNoteCollectionViewdidSelectedIndex:(NSInteger)index;
+
+@end
+
 @interface PJNoteCollectionView : UICollectionView
 
 @property (nonatomic, readwrite, strong) NSArray *dataArray;
 @property (nonatomic, readwrite, assign) BOOL isUserHeader;
+
+@property (nonatomic, readwrite, weak) id<PJNoteCollectionViewDelegate> viewDelegate;
 
 @end

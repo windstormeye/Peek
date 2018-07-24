@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Card" representedClassName="Card" syncable="YES">
+        <attribute name="itemId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="itemImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="itemOpencvImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="itemTouchImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="cardTooneNote" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="noteTomanyCard" inverseEntity="Note" syncable="YES"/>
+    </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">
+        <attribute name="itemId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="itemImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="itemImageName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="noteTomanyCard" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Card" inverseName="cardTooneNote" inverseEntity="Card" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Note" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Note" positionX="234" positionY="-18" width="128" height="120"/>
+        <element name="Card" positionX="234" positionY="18" width="128" height="120"/>
     </elements>
 </model>

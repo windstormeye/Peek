@@ -14,8 +14,9 @@
 #import "UIImage+Tag.h"
 #import "Peek-Swift.h"
 #import "PJCoreDateHelper.h"
+#import "PJNoteViewController.h"
 
-@interface HomeViewController () <PJHomeBottomViewDelegate, PJCameraViewDelegate>
+@interface HomeViewController () <PJHomeBottomViewDelegate, PJCameraViewDelegate, PJNoteCollectionViewDelegate>
 
 @property (nonatomic, readwrite, assign) BOOL isShowCollectionView;
 
@@ -127,6 +128,7 @@
     layout.sectionInset = UIEdgeInsetsMake(25, 25, 25, 25);
     self.collectionView = [[PJNoteCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) collectionViewLayout:layout];
     self.collectionView.isUserHeader = YES;
+    self.collectionView.viewDelegate = self;
     [self.collectionView addSubview:self.collectionViewRefreshControl];
     [self.view addSubview:self.collectionView];
     self.collectionView.dataArray = [[PJCoreDateHelper shareInstance] getNoteData];
@@ -314,6 +316,13 @@
         [self.imageArray removeAllObjects];
         self.recaptrueIndex = 0;
     }];
+}
+
+- (void)PJNoteCollectionViewdidSelectedIndex:(NSInteger)index {
+    NSArray *dataArray = [[PJCoreDateHelper shareInstance] getCardData:index];
+    PJNoteViewController *vc = [PJNoteViewController new];
+    vc.dataArray = dataArray;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)swipeGestureWithDirection:(UISwipeGestureRecognizerDirection)direction {

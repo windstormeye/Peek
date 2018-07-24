@@ -66,6 +66,9 @@
 		74C5CDED20D94F8400DB072C /* PJNoteHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDEC20D94F8400DB072C /* PJNoteHeaderView.m */; };
 		74C5CDF120DA063D00DB072C /* PJHomeBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C5CDF020DA063C00DB072C /* PJHomeBottomView.m */; };
 		74C63A3E1F47259400D0B35F /* PJModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63A3D1F47259400D0B35F /* PJModifyViewController.m */; };
+		74C63B7E2107774F0058FDCD /* Card+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63B7C2107774F0058FDCD /* Card+CoreDataClass.m */; };
+		74C63B7F2107774F0058FDCD /* Card+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63B7D2107774F0058FDCD /* Card+CoreDataProperties.m */; };
+		74C63B83210781CB0058FDCD /* PJNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63B82210781CB0058FDCD /* PJNoteViewController.m */; };
 		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
 		74EB3EDA20DF85C1001F0E0C /* PJSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */; };
 		74EC312320DF86B1005FC688 /* PJTools-UIView+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC312220DF86B1005FC688 /* PJTools-UIView+Position.swift */; };
@@ -210,6 +213,12 @@
 		74C5CDF020DA063C00DB072C /* PJHomeBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJHomeBottomView.m; sourceTree = "<group>"; };
 		74C63A3C1F47259400D0B35F /* PJModifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJModifyViewController.h; sourceTree = "<group>"; };
 		74C63A3D1F47259400D0B35F /* PJModifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJModifyViewController.m; sourceTree = "<group>"; };
+		74C63B7A2107774F0058FDCD /* Card+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Card+CoreDataProperties.h"; sourceTree = "<group>"; };
+		74C63B7B2107774F0058FDCD /* Card+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Card+CoreDataClass.h"; sourceTree = "<group>"; };
+		74C63B7C2107774F0058FDCD /* Card+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Card+CoreDataClass.m"; sourceTree = "<group>"; };
+		74C63B7D2107774F0058FDCD /* Card+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Card+CoreDataProperties.m"; sourceTree = "<group>"; };
+		74C63B81210781CB0058FDCD /* PJNoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJNoteViewController.h; sourceTree = "<group>"; };
+		74C63B82210781CB0058FDCD /* PJNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJNoteViewController.m; sourceTree = "<group>"; };
 		74EAE19F1F8A05BC0071F82D /* PJOpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJOpenCV.h; sourceTree = "<group>"; };
 		74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PJOpenCV.mm; sourceTree = "<group>"; };
 		74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJSegmentView.swift; sourceTree = "<group>"; };
@@ -626,8 +635,9 @@
 		749766212046E65D006F47F6 /* Page */ = {
 			isa = PBXGroup;
 			children = (
-				74404E1F2105794200405F3A /* Card */,
 				747E22E21EE27AC00078552D /* 首页 */,
+				74C63B80210781A30058FDCD /* Note */,
+				74404E1F2105794200405F3A /* Card */,
 				747E22E31EE27AD60078552D /* 个人中心 */,
 				7463F3F21FA753A300125448 /* 忘记密码 */,
 				743C84461F0B893900D46EAC /* 朋友 */,
@@ -708,12 +718,24 @@
 			name = PJDevice;
 			sourceTree = "<group>";
 		};
+		74A1557121076A200064AE43 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				74C63B7A2107774F0058FDCD /* Card+CoreDataProperties.h */,
+				74C63B7B2107774F0058FDCD /* Card+CoreDataClass.h */,
+				74C63B7C2107774F0058FDCD /* Card+CoreDataClass.m */,
+				74C63B7D2107774F0058FDCD /* Card+CoreDataProperties.m */,
+			);
+			name = Card;
+			sourceTree = "<group>";
+		};
 		74ACE52321059B8300C889BE /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				746730362105A9F000D4AD2F /* Note */,
 				74ACE52421059BB900C889BE /* PJCoreDateHelper.h */,
 				74ACE52521059BB900C889BE /* PJCoreDateHelper.m */,
+				74A1557121076A200064AE43 /* Card */,
+				746730362105A9F000D4AD2F /* Note */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -811,6 +833,15 @@
 				74C63A3D1F47259400D0B35F /* PJModifyViewController.m */,
 			);
 			name = "修改资料";
+			sourceTree = "<group>";
+		};
+		74C63B80210781A30058FDCD /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				74C63B81210781CB0058FDCD /* PJNoteViewController.h */,
+				74C63B82210781CB0058FDCD /* PJNoteViewController.m */,
+			);
+			name = Note;
 			sourceTree = "<group>";
 		};
 		74EAE19E1F8A059E0071F82D /* OpenCV */ = {
@@ -1102,6 +1133,7 @@
 				7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */,
 				7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */,
 				746730342105A9E200D4AD2F /* Note+CoreDataClass.m in Sources */,
+				74C63B83210781CB0058FDCD /* PJNoteViewController.m in Sources */,
 				7454D8FE20D7FA740004C83E /* UIView+Position.m in Sources */,
 				744327FE1EE5850C00E20FAC /* LeftSliderView.m in Sources */,
 				74ADA76720FD8B580044C966 /* PJEditImageViewController.m in Sources */,
@@ -1112,6 +1144,7 @@
 				74C5CDED20D94F8400DB072C /* PJNoteHeaderView.m in Sources */,
 				74A0D6221FA8A860006AB335 /* PJDevice.m in Sources */,
 				74559DB91EE00FB70081A0A5 /* UIViewController+Extension.m in Sources */,
+				74C63B7F2107774F0058FDCD /* Card+CoreDataProperties.m in Sources */,
 				7454D90820D8056B0004C83E /* PJNoteCollectionViewCell.m in Sources */,
 				746730352105A9E200D4AD2F /* Note+CoreDataProperties.m in Sources */,
 				744C3C451FADB38800767B42 /* PJFriendTableViewCell.m in Sources */,
@@ -1123,6 +1156,7 @@
 				744C3C3C1FADB33A00767B42 /* PJFriendHomeView.m in Sources */,
 				744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */,
 				74ADA76F20FEE31E0044C966 /* PJEditImageScrollView.swift in Sources */,
+				74C63B7E2107774F0058FDCD /* Card+CoreDataClass.m in Sources */,
 				74ACE52221057C0000C889BE /* PJCardImageView.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
 				74006FD81EFC0166008A151C /* PJLoginViewController.m in Sources */,

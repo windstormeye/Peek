@@ -8,6 +8,7 @@
 
 #import "PJChoiceNoteViewController.h"
 #import "PJNoteCollectionView.h"
+#import "PJNoteCollectionViewCell.h"
 #import "PJCoreDateHelper.h"
 #import "PJCardImageView.h"
 #import "PJTool.h"
@@ -22,11 +23,13 @@
 @property (nonatomic, readwrite, strong) UIScrollView *bottomScrollView;
 
 @property (nonatomic, readwrite, strong) NSMutableArray *tempCardImageViewArray;
-@property (nonatomic, readwrite, strong) NSMutableArray *tempCardImageViewCenterXArray;
+// 存放在小册里的照片数组
+@property (nonatomic, readwrite, strong) NSMutableArray<NSMutableArray *> *noteCellArray;
 @property (nonatomic, readwrite, assign) CGPoint previous_point;
 @property (nonatomic, readwrite, assign) CGPoint next_point;
 @property (nonatomic, readwrite, assign) CGPoint current_point;
 @property (nonatomic, readwrite, assign) NSInteger currentImageIndex;
+@property (nonatomic, readwrite, assign) NSIndexPath *previousIndexPath;
 
 @end
 
@@ -44,6 +47,7 @@
 - (void)initView {
     self.view.backgroundColor = [UIColor whiteColor];
     self.tempCardImageViewArray = [NSMutableArray new];
+    self.noteCellArray = [NSMutableArray new];
     
     self.cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 30, 50, 20)];
     [self.view addSubview:self.cancleBtn];
@@ -64,7 +68,7 @@
                          forState:UIControlStateNormal];
     
     UILabel *tipsLabel = [UILabel new];
-    tipsLabel.text = @"拖拽照片进行归档";
+    tipsLabel.text = @"长按拖拽照片进行归档";
     tipsLabel.font = [UIFont boldSystemFontOfSize:14];
     [tipsLabel sizeToFit];
     tipsLabel.textColor = [UIColor blackColor];
@@ -88,9 +92,15 @@
     self.collectionView.dataArray = [[PJCoreDateHelper shareInstance] getNoteData];
     [self.collectionView reloadData];
     
+    for (int i = 0; i < self.self.collectionView.dataArray.count; i++) {
+        NSMutableArray *arr = [NSMutableArray new];
+        [self.noteCellArray addObject: arr];
+    }
+    
     self.bottomScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.view.height - bottomViewHeigh, self.view.width, bottomViewHeigh + 20)];
     [self.view addSubview:self.bottomScrollView];
     self.bottomScrollView.backgroundColor = [UIColor whiteColor];
+    
     NSInteger index = 0;
     CGFloat marginX = 20;
     for (PJCardImageView *card in self.cardImageViewArray) {
@@ -121,7 +131,6 @@
         
         [self.bottomScrollView addSubview:tempCard];
         [self.tempCardImageViewArray addObject:tempCard];
-        [self.tempCardImageViewCenterXArray addObject:[NSNumber numberWithFloat:tempCard.centerX]];
         
         index ++;
     }
@@ -134,7 +143,14 @@
 }
 
 - (void)rightBtnClick {
-    
+    NSInteger index = 0;
+    for (NSArray* cards in self.noteCellArray) {
+        if (cards.count != 0) {
+            [[PJCoreDateHelper shareInstance] updateNoteContentData:cards noteIndex:index];
+        }
+        index ++;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)cardImageViewLongPress:(UILongPressGestureRecognizer *)presser {
@@ -154,6 +170,7 @@
 
 - (void)dragBegin:(UILongPressGestureRecognizer *)presser {
     CGPoint point = [presser locationInView:self.bottomScrollView];
+
     for (PJCardImageView *card in self.tempCardImageViewArray) {
         if (point.x >= card.left && point.x <= card.right && point.y >= card.top && point.y < card.bottom) {
             self.currentImageIndex = card.tag;
@@ -176,62 +193,84 @@
 }
 
 - (void)dragChanged:(UILongPressGestureRecognizer *)presser{
+    CGPoint point = [presser locationInView:self.view];
     if (self.moveImageView) {
-        CGPoint point = [presser locationInView:self.view];
         self.moveImageView.center = point;
-        
-        // 获取前后index
-        NSInteger p_index, n_index;
-        if (self.currentImageIndex == 0) {
-            p_index = 0;
-            n_index = 1;
-        } else if (self.currentImageIndex == self.tempCardImageViewArray.count - 1) {
-            p_index = self.currentImageIndex - 1;
-            n_index = self.tempCardImageViewArray.count - 1;
-        } else {
-            p_index = self.currentImageIndex - 1;
-            n_index = self.currentImageIndex + 1;
-        }
-        
-        // 有问题
-        NSNumber *p_Number = self.tempCardImageViewCenterXArray[p_index];
-        CGFloat p_centerX = p_Number.floatValue;
-        NSNumber *n_Number = self.tempCardImageViewCenterXArray[n_index];
-        CGFloat n_centerX = n_Number.floatValue;
-        
-        NSInteger cardIndex;
-        if (fabs(point.x - p_centerX) > fabs(point.x - n_centerX)) {
-            cardIndex = n_index;
-        } else {
-            cardIndex = p_index;
-        }
-        PJCardImageView *card = self.tempCardImageViewArray[cardIndex];
-        CGFloat cardCenterX = card.centerX;
-        PJCardImageView *currentCard = self.tempCardImageViewArray[self.currentImageIndex];
-        [UIView animateWithDuration:0.25 animations:^{
-            card.centerX = currentCard.centerX;
-        } completion:^(BOOL finished) {
-            if (finished) {
+        if (point.y < self.bottomScrollView.top) {
+            NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:[presser locationInView:self.collectionView]];
+            if (!indexPath || indexPath == self.previousIndexPath) {
+                if (!indexPath) {
+                    self.previousIndexPath = nil;
+                }
+                return;
+            }
+            PJNoteCollectionViewCell *cell = (PJNoteCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            if (cell) {
+                // 动画没开始之前就要赋值了，反之用户未等待动画进行完就撒手
+                self.previousIndexPath = indexPath;
                 [UIView animateWithDuration:0.25 animations:^{
-                    currentCard.centerX = cardCenterX;
+                    cell.transform = CGAffineTransformMakeScale(1.1, 1.1);
+                } completion:^(BOOL finished) {
+                    if (finished) {
+                        [UIView animateWithDuration:0.25 animations:^{
+                            cell.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                        }];
+                    }
                 }];
             }
-        }];
-        
+        }
     }
 }
 
 - (void)dragEnd:(UILongPressGestureRecognizer *)presser {
-    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.moveImageView.center = self.current_point;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            PJCardImageView *card = self.tempCardImageViewArray[self.currentImageIndex];
-            card.alpha = 1.0;
-            [self.moveImageView removeFromSuperview];
-            self.moveImageView = nil;
-        }
-    }];
+    PJCardImageView *card = self.tempCardImageViewArray[self.currentImageIndex];
+    if (!self.previousIndexPath) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.moveImageView.center = self.current_point;
+        }completion:^(BOOL finished) {
+            if (finished) {
+                card.alpha = 1.0;
+                [self.moveImageView removeFromSuperview];
+                self.moveImageView = nil;
+                self.previousIndexPath = nil;
+            }
+        }];
+    } else {
+        [UIView animateWithDuration:0.25 animations:^{
+            card.alpha = 0;
+            [card removeFromSuperview];
+            [self.tempCardImageViewArray removeObject:card];
+            
+            self.moveImageView.transform = CGAffineTransformMakeScale(2, 2);
+            self.moveImageView.alpha = 0;
+        } completion:^(BOOL finished) {
+            if (finished) {
+                
+                if (self.tempCardImageViewArray.count == 0) {
+                    self.collectionView.height += self.bottomScrollView.height;
+                    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                        self.bottomScrollView.alpha = 0;
+                        self.bottomScrollView.top = self.self.view.height;
+                    } completion:^(BOOL finished) {
+                        [self.bottomScrollView removeFromSuperview];
+                    }];
+                }
+                
+                NSMutableArray *array = self.noteCellArray[self.previousIndexPath.row];
+                [array addObject:card];
+            
+                NSInteger index = 0;
+                CGFloat marginX = 20;
+                for (PJCardImageView *tempCard in self.bottomScrollView.subviews) {
+                    [UIView animateWithDuration:0.25 animations:^{
+                        tempCard.x = marginX + index * (self.view.width * 0.17 + marginX);
+                    }];
+                    tempCard.tag = index;
+                    index ++;
+                }
+            }
+        }];
+    }
 }
 
 @end
