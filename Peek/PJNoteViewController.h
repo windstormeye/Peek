@@ -11,5 +11,7 @@
 @interface PJNoteViewController : UIViewController
 
 @property (nonatomic, readwrite, strong) NSArray *dataArray;
+@property (nonatomic, readwrite, copy) NSString *noteTitle;
+@property (nonatomic, readwrite, strong) UIImage *noteImage;
 
 @end

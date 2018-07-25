@@ -37,73 +37,73 @@
 }
 
 - (void)initViewWithName:(NSString *)nameStr {
-    [self initNavigationBar];
-    self.titleLabel.text = nameStr;
-    self.titleLabel.textColor = [UIColor blackColor];
-    [self.leftBarButton setImage:[[UIImage imageNamed:@"back"] imageWithColor:[UIColor blackColor]] forState:0];
-    [self.rightBarButton setImage:[[UIImage imageNamed:@"person_yes"] imageWithColor:[UIColor blackColor]] forState:0];
-    [self.rightBarButton addTarget:self action:@selector(finishUpdate) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    bgImgView.image = [UIImage imageNamed:@"背景"];
-    [self.view addSubview:bgImgView];
-    [self.view sendSubviewToBack:bgImgView];
-    // 开启高斯模糊
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    effectView.frame = CGRectMake(0, 0, bgImgView.frame.size.width, bgImgView.frame.size.height);
-    [bgImgView addSubview:effectView];
-    
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0,64 + 30, SCREEN_WIDTH, 60)];
-    [self.view addSubview:bgView];
-    bgView.backgroundColor = [UIColor whiteColor];
-    
-    _kFocusTxt = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.9)/2, (bgView.frame.size.height - 25)/2, SCREEN_WIDTH * 0.9, 25)];
-    [bgView addSubview:_kFocusTxt];
-    _kFocusTxt.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _kFocusTxt.font = [UIFont systemFontOfSize:18];
-    _kFocusTxt.textColor = [UIColor blackColor];
-    // 选中其为中文九宫格输入法
-    _kFocusTxt.keyboardType = UIKeyboardTypeNamePhonePad;
-    _kFocusTxt.returnKeyType = UIReturnKeyDone;
-    _kFocusTxt.textAlignment = NSTextAlignmentCenter;
-    // 使其成为第一响应者
-    [_kFocusTxt becomeFirstResponder];
-    
-    _kTipsLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.8)/2, bgView.frame.origin.y + bgView.frame.size.height + 10, SCREEN_WIDTH * 0.8, 15)];
-    [self.view addSubview:_kTipsLabel];
-    _kTipsLabel.textColor = RGB(70, 70, 70);
-    _kTipsLabel.font = [UIFont systemFontOfSize:12];
-    _kTipsLabel.hidden = true;
-    _kTipsLabel.textAlignment = NSTextAlignmentCenter;
-    
-    _kOneTxtView = [[UIView alloc] initWithFrame:CGRectMake(0, bgView.frame.origin.y + bgView.frame.size.height + 20, SCREEN_WIDTH, bgView.frame.size.height)];
-    [self.view addSubview:_kOneTxtView];
-    _kOneTxtView.backgroundColor = [UIColor whiteColor];
-    _kOneTxtView.hidden = true;
-
-    
-    _kOneTxt = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.9)/2, (_kOneTxtView.frame.size.height - 25)/2, SCREEN_WIDTH * 0.9, 25)];
-    [_kOneTxtView addSubview:_kOneTxt];
-    _kOneTxt.placeholder = @"输入新密码";
-    _kOneTxt.font = _kFocusTxt.font;
-    _kOneTxt.textAlignment = NSTextAlignmentLeft;
-    _kOneTxt.secureTextEntry = true;
-    _kOneTxt.returnKeyType = UIReturnKeyNext;
-    _kOneTxt.delegate = self;
-    
-    _kTwoTxtView = [[UIView alloc] initWithFrame:CGRectMake(0, _kOneTxtView.frame.origin.y + _kOneTxtView.frame.size.height + 1, SCREEN_WIDTH, _kOneTxtView.frame.size.height)];
-    [self.view addSubview:_kTwoTxtView];
-    _kTwoTxtView.backgroundColor = [UIColor whiteColor];
-    _kTwoTxtView.hidden = true;
-    
-    _kSecondTxt = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.9)/2, (_kTwoTxtView.frame.size.height - 25)/2, SCREEN_WIDTH * 0.9, 25)];
-    [_kTwoTxtView addSubview:_kSecondTxt];
-    _kSecondTxt.placeholder = @"再输入一次";
-    _kSecondTxt.font = _kOneTxt.font;
-    _kSecondTxt.textAlignment = NSTextAlignmentLeft;
-    _kSecondTxt.secureTextEntry = true;
-    _kSecondTxt.returnKeyType = UIReturnKeyDone;
-    _kSecondTxt.delegate = self;
+//    [self initNavigationBar];
+//    self.titleLabel.text = nameStr;
+//    self.titleLabel.textColor = [UIColor blackColor];
+//    [self.leftBarButton setImage:[[UIImage imageNamed:@"back"] imageWithColor:[UIColor blackColor]] forState:0];
+//    [self.rightBarButton setImage:[[UIImage imageNamed:@"person_yes"] imageWithColor:[UIColor blackColor]] forState:0];
+//    [self.rightBarButton addTarget:self action:@selector(finishUpdate) forControlEvents:UIControlEventTouchUpInside];
+//    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    bgImgView.image = [UIImage imageNamed:@"背景"];
+//    [self.view addSubview:bgImgView];
+//    [self.view sendSubviewToBack:bgImgView];
+//    // 开启高斯模糊
+//    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+//    effectView.frame = CGRectMake(0, 0, bgImgView.frame.size.width, bgImgView.frame.size.height);
+//    [bgImgView addSubview:effectView];
+//    
+//    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0,64 + 30, SCREEN_WIDTH, 60)];
+//    [self.view addSubview:bgView];
+//    bgView.backgroundColor = [UIColor whiteColor];
+//    
+//    _kFocusTxt = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.9)/2, (bgView.frame.size.height - 25)/2, SCREEN_WIDTH * 0.9, 25)];
+//    [bgView addSubview:_kFocusTxt];
+//    _kFocusTxt.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    _kFocusTxt.font = [UIFont systemFontOfSize:18];
+//    _kFocusTxt.textColor = [UIColor blackColor];
+//    // 选中其为中文九宫格输入法
+//    _kFocusTxt.keyboardType = UIKeyboardTypeNamePhonePad;
+//    _kFocusTxt.returnKeyType = UIReturnKeyDone;
+//    _kFocusTxt.textAlignment = NSTextAlignmentCenter;
+//    // 使其成为第一响应者
+//    [_kFocusTxt becomeFirstResponder];
+//    
+//    _kTipsLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.8)/2, bgView.frame.origin.y + bgView.frame.size.height + 10, SCREEN_WIDTH * 0.8, 15)];
+//    [self.view addSubview:_kTipsLabel];
+//    _kTipsLabel.textColor = RGB(70, 70, 70);
+//    _kTipsLabel.font = [UIFont systemFontOfSize:12];
+//    _kTipsLabel.hidden = true;
+//    _kTipsLabel.textAlignment = NSTextAlignmentCenter;
+//    
+//    _kOneTxtView = [[UIView alloc] initWithFrame:CGRectMake(0, bgView.frame.origin.y + bgView.frame.size.height + 20, SCREEN_WIDTH, bgView.frame.size.height)];
+//    [self.view addSubview:_kOneTxtView];
+//    _kOneTxtView.backgroundColor = [UIColor whiteColor];
+//    _kOneTxtView.hidden = true;
+//
+//    
+//    _kOneTxt = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.9)/2, (_kOneTxtView.frame.size.height - 25)/2, SCREEN_WIDTH * 0.9, 25)];
+//    [_kOneTxtView addSubview:_kOneTxt];
+//    _kOneTxt.placeholder = @"输入新密码";
+//    _kOneTxt.font = _kFocusTxt.font;
+//    _kOneTxt.textAlignment = NSTextAlignmentLeft;
+//    _kOneTxt.secureTextEntry = true;
+//    _kOneTxt.returnKeyType = UIReturnKeyNext;
+//    _kOneTxt.delegate = self;
+//    
+//    _kTwoTxtView = [[UIView alloc] initWithFrame:CGRectMake(0, _kOneTxtView.frame.origin.y + _kOneTxtView.frame.size.height + 1, SCREEN_WIDTH, _kOneTxtView.frame.size.height)];
+//    [self.view addSubview:_kTwoTxtView];
+//    _kTwoTxtView.backgroundColor = [UIColor whiteColor];
+//    _kTwoTxtView.hidden = true;
+//    
+//    _kSecondTxt = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - SCREEN_WIDTH * 0.9)/2, (_kTwoTxtView.frame.size.height - 25)/2, SCREEN_WIDTH * 0.9, 25)];
+//    [_kTwoTxtView addSubview:_kSecondTxt];
+//    _kSecondTxt.placeholder = @"再输入一次";
+//    _kSecondTxt.font = _kOneTxt.font;
+//    _kSecondTxt.textAlignment = NSTextAlignmentLeft;
+//    _kSecondTxt.secureTextEntry = true;
+//    _kSecondTxt.returnKeyType = UIReturnKeyDone;
+//    _kSecondTxt.delegate = self;
 }
 
 - (void)setType:(ModifyType)type {

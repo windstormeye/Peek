@@ -47,6 +47,7 @@
 		746730342105A9E200D4AD2F /* Note+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 746730322105A9E200D4AD2F /* Note+CoreDataClass.m */; };
 		746730352105A9E200D4AD2F /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 746730332105A9E200D4AD2F /* Note+CoreDataProperties.m */; };
 		7467303A2105C27000D4AD2F /* PJChoiceNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746730392105C27000D4AD2F /* PJChoiceNoteViewController.m */; };
+		748C7BA92108A4C50022F789 /* PJFavoriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 748C7BA82108A4C50022F789 /* PJFavoriteButton.m */; };
 		749766292046E741006F47F6 /* PJUserLoginCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 749766282046E741006F47F6 /* PJUserLoginCom.m */; };
 		7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 7497662B2046E74E006F47F6 /* PJUserRegister.m */; };
 		749766352046ECCF006F47F6 /* PJNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 749766342046ECCF006F47F6 /* PJNetWorkManager.m */; };
@@ -174,6 +175,8 @@
 		746730332105A9E200D4AD2F /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
 		746730382105C27000D4AD2F /* PJChoiceNoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJChoiceNoteViewController.h; sourceTree = "<group>"; };
 		746730392105C27000D4AD2F /* PJChoiceNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJChoiceNoteViewController.m; sourceTree = "<group>"; };
+		748C7BA72108A4C50022F789 /* PJFavoriteButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJFavoriteButton.h; sourceTree = "<group>"; };
+		748C7BA82108A4C50022F789 /* PJFavoriteButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJFavoriteButton.m; sourceTree = "<group>"; };
 		74911B071F89E165004A729A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../Downloads/opencv2.framework; sourceTree = "<group>"; };
 		749766272046E741006F47F6 /* PJUserLoginCom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserLoginCom.h; sourceTree = "<group>"; };
 		749766282046E741006F47F6 /* PJUserLoginCom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserLoginCom.m; sourceTree = "<group>"; };
@@ -439,6 +442,8 @@
 			children = (
 				7454D8F320D6C3950004C83E /* PJBaseViewController.h */,
 				7454D8F420D6C3950004C83E /* PJBaseViewController.m */,
+				748C7BA72108A4C50022F789 /* PJFavoriteButton.h */,
+				748C7BA82108A4C50022F789 /* PJFavoriteButton.m */,
 			);
 			name = BaseClass;
 			sourceTree = "<group>";
@@ -1109,6 +1114,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				748C7BA92108A4C50022F789 /* PJFavoriteButton.m in Sources */,
 				74ADA77E210021700044C966 /* UIImage+Tag.m in Sources */,
 				744F0E9E1EF003A3005D4133 /* leftHomeView.m in Sources */,
 				7463F3F51FA753D600125448 /* PJUserForgetPasswdViewController.m in Sources */,

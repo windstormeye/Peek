@@ -40,37 +40,37 @@
 }
 
 - (void)initView {
-    [self initNavigationBar];
-    self.titleLabel.text = @"我的资料";
-    self.titleLabel.textColor = [UIColor blackColor];
-    [self.leftBarButton setImage:[[UIImage imageNamed:@"back"] imageWithColor:[UIColor blackColor]] forState:0];
-    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    bgImgView.image = [UIImage imageNamed:@"背景"];
-    [self.view addSubview:bgImgView];
-    [self.view sendSubviewToBack:bgImgView];
-    
-    // 开启高斯模糊
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    effectView.frame = CGRectMake(0, 0, bgImgView.frame.size.width, bgImgView.frame.size.height);
-    [bgImgView addSubview:effectView];
-    
-    _kTableView = [[PJEditTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_WIDTH - 64) style:UITableViewStyleGrouped];
-    _kTableView.tableDelegate = self;
-    [self.view addSubview:_kTableView];
-    
-    _kBigImageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [self.view addSubview:_kBigImageView];
-//    _kBigImageView.backgroundColor = [UIColor blackColor];
-    UIVisualEffectView *effectBigView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    effectBigView.frame = CGRectMake(0, 0, _kBigImageView.frame.size.width, _kBigImageView.frame.size.height);
-    [_kBigImageView addSubview:effectBigView];
-    _kBigImageView.alpha = 0;
-    _kBigImageView.hidden = true;
-    UITapGestureRecognizer *viewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTap)];
-    [_kBigImageView addGestureRecognizer:viewTap];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyReload:) name:@"modifyNo"  object:nil];
+//    [self initNavigationBar];
+//    self.titleLabel.text = @"我的资料";
+//    self.titleLabel.textColor = [UIColor blackColor];
+//    [self.leftBarButton setImage:[[UIImage imageNamed:@"back"] imageWithColor:[UIColor blackColor]] forState:0];
+//    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    bgImgView.image = [UIImage imageNamed:@"背景"];
+//    [self.view addSubview:bgImgView];
+//    [self.view sendSubviewToBack:bgImgView];
+//    
+//    // 开启高斯模糊
+//    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+//    effectView.frame = CGRectMake(0, 0, bgImgView.frame.size.width, bgImgView.frame.size.height);
+//    [bgImgView addSubview:effectView];
+//    
+//    _kTableView = [[PJEditTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_WIDTH - 64) style:UITableViewStyleGrouped];
+//    _kTableView.tableDelegate = self;
+//    [self.view addSubview:_kTableView];
+//    
+//    _kBigImageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    [self.view addSubview:_kBigImageView];
+////    _kBigImageView.backgroundColor = [UIColor blackColor];
+//    UIVisualEffectView *effectBigView = [[UIVisualEffectView alloc] initWithEffect:effect];
+//    effectBigView.frame = CGRectMake(0, 0, _kBigImageView.frame.size.width, _kBigImageView.frame.size.height);
+//    [_kBigImageView addSubview:effectBigView];
+//    _kBigImageView.alpha = 0;
+//    _kBigImageView.hidden = true;
+//    UITapGestureRecognizer *viewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTap)];
+//    [_kBigImageView addGestureRecognizer:viewTap];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyReload:) name:@"modifyNo"  object:nil];
 }
 
 // 收到更新昵称通知

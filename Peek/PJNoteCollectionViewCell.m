@@ -7,7 +7,6 @@
 //
 
 #import "PJNoteCollectionViewCell.h"
-#import "Note+CoreDataProperties.h"
 
 @implementation PJNoteCollectionViewCell
 

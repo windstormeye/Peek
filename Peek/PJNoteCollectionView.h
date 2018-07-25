@@ -10,7 +10,7 @@
 
 @protocol PJNoteCollectionViewDelegate <NSObject>
 
-- (void)PJNoteCollectionViewdidSelectedIndex:(NSInteger)index;
+- (void)PJNoteCollectionViewdidSelectedIndex:(NSInteger)index noteTitle:(NSString *)noteTitle noteImage:(UIImage *)noteImage;
 
 @end
 

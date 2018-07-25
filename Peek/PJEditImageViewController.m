@@ -367,8 +367,8 @@
     self.isBlur = !self.isBlur;
     PJEditImageTouchView *touchView = [self getTouchView];
     if (touchView) {
+        touchView.isStroke = YES;
         touchView.isBlur = self.isBlur;
-        touchView.isStroke = NO;
     }
     [self changeTipslabelText];
 }

@@ -10,14 +10,29 @@
 
 @interface PJBaseViewController ()
 
+@property (nonatomic, strong, readwrite) UILabel *titleLabel;
+
 @end
 
 @implementation PJBaseViewController
 
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [UILabel new];
+        _titleLabel.textColor = [UIColor blackColor];
+        _titleLabel.text = self.navTitle;
+        _titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [_titleLabel sizeToFit];
+        _titleLabel.centerX = self.navBar.centerX;
+        _titleLabel.centerY = self.navBar.centerY;
+    }
+    return _titleLabel;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.isLargeTitle = YES;
+    self.isLargeTitle = NO;
 
     self.navigationController.navigationBar.translucent = false;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -37,6 +52,7 @@
     return [[UIApplication sharedApplication] statusBarFrame].size.height;
 }
 
+
 - (void)setIsLargeTitle:(BOOL)isLargeTitle {
     _isLargeTitle = isLargeTitle;
     self.navBar.prefersLargeTitles = isLargeTitle;
@@ -51,6 +67,11 @@
         self.navigationController.navigationBar.layer.shadowRadius = 8.0;
         self.navigationController.navigationBar.layer.shadowOffset = CGSizeMake(0, 2);
     }
+}
+
+- (void)setNavTitle:(NSString *)navTitle {
+    _navTitle = navTitle;
+    [self.navBar addSubview:self.titleLabel];
 }
 
 - (void)leftBarButtonItemAction:(SEL)action {

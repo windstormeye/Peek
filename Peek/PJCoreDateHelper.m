@@ -72,6 +72,10 @@ static PJCoreDateHelper *helper = nil;
     NSError *error = nil;
     NSArray *notes = [context executeFetchRequest:[Note fetchRequest] error:&error];
     
+    for (Note *note in notes) {
+        NSLog(@"%d, %@", note.itemId, note.itemName);
+    }
+    
     if (error != nil) {
         NSLog(@"%@", error);
     } else {
@@ -104,7 +108,7 @@ static PJCoreDateHelper *helper = nil;
         card.itemImage = itemImageData;
         card.itemTouchImage = itemTouchImageData;
         card.itemOpencvImage = itemOpencvImageData;
-        card.itemId = index;
+        [card setValue:[NSNumber numberWithInteger:noteIndex] forKey:@"itemId"];
         card.cardTooneNote = [self getNoteData:noteIndex];
         
         index ++;

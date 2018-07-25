@@ -318,10 +318,16 @@
     }];
 }
 
-- (void)PJNoteCollectionViewdidSelectedIndex:(NSInteger)index {
+- (void)PJNoteCollectionViewdidSelectedIndex:(NSInteger)index noteTitle:(NSString *)noteTitle noteImage:(UIImage *)noteImage {
     NSArray *dataArray = [[PJCoreDateHelper shareInstance] getCardData:index];
+    if (dataArray.count == 0) {
+        [PJTapic error];
+        return;
+    }
     PJNoteViewController *vc = [PJNoteViewController new];
     vc.dataArray = dataArray;
+    vc.noteTitle = noteTitle;
+    vc.noteImage = noteImage;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

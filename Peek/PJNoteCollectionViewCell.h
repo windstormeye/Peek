@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Note+CoreDataProperties.h"
 
 @class Note;
 @interface PJNoteCollectionViewCell : UICollectionViewCell

@@ -12,6 +12,8 @@
 
 @property (nonatomic, readwrite, strong) UINavigationBar *navBar;
 @property (nonatomic, readwrite, strong) UINavigationItem *navItem;
+
+@property (nonatomic, readwrite, copy) NSString *navTitle;
 @property (nonatomic, readwrite, assign) CGFloat statusBarHeight;
 @property (nonatomic, readwrite, assign) BOOL isLargeTitle;
 @property (nonatomic, readwrite, assign) BOOL isBottomShadow;

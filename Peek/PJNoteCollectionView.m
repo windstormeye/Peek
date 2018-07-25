@@ -76,7 +76,10 @@ static NSString * const resureIdentifier = @"PJNoteCollectioview";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self.viewDelegate PJNoteCollectionViewdidSelectedIndex:indexPath.row];
+    PJNoteCollectionViewCell *cell = (PJNoteCollectionViewCell *)[self cellForItemAtIndexPath:indexPath];
+    [self.viewDelegate PJNoteCollectionViewdidSelectedIndex:indexPath.row
+                                                  noteTitle:cell.note.itemName
+                                                  noteImage:[UIImage imageWithData:cell.note.itemImage]];
 }
 
 

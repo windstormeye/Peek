@@ -143,6 +143,10 @@
 }
 
 - (void)rightBtnClick {
+    if (self.tempCardImageViewArray.count != 0) {
+        [PJTapic error];
+        return;
+    }
     NSInteger index = 0;
     for (NSArray* cards in self.noteCellArray) {
         if (cards.count != 0) {

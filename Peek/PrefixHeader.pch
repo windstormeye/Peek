@@ -7,7 +7,7 @@
 //
 
 #import "constant.h"
-#import "UIViewController+Extension.h"
+//#import "UIViewController+Extension.h"
 #import "PJUIImage+Extension.h"
 #import "PJHUD.h"
 #import "PJTool.h"
