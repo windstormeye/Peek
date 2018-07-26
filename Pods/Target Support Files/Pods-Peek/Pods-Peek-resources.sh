@@ -84,38 +84,12 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf"
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf"
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf"
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf"
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf"
+  install_resource "${PODS_ROOT}/AVOSCloud/AVOS/AVOSCloud/AVOSCloud_Art.inc"
   install_resource "${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
-  install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist"
-  install_resource "${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
-  install_resource "${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle"
-  install_resource "${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialUI/UMSocialSDKResources.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf"
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf"
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf"
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf"
-  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf"
+  install_resource "${PODS_ROOT}/AVOSCloud/AVOS/AVOSCloud/AVOSCloud_Art.inc"
   install_resource "${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
-  install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist"
-  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist"
-  install_resource "${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
-  install_resource "${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle"
-  install_resource "${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialUI/UMSocialSDKResources.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

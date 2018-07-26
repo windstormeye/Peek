@@ -1,6 +1,0 @@
-framework module JVFloatLabeledTextField {
-  umbrella header "JVFloatLabeledTextField-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -11,5 +11,11 @@
 @interface PJTool : NSObject
 
 + (UIImageView *)convertCreateImageWithUIView:(UIView *)view;
-
++ (UIImage *)imageWithRoundCorner:(UIImage *)sourceImage
+                     cornerRadius:(CGFloat)cornerRadius
+                             size:(CGSize)size;
++ (void)addShadowToView:(UIView *)view
+            withOpacity:(float)shadowOpacity
+           shadowRadius:(CGFloat)shadowRadius
+        andCornerRadius:(CGFloat)cornerRadius;
 @end

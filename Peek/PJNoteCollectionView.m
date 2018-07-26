@@ -12,7 +12,7 @@
 
 static NSString * const resureIdentifier = @"PJNoteCollectioview";
 
-@interface PJNoteCollectionView() <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface PJNoteCollectionView() <UICollectionViewDataSource, UICollectionViewDelegate, PJNoteHeaderViewDelegate>
 @end
 
 @implementation PJNoteCollectionView
@@ -67,7 +67,7 @@ static NSString * const resureIdentifier = @"PJNoteCollectioview";
                 }
             }
             PJNoteHeaderView *headerView = [[PJNoteHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.width, 100)];
-            //头视图添加view
+            headerView.viewdelegate = self;
             [header addSubview:headerView];
             return header;
         }
@@ -82,5 +82,9 @@ static NSString * const resureIdentifier = @"PJNoteCollectioview";
                                                   noteImage:[UIImage imageWithData:cell.note.itemImage]];
 }
 
+
+- (void)PJNoteHeaderViewAvatarBtnClick {
+    [self.viewDelegate PJNoteCollectionViewHeaderViewAvatarBtnClick];
+}
 
 @end

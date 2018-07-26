@@ -40,14 +40,9 @@
     UIButton *avatarButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 40 - 25, 0, 40, 40)];
     avatarButton.centerY = self.centerY;
     [self addSubview:avatarButton];
-    if ([BmobUser currentUser]) {
-        [avatarButton sd_setImageWithURL:[[BmobUser currentUser] objectForKey:@"avatar_url"]
-                                forState:UIControlStateNormal
-                        placeholderImage:[UIImage imageNamed:@"avatar"]];
-    } else {
-        [avatarButton setImage:[UIImage imageNamed:@"avatar"]
-                      forState:UIControlStateNormal];
-    }
+    [avatarButton addTarget:self action:@selector(avatarBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [avatarButton setImage:[UIImage imageNamed:@"avatar"]
+                  forState:UIControlStateNormal];
     avatarButton.layer.cornerRadius = avatarButton.width / 2;
     avatarButton.layer.masksToBounds = YES;
 }
@@ -58,6 +53,11 @@
 
 - (void)addButtonClick {
     [PJTapic tap];
+}
+
+- (void)avatarBtnClick {
+    [PJTapic select];
+    [self.viewdelegate PJNoteHeaderViewAvatarBtnClick];
 }
 
 @end

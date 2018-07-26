@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PJNoteHeaderViewDelegate <NSObject>
+
+- (void)PJNoteHeaderViewAvatarBtnClick;
+
+@end
+
 @interface PJNoteHeaderView : UIView
+
+@property (nonatomic, readwrite, weak) id<PJNoteHeaderViewDelegate> viewdelegate;
 
 @end

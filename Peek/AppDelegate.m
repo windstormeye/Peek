@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "HomeViewController.h"
-#import "Register.h"
+#import <AVOSCloud/AVOSCloud.h>
+
 
 @interface AppDelegate ()
 
@@ -18,14 +19,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    [Register registerShareSDK:application didFinishLaunchingWithOptions:launchOptions];
-    
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:[HomeViewController new]];
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
-      
+    
+    [AVOSCloud setApplicationId:@"3s5wNrC33b2gr7vKQIgyVqFx-gzGzoHsz" clientKey:@"c0189IOWDn0RvxDJagrwv0ez"];
+    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    [AVOSCloud setAllLogsEnabled:YES];
+    
     return YES;
 }
 

@@ -15,6 +15,7 @@
 #import "Peek-Swift.h"
 #import "PJCoreDateHelper.h"
 #import "PJNoteViewController.h"
+#import "PJUserViewController.h"
 
 @interface HomeViewController () <PJHomeBottomViewDelegate, PJCameraViewDelegate, PJNoteCollectionViewDelegate>
 
@@ -349,6 +350,11 @@
     self.recaptrueIndex = [notify.userInfo[@"index"] intValue];
     self.imageArray = notify.userInfo[@"imageArray"];
     self.isRecaptrue = YES;
+}
+
+- (void)PJNoteCollectionViewHeaderViewAvatarBtnClick {
+    PJUserViewController *vc = [PJUserViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)dealloc {
