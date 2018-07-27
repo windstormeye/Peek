@@ -47,12 +47,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.imageViewArray = [NSMutableArray new];
     self.page = 0;
-
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    
-//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-//    }
     
     UIImageView *backImageView = [[UIImageView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:backImageView];

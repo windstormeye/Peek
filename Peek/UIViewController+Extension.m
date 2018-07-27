@@ -54,7 +54,7 @@ static const void *LeftBarButton = &LeftBarButton;
     [self.view addSubview:self.navigationBar];
     
     self.leftBarButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 35, 28, 28)];
-    [self.leftBarButton setImage:[[UIImage imageNamed:@"back"] imageWithColor:[UIColor whiteColor]] forState:0];
+    [self.leftBarButton setImage:[[UIImage imageNamed:@"back_black"] imageWithColor:[UIColor whiteColor]] forState:0];
     [self.leftBarButton addTarget:self action:@selector(extentionBack) forControlEvents:1<<6];
     [self.view addSubview:self.leftBarButton];
     

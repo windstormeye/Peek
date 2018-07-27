@@ -7,11 +7,18 @@
 //
 
 #import "PJUserViewController.h"
+#import "PJUserFavoriteView.h"
 
 @interface PJUserViewController ()
 
 @property (nonatomic, readwrite, strong) UIImageView *userBackImageView;
 @property (nonatomic, readwrite, strong) UILabel *userNameLabel;
+@property (nonatomic, readwrite, assign) NSInteger attentionNum;
+@property (nonatomic, readwrite, assign) NSInteger listNum;
+
+@property (nonatomic, readwrite, strong) PJUserFavoriteView *favoriteView;
+@property (nonatomic, readwrite, strong) UIScrollView *backScrollView;
+
 
 @end
 
@@ -28,14 +35,25 @@
 
 - (void)initView {
     self.view.backgroundColor = [UIColor whiteColor];
+    self.attentionNum = 0;
+    
+    UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 30, 50, 20)];
+    [self.view addSubview:cancleBtn];
+    [cancleBtn addTarget:self action:@selector(cancleBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [cancleBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
+    [cancleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    self.backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64)];
+    [self.view addSubview:self.backScrollView];
+    self.backScrollView.showsVerticalScrollIndicator = NO;
     
     self.userBackImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, self.view.width * 0.7, 140)];
-    [self.view addSubview:self.userBackImageView];
+    [self.backScrollView addSubview:self.userBackImageView];
     self.userBackImageView.image = [PJTool imageWithRoundCorner:[UIImage imageNamed:@"userBackView"] cornerRadius:8.0 size:self.userBackImageView.size];
     self.userBackImageView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.userBackImageView.layer.shadowRadius = 5;
     self.userBackImageView.layer.shadowOffset = CGSizeMake(0, 0);
-    self.userBackImageView.layer.shadowOpacity = 0.3;
+    self.userBackImageView.layer.shadowOpacity = 0.2;
     
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.userBackImageView.width, self.userBackImageView.height)];
     [self.userBackImageView addSubview:backView];
@@ -66,20 +84,20 @@
     
     CGFloat messageBtnW = self.view.width - self.userBackImageView.right - 20;
     UIButton *messageButton = [[UIButton alloc] initWithFrame:CGRectMake(self.userBackImageView.right + 10, self.userBackImageView.top, messageBtnW, self.userBackImageView.height * 0.55)];
-    [self.view addSubview:messageButton];
+    [self.backScrollView addSubview:messageButton];
     [messageButton setImage:[UIImage imageNamed:@"user_message"] forState:UIControlStateNormal];
     messageButton.backgroundColor = [UIColor whiteColor];
-    [PJTool addShadowToView:messageButton withOpacity:0.3 shadowRadius:5 andCornerRadius:8];
+    [PJTool addShadowToView:messageButton withOpacity:0.2 shadowRadius:5 andCornerRadius:8];
     
     UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(messageButton.left, messageButton.bottom + 10, messageButton.width, self.userBackImageView.height - messageButton.height - 10)];
-    [self.view addSubview:settingBtn];
+    [self.backScrollView addSubview:settingBtn];
     [settingBtn setImage:[UIImage imageNamed:@"user_setting"] forState:UIControlStateNormal];
     settingBtn.backgroundColor = [UIColor whiteColor];
-    [PJTool addShadowToView:settingBtn withOpacity:0.3 shadowRadius:5 andCornerRadius:8];
+    [PJTool addShadowToView:settingBtn withOpacity:0.2 shadowRadius:5 andCornerRadius:8];
     
     UIView *attentionListView = ({
         UIView *listView = [[UIView alloc] initWithFrame:CGRectMake(0, self.userBackImageView.bottom + 30, self.view.width, 40)];
-        [self.view addSubview:listView];
+        [self.backScrollView addSubview:listView];
         
         UIImageView *tagImageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 10, 20, 20)];
         tagImageView.image = [UIImage imageNamed:@"user_tag"];
@@ -92,16 +110,24 @@
         label.textColor = [UIColor blackColor];
         label.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
         
-        UIImageView *detailsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(listView.width - 30, tagImageView.y, tagImageView.width, listView.height)];
+        UIImageView *detailsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(listView.width - 30, (listView.height - listView.height * 0.7 * 0.7)/2, 15 * 0.7, listView.height * 0.7 * 0.7)];
         detailsImageView.image = [UIImage imageNamed:@"user_details"];
         [listView addSubview:detailsImageView];
+        
+        UILabel *attentionNumLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, listView.width - label.right - detailsImageView.width - 10, listView.height)];
+        attentionNumLabel.right = detailsImageView.left - 10;
+        [listView addSubview:attentionNumLabel];
+        attentionNumLabel.text = [NSString stringWithFormat:@"你现在有 %ld 个关注", (long)self.attentionNum];
+        attentionNumLabel.textAlignment = NSTextAlignmentRight;
+        attentionNumLabel.textColor = RGB(150, 150, 150);
+        attentionNumLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
         
         listView;
     });
     
     UIView *cardListView = ({
         UIView *listView = [[UIView alloc] initWithFrame:CGRectMake(0, self.userBackImageView.bottom + 30 + 40 + 20, self.view.width, 40)];
-        [self.view addSubview:listView];
+        [self.backScrollView addSubview:listView];
         
         UIImageView *tagImageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 10, 20, 20)];
         tagImageView.image = [UIImage imageNamed:@"user_list"];
@@ -114,13 +140,36 @@
         label.textColor = [UIColor blackColor];
         label.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
         
-        UIImageView *detailsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(listView.width - 30, tagImageView.y, tagImageView.width, listView.height)];
+        UIImageView *detailsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(listView.width - 30, (listView.height - listView.height * 0.7 * 0.7)/2, 15 * 0.7, listView.height * 0.7 * 0.7)];
         detailsImageView.image = [UIImage imageNamed:@"user_details"];
         [listView addSubview:detailsImageView];
+        
+        UILabel *listNumLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, listView.width - label.right - detailsImageView.width - 10, listView.height)];
+        listNumLabel.right = detailsImageView.left - 10;
+        [listView addSubview:listNumLabel];
+        listNumLabel.text = [NSString stringWithFormat:@"%ld 个清单正在进行", (long)self.attentionNum];
+        listNumLabel.textAlignment = NSTextAlignmentRight;
+        listNumLabel.textColor = RGB(150, 150, 150);
+        listNumLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
         
         listView;
     });
     
+    self.favoriteView = ({
+        PJUserFavoriteView *favoriteView = [[PJUserFavoriteView alloc] initWithFrame:CGRectMake(10, cardListView.bottom + 30, self.view.width - 20, 250)];
+        [self.backScrollView addSubview:favoriteView];
+        favoriteView;
+    });
+
+    if (self.favoriteView.bottom + 10 < self.view.height) {
+        self.backScrollView.contentSize = CGSizeMake(0, self.view.height + 1);
+    } else {
+        self.backScrollView.contentSize = CGSizeMake(0, self.favoriteView.bottom + 20);
+    }
+}
+
+- (void)cancleBtnClick {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

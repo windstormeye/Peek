@@ -16,6 +16,8 @@
 #import "PJCoreDateHelper.h"
 #import "PJNoteViewController.h"
 #import "PJUserViewController.h"
+#import "PJUserLoginViewController.h"
+#import <AVUser.h>
 
 @interface HomeViewController () <PJHomeBottomViewDelegate, PJCameraViewDelegate, PJNoteCollectionViewDelegate>
 
@@ -148,16 +150,32 @@
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraViewPan:)];
     [self.bottomView addGestureRecognizer:pan];
     
+    if (!AVUser.currentUser) {
+        UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, (self.bottomView.height - self.bottomView.height / 2) / 2 + 10, self.bottomView.width - 40, self.bottomView.height * 0.5)];
+        [self.bottomView addSubview:loginBtn];
+        loginBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        loginBtn.backgroundColor = [UIColor whiteColor];
+        [PJTool addShadowToView:loginBtn withOpacity:0.2 shadowRadius:5 andCornerRadius:8];
+        [loginBtn setTitle:@"👉 登录开启全新学习方式 👈" forState:UIControlStateNormal];
+        [loginBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [loginBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(PJRecognizeViewControllerRecaptrue:)
                                                  name:PJRecognizeViewControllerRecaptrueNotification
                                                object:nil];
 }
 
-
 // MARK: UI response
 - (void)homeBottomViewButtonClick {
     [self.cameraView takePhoto];
+}
+
+- (void)loginBtnClick {
+    PJUserLoginViewController *vc = [PJUserLoginViewController new];
+    vc.imageView = [PJTool convertCreateImageWithUIView:self.view];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 -(void)refreshAction {

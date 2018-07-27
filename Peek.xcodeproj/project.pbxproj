@@ -11,7 +11,6 @@
 		74404DDD210576C700405F3A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74404DDB210576C700405F3A /* Model.xcdatamodeld */; };
 		7441BCDD1FA1A120005E37ED /* PJTapic.m in Sources */ = {isa = PBXBuildFile; fileRef = 7441BCDC1FA1A120005E37ED /* PJTapic.m */; };
 		744C3C381FAD9B2D00767B42 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744C3C371FAD9B2D00767B42 /* opencv2.framework */; };
-		744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0EA31EF00D2F005D4133 /* PublishViewController.m */; };
 		744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */; };
 		7454D8F520D6C3950004C83E /* PJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7454D8F420D6C3950004C83E /* PJBaseViewController.m */; };
 		7454D8FE20D7FA740004C83E /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 7454D8FD20D7FA740004C83E /* UIView+Position.m */; };
@@ -53,6 +52,8 @@
 		74C63B83210781CB0058FDCD /* PJNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C63B82210781CB0058FDCD /* PJNoteViewController.m */; };
 		74C960B6210A017F00A70FF8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C960B5210A017F00A70FF8 /* AssetsLibrary.framework */; };
 		74C960BA210A071100A70FF8 /* PJUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C960B9210A071100A70FF8 /* PJUserViewController.m */; };
+		74C960C1210A2B4B00A70FF8 /* PJUserFavoriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C960C0210A2B4B00A70FF8 /* PJUserFavoriteView.m */; };
+		74C960C6210AED2A00A70FF8 /* PJUserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C960C5210AED2A00A70FF8 /* PJUserLoginViewController.m */; };
 		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
 		74EB3EDA20DF85C1001F0E0C /* PJSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */; };
 		74EC312320DF86B1005FC688 /* PJTools-UIView+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC312220DF86B1005FC688 /* PJTools-UIView+Position.swift */; };
@@ -86,8 +87,6 @@
 		7441BCDB1FA1A120005E37ED /* PJTapic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJTapic.h; sourceTree = "<group>"; };
 		7441BCDC1FA1A120005E37ED /* PJTapic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJTapic.m; sourceTree = "<group>"; };
 		744C3C371FAD9B2D00767B42 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		744F0EA21EF00D2F005D4133 /* PublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishViewController.h; sourceTree = "<group>"; };
-		744F0EA31EF00D2F005D4133 /* PublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishViewController.m; sourceTree = "<group>"; };
 		744FCBE31EFEAE3E008BAC63 /* PJKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJKeyboard.h; sourceTree = "<group>"; };
 		744FCBE41EFEAE3E008BAC63 /* PJKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJKeyboard.m; sourceTree = "<group>"; };
 		7454D8F320D6C3950004C83E /* PJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJBaseViewController.h; sourceTree = "<group>"; };
@@ -173,6 +172,10 @@
 		74C960B5210A017F00A70FF8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		74C960B8210A071100A70FF8 /* PJUserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserViewController.h; sourceTree = "<group>"; };
 		74C960B9210A071100A70FF8 /* PJUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserViewController.m; sourceTree = "<group>"; };
+		74C960BF210A2B4B00A70FF8 /* PJUserFavoriteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserFavoriteView.h; sourceTree = "<group>"; };
+		74C960C0210A2B4B00A70FF8 /* PJUserFavoriteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserFavoriteView.m; sourceTree = "<group>"; };
+		74C960C4210AED2A00A70FF8 /* PJUserLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserLoginViewController.h; sourceTree = "<group>"; };
+		74C960C5210AED2A00A70FF8 /* PJUserLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserLoginViewController.m; sourceTree = "<group>"; };
 		74EAE19F1F8A05BC0071F82D /* PJOpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJOpenCV.h; sourceTree = "<group>"; };
 		74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PJOpenCV.mm; sourceTree = "<group>"; };
 		74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJSegmentView.swift; sourceTree = "<group>"; };
@@ -262,15 +265,6 @@
 				7441BCDC1FA1A120005E37ED /* PJTapic.m */,
 			);
 			name = PJTapic;
-			sourceTree = "<group>";
-		};
-		744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */ = {
-			isa = PBXGroup;
-			children = (
-				744F0EA21EF00D2F005D4133 /* PublishViewController.h */,
-				744F0EA31EF00D2F005D4133 /* PublishViewController.m */,
-			);
-			name = "我发布的卡片";
 			sourceTree = "<group>";
 		};
 		744FCBE21EFEAE14008BAC63 /* PJKeyboard */ = {
@@ -457,7 +451,6 @@
 				747E22E21EE27AC00078552D /* 首页 */,
 				74C63B80210781A30058FDCD /* Note */,
 				74404E1F2105794200405F3A /* Card */,
-				744F0E9F1EF00CAD005D4133 /* 我发布的卡片 */,
 				741324A51F9DE56100FA0623 /* 卡片编辑 */,
 			);
 			name = Page;
@@ -650,10 +643,38 @@
 		74C960B7210A06F900A70FF8 /* 用户 */ = {
 			isa = PBXGroup;
 			children = (
+				74C960C3210AED1A00A70FF8 /* 登录 */,
+				74C960C2210AED1100A70FF8 /* 用户中心 */,
+				74C960BE210A2B2700A70FF8 /* favoriteGroup */,
+			);
+			name = "用户";
+			sourceTree = "<group>";
+		};
+		74C960BE210A2B2700A70FF8 /* favoriteGroup */ = {
+			isa = PBXGroup;
+			children = (
+				74C960BF210A2B4B00A70FF8 /* PJUserFavoriteView.h */,
+				74C960C0210A2B4B00A70FF8 /* PJUserFavoriteView.m */,
+			);
+			name = favoriteGroup;
+			sourceTree = "<group>";
+		};
+		74C960C2210AED1100A70FF8 /* 用户中心 */ = {
+			isa = PBXGroup;
+			children = (
 				74C960B8210A071100A70FF8 /* PJUserViewController.h */,
 				74C960B9210A071100A70FF8 /* PJUserViewController.m */,
 			);
-			name = "用户";
+			name = "用户中心";
+			sourceTree = "<group>";
+		};
+		74C960C3210AED1A00A70FF8 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				74C960C4210AED2A00A70FF8 /* PJUserLoginViewController.h */,
+				74C960C5210AED2A00A70FF8 /* PJUserLoginViewController.m */,
+			);
+			name = "登录";
 			sourceTree = "<group>";
 		};
 		74EAE19E1F8A059E0071F82D /* OpenCV */ = {
@@ -921,6 +942,7 @@
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
 				745F334A20DC0099009C1991 /* PJCameraView.swift in Sources */,
 				74ACE52621059BB900C889BE /* PJCoreDateHelper.m in Sources */,
+				74C960C6210AED2A00A70FF8 /* PJUserLoginViewController.m in Sources */,
 				74ADA76620FD8B580044C966 /* PJEditImageBottomView.m in Sources */,
 				74ADA779210015410044C966 /* PJRecognizeViewController.m in Sources */,
 				7497662C2046E74E006F47F6 /* PJUserRegister.m in Sources */,
@@ -939,11 +961,11 @@
 				7467303A2105C27000D4AD2F /* PJChoiceNoteViewController.m in Sources */,
 				744FCBE51EFEAE3E008BAC63 /* PJKeyboard.m in Sources */,
 				74C5CDF120DA063D00DB072C /* PJHomeBottomView.m in Sources */,
-				744F0EA41EF00D2F005D4133 /* PublishViewController.m in Sources */,
 				74ADA76F20FEE31E0044C966 /* PJEditImageScrollView.swift in Sources */,
 				74C63B7E2107774F0058FDCD /* Card+CoreDataClass.m in Sources */,
 				74ACE52221057C0000C889BE /* PJCardImageView.m in Sources */,
 				74559D821EE009BE0081A0A5 /* main.m in Sources */,
+				74C960C1210A2B4B00A70FF8 /* PJUserFavoriteView.m in Sources */,
 				749766352046ECCF006F47F6 /* PJNetWorkManager.m in Sources */,
 				74404DDD210576C700405F3A /* Model.xcdatamodeld in Sources */,
 				74ADA76820FD8B580044C966 /* PJEditImageTouchView.m in Sources */,

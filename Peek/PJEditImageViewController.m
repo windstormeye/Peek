@@ -126,7 +126,7 @@
     
     [self.view addSubview:self.imageScrollView];
     
-    self.cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 50, 20)];
+    self.cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 30, 50, 20)];
     [self.view addSubview:self.cancleBtn];
     [self.cancleBtn addTarget:self action:@selector(cancleBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.cancleBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
