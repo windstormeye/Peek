@@ -11,6 +11,8 @@
 #import "PJTool.h"
 #import "PJKeyboard.h"
 #import "UIView+Position.h"
+#import "PJHUD.h"
+#import <AVUser.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIButton+WebCache.h>
 #import <AudioToolbox/AudioToolbox.h>

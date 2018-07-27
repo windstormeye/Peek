@@ -18,4 +18,7 @@
             withOpacity:(float)shadowOpacity
            shadowRadius:(CGFloat)shadowRadius
         andCornerRadius:(CGFloat)cornerRadius;
+
+// 取最上层Window的便捷方法
++ (UIWindow *)TopWindow;
 @end

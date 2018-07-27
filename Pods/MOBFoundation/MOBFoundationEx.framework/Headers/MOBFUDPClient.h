@@ -38,13 +38,14 @@ typedef void (^MOBFUDPClientReceiveDataHandler) (NSString *address, UInt32 port,
 - (void)stop;
 
 /**
- *  发送数据
- *
- *  @param data 数据
- *  @param address 地址
- *  @param port 端口
+ 发送数据
+
+ @param data 数据
+ @param address 地址
+ @param port 端口
+ @return YES 发送成功，NO 发送失败
  */
-- (void)sendData:(NSData *)data toAddress:(NSString *)address andPort:(UInt32)port;
+- (BOOL)sendData:(NSData *)data toAddress:(NSString *)address andPort:(UInt32)port;
 
 /**
  *  接收到数据

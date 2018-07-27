@@ -16,28 +16,28 @@ PODS:
     - AFNetworking/NSURLSession
   - AVOSCloud (11.0.0)
   - IQKeyboardManager (4.0.10)
-  - MOBFoundation (3.0.0)
+  - mob_smssdk (3.1.0):
+    - MOBFoundation
+  - MOBFoundation (3.1.5)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
-  - SMSSDK (3.0.0):
-    - MOBFoundation
 
 DEPENDENCIES:
   - AFNetworking
   - AVOSCloud
   - IQKeyboardManager
+  - mob_smssdk
   - SDWebImage
-  - SMSSDK
 
 SPEC CHECKSUMS:
   AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
   AVOSCloud: 8ffa848f5f7391fc7594d3671a29cd6f8a14cc2a
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
-  MOBFoundation: e6572a62983a44fa048c4038842ade1494c10059
+  mob_smssdk: 50a3c764232919f78578d911a60afc142ee7a405
+  MOBFoundation: d961251ce6de54917f678dc711962d1385ae7ee1
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  SMSSDK: e4706231a3e6aa5620ec8a2d3fdc4d16870f746e
 
-PODFILE CHECKSUM: d12d34f4bcab8646389fa708d0d6156a7163bcb6
+PODFILE CHECKSUM: 04b0a02ab26a4675ecdf5f094135413ef2cb062c
 
 COCOAPODS: 1.3.1

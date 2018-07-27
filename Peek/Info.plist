@@ -43,9 +43,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MOBAppKey</key>
-	<string>1eed14aaba72c</string>
+	<string>27165f6fb0e77</string>
 	<key>MOBAppSecret</key>
-	<string>71fb7e198d0098f48233d6d98e5cb73f</string>
+	<string>11c20fbb94760b2ef04ce4ecdc0b6e8d</string>
 	<key>NSCameraUsageDescription</key>
 	<string>PLook需要获取您的相机进行拍照</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

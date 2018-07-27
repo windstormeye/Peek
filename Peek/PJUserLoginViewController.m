@@ -7,6 +7,8 @@
 //
 
 #import "PJUserLoginViewController.h"
+#import <SMS_SDK/SMSSDK.h>
+
 
 @interface PJUserLoginViewController () <UITextFieldDelegate>
 
@@ -107,6 +109,10 @@
         [button setTitle:@"发送验证码" forState:UIControlStateNormal];
         button.backgroundColor = RGB(200, 200, 200);
         button.titleLabel.font = [UIFont systemFontOfSize:14];
+        button.selected = NO;
+        [button addTarget:self
+                   action:@selector(verityBtnClick)
+         forControlEvents:UIControlEventTouchUpInside];
         [PJTool addShadowToView:button withOpacity:0.2 shadowRadius:5 andCornerRadius:8];
         
         button;
@@ -117,7 +123,10 @@
         [backView addSubview:button];
         [button setTitle:@"登 录" forState:UIControlStateNormal];
         button.backgroundColor = RGB(200, 200, 200);
+        button.userInteractionEnabled = YES;
         button.titleLabel.font = [UIFont systemFontOfSize:14];
+        [button addTarget:self action:@selector(loginButtonClick)
+         forControlEvents:UIControlEventTouchUpInside];
         [PJTool addShadowToView:button withOpacity:0.2 shadowRadius:5 andCornerRadius:8];
         
         button;
@@ -165,7 +174,9 @@
     [xinlangButton setImage:[UIImage imageNamed:@"user_xinlang"] forState:UIControlStateNormal];
     xinlangButton.backgroundColor = RGB(255, 165, 0);
     [PJTool addShadowToView:xinlangButton withOpacity:0.2 shadowRadius:5 andCornerRadius:8];
-    
+ 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidChangeNotification object:self.phoneTextField];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidChangeNotification object:self.verityTextField];
 }
 
 - (void)cancleBtnClick {
@@ -176,8 +187,112 @@
     
 }
 
+- (void)verityBtnClick {
+    if (![self dealPhoneNumber]) {
+        return;
+    }
+    [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS
+                            phoneNumber:self.phoneTextField.text
+                                   zone:@"86"
+                                 result:^(NSError *error) {
+                                     if (error) {
+                                        NSLog(@"Mob error = %@", error);
+                                     }
+                                 }];
+    self.verityButton.enabled = NO;
+    __block NSInteger second = 60;
+    //全局队列    默认优先级
+    dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //定时器模式  事件源
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, quene);
+    //NSEC_PER_SEC是秒，＊1是每秒
+    dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), NSEC_PER_SEC * 1, 0);
+    //设置响应dispatch源事件的block，在dispatch源指定的队列上运行
+    dispatch_source_set_event_handler(timer, ^{
+        //回调主线程，在主线程中操作UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (second >= 0) {
+                [self.verityButton setTitle:[NSString stringWithFormat:@"%lds后重发",second] forState:UIControlStateNormal];
+                second--;
+            }
+            else
+            {
+                //这句话必须写否则会出问题
+                dispatch_source_cancel(timer);
+                self.verityButton.enabled = YES;
+                [self.verityButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+            }
+        });
+    });
+    //启动源
+    dispatch_resume(timer);
+}
+
+- (BOOL)dealPhoneNumber {
+    NSString *phoneString = self.phoneTextField.text;
+    if (phoneString.length != 11 || [phoneString isEqualToString:@""]) {
+        [[PJHUD shareInstance] warningString:@"请输入正确手机号码" coverHidden:NO];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)dealVerityCode {
+    NSString *verityString = self.verityTextField.text;
+    if ([verityString isEqualToString:@""]) {
+        [[PJHUD shareInstance] warningString:@"请输入正确验证码" coverHidden:NO];
+        return NO;
+    }
+    return YES;
+}
+
 # pragma mark: delegate
 
+- (void)loginButtonClick {
+    if (![self dealPhoneNumber] || ![self dealVerityCode]) {
+        return ;
+    }
+    
+    NSString *phoneString = self.phoneTextField.text;
+    
+    [SMSSDK commitVerificationCode:self.verityTextField.text
+                       phoneNumber:self.phoneTextField.text
+                              zone:@"86"
+                            result:^(NSError *error) {
+                                if (!error) {
+                                    AVUser *user = [AVUser user];
+                                    user.username = phoneString;
+                                    user.password = phoneString;
+                                    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                        if (succeeded) {
+                                            [self cancleBtnClick];
+                                        } else {
+                                            [[PJHUD shareInstance] warningString:error.userInfo[@"NSLocalizedFailureReason"] coverHidden:NO];
+                                        }
+                                    }];
+                                }
+                            }];
+}
 
+- (void)textFieldChange:(NSNotification *)obj {
+    UITextField * textField = (UITextField *)obj.object;
+    NSString *toBeString = textField.text;
+    if (textField.tag == 1000) {
+        if (toBeString.length >= 11) {
+            self.verityButton.backgroundColor = RGB(50, 50, 50);
+        } else {
+            self.verityButton.backgroundColor = RGB(200, 200, 200);
+        }
+        self.verityButton.selected = !self.verityButton.selected;
+    }
+    
+    if (textField.tag == 2000) {
+        if (toBeString.length >= 4 && self.verityButton.selected == YES) {
+            self.loginButton.backgroundColor = RGB(50, 50, 50);
+        } else {
+            self.loginButton.backgroundColor = RGB(200, 200, 200);
+        }
+    }
+}
 
 @end

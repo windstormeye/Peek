@@ -1,1 +1,0 @@
-../../../../SMSSDK/MobProducts/SDK/SMSSDK/SMS_SDK.framework/Headers/SMSSDK.h

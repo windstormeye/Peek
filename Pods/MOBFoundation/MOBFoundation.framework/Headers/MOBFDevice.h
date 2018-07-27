@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+extern NSString *kMOBFReachabilityChangedNotification;
+
 /**
  *  网络类型
  */
@@ -185,5 +187,19 @@ typedef NS_ENUM(NSUInteger, MOBFIPVersion)
  *  @return 开发商ID
  */
 + (NSString *)idfv;
+
+/**
+ *  获取物理内存
+
+ @return 物理内存
+ */
++ (double)physicalMemory;
+
+/**
+ *  获取存储大小
+
+ @return 存储大小
+ */
++ (long long)diskSpace;
 
 @end

@@ -6,7 +6,7 @@ pod 'SDWebImage'
 pod 'IQKeyboardManager'
 pod 'AFNetworking'
 
-pod 'SMSSDK'
 pod 'AVOSCloud'
+pod 'mob_smssdk'
 
 end

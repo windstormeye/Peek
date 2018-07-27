@@ -54,6 +54,7 @@
 		74C960BA210A071100A70FF8 /* PJUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C960B9210A071100A70FF8 /* PJUserViewController.m */; };
 		74C960C1210A2B4B00A70FF8 /* PJUserFavoriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C960C0210A2B4B00A70FF8 /* PJUserFavoriteView.m */; };
 		74C960C6210AED2A00A70FF8 /* PJUserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C960C5210AED2A00A70FF8 /* PJUserLoginViewController.m */; };
+		74C960CB210B2D0400A70FF8 /* PJHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C960CA210B2D0400A70FF8 /* PJHUD.m */; };
 		74EAE1A11F8A05BC0071F82D /* PJOpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */; };
 		74EB3EDA20DF85C1001F0E0C /* PJSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */; };
 		74EC312320DF86B1005FC688 /* PJTools-UIView+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC312220DF86B1005FC688 /* PJTools-UIView+Position.swift */; };
@@ -176,6 +177,8 @@
 		74C960C0210A2B4B00A70FF8 /* PJUserFavoriteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserFavoriteView.m; sourceTree = "<group>"; };
 		74C960C4210AED2A00A70FF8 /* PJUserLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJUserLoginViewController.h; sourceTree = "<group>"; };
 		74C960C5210AED2A00A70FF8 /* PJUserLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJUserLoginViewController.m; sourceTree = "<group>"; };
+		74C960C9210B2D0400A70FF8 /* PJHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJHUD.h; sourceTree = "<group>"; };
+		74C960CA210B2D0400A70FF8 /* PJHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJHUD.m; sourceTree = "<group>"; };
 		74EAE19F1F8A05BC0071F82D /* PJOpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJOpenCV.h; sourceTree = "<group>"; };
 		74EAE1A01F8A05BC0071F82D /* PJOpenCV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PJOpenCV.mm; sourceTree = "<group>"; };
 		74EB3ED920DF85C1001F0E0C /* PJSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJSegmentView.swift; sourceTree = "<group>"; };
@@ -355,6 +358,7 @@
 		74559DC01EE03AB20081A0A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				74C960C8210B2CEA00A70FF8 /* PJHUD */,
 				74EC312420DF86B9005FC688 /* SwiftTool */,
 				74C5CDE620D8E5D300DB072C /* PJTool */,
 				74A0D61F1FA8A84E006AB335 /* PJDevice */,
@@ -677,6 +681,15 @@
 			name = "登录";
 			sourceTree = "<group>";
 		};
+		74C960C8210B2CEA00A70FF8 /* PJHUD */ = {
+			isa = PBXGroup;
+			children = (
+				74C960C9210B2D0400A70FF8 /* PJHUD.h */,
+				74C960CA210B2D0400A70FF8 /* PJHUD.m */,
+			);
+			name = PJHUD;
+			sourceTree = "<group>";
+		};
 		74EAE19E1F8A059E0071F82D /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
@@ -942,6 +955,7 @@
 				74559D851EE009BE0081A0A5 /* AppDelegate.m in Sources */,
 				745F334A20DC0099009C1991 /* PJCameraView.swift in Sources */,
 				74ACE52621059BB900C889BE /* PJCoreDateHelper.m in Sources */,
+				74C960CB210B2D0400A70FF8 /* PJHUD.m in Sources */,
 				74C960C6210AED2A00A70FF8 /* PJUserLoginViewController.m in Sources */,
 				74ADA76620FD8B580044C966 /* PJEditImageBottomView.m in Sources */,
 				74ADA779210015410044C966 /* PJRecognizeViewController.m in Sources */,

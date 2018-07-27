@@ -89,4 +89,14 @@
     [view.superview.layer insertSublayer:shadowLayer below:view.layer];
 }
 
++ (UIWindow *)TopWindow {
+    UIWindow * window = [[UIApplication sharedApplication].delegate window];
+    if ([[UIApplication sharedApplication] windows].count > 1) {
+        NSArray *windowsArray = [[UIApplication sharedApplication] windows];
+        window = [windowsArray lastObject];
+    }
+    
+    return window;
+}
+
 @end
