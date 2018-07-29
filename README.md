@@ -64,7 +64,7 @@
 
 PLook自研的内容识别引擎结合了`Core ML`、`Visio`、`OpenCV`三大成熟框架，站在巨人的肩膀上，重新调整，能够对初高中同学们的日常知识内容识别率达60%，当然我们开发团队也在持续不断的努力攻关当中。
 
-<img src="https://i.loli.net/2018/07/29/5b5d2f0368a9e.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d2f0368a9e.jpeg" width = "50%" height = "50%" align=center />
 
 ## 可行性分析和目标群体
 
@@ -147,57 +147,57 @@ PLook中预制了三种帧态处理模式，分别为“遮罩”、“切割”
 
 #### 首页——我的小册
 
-<img src="https://i.loli.net/2018/07/29/5b5d9741afd17.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9741afd17.jpeg" width = "50%" height = "50%" align=center />
 
 #### 首页——我的小册——小册详情
 
-<img src="https://i.loli.net/2018/07/29/5b5d99b48d189.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d99b48d189.jpeg" width = "50%" height = "50%" align=center />
 
 #### 首页——个人中心
 
-<img src="https://i.loli.net/2018/07/29/5b5d992adfa1b.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d992adfa1b.jpeg" width = "50%" height = "50%" align=center />
 
 #### 相机——进入相机
 
-<img src="https://i.loli.net/2018/07/29/5b5d99d3780ad.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d99d3780ad.jpeg" width = "50%" height = "50%" align=center />
 
 #### 相机
 
-<img src="https://i.loli.net/2018/07/29/5b5d9987dd432.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9987dd432.jpeg" width = "50%" height = "50%" align=center />
 
 #### 内容识别引擎（识别完毕）
 
-<img src="https://i.loli.net/2018/07/29/5b5d9a1e19516.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9a1e19516.jpeg" width = "50%" height = "50%" align=center />
 
 #### 内容辅助标记模块
 
-<img src="https://i.loli.net/2018/07/29/5b5d9a50e0419.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9a50e0419.jpeg" width = "50%" height = "50%" align=center />
 
 #### 内容辅助标记模块（画笔选择）
 
-<img src="https://i.loli.net/2018/07/29/5b5d9a85f0da0.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9a85f0da0.jpeg" width = "50%" height = "50%" align=center />
 
 #### 内容辅助标记模块（两指放大缩小）
 
-<img src="https://i.loli.net/2018/07/29/5b5d9ab0d4008.jpeg" width = "25%" height = "25%" align=center />
-<img src="https://i.loli.net/2018/07/29/5b5d9ab0de291.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9ab0d4008.jpeg" width = "50%" height = "50%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9ab0de291.jpeg" width = "50%" height = "50%" align=center />
 
 #### 卡片归档小册（长按选中小册，拖拽释放归档）
 
-<img src="https://i.loli.net/2018/07/29/5b5d9af0554fd.jpeg" width = "25%" height = "25%" align=center />
-<img src="https://i.loli.net/2018/07/29/5b5d9af3797ef.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9af0554fd.jpeg" width = "50%" height = "50%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9af3797ef.jpeg" width = "50%" height = "50%" align=center />
 
 
 #### 内容识别引擎模式
 * 蓝色荧光笔——“切割模式”：
 
-<img src="https://i.loli.net/2018/07/29/5b5d33eee7502.jpeg" width = "25%" height = "25%" align=center />
-<img src="https://i.loli.net/2018/07/29/5b5d341fd4255.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d33eee7502.jpeg" width = "50%" height = "50%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d341fd4255.jpeg" width = "50%" height = "50%" align=center />
 
 * 红色荧光笔——“遮罩模式”：
 
-<img src="https://i.loli.net/2018/07/29/5b5d343f82a38.jpeg" width = "25%" height = "25%" align=center />
-<img src="https://i.loli.net/2018/07/29/5b5d3452367c0.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d343f82a38.jpeg" width = "50%" height = "50%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d3452367c0.jpeg" width = "50%" height = "50%" align=center />
 
 ### 特色分析
 PLook除了基础框架外达到了核心模块的100%自研，存在一定的技术壁垒，能够较好的解决初高中学生使用零散时间温习重点知识的需求，并且我们会持续完善PLook的内容识别引擎，使其支持多种颜色荧光笔的识别和提升现有颜色荧光笔识别的准确度。
@@ -213,7 +213,7 @@ PLook除了基础框架外达到了核心模块的100%自研，存在一定的�
 
 所以我们开发团队阅读了一些关于心理学的书，比如《认知心理学基础》、《行为心理学》等等资料，并且仔细攻关拿下最终的首页的定稿——拟物化书本设计。这不是简单意义上的UI出几张图就能应付得过去挑剔用户的视觉感官体验的，开发团队最后在PLook的代码中把首页的“拟物化书本设计”进行了二次封装，跟随外部设备尺寸变化而进行拟物化书本设计的扩缩，较为充分的把拟物化书本的设计进行了2D平面上的延伸。如下所示：
 
-<img src="https://i.loli.net/2018/07/29/5b5d9741afd17.jpeg" width = "25%" height = "25%" align=center />
+<img src="https://i.loli.net/2018/07/29/5b5d9741afd17.jpeg" width = "50%" height = "50%" align=center />
 
 #### 内容识别引擎：
 内容识别引擎是我们开发团队重点攻关和技术沉淀，并且花费了大量时间的基础模块，其中最大的难点就在几大框架的协同合作上，尤其是`OpenCV`的识别模式嫁接，数据流的导向和在上下流层级的格式转换是一块非常难啃的硬骨头，多次把开发团队的小伙伴搞得十分的郁闷和无奈。一直在截止提交作品的前一天晚上，开发团队的小伙伴都一直还在接着对内容识别模块进行调优。
