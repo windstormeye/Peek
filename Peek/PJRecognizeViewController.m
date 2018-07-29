@@ -341,10 +341,7 @@ NSNotificationName const PJRecognizeViewControllerRecaptrueNotification = @"PJRe
         contentView.openvcImageView = _kAnswerImageView;
     } else {
         newImage = [PJOpenCV imageToDiscernBlue:image];
-        newImageView.image = newImage;
-        UIImageView *_kAnswerImageView = newImageView;
-        _kAnswerImageView.tag = 1002;
-        contentView.openvcImageView = _kAnswerImageView;
+        contentView.image = newImage;
     }
 }
 

@@ -8,6 +8,8 @@
 
 #import "PJHUD.h"
 
+static const NSInteger duration = 3;
+
 @interface PJHUD ()
 
 @property (nonatomic, readwrite, strong) UILabel *titleLabel;
@@ -103,7 +105,7 @@ static PJHUD *instance = nil;
         self.top = 0;
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self dismiss];
     });
 }

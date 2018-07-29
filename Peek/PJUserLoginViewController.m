@@ -9,6 +9,7 @@
 #import "PJUserLoginViewController.h"
 #import <SMS_SDK/SMSSDK.h>
 
+UIKIT_EXTERN NSNotificationName const PJUserLoginViewControllerUserLoginSuccess = @"PJUserLoginViewControllerUserLoginSuccess";
 
 @interface PJUserLoginViewController () <UITextFieldDelegate>
 
@@ -266,6 +267,8 @@
                                     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                                         if (succeeded) {
                                             [self cancleBtnClick];
+                                            
+                                            [[NSNotificationCenter defaultCenter] postNotificationName:PJUserLoginViewControllerUserLoginSuccess object:nil];
                                         } else {
                                             [[PJHUD shareInstance] warningString:error.userInfo[@"NSLocalizedFailureReason"] coverHidden:NO];
                                         }

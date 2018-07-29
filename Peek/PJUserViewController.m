@@ -64,7 +64,11 @@
     
     self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 0, 20)];
     [self.userBackImageView addSubview:self.userNameLabel];
-    self.userNameLabel.text = @"培钧";
+    if ([AVUser.currentUser valueForKey:@"nickName"]) {
+        self.userNameLabel.text = [AVUser.currentUser valueForKey:@"nickName"];
+    } else {
+        self.userNameLabel.text = @"快来设置昵称吧~";
+    }
     self.userNameLabel.textColor = [UIColor whiteColor];
     self.userNameLabel.font = [UIFont boldSystemFontOfSize:22];
     [self.userNameLabel sizeToFit];

@@ -15,9 +15,9 @@
 @interface PJNoteViewController ()
 
 @property (nonatomic, readwrite, strong) PJCardImageView *card;
+@property (nonatomic, readwrite, strong) PJFavoriteButton *likeBtn;
 
 @property (nonatomic, readwrite, strong) UIButton *cancleBtn;
-@property (nonatomic, readwrite, strong) PJFavoriteButton *likeBtn;
 @property (nonatomic, readwrite, strong) UIButton *commentBtn;
 @property (nonatomic, readwrite, strong) UIButton *visibleBtn;
 @property (nonatomic, readwrite, strong) UIButton *shareBtn;
@@ -133,6 +133,7 @@
         cardImageView.centerX = self.view.centerX;
         cardImageView.userInteractionEnabled = YES;
         cardImageView.image = [UIImage imageWithData:card.itemImage];
+        cardImageView.layer.cornerRadius = 5;
         
         UIImageView *opencvImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cardImageView.width, cardImageView.height)];
         opencvImageView.image = [UIImage imageWithData:card.itemOpencvImage];
@@ -180,9 +181,6 @@
     
     self.tempImageView = self.imageViewArray[self.page];
     [self.view addSubview:self.tempImageView];
-    
-    
-    
 }
 
 - (void)cancleBtnClick {
@@ -205,7 +203,6 @@
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
         [self rightSwipe];
     } else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
-        
         [self leftSwipe];
     }
 }
@@ -315,6 +312,17 @@
     PJCardImageView *cardImageView = self.imageViewArray[page];
     UIImageView *_kAnswerImageView = cardImageView.openvcImageView;
     _kAnswerImageView.alpha = 1;
+}
+
+- (void) transitionWithType:(NSString *) type WithSubtype:(NSString *) subtype ForView : (UIView *) view {
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.7f;
+    animation.type = type;
+    if (subtype != nil) {
+        animation.subtype = subtype;
+    }
+    animation.timingFunction = UIViewAnimationOptionCurveEaseInOut;
+    [view.layer addAnimation:animation forKey:@"animation"];
 }
 
 @end

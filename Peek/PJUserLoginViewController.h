@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+UIKIT_EXTERN NSNotificationName const PJUserLoginViewControllerUserLoginSuccess;
+
 @interface PJUserLoginViewController : UIViewController
 
 @property (nonatomic, readwrite, strong) UIImageView *imageView;

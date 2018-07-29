@@ -31,6 +31,7 @@
 @property (nonatomic, readwrite, strong) UIRefreshControl *collectionViewRefreshControl;
 @property (nonatomic, readwrite, strong) UIView *cameraTopView;
 @property (nonatomic, readwrite, strong) UIView *cameraCaverView;
+@property (nonatomic, readwrite, strong) UIButton *loginBtn;
 
 @property (nonatomic, readwrite, assign) NSInteger segmentIndex;
 @property (nonatomic, readwrite, assign) BOOL isRecaptrue;
@@ -47,25 +48,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    if (!AVUser.currentUser) {
-        UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, (self.bottomView.height - self.bottomView.height / 2) / 2 + 10, self.bottomView.width - 40, self.bottomView.height * 0.5)];
-        [self.bottomView addSubview:loginBtn];
-        loginBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-        loginBtn.backgroundColor = [UIColor whiteColor];
-        [PJTool addShadowToView:loginBtn withOpacity:0.2 shadowRadius:5 andCornerRadius:8];
-        [loginBtn setTitle:@"👉 登录开启全新学习方式 👈" forState:UIControlStateNormal];
-        [loginBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [loginBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
-
-        // TODO: 登录时需要做用户检测！！！
-        [[PJHUD shareInstance] warningString:@"检测到您未设置密码，请前往设置 →" coverHidden:YES];
-        [PJHUD shareInstance].coverButtonBlock = ^() {
-            NSLog(@"2333");
-        };
-    }
 }
 
 // MARK: layz load
@@ -169,10 +151,25 @@
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cameraViewPan:)];
     [self.bottomView addGestureRecognizer:pan];
     
+    self.loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, (self.bottomView.height - self.bottomView.height / 2) / 2 + 10, self.bottomView.width - 40, self.bottomView.height * 0.5)];
+    [self.bottomView addSubview:self.loginBtn];
+    self.loginBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+    self.loginBtn.backgroundColor = [UIColor whiteColor];
+    self.loginBtn.layer.borderColor = RGB(150, 150, 150).CGColor;
+    self.loginBtn.layer.borderWidth = 1;
+    [self.loginBtn setTitle:@"👉 登录开启全新学习方式 👈" forState:UIControlStateNormal];
+    [self.loginBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.loginBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (AVUser.currentUser) {
+        self.loginBtn.hidden = YES;
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(PJRecognizeViewControllerRecaptrue:)
                                                  name:PJRecognizeViewControllerRecaptrueNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userloginSuccess) name:PJUserLoginViewControllerUserLoginSuccess object:nil];
 }
 
 // MARK: UI response
@@ -381,6 +378,10 @@
 - (void)PJNoteCollectionViewHeaderViewAvatarBtnClick {
     PJUserViewController *vc = [PJUserViewController new];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)userloginSuccess {
+    self.loginBtn.hidden = YES;
 }
 
 - (void)dealloc {
